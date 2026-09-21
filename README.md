@@ -3,9 +3,9 @@
 <img src="docs/logo.png" alt="Station North Logo" width="260" />
 
 # 👑 SNfetchPLAYER • The Queen's Frequency
-**Version 1.0.0.6 • Broadcast & Audio Engine for Android Smartphones, Tablets & Android TV**
+**Version 1.0.0.7 • Broadcast & Audio Engine for Android Smartphones, Tablets & Android TV**
 
-[![Release](https://img.shields.io/badge/release-v1.0.0.6-teal.svg)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v1.0.0.6)
+[![Release](https://img.shields.io/badge/release-v1.0.0.7-teal.svg)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v1.0.0.7)
 [![Downloads](https://img.shields.io/github/downloads/StationNorthMedia/SNfetchPLAYER/total.svg?color=brightgreen)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Android%205.0%2B-blue.svg)](https://developer.android.com/)
@@ -155,7 +155,7 @@ I watch him through the glass. He’s sitting there, shoulders rigid, fingers da
 
 ## 📥 Download & Installation
 
-1. Download **[`SNfetchPLAYER-v1.0.0.6.apk`](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/latest)** (76.7 MB) from GitHub Releases.
+1. Download **[`SNfetchPLAYER-v1.0.0.7.apk`](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/latest)** (76.7 MB) from GitHub Releases.
 2. Install the APK on your Android Smartphone, Tablet, or Android TV Box.
 3. Launch **SNfetchPLAYER** and let the Queen take over!
 

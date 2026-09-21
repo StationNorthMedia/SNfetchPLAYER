@@ -913,11 +913,12 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         val constraintSet = ConstraintSet()
         constraintSet.clone(binding.rootLayout)
         constraintSet.setDimensionRatio(R.id.cardPlayerContainer, "16:9")
-        constraintSet.clear(R.id.cardPlayerContainer, ConstraintSet.END)
         constraintSet.connect(R.id.cardPlayerContainer, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
         constraintSet.connect(R.id.cardPlayerContainer, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
         constraintSet.connect(R.id.cardPlayerContainer, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
         constraintSet.connect(R.id.cardPlayerContainer, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
+        constraintSet.setHorizontalBias(R.id.cardPlayerContainer, 0.5f)
+        constraintSet.setVerticalBias(R.id.cardPlayerContainer, 0.5f)
         constraintSet.applyTo(binding.rootLayout)
 
         showHudTemporarily()
