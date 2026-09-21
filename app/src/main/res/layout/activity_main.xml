@@ -117,7 +117,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        android:layout_marginHorizontal="8dp"
         app:cardBackgroundColor="@color/black"
         app:cardCornerRadius="12dp"
         app:cardElevation="4dp"
@@ -1569,7 +1568,7 @@
                             android:id="@+id/tvAppVersion"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Version 1.0.0.8 • Station North Media"
+                            android:text="Version 1.0.0.9 • Station North Media"
                             android:textColor="@color/nord8"
                             android:textSize="11sp" />
 

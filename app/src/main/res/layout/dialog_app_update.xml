@@ -40,7 +40,7 @@
                 android:background="@drawable/badge_update_bg"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
-                android:text="v1.0.0.8"
+                android:text="v1.0.0.9"
                 android:textColor="@color/nord0"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="Installed: v1.0.0.7  •  Available on GitHub: v1.0.0.8"
+            android:text="Installed: v1.0.0.8  •  Available on GitHub: v1.0.0.9"
             android:textColor="@color/nord6"
             android:textSize="11sp" />
 
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:lineSpacingExtra="2dp"
-                android:text="• 100% English UI Localization &amp; Refinements\n• 21:9 Ultra-Wide Fullscreen Aspect Ratio Centering\n• In-App SmartTube Auto-Updater Engine"
+                android:text="• Fixed 16:9 Player &amp; Control Deck Width Alignment across Portrait &amp; Landscape\n• True 1:1 Aspect Ratio Matching for Smartphone &amp; TV UI Layouts\n• Updated GitHub Repository Documentation &amp; Release Pipeline"
                 android:textColor="@color/nord4"
                 android:textSize="11sp" />
         </androidx.core.widget.NestedScrollView>
