@@ -1557,10 +1557,11 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvAppVersion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Version 21.25 • Station North Media"
+                        android:text="Version 1.0.0.1 • Station North Media"
                         android:textColor="@color/nord8"
                         android:textSize="11sp" />
 

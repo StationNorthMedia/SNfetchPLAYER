@@ -166,6 +166,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         setContentView(binding.root)
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        binding.tvAppVersion.text = "Version ${com.example.snfetchplayer.BuildConfig.VERSION_NAME} • Station North Media"
 
         curatedCatalogManager = CuratedCatalogManager(this)
         com.example.snfetchplayer.data.ArtistLexiconRepository.init(this)
