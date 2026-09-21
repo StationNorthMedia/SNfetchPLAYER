@@ -172,7 +172,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <!-- Real FFT Audio Spectrum Visualizer (100% Full Background) -->
-                <com.example.snfetchplayer.ui.NordAudioVisualizerView
+                <net.sn.fetchplayer.ui.NordAudioVisualizerView
                     android:id="@+id/audioVisualizer"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -202,7 +202,7 @@
                         android:scaleType="fitCenter"
                         android:src="@drawable/sn_logo" />
 
-                    <com.example.snfetchplayer.ui.OutlinedTextView
+                    <net.sn.fetchplayer.ui.OutlinedTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
@@ -1634,7 +1634,7 @@
                             android:id="@+id/tvAppVersion"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Version 1.0.0.5 • Station North Media"
+                            android:text="Version 1.0.0.6 • Station North Media"
                             android:textColor="@color/nord8"
                             android:textSize="11sp" />
 
@@ -1969,7 +1969,7 @@
         android:elevation="30dp"
         android:visibility="gone">
 
-        <com.example.snfetchplayer.ui.NordKineticSplashView
+        <net.sn.fetchplayer.ui.NordKineticSplashView
             android:id="@+id/kineticSplashView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

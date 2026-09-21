@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    namespace = "com.example.snfetchplayer"
+    namespace = "net.sn.fetchplayer"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.snfetchplayer"
+        applicationId = "net.sn.fetchplayer"
         minSdk = 24
         targetSdk = 34
-        versionCode = 2026092125
-        versionName = "1.0.0.5 (2026.09.21-23:10)"
+        versionCode = 2026092126
+        versionName = "1.0.0.6 (2026.09.21-23:40)"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
