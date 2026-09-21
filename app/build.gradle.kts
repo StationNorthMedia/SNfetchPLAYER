@@ -11,8 +11,8 @@ android {
         applicationId = "com.example.snfetchplayer"
         minSdk = 24
         targetSdk = 34
-        versionCode = 2026092122
-        versionName = "1.0.0.2 (2026.09.21-21:25)"
+        versionCode = 2026092123
+        versionName = "1.0.0.3 (2026.09.21-21:50)"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

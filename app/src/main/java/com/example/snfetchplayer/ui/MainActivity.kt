@@ -170,6 +170,8 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
 
         curatedCatalogManager = CuratedCatalogManager(this)
         com.example.snfetchplayer.data.ArtistLexiconRepository.init(this)
+        com.example.snfetchplayer.manager.QueenQuotesManager.init(this)
+        binding.tvManjaroChroniclesText.text = com.example.snfetchplayer.manager.QueenQuotesManager.getChroniclesText(this)
 
         if (savedInstanceState != null) {
             isSettingsModeActive = savedInstanceState.getBoolean("isSettingsModeActive", false)
@@ -1115,12 +1117,18 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         }
     }
 
-    private fun updateRadioWikipediaPanel(artistName: String, title: String, extract: String?, bitmap: android.graphics.Bitmap?) {
+    private fun updateRadioWikipediaPanel(artistName: String, title: String, extract: String?, bitmap: android.graphics.Bitmap?, textColor: Int? = null) {
         binding.tvRadioArtistName.text = "$artistName • $title"
         if (!extract.isNullOrBlank()) {
             binding.tvRadioWikipediaSummary.text = extract
         } else {
             binding.tvRadioWikipediaSummary.text = "Station North Digital Radio Stream • Pure R&B & Urban Culture"
+        }
+
+        if (textColor != null) {
+            binding.tvRadioWikipediaSummary.setTextColor(textColor)
+        } else {
+            binding.tvRadioWikipediaSummary.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.nord4))
         }
 
         if (bitmap != null) {
@@ -1138,17 +1146,21 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                 lowerArtist.contains("sn-tv")
 
         if (isStation) {
+            val quote = com.example.snfetchplayer.manager.QueenQuotesManager.getRandomQuote()
+            val quoteText = quote?.text ?: "The Queen is watching. Station North."
+            val quoteColor = quote?.colorInt
+
             val stationItem = ArtistHistoryItem(
                 track = track,
-                displayTitle = "STATION NORTH // TV SIGNAL",
+                displayTitle = "👑 THE QUEEN // STATION NORTH",
                 imageUrl = null,
                 imageBitmap = null,
-                extract = "Station North (SN-TV & SN-RADIO) ist Ihre 24/7 Immersive Audio-Visual Engine. Kuratierte Musikvideos, Station-IDs und Echte FFT-Audiovisualisierung direkt auf Ihrem Bildschirm."
+                extract = quoteText
             )
             com.example.snfetchplayer.data.ArtistHistoryRepository.addOrUpdateItem(stationItem)
             artistHistoryAdapter.setItems(com.example.snfetchplayer.data.ArtistHistoryRepository.getHistory())
             binding.rvArtistHistory.scrollToPosition(0)
-            updateRadioWikipediaPanel("STATION NORTH", track.title, stationItem.extract, null)
+            updateRadioWikipediaPanel("👑 THE QUEEN", track.title, quoteText, null, quoteColor)
             return
         }
 
