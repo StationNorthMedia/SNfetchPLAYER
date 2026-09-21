@@ -1,5 +1,5 @@
 {
-  "version": "21.25",
+  "version": "1.0.0.1",
   "updated_at": "2026-09-21",
   "playlists": [
     {
@@ -18,6 +18,1033 @@
       "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/playlists/us_hiphop_top50.json"
     }
   ],
-  "jingles": [],
-  "tv_ids": []
+  "jingles": [
+    {
+      "id": "Manjaro Lounge on Station North Talk (1)",
+      "name": "Manjaro Lounge on Station North Talk (1)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (1).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (10)",
+      "name": "Manjaro Lounge on Station North Talk (10)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (10).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (11)",
+      "name": "Manjaro Lounge on Station North Talk (11)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (11).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (12)",
+      "name": "Manjaro Lounge on Station North Talk (12)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (12).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (13)",
+      "name": "Manjaro Lounge on Station North Talk (13)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (13).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (14)",
+      "name": "Manjaro Lounge on Station North Talk (14)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (14).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (15)",
+      "name": "Manjaro Lounge on Station North Talk (15)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (15).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (16)",
+      "name": "Manjaro Lounge on Station North Talk (16)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (16).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (17)",
+      "name": "Manjaro Lounge on Station North Talk (17)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (17).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (18)",
+      "name": "Manjaro Lounge on Station North Talk (18)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (18).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (19)",
+      "name": "Manjaro Lounge on Station North Talk (19)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (19).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (2)",
+      "name": "Manjaro Lounge on Station North Talk (2)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (2).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (20)",
+      "name": "Manjaro Lounge on Station North Talk (20)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (20).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (21)",
+      "name": "Manjaro Lounge on Station North Talk (21)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (21).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (22)",
+      "name": "Manjaro Lounge on Station North Talk (22)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (22).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (23)",
+      "name": "Manjaro Lounge on Station North Talk (23)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (23).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (24)",
+      "name": "Manjaro Lounge on Station North Talk (24)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (24).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (25)",
+      "name": "Manjaro Lounge on Station North Talk (25)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (25).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (26)",
+      "name": "Manjaro Lounge on Station North Talk (26)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (26).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (27)",
+      "name": "Manjaro Lounge on Station North Talk (27)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (27).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (28)",
+      "name": "Manjaro Lounge on Station North Talk (28)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (28).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (29)",
+      "name": "Manjaro Lounge on Station North Talk (29)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (29).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (3)",
+      "name": "Manjaro Lounge on Station North Talk (3)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (3).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (30)",
+      "name": "Manjaro Lounge on Station North Talk (30)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (30).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (31)",
+      "name": "Manjaro Lounge on Station North Talk (31)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (31).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (32)",
+      "name": "Manjaro Lounge on Station North Talk (32)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (32).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (33)",
+      "name": "Manjaro Lounge on Station North Talk (33)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (33).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (34)",
+      "name": "Manjaro Lounge on Station North Talk (34)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (34).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (35)",
+      "name": "Manjaro Lounge on Station North Talk (35)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (35).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (36)",
+      "name": "Manjaro Lounge on Station North Talk (36)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (36).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (37)",
+      "name": "Manjaro Lounge on Station North Talk (37)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (37).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (38)",
+      "name": "Manjaro Lounge on Station North Talk (38)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (38).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (39)",
+      "name": "Manjaro Lounge on Station North Talk (39)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (39).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (4)",
+      "name": "Manjaro Lounge on Station North Talk (4)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (4).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (40)",
+      "name": "Manjaro Lounge on Station North Talk (40)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (40).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (41)",
+      "name": "Manjaro Lounge on Station North Talk (41)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (41).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (42)",
+      "name": "Manjaro Lounge on Station North Talk (42)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (42).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (43)",
+      "name": "Manjaro Lounge on Station North Talk (43)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (43).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (44)",
+      "name": "Manjaro Lounge on Station North Talk (44)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (44).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (45)",
+      "name": "Manjaro Lounge on Station North Talk (45)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (45).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (46)",
+      "name": "Manjaro Lounge on Station North Talk (46)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (46).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (47)",
+      "name": "Manjaro Lounge on Station North Talk (47)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (47).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (48)",
+      "name": "Manjaro Lounge on Station North Talk (48)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (48).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (49)",
+      "name": "Manjaro Lounge on Station North Talk (49)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (49).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (5)",
+      "name": "Manjaro Lounge on Station North Talk (5)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (5).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (50)",
+      "name": "Manjaro Lounge on Station North Talk (50)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (50).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (6)",
+      "name": "Manjaro Lounge on Station North Talk (6)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (6).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (7)",
+      "name": "Manjaro Lounge on Station North Talk (7)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (7).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (8)",
+      "name": "Manjaro Lounge on Station North Talk (8)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (8).mp3"
+    },
+    {
+      "id": "Manjaro Lounge on Station North Talk (9)",
+      "name": "Manjaro Lounge on Station North Talk (9)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Manjaro Lounge on Station North Talk (9).mp3"
+    },
+    {
+      "id": "SN - Sunshine on the Dash",
+      "name": "SN - Sunshine on the Dash",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN - Sunshine on the Dash.mp3"
+    },
+    {
+      "id": "SN Queen Intro (1)",
+      "name": "SN Queen Intro (1)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN Queen Intro (1).mp3"
+    },
+    {
+      "id": "SN Queen Intro (2)",
+      "name": "SN Queen Intro (2)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN Queen Intro (2).mp3"
+    },
+    {
+      "id": "SN Queen Intro (3)",
+      "name": "SN Queen Intro (3)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN Queen Intro (3).mp3"
+    },
+    {
+      "id": "SN Queen Intro (4)",
+      "name": "SN Queen Intro (4)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN Queen Intro (4).mp3"
+    },
+    {
+      "id": "SN Queen Intro (5)",
+      "name": "SN Queen Intro (5)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN Queen Intro (5).mp3"
+    },
+    {
+      "id": "SN-Flirt01",
+      "name": "SN-Flirt01",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Flirt01.mp3"
+    },
+    {
+      "id": "SN-Flirt02",
+      "name": "SN-Flirt02",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Flirt02.mp3"
+    },
+    {
+      "id": "SN-Flirt03",
+      "name": "SN-Flirt03",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Flirt03.mp3"
+    },
+    {
+      "id": "SN-Flirt04",
+      "name": "SN-Flirt04",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Flirt04.mp3"
+    },
+    {
+      "id": "SN-Flirt05",
+      "name": "SN-Flirt05",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Flirt05.mp3"
+    },
+    {
+      "id": "SN-Flirt06",
+      "name": "SN-Flirt06",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Flirt06.mp3"
+    },
+    {
+      "id": "SN-Flirt07",
+      "name": "SN-Flirt07",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Flirt07.mp3"
+    },
+    {
+      "id": "SN-Flirt08",
+      "name": "SN-Flirt08",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Flirt08.mp3"
+    },
+    {
+      "id": "SN-Talk-40",
+      "name": "SN-Talk-40",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Talk-40.mp3"
+    },
+    {
+      "id": "SN-Talk-41",
+      "name": "SN-Talk-41",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Talk-41.mp3"
+    },
+    {
+      "id": "SN-Talk-42",
+      "name": "SN-Talk-42",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Talk-42.mp3"
+    },
+    {
+      "id": "SN-Talk-43",
+      "name": "SN-Talk-43",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Talk-43.mp3"
+    },
+    {
+      "id": "SN-Talk-44",
+      "name": "SN-Talk-44",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Talk-44.mp3"
+    },
+    {
+      "id": "SN-Talk-45",
+      "name": "SN-Talk-45",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Talk-45.mp3"
+    },
+    {
+      "id": "SN-Talk-46",
+      "name": "SN-Talk-46",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Talk-46.mp3"
+    },
+    {
+      "id": "SN-Talk-47",
+      "name": "SN-Talk-47",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Talk-47.mp3"
+    },
+    {
+      "id": "SN-Talk-48",
+      "name": "SN-Talk-48",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Talk-48.mp3"
+    },
+    {
+      "id": "SN-Talk-49",
+      "name": "SN-Talk-49",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Talk-49.mp3"
+    },
+    {
+      "id": "SN-Talk-50",
+      "name": "SN-Talk-50",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Talk-50.mp3"
+    },
+    {
+      "id": "SN-Talk-51",
+      "name": "SN-Talk-51",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Talk-51.mp3"
+    },
+    {
+      "id": "SN-Talk-52",
+      "name": "SN-Talk-52",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Talk-52.mp3"
+    },
+    {
+      "id": "SN-Talk-53",
+      "name": "SN-Talk-53",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Talk-53.mp3"
+    },
+    {
+      "id": "SN-Talk-54",
+      "name": "SN-Talk-54",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Talk-54.mp3"
+    },
+    {
+      "id": "SN-Up&Down01",
+      "name": "SN-Up&Down01",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Up&Down01.mp3"
+    },
+    {
+      "id": "SN-Up&Down02",
+      "name": "SN-Up&Down02",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Up&Down02.mp3"
+    },
+    {
+      "id": "SN-Up&Down03",
+      "name": "SN-Up&Down03",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Up&Down03.mp3"
+    },
+    {
+      "id": "SN-Up&Down04",
+      "name": "SN-Up&Down04",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-Up&Down04.mp3"
+    },
+    {
+      "id": "SN-queen-id-01",
+      "name": "SN-queen-id-01",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-queen-id-01.mp3"
+    },
+    {
+      "id": "SN-queen-id-02",
+      "name": "SN-queen-id-02",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-queen-id-02.mp3"
+    },
+    {
+      "id": "SN-queen-id-03",
+      "name": "SN-queen-id-03",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-queen-id-03.mp3"
+    },
+    {
+      "id": "SN-queen-id-04",
+      "name": "SN-queen-id-04",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-queen-id-04.mp3"
+    },
+    {
+      "id": "SN-queen-id-05",
+      "name": "SN-queen-id-05",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-queen-id-05.mp3"
+    },
+    {
+      "id": "SN-queen-id-06",
+      "name": "SN-queen-id-06",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-queen-id-06.mp3"
+    },
+    {
+      "id": "SN-queen-id-07",
+      "name": "SN-queen-id-07",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-queen-id-07.mp3"
+    },
+    {
+      "id": "SN-queen-id-08",
+      "name": "SN-queen-id-08",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-queen-id-08.mp3"
+    },
+    {
+      "id": "SN-queen-id-09",
+      "name": "SN-queen-id-09",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-queen-id-09.mp3"
+    },
+    {
+      "id": "SN-queen-id-10",
+      "name": "SN-queen-id-10",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN-queen-id-10.mp3"
+    },
+    {
+      "id": "SN0",
+      "name": "SN0",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN0.mp3"
+    },
+    {
+      "id": "SN1",
+      "name": "SN1",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN1.mp3"
+    },
+    {
+      "id": "SN2",
+      "name": "SN2",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN2.mp3"
+    },
+    {
+      "id": "SN3",
+      "name": "SN3",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN3.mp3"
+    },
+    {
+      "id": "SN4",
+      "name": "SN4",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN4.mp3"
+    },
+    {
+      "id": "SN5",
+      "name": "SN5",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN5.mp3"
+    },
+    {
+      "id": "SN6",
+      "name": "SN6",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN6.mp3"
+    },
+    {
+      "id": "SN7",
+      "name": "SN7",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN7.mp3"
+    },
+    {
+      "id": "SN8",
+      "name": "SN8",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN8.mp3"
+    },
+    {
+      "id": "SN9",
+      "name": "SN9",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/SN9.mp3"
+    },
+    {
+      "id": "Station North Soundtrack (1)",
+      "name": "Station North Soundtrack (1)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (1).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (10)",
+      "name": "Station North Soundtrack (10)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (10).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (11)",
+      "name": "Station North Soundtrack (11)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (11).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (12)",
+      "name": "Station North Soundtrack (12)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (12).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (13)",
+      "name": "Station North Soundtrack (13)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (13).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (14)",
+      "name": "Station North Soundtrack (14)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (14).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (15)",
+      "name": "Station North Soundtrack (15)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (15).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (16)",
+      "name": "Station North Soundtrack (16)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (16).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (17)",
+      "name": "Station North Soundtrack (17)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (17).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (18)",
+      "name": "Station North Soundtrack (18)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (18).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (19)",
+      "name": "Station North Soundtrack (19)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (19).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (2)",
+      "name": "Station North Soundtrack (2)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (2).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (20)",
+      "name": "Station North Soundtrack (20)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (20).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (21)",
+      "name": "Station North Soundtrack (21)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (21).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (22)",
+      "name": "Station North Soundtrack (22)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (22).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (23)",
+      "name": "Station North Soundtrack (23)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (23).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (24)",
+      "name": "Station North Soundtrack (24)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (24).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (25)",
+      "name": "Station North Soundtrack (25)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (25).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (26)",
+      "name": "Station North Soundtrack (26)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (26).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (27)",
+      "name": "Station North Soundtrack (27)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (27).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (28)",
+      "name": "Station North Soundtrack (28)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (28).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (29)",
+      "name": "Station North Soundtrack (29)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (29).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (3)",
+      "name": "Station North Soundtrack (3)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (3).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (30)",
+      "name": "Station North Soundtrack (30)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (30).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (31)",
+      "name": "Station North Soundtrack (31)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (31).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (32)",
+      "name": "Station North Soundtrack (32)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (32).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (33)",
+      "name": "Station North Soundtrack (33)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (33).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (34)",
+      "name": "Station North Soundtrack (34)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (34).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (35)",
+      "name": "Station North Soundtrack (35)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (35).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (36)",
+      "name": "Station North Soundtrack (36)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (36).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (37)",
+      "name": "Station North Soundtrack (37)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (37).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (38)",
+      "name": "Station North Soundtrack (38)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (38).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (39)",
+      "name": "Station North Soundtrack (39)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (39).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (4)",
+      "name": "Station North Soundtrack (4)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (4).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (40)",
+      "name": "Station North Soundtrack (40)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (40).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (41)",
+      "name": "Station North Soundtrack (41)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (41).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (42)",
+      "name": "Station North Soundtrack (42)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (42).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (43)",
+      "name": "Station North Soundtrack (43)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (43).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (44)",
+      "name": "Station North Soundtrack (44)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (44).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (45)",
+      "name": "Station North Soundtrack (45)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (45).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (46)",
+      "name": "Station North Soundtrack (46)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (46).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (47)",
+      "name": "Station North Soundtrack (47)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (47).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (48)",
+      "name": "Station North Soundtrack (48)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (48).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (49)",
+      "name": "Station North Soundtrack (49)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (49).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (5)",
+      "name": "Station North Soundtrack (5)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (5).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (50)",
+      "name": "Station North Soundtrack (50)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (50).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (51)",
+      "name": "Station North Soundtrack (51)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (51).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (52)",
+      "name": "Station North Soundtrack (52)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (52).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (53)",
+      "name": "Station North Soundtrack (53)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (53).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (54)",
+      "name": "Station North Soundtrack (54)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (54).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (55)",
+      "name": "Station North Soundtrack (55)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (55).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (6)",
+      "name": "Station North Soundtrack (6)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (6).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (7)",
+      "name": "Station North Soundtrack (7)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (7).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (8)",
+      "name": "Station North Soundtrack (8)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (8).mp3"
+    },
+    {
+      "id": "Station North Soundtrack (9)",
+      "name": "Station North Soundtrack (9)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/Station North Soundtrack (9).mp3"
+    },
+    {
+      "id": "The Qween - GenZ Love",
+      "name": "The Qween - GenZ Love",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/The Qween - GenZ Love.mp3"
+    },
+    {
+      "id": "audi_in_the_alley",
+      "name": "audi_in_the_alley",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/audi_in_the_alley.mp3"
+    },
+    {
+      "id": "copper_glow",
+      "name": "copper_glow",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/copper_glow.mp3"
+    },
+    {
+      "id": "queen_of_station_north (1)",
+      "name": "queen_of_station_north (1)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/queen_of_station_north (1).mp3"
+    },
+    {
+      "id": "tiger_in_the_maze",
+      "name": "tiger_in_the_maze",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/jingles/tiger_in_the_maze.mp3"
+    }
+  ],
+  "tv_ids": [
+    {
+      "id": "SN_tv_000001",
+      "name": "SN_tv_000001",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000001.mp4"
+    },
+    {
+      "id": "SN_tv_000002",
+      "name": "SN_tv_000002",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000002.mp4"
+    },
+    {
+      "id": "SN_tv_000003",
+      "name": "SN_tv_000003",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000003.mp4"
+    },
+    {
+      "id": "SN_tv_000004",
+      "name": "SN_tv_000004",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000004.mp4"
+    },
+    {
+      "id": "SN_tv_000005",
+      "name": "SN_tv_000005",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000005.mp4"
+    },
+    {
+      "id": "SN_tv_000006",
+      "name": "SN_tv_000006",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000006.mp4"
+    },
+    {
+      "id": "SN_tv_000007",
+      "name": "SN_tv_000007",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000007.mp4"
+    },
+    {
+      "id": "SN_tv_000008",
+      "name": "SN_tv_000008",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000008.mp4"
+    },
+    {
+      "id": "SN_tv_000009",
+      "name": "SN_tv_000009",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000009.mp4"
+    },
+    {
+      "id": "SN_tv_000010",
+      "name": "SN_tv_000010",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000010.mp4"
+    },
+    {
+      "id": "SN_tv_000011",
+      "name": "SN_tv_000011",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000011.mp4"
+    },
+    {
+      "id": "SN_tv_000012",
+      "name": "SN_tv_000012",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000012.mp4"
+    },
+    {
+      "id": "SN_tv_000013",
+      "name": "SN_tv_000013",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000013.mp4"
+    },
+    {
+      "id": "SN_tv_000014",
+      "name": "SN_tv_000014",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000014.mp4"
+    },
+    {
+      "id": "SN_tv_000015",
+      "name": "SN_tv_000015",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000015.mp4"
+    },
+    {
+      "id": "SN_tv_000016",
+      "name": "SN_tv_000016",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000016.mp4"
+    },
+    {
+      "id": "SN_tv_000017",
+      "name": "SN_tv_000017",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000017.mp4"
+    },
+    {
+      "id": "SN_tv_000018",
+      "name": "SN_tv_000018",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000018.mp4"
+    },
+    {
+      "id": "SN_tv_000019",
+      "name": "SN_tv_000019",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000019.mp4"
+    },
+    {
+      "id": "SN_tv_000020",
+      "name": "SN_tv_000020",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000020.mp4"
+    },
+    {
+      "id": "SN_tv_000021",
+      "name": "SN_tv_000021",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000021.mp4"
+    },
+    {
+      "id": "SN_tv_000022",
+      "name": "SN_tv_000022",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000022.mp4"
+    },
+    {
+      "id": "SN_tv_000023",
+      "name": "SN_tv_000023",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000023.mp4"
+    },
+    {
+      "id": "SN_tv_000024",
+      "name": "SN_tv_000024",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000024.mp4"
+    },
+    {
+      "id": "SN_tv_000025",
+      "name": "SN_tv_000025",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000025.mp4"
+    },
+    {
+      "id": "SN_tv_000026",
+      "name": "SN_tv_000026",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000026.mp4"
+    },
+    {
+      "id": "SN_tv_000027",
+      "name": "SN_tv_000027",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000027.mp4"
+    },
+    {
+      "id": "SN_tv_000028",
+      "name": "SN_tv_000028",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000028.mp4"
+    },
+    {
+      "id": "SN_tv_000029",
+      "name": "SN_tv_000029",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000029.mp4"
+    },
+    {
+      "id": "SN_tv_000030",
+      "name": "SN_tv_000030",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000030.mp4"
+    },
+    {
+      "id": "SN_tv_000031",
+      "name": "SN_tv_000031",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000031.mp4"
+    },
+    {
+      "id": "SN_tv_000032",
+      "name": "SN_tv_000032",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000032.mp4"
+    },
+    {
+      "id": "SN_tv_000033",
+      "name": "SN_tv_000033",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000033.mp4"
+    },
+    {
+      "id": "SN_tv_000034",
+      "name": "SN_tv_000034",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000034.mp4"
+    },
+    {
+      "id": "SN_tv_000035",
+      "name": "SN_tv_000035",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000035.mp4"
+    },
+    {
+      "id": "SN_tv_000036",
+      "name": "SN_tv_000036",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000036.mp4"
+    },
+    {
+      "id": "SN_tv_000037",
+      "name": "SN_tv_000037",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000037.mp4"
+    },
+    {
+      "id": "SN_tv_000038",
+      "name": "SN_tv_000038",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000038.mp4"
+    },
+    {
+      "id": "SN_tv_000039",
+      "name": "SN_tv_000039",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000039.mp4"
+    },
+    {
+      "id": "SN_tv_000040",
+      "name": "SN_tv_000040",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000040.mp4"
+    },
+    {
+      "id": "SN_tv_000041",
+      "name": "SN_tv_000041",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000041.mp4"
+    },
+    {
+      "id": "SN_tv_000042",
+      "name": "SN_tv_000042",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/tv_ids/SN_tv_000042.mp4"
+    }
+  ]
 }

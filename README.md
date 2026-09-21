@@ -3,9 +3,9 @@
 <img src="docs/logo.png" alt="Station North Logo" width="220" />
 
 # SNfetchPLAYER • Broadcast & Audio Engine
-**Version 1.0.0.1 • Designed for Android Smartphones, Tablets & Android TV**
+**Version 1.0.0.2 • Designed for Android Smartphones, Tablets & Android TV**
 
-[![Release](https://img.shields.io/badge/release-v1.0.0.1-teal.svg)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v1.0.0.1)
+[![Release](https://img.shields.io/badge/release-v1.0.0.2-teal.svg)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v1.0.0.2)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Android%205.0%2B-blue.svg)](https://developer.android.com/)
 
@@ -67,7 +67,7 @@ remote_assets/
 
 ## 📥 Download & Installation
 
-1. Download the latest **`SNfetchPLAYER-v1.0.0.1.apk`** from [GitHub Releases](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/latest).
+1. Download the latest **`SNfetchPLAYER-v1.0.0.2.apk`** from [GitHub Releases](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/latest).
 2. Install the APK on your Android device or Android TV box.
 3. Launch **SNfetchPLAYER** and enjoy Station North Media streams!
 
