@@ -40,7 +40,7 @@
                 android:background="@drawable/badge_update_bg"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
-                android:text="v1.0.0.9"
+                android:text="v1.0.0.10"
                 android:textColor="@color/nord0"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="Installed: v1.0.0.8  •  Available on GitHub: v1.0.0.9"
+            android:text="Installed: v1.0.0.8  •  Available on GitHub: v1.0.0.10"
             android:textColor="@color/nord6"
             android:textSize="11sp" />
 
