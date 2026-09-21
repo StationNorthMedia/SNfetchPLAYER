@@ -1729,14 +1729,15 @@
                         android:textColor="@color/nord4"
                         android:textSize="11sp" />
 
-                    <!-- The Manjaro Lounge Chronicles -->
+                    <!-- Remote Assets Sync Status & Progress -->
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardRemoteAssetSync"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         app:cardBackgroundColor="@color/nord1"
                         app:cardCornerRadius="8dp"
-                        app:strokeColor="@color/nord15"
+                        app:strokeColor="@color/nord14"
                         app:strokeWidth="1dp">
 
                         <LinearLayout
@@ -1745,25 +1746,68 @@
                             android:orientation="vertical"
                             android:padding="14dp">
 
-                            <TextView
+                            <RelativeLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="📖 THE MANJARO LOUNGE CHRONICLES // VOL. 01"
-                                android:textColor="@color/nord15"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:text="📡 REMOTE ASSET CLOUD SYNC"
+                                    android:textColor="@color/nord14"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnSyncAssetsNow"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="32dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:paddingHorizontal="10dp"
+                                    android:paddingVertical="0dp"
+                                    android:text="🔄 Sync Now"
+                                    android:textColor="@color/nord14"
+                                    android:textSize="10sp"
+                                    app:strokeColor="@color/nord14"
+                                    app:strokeWidth="1dp" />
+                            </RelativeLayout>
+
+                            <ProgressBar
+                                android:id="@+id/pbRemoteAssetSync"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="8dp"
+                                android:layout_marginTop="8dp"
+                                android:max="100"
+                                android:progress="0" />
 
                             <TextView
-                                android:id="@+id/tvManjaroChroniclesText"
+                                android:id="@+id/tvAssetSyncStatus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
-                                android:lineSpacingExtra="3dp"
+                                android:text="Checking local &amp; remote asset status..."
                                 android:textColor="@color/nord4"
                                 android:textSize="11sp" />
 
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
+
+                    <!-- E-Book Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnOpenEbookChronicles"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="12dp"
+                        android:text="📖 Open Station North Chronicles (E-Book)"
+                        android:textColor="@color/nord15"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:strokeColor="@color/nord15"
+                        app:strokeWidth="1.5dp" />
 
                     <!-- Her Majesty's Royal FAQ & User Guide -->
                     <com.google.android.material.card.MaterialCardView

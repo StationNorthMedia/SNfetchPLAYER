@@ -22,7 +22,8 @@ data class ArtistHistoryItem(
     val displayTitle: String,
     val imageUrl: String?,
     var imageBitmap: android.graphics.Bitmap?,
-    val extract: String
+    val extract: String,
+    val textColor: Int? = null
 )
 
 class ArtistHistoryAdapter(
@@ -61,7 +62,8 @@ class ArtistHistoryAdapter(
         ssb.append(item.displayTitle).append("\n")
         val titleEnd = ssb.length
         ssb.setSpan(StyleSpan(Typeface.BOLD), titleStart, titleEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        ssb.setSpan(ForegroundColorSpan(ContextCompat.getColor(context, R.color.nord8)), titleStart, titleEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        val headerColor = if (item.textColor != null) item.textColor else ContextCompat.getColor(context, R.color.nord8)
+        ssb.setSpan(ForegroundColorSpan(headerColor), titleStart, titleEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         ssb.setSpan(RelativeSizeSpan(1.25f), titleStart, titleEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         // Track Title Sub-Header if available
@@ -74,8 +76,16 @@ class ArtistHistoryAdapter(
             ssb.setSpan(RelativeSizeSpan(1.05f), subStart, subEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
 
-        // Bio Extract Text
+        // Bio Extract Text (Styled with ambient color if present)
+        val extractStart = ssb.length
         ssb.append(item.extract)
+        val extractEnd = ssb.length
+        if (item.textColor != null) {
+            ssb.setSpan(ForegroundColorSpan(item.textColor), extractStart, extractEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            ssb.setSpan(StyleSpan(Typeface.BOLD), extractStart, extractEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        } else {
+            ssb.setSpan(ForegroundColorSpan(ContextCompat.getColor(context, R.color.nord4)), extractStart, extractEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
 
         // Floating Text Margin Span
         ssb.setSpan(FloatingTextMarginSpan(imgWidthPx, 6), 0, ssb.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
@@ -107,4 +117,3 @@ class ArtistHistoryAdapter(
         }
     }
 }
-

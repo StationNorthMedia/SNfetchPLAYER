@@ -171,7 +171,13 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         curatedCatalogManager = CuratedCatalogManager(this)
         com.example.snfetchplayer.data.ArtistLexiconRepository.init(this)
         com.example.snfetchplayer.manager.QueenQuotesManager.init(this)
-        binding.tvManjaroChroniclesText.text = com.example.snfetchplayer.manager.QueenQuotesManager.getChroniclesText(this)
+
+        val initialSyncState = com.example.snfetchplayer.manager.RemoteAssetSyncManager.checkLocalAssetsStatus(this)
+        updateAssetSyncUi(initialSyncState)
+
+        com.example.snfetchplayer.manager.RemoteAssetSyncManager.startRemoteAssetSync(this) { progress ->
+            updateAssetSyncUi(progress)
+        }
 
         if (savedInstanceState != null) {
             isSettingsModeActive = savedInstanceState.getBoolean("isSettingsModeActive", false)
@@ -1115,6 +1121,30 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
             exportLogsTxtLauncher.launch("sn_terminal_logs_$timestamp.txt")
         }
+
+        binding.btnSyncAssetsNow.setOnClickListener {
+            com.example.snfetchplayer.manager.RemoteAssetSyncManager.startRemoteAssetSync(this) { progress ->
+                updateAssetSyncUi(progress)
+            }
+        }
+
+        binding.btnOpenEbookChronicles.setOnClickListener {
+            ChroniclesEbookDialog(this).show()
+        }
+    }
+
+    private fun updateAssetSyncUi(progress: com.example.snfetchplayer.manager.SyncProgress) {
+        runOnUiThread {
+            binding.pbRemoteAssetSync.progress = progress.progressPercent
+            binding.tvAssetSyncStatus.text = progress.statusMessage
+            if (progress.isSyncing) {
+                binding.btnSyncAssetsNow.isEnabled = false
+                binding.btnSyncAssetsNow.text = "⏳ Syncing..."
+            } else {
+                binding.btnSyncAssetsNow.isEnabled = true
+                binding.btnSyncAssetsNow.text = "🔄 Sync Now"
+            }
+        }
     }
 
     private fun updateRadioWikipediaPanel(artistName: String, title: String, extract: String?, bitmap: android.graphics.Bitmap?, textColor: Int? = null) {
@@ -1155,7 +1185,8 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                 displayTitle = "👑 THE QUEEN // STATION NORTH",
                 imageUrl = null,
                 imageBitmap = null,
-                extract = quoteText
+                extract = quoteText,
+                textColor = quoteColor
             )
             com.example.snfetchplayer.data.ArtistHistoryRepository.addOrUpdateItem(stationItem)
             artistHistoryAdapter.setItems(com.example.snfetchplayer.data.ArtistHistoryRepository.getHistory())
