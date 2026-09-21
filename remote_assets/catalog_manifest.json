@@ -1,0 +1,23 @@
+{
+  "version": "21.25",
+  "updated_at": "2026-09-21",
+  "playlists": [
+    {
+      "id": "main_top100",
+      "name": "Station North Main Mix (100 Hits)",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/playlists/main_top100.json"
+    },
+    {
+      "id": "us_rnb_top50",
+      "name": "US R&B Top 50",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/playlists/us_rnb_top50.json"
+    },
+    {
+      "id": "us_hiphop_top50",
+      "name": "US HipHop Top 50",
+      "url": "https://raw.githubusercontent.com/StationNorthMedia/SNfetchPLAYER/main/remote_assets/playlists/us_hiphop_top50.json"
+    }
+  ],
+  "jingles": [],
+  "tv_ids": []
+}
