@@ -67,7 +67,7 @@ remote_assets/
 
 ## 📥 Download & Installation
 
-1. Download the latest **`app-debug.apk`** from [GitHub Releases](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v21.25).
+1. Download the latest **`SNfetchPLAYER-v21.25.apk`** from [GitHub Releases](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/latest).
 2. Install the APK on your Android device or Android TV box.
 3. Launch **SNfetchPLAYER** and enjoy Station North Media streams!
 
