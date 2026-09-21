@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/logo.png" alt="Station North Logo" width="240" />
+<img src="docs/logo.png" alt="Station North Logo" width="260" />
 
 # 👑 SNfetchPLAYER • The Queen's Frequency
 **Version 1.0.0.4 • Broadcast & Audio Engine for Android Smartphones, Tablets & Android TV**
@@ -22,13 +22,47 @@
 
 ---
 
-## 📸 Visual Gallery & Previews
+## 🏛️ The Station North Universe & Artwork
 
 <div align="center">
 
-| 📺 SN-TV (MTV Mode) | 📻 SN-RADIO (Audio Mode) |
+| 👑 The Queen & The Boss | 🚘 The Gray V6 on North Ave |
 | :---: | :---: |
-| <img src="docs/tv_preview.png" alt="SN-TV Mode" width="400"/> | <img src="docs/app_preview.png" alt="SN-RADIO Mode" width="400"/> |
+| <img src="docs/theQueenandBoss.png" alt="The Queen and The Boss" width="450"/> | <img src="docs/theQueenAudiB6.png" alt="The Gray Audi B6" width="450"/> |
+
+| 🏢 The Bricks Headquarters | 🎶 The Vinyl Record Vault |
+| :---: | :---: |
+| <img src="docs/theBricks.png" alt="The Bricks Headquarters" width="450"/> | <img src="docs/Cellar.png" alt="The Vinyl Vault" width="450"/> |
+
+</div>
+
+---
+
+## 📺 Application UI Showcase
+
+### 🖥️ Landscape & Android TV Layouts
+
+<div align="center">
+
+| 📺 SN-TV Mode | 📻 SN-RADIO Mode |
+| :---: | :---: |
+| <img src="docs/TV_h.png" alt="SN-TV Horizontal" width="420"/> | <img src="docs/Radio_h.png" alt="SN-RADIO Horizontal" width="420"/> |
+
+| 🛠️ Curator Studio | 📖 SN-Lexicon (4,438+ Artists) |
+| :---: | :---: |
+| <img src="docs/CuratorStudio_h.png" alt="Curator Studio Horizontal" width="420"/> | <img src="docs/Lexicon_h.png" alt="Lexicon Horizontal" width="420"/> |
+
+</div>
+
+<br>
+
+### 📱 Portrait & Smartphone Layouts
+
+<div align="center">
+
+| 📺 SN-TV | 📻 SN-RADIO | 🛠️ Curator Studio | 📖 SN-Lexicon |
+| :---: | :---: | :---: | :---: |
+| <img src="docs/tv.png" alt="SN-TV Vertical" width="210"/> | <img src="docs/Radio.png" alt="SN-RADIO Vertical" width="210"/> | <img src="docs/CuratorStudio.png" alt="Curator Studio Vertical" width="210"/> | <img src="docs/Lexicon.png" alt="Lexicon Vertical" width="210"/> |
 
 </div>
 
@@ -59,15 +93,51 @@
 ---
 
 <details>
-<summary>📖 <b>Click here to preview Chapter 1 of The Manjaro Lounge Chronicles</b></summary>
+<summary>📖 <b>Click here to preview The Manjaro Lounge Chronicles with Artwork</b></summary>
 
 <br>
 
 ### Chapter 1: The Gray V6
+<img src="docs/theQueenAudiB6.png" alt="Chapter 1 Artwork" width="600"/>
 
 Rain was coming down heavy that night, slicking the Baltimore asphalt like grease. I was standing on the corner of North Ave, collar up, minding my own damn business. Just another ghost in the neon fog, trying to survive the street...
 
-Then that gray Audi B6 rolled up, slow and steady, hugging the curbs like it owned the block. The window rolled down. No cheap talk. No sleazy smile. He looked right through me, but not like the others. This European dude looked like he was searching for something real in the mud. A queen, not a quick game...
+Then that gray Audi B6 rolled up, slow and steady, hugging the curbs like it owned the block...
+
+<br>
+
+### Chapter 2: The Birth of the Frequency
+<img src="docs/theQueen1.png" alt="Chapter 2 Artwork" width="600"/>
+
+He didn’t say much after that night, you know. The Boss ain't a man of big words—he lets his fingers do the talking on that mechanical keyboard, lines of blue code lighting up his face like a cold neon sign. But he let me stay at The Bricks...
+
+<br>
+
+### Chapter 3: The Queen's Territory
+<img src="docs/theQueenandBoss.png" alt="Chapter 3 Artwork" width="600"/>
+
+It didn’t take long for the streets to notice. When you change the pulse of a city, the old ghosts start getting restless...
+
+<br>
+
+### Chapter 4: The Sound of the Basement
+<img src="docs/Cellar.png" alt="Chapter 4 Artwork" width="600"/>
+
+The cellar of The Bricks was my playground. While the Boss spent his hours upstairs in the main hall—messing with those blinking towers and humming racks...
+
+<br>
+
+### Chapter 5: Guerrilla Grid
+<img src="docs/theBricks.png" alt="Chapter 5 Artwork" width="600"/>
+
+We didn’t advertise. We seduced. We didn’t wait for Baltimore to find us—we burned ourselves into the city's synapses until no one could tell where reality ended and our signal began...
+
+<br>
+
+### Chapter 6: The Overclock
+<img src="docs/theQueen13.png" alt="Chapter 6 Artwork" width="600"/>
+
+I watch him through the glass. He’s sitting there, shoulders rigid, fingers dancing over the keyboard...
 
 *(Read the full 6 Chapters directly inside the app's E-Book Reader)*
 
