@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.SNfetchPLAYER" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/nord8</item>
+        <item name="colorPrimaryVariant">@color/nord10</item>
+        <item name="colorOnPrimary">@color/nord0</item>
+        <item name="colorSecondary">@color/nord7</item>
+        <item name="colorSecondaryVariant">@color/nord9</item>
+        <item name="colorOnSecondary">@color/nord0</item>
+        <item name="android:statusBarColor">@color/nord0</item>
+        <item name="android:navigationBarColor">@color/nord0</item>
+        <item name="android:windowBackground">@color/nord0</item>
+    </style>
+
+    <style name="RoundedCornerImageStyle">
+        <item name="cornerSize">10dp</item>
+    </style>
+</resources>

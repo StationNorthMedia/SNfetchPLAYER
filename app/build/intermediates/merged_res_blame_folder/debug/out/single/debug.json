@@ -1,0 +1,194 @@
+[
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/layout_item_artist_history.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/item_artist_history.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/xml_backup_rules.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/drawable_ic_delete.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/drawable/ic_delete.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/drawable_ic_previous.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/drawable/ic_previous.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/layout_activity_main.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/layout_item_lexicon_studio_result.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/item_lexicon_studio_result.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/anim_slide_in_right.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/anim/slide_in_right.xml"
+    },
+    {
+        "merged": "com.example.snfetchplayer.app-merged_res-36:/layout-sw600dp-land_activity_main.xml.flat",
+        "source": "com.example.snfetchplayer.app-main-38:/layout-sw600dp-land/activity_main.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/drawable_ic_fullscreen_exit.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/drawable/ic_fullscreen_exit.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/anim_fade_out.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/anim/fade_out.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/layout_item_related_artist.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/item_related_artist.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/layout_item_curator_track.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/item_curator_track.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/drawable_ic_check.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/drawable/ic_check.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/drawable_ic_pause.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/drawable/ic_pause.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/layout_item_lexicon_album.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/item_lexicon_album.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/drawable_tv_banner.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/drawable/tv_banner.png"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/layout-sw600dp-land_activity_main.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout-sw600dp-land/activity_main.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/drawable_ic_play.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/drawable/ic_play.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/layout_dialog_edit_track.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/dialog_edit_track.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/layout_dialog_lexicon_browser.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/dialog_lexicon_browser.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/drawable_sn_logo.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/drawable/sn_logo.png"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/xml_data_extraction_rules.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/drawable_ic_fullscreen.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/drawable/ic_fullscreen.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/drawable_ic_launcher.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/drawable/ic_launcher.png"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/layout-land_activity_main.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout-land/activity_main.xml"
+    },
+    {
+        "merged": "com.example.snfetchplayer.app-merged_res-36:/layout-land_activity_main.xml.flat",
+        "source": "com.example.snfetchplayer.app-main-38:/layout-land/activity_main.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/layout_item_lexicon_dropdown_suggestion.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/item_lexicon_dropdown_suggestion.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/drawable_ic_next.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/drawable/ic_next.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/raw_sn_jingle_1.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/raw/sn_jingle_1.mp3"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.snfetchplayer.app-merged_res-36:/layout_activity_main.xml.flat",
+        "source": "com.example.snfetchplayer.app-main-38:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/drawable_ic_save.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/drawable/ic_save.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/raw_sn_id_1.mp4.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/raw/sn_id_1.mp4"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/drawable_ic_repeat.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/drawable/ic_repeat.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/drawable_ic_edit.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/drawable/ic_edit.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/drawable_ic_tv.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/drawable/ic_tv.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/anim_slide_in_left.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/anim/slide_in_left.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/layout_item_lexicon_artist.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/item_lexicon_artist.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-merged_res-36:/drawable_ic_radio.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/drawable/ic_radio.xml"
+    }
+]

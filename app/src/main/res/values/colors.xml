@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Nord Theme Palette -->
+    <color name="nord0">#2E3440</color> <!-- Polar Night: Main Dark Background -->
+    <color name="nord1">#3B4252</color> <!-- Polar Night: Card Surface -->
+    <color name="nord2">#434C5E</color> <!-- Polar Night: Elevated Stroke/Borders -->
+    <color name="nord3">#4C566A</color> <!-- Polar Night: Subtle Dividers & Muted Texts -->
+
+    <color name="nord4">#D8DEE9</color> <!-- Snow Storm: Main Body Text -->
+    <color name="nord5">#E5E9F0</color> <!-- Snow Storm: Subheaders & Icons -->
+    <color name="nord6">#ECEFF4</color> <!-- Snow Storm: Pure White Headlines -->
+
+    <color name="nord7">#8FBCBB</color> <!-- Frost: Soft Teal Highlight -->
+    <color name="nord8">#88C0D0</color> <!-- Frost: Primary Cyan Accent -->
+    <color name="nord9">#81A1C1</color> <!-- Frost: Soft Blue Accent -->
+    <color name="nord10">#5E81AC</color> <!-- Frost: Deep Blue Accent -->
+
+    <color name="nord11">#BF616A</color> <!-- Aurora: Red Badge / TV Accent -->
+    <color name="nord12">#D08770</color> <!-- Aurora: Orange -->
+    <color name="nord13">#EBCB8B</color> <!-- Aurora: Yellow -->
+    <color name="nord14">#A3BE8C</color> <!-- Aurora: Green Success Badge -->
+    <color name="nord15">#B48EAD</color> <!-- Aurora: Purple Accent -->
+
+    <!-- Station North Brand Mappings -->
+    <color name="sn_background">#2E3440</color>
+    <color name="sn_surface">#3B4252</color>
+    <color name="sn_primary">#88C0D0</color>
+    <color name="sn_accent">#8FBCBB</color>
+    <color name="sn_text_primary">#ECEFF4</color>
+    <color name="sn_text_secondary">#D8DEE9</color>
+</resources>

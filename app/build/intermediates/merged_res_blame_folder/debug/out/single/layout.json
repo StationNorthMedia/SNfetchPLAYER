@@ -1,0 +1,46 @@
+[
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-mergeDebugResources-35:/layout/item_artist_history.xml",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/item_artist_history.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-mergeDebugResources-35:/layout/item_related_artist.xml",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/item_related_artist.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-mergeDebugResources-35:/layout/activity_main.xml",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-mergeDebugResources-35:/layout/item_lexicon_artist.xml",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/item_lexicon_artist.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-mergeDebugResources-35:/layout/item_lexicon_dropdown_suggestion.xml",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/item_lexicon_dropdown_suggestion.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-mergeDebugResources-35:/layout/dialog_edit_track.xml",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/dialog_edit_track.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-mergeDebugResources-35:/layout/item_lexicon_studio_result.xml",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/item_lexicon_studio_result.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-mergeDebugResources-35:/layout/item_curator_track.xml",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/item_curator_track.xml"
+    },
+    {
+        "merged": "com.example.snfetchplayer.app-mergeDebugResources-35:/layout/activity_main.xml",
+        "source": "com.example.snfetchplayer.app-main-38:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-mergeDebugResources-35:/layout/dialog_lexicon_browser.xml",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/dialog_lexicon_browser.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-mergeDebugResources-35:/layout/item_lexicon_album.xml",
+        "source": "/home/plex/.gradle/daemon/8.5/com.example.snfetchplayer.app-main-38:/layout/item_lexicon_album.xml"
+    }
+]

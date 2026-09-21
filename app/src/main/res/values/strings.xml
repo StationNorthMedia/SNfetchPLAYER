@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">SNfetchPLAYER</string>
+    <string name="station_north">Station North</string>
+    <string name="mode_tv">SN-TV (MTV Mode)</string>
+    <string name="mode_radio">SN-RADIO (Radio Mode)</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="next">Next Track</string>
+    <string name="channel_name">Station North Radio Service</string>
+    <string name="channel_description">Foreground service for uninterrupted Station North streams</string>
+    <string name="unknown_title">Unknown Title</string>
+    <string name="unknown_artist">Station North Stream</string>
+    <string name="badge_station_id">SN-ID (Station Video)</string>
+    <string name="badge_jingle">SN-Jingle (Radio Audio)</string>
+    <string name="badge_youtube">YouTube Stream</string>
+</resources>

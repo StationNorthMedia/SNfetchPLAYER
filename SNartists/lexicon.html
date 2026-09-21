@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Station North - R&B & Neo-Soul Lexicon</title>
+<link rel="stylesheet" href="style-lexicon.css">
+<script src="config.js"></script>
+</head>
+<body>
+
+  <!-- Dynamic Website Navigation Placeholder for Root Pages -->
+  <div id="nav-placeholder"></div>
+  <script src="menu.js" defer></script>
+
+  <!-- LAYER 1 & 2: Fixed kinetic background visual center -->
+  <div class="fixed-visuals">
+    <!-- Inward Rings -->
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    
+    <!-- Outward Shockwaves -->
+    <div class="shockwave"></div>
+    <div class="shockwave"></div>
+    <div class="shockwave"></div>
+
+    <!-- Center Logo Container -->
+    <div class="center-logo-container">
+      <img src="logo.png" alt="Station North Logo" class="custom-logo" onerror="this.onerror=null; this.src='img/logo.png';">
+    </div>
+  </div>
+
+  <!-- LAYER 3: Scrollable Lexicon Interface -->
+  <div class="scroll-layer">
+
+    <main>
+      <!-- Top Centered Lexicon Content Toolbar -->
+      <div class="lexicon-toolbar">
+        <a href="lexicon.html" class="lexicon-toolbar-link active-badge">🔍 Live Search</a>
+        <a href="lexicon-directory.html" class="lexicon-toolbar-link">📚 A-Z Index</a>
+      </div>
+
+      <!-- Queen of Station North Intro Box -->
+      <div class="queen-intro-box">
+        <div class="queen-badge">👑 MANJARO LOUNGE // ON AIR</div>
+        <p class="queen-quote">„Welcome to the Vault. Forget the clock and the noise outside. Down here at The Bricks, over 2,000 voices and late-night confessions are locked into the grid. Search for an artist, drop a track, and let the frequency take over.“</p>
+      </div>
+
+      <!-- Search Section -->
+      <section class="search-section">
+        <div class="search-container">
+          <div class="search-input-wrapper">
+            <svg class="search-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input 
+              type="text" 
+              id="artistSearch" 
+              class="search-input" 
+              placeholder="Search 1,900+ R&B / Neo-Soul artists (e.g. Mariah Carey, Usher, Erykah Badu)..."
+              autocomplete="off"
+            >
+          </div>
+          <div id="searchDropdown" class="search-dropdown"></div>
+        </div>
+      </section>
+
+      <!-- Selected Artist Detail View (Immediately below search bar) -->
+      <section id="artistDetail" class="artist-detail-container">
+        <!-- Dynamically rendered by app.js -->
+      </section>
+
+      <!-- Featured / Pre-listed Artists Section (Placed below active search result) -->
+      <div class="featured-section" style="margin-top: 40px;">
+        <div class="section-title">Featured Icon Archives</div>
+        <div id="featuredGrid" class="featured-grid">
+          <!-- Dynamically populated on load -->
+        </div>
+      </div>
+
+      <!-- Bottom Centered Lexicon Content Toolbar -->
+      <div class="lexicon-toolbar">
+        <a href="lexicon.html" class="lexicon-toolbar-link active-badge">🔍 Live Search</a>
+        <a href="lexicon-directory.html" class="lexicon-toolbar-link">📚 A-Z Index</a>
+      </div>
+    </main>
+
+    <!-- Dynamic Website Footer Placeholder for Root Pages -->
+    <div id="footer-placeholder"></div>
+
+  </div>
+
+  <!-- Load database script (CORS-free for local file:// opening) -->
+  <script src="lexicon_data.js"></script>
+  <script src="app-lexicon.js"></script>
+
+  <!-- Website Footer and Ticker Script -->
+  <script src="slider.js"></script>
+</body>
+</html>
