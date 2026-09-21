@@ -147,7 +147,7 @@ I watch him through the glass. He’s sitting there, shoulders rigid, fingers da
 
 ## 📥 Download & Installation
 
-1. Download **[`SNfetchPLAYER-v1.0.0.4.apk`](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/latest)** (73.1 MB) from GitHub Releases.
+1. Download **[`SNfetchPLAYER-v1.0.0.5.apk`](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/latest)** (76.7 MB) from GitHub Releases.
 2. Install the APK on your Android Smartphone, Tablet, or Android TV Box.
 3. Launch **SNfetchPLAYER** and let the Queen take over!
 
