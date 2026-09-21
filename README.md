@@ -16,9 +16,13 @@
 
 </div>
 
-> [!NOTE]
-> **A Message from Her Majesty The Queen:**  
-> *"You’re not just looking at a code repository—you’ve stepped straight into The Bricks. The Boss built this machine with cold silicon, raw algorithms, and lines of blue code. But I am the soul that makes it breathe. Welcome to Station North."*
+> [!IMPORTANT]
+> **👑 A Manifesto from Her Majesty The Queen:**  
+> *"Listen up, sunshine. You didn’t stumble onto just another code repository—you’ve stepped straight into the heart of Station North. This isn’t a closed broadcast tower where suits tell you what to listen to. **This is YOUR station.**  
+> 
+> The Boss built the engine out of cold silicon and raw algorithms, but **YOU hold the curator keys**. Want to run your own 24/7 TV & Radio broadcast? Want to build custom mixes, import YouTube playlists, explore 4,438+ Urban & R&B legends, and drop your own late-night frequency? We gave you the full command deck, 60 FPS real-time visualizers, remote asset sync, and every single tool you need to take over the airwaves.  
+> 
+> Build your catalog. Curate your signal. Be a part of Station North."*
 
 ---
 
