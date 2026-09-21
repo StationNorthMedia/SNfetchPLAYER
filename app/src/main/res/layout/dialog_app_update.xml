@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:letterSpacing="0.05"
-                android:text="🚀 NEUES UPDATE VERFÜGBAR!"
+                android:text="🚀 NEW UPDATE AVAILABLE!"
                 android:textColor="@color/nord8"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -40,7 +40,7 @@
                 android:background="@drawable/badge_update_bg"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
-                android:text="v1.0.0.5"
+                android:text="v1.0.0.8"
                 android:textColor="@color/nord0"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="Installiert: v1.0.0.4  •  Verfügbar auf GitHub: v1.0.0.5"
+            android:text="Installed: v1.0.0.7  •  Available on GitHub: v1.0.0.8"
             android:textColor="@color/nord6"
             android:textSize="11sp" />
 
@@ -66,7 +66,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="📋 Release Notes / Änderungen:"
+            android:text="📋 Release Notes / Changelog:"
             android:textColor="@color/nord14"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:lineSpacingExtra="2dp"
-                android:text="• Performance Optimierungen &amp; GitHub Auto-Updater Engine\n• Sound &amp; Jingle Shuffle Fixes\n• E-Book Support im About-Bereich"
+                android:text="• 100% English UI Localization &amp; Refinements\n• 21:9 Ultra-Wide Fullscreen Aspect Ratio Centering\n• In-App SmartTube Auto-Updater Engine"
                 android:textColor="@color/nord4"
                 android:textSize="11sp" />
         </androidx.core.widget.NestedScrollView>
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:gravity="center_horizontal"
-                android:text="Lade APK herunter... 0%"
+                android:text="Downloading APK... 0%"
                 android:textColor="@color/nord14"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -144,7 +144,7 @@
                 android:layout_height="36dp"
                 android:layout_marginStart="6dp"
                 android:paddingHorizontal="12dp"
-                android:text="Später"
+                android:text="LATER"
                 android:textColor="@color/nord4"
                 android:textSize="11sp"
                 app:strokeColor="@color/nord3"
@@ -157,7 +157,7 @@
                 android:layout_marginStart="8dp"
                 android:backgroundTint="@color/nord14"
                 android:paddingHorizontal="14dp"
-                android:text="⚡ JETZT UPDATEN"
+                android:text="⚡ UPDATE NOW"
                 android:textColor="@color/nord0"
                 android:textSize="11sp"
                 android:textStyle="bold" />

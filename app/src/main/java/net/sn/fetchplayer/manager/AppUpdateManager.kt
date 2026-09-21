@@ -56,7 +56,7 @@ object AppUpdateManager {
 
             val tagName = json.optString("tag_name", "")
             val htmlUrl = json.optString("html_url", "")
-            val releaseNotes = json.optString("body", "Keine Release-Notes vorhanden.")
+            val releaseNotes = json.optString("body", "No release notes provided.")
 
             var apkUrl = ""
             var apkFileName = ""

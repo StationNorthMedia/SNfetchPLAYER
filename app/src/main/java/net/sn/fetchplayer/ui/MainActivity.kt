@@ -1159,7 +1159,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                         val cleanCurrent = net.sn.fetchplayer.manager.AppUpdateManager.cleanVersionString(currentVer)
                         Toast.makeText(
                             this@MainActivity,
-                            "Du hast bereits die neueste Version (v$cleanCurrent)!",
+                            "You already have the latest version (v$cleanCurrent)!",
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -1189,8 +1189,8 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
 
         val currVerClean = net.sn.fetchplayer.manager.AppUpdateManager.cleanVersionString(net.sn.fetchplayer.BuildConfig.VERSION_NAME)
         tvBadge.text = updateInfo.tagName
-        tvSub.text = "Installiert: v$currVerClean  •  Verfügbar auf GitHub: ${updateInfo.tagName}"
-        tvChangelog.text = updateInfo.releaseNotes.ifBlank { "Keine Release-Notes angegeben." }
+        tvSub.text = "Installed: v$currVerClean  •  Available on GitHub: ${updateInfo.tagName}"
+        tvChangelog.text = updateInfo.releaseNotes.ifBlank { "No release notes provided." }
 
         btnGitHub.setOnClickListener {
             val targetUrl = updateInfo.htmlUrl.ifEmpty { "https://github.com/StationNorthMedia/SNfetchPLAYER/releases" }
@@ -1203,7 +1203,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
 
         btnDownload.setOnClickListener {
             if (updateInfo.apkDownloadUrl.isEmpty()) {
-                Toast.makeText(this, "Keine APK-Datei im GitHub Release gefunden. Öffne Browser...", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "No APK asset found in GitHub Release. Opening web browser...", Toast.LENGTH_SHORT).show()
                 val targetUrl = updateInfo.htmlUrl.ifEmpty { "https://github.com/StationNorthMedia/SNfetchPLAYER/releases" }
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(targetUrl)))
                 dialog.dismiss()
@@ -1224,25 +1224,25 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                         pbProgress.progress = percent
                         val downloadedMb = String.format(Locale.US, "%.1f", downloadedBytes / (1024.0 * 1024.0))
                         val totalMb = String.format(Locale.US, "%.1f", totalBytes / (1024.0 * 1024.0))
-                        tvProgressStatus.text = "Lade APK herunter... $percent% ($downloadedMb MB / $totalMb MB)"
+                        tvProgressStatus.text = "Downloading APK... $percent% ($downloadedMb MB / $totalMb MB)"
                     }
                 )
 
                 withContext(Dispatchers.Main) {
                     if (apkFile != null && apkFile.exists()) {
-                        tvProgressStatus.text = "Download abgeschlossen! Starte Installation..."
+                        tvProgressStatus.text = "Download complete! Launching package installer..."
                         val installed = net.sn.fetchplayer.manager.AppUpdateManager.installApk(this@MainActivity, apkFile)
                         if (!installed) {
-                            Toast.makeText(this@MainActivity, "Installation konnte nicht direkt gestartet werden. Öffne Browser...", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, "Direct installation could not be launched. Opening browser...", Toast.LENGTH_SHORT).show()
                             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(updateInfo.htmlUrl)))
                         }
                         dialog.dismiss()
                     } else {
-                        tvProgressStatus.text = "Download fehlgeschlagen!"
+                        tvProgressStatus.text = "Download failed!"
                         btnDownload.isEnabled = true
                         btnLater.isEnabled = true
                         btnGitHub.isEnabled = true
-                        Toast.makeText(this@MainActivity, "Download fehlgeschlagen! Bitte später erneut versuchen.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@MainActivity, "Download failed! Please try again later.", Toast.LENGTH_LONG).show()
                     }
                 }
             }
