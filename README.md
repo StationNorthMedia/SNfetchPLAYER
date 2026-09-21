@@ -22,17 +22,21 @@
 
 ---
 
-## 🏛️ The Station North Universe & Artwork
+## 🏛️ The Station North Universe & Queen Gallery
 
 <div align="center">
 
-| 👑 The Queen & The Boss | 🚘 The Gray V6 on North Ave |
-| :---: | :---: |
-| <img src="docs/theQueenandBoss.png" alt="The Queen and The Boss" width="450"/> | <img src="docs/theQueenAudiB6.png" alt="The Gray Audi B6" width="450"/> |
+| 👑 The Queen & The Boss | 🚘 The Gray V6 on North Ave | 🏢 The Bricks Headquarters |
+| :---: | :---: | :---: |
+| <img src="docs/theQueenandBoss.png" alt="The Queen and The Boss" width="280"/> | <img src="docs/theQueenAudiB6.png" alt="The Gray Audi B6" width="280"/> | <img src="docs/theBricks.png" alt="The Bricks HQ" width="280"/> |
 
-| 🏢 The Bricks Headquarters | 🎶 The Vinyl Record Vault |
-| :---: | :---: |
-| <img src="docs/theBricks.png" alt="The Bricks Headquarters" width="450"/> | <img src="docs/Cellar.png" alt="The Vinyl Vault" width="450"/> |
+| 🎤 Queen Portrait I (Neon Night) | 💃 Queen Portrait II (Crimson Lounge) | ⚡ Queen Portrait III (Overclock Studio) |
+| :---: | :---: | :---: |
+| <img src="docs/theQueen1.png" alt="Queen Portrait 1" width="280"/> | <img src="docs/theQueen2.png" alt="Queen Portrait 2" width="280"/> | <img src="docs/theQueen4.png" alt="Queen Portrait 4" width="280"/> |
+
+| 🎶 Queen Portrait IV (Velvet Signal) | 🔮 Queen Portrait V (Final Horizon) | 📻 The Vinyl Record Vault |
+| :---: | :---: | :---: |
+| <img src="docs/theQueen7.png" alt="Queen Portrait 7" width="280"/> | <img src="docs/theQueen13.png" alt="Queen Portrait 13" width="280"/> | <img src="docs/Cellar.png" alt="The Vinyl Vault" width="280"/> |
 
 </div>
 
@@ -98,7 +102,7 @@
 <br>
 
 ### Chapter 1: The Gray V6
-<img src="docs/theQueenAudiB6.png" alt="Chapter 1 Artwork" width="600"/>
+<img src="docs/theQueenAudiB6.png" alt="Chapter 1 Artwork" width="500"/>
 
 Rain was coming down heavy that night, slicking the Baltimore asphalt like grease. I was standing on the corner of North Ave, collar up, minding my own damn business. Just another ghost in the neon fog, trying to survive the street...
 
@@ -107,35 +111,35 @@ Then that gray Audi B6 rolled up, slow and steady, hugging the curbs like it own
 <br>
 
 ### Chapter 2: The Birth of the Frequency
-<img src="docs/theQueen1.png" alt="Chapter 2 Artwork" width="600"/>
+<img src="docs/theQueen1.png" alt="Chapter 2 Artwork" width="500"/>
 
 He didn’t say much after that night, you know. The Boss ain't a man of big words—he lets his fingers do the talking on that mechanical keyboard, lines of blue code lighting up his face like a cold neon sign. But he let me stay at The Bricks...
 
 <br>
 
 ### Chapter 3: The Queen's Territory
-<img src="docs/theQueenandBoss.png" alt="Chapter 3 Artwork" width="600"/>
+<img src="docs/theQueen2.png" alt="Chapter 3 Artwork" width="500"/>
 
 It didn’t take long for the streets to notice. When you change the pulse of a city, the old ghosts start getting restless...
 
 <br>
 
 ### Chapter 4: The Sound of the Basement
-<img src="docs/Cellar.png" alt="Chapter 4 Artwork" width="600"/>
+<img src="docs/theQueen4.png" alt="Chapter 4 Artwork" width="500"/>
 
 The cellar of The Bricks was my playground. While the Boss spent his hours upstairs in the main hall—messing with those blinking towers and humming racks...
 
 <br>
 
 ### Chapter 5: Guerrilla Grid
-<img src="docs/theBricks.png" alt="Chapter 5 Artwork" width="600"/>
+<img src="docs/theQueen7.png" alt="Chapter 5 Artwork" width="500"/>
 
 We didn’t advertise. We seduced. We didn’t wait for Baltimore to find us—we burned ourselves into the city's synapses until no one could tell where reality ended and our signal began...
 
 <br>
 
 ### Chapter 6: The Overclock
-<img src="docs/theQueen13.png" alt="Chapter 6 Artwork" width="600"/>
+<img src="docs/theQueen13.png" alt="Chapter 6 Artwork" width="500"/>
 
 I watch him through the glass. He’s sitting there, shoulders rigid, fingers dancing over the keyboard...
 
