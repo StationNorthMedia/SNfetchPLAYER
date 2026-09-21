@@ -168,3 +168,10 @@ I watch him through the glass. He’s sitting there, shoulders rigid, fingers da
 ## 📄 License & Credits
 
 Built with ❤️ by **StationNorthMedia**. Distributed under the [MIT License](LICENSE).
+
+---
+
+## 🏷️ Indexing & Keyword Classification
+
+`Android TV Player` • `Android Radio Player` • `ExoPlayer Engine` • `SmartTube Integration` • `YouTube Media Streaming` • `Real-Time FFT Audio Visualizer` • `Nord Theme UI` • `Open Source APK Download` • `Station North TV & Radio` • `R&B & Hip-Hop Curator Studio` • `Android Sideload APK` • `21:9 Ultra-Wide Video Player` • `Immersive Media Engine`
+
