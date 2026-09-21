@@ -22,7 +22,7 @@
 > 
 > The Boss built the engine out of cold silicon and raw algorithms, but **YOU hold the curator keys**. Want to run your own 24/7 TV & Radio broadcast? Want to build custom mixes, import YouTube playlists, explore 4,438+ Urban & R&B legends, and drop your own late-night frequency? We gave you the full command deck, 60 FPS real-time visualizers, remote asset sync, and every single tool you need to take over the airwaves.  
 > 
-> Build your catalog. Curate your signal. Be a part of Station North."*
+> Build your catalog. Share your curated mixes across social media, forums, or with your crew. Curate your signal. Be a part of Station North."*
 
 ---
 
@@ -94,6 +94,10 @@
 ### 📡 Remote Asset Cloud Delivery
 - **Background Sync Engine**: 163 audio jingles and 42 TV IDs lazily downloaded from the cloud in the background to keep the initial APK download lightweight.
 - **Live Progress Bar**: Real-time asset download indicator located inside the Curator Studio **ℹ️ ABOUT** tab.
+
+### 🌐 Community & Social Playlist Sharing
+- **1,000 Ways to Share**: Export your custom-curated mixes and share them across forums, social media, Reddit, Discord, or directly with your crew.
+- **Import Community Signals**: Paste playlist links, YouTube mixes, or JSON catalogs to instantly expand your personal Station North broadcast engine.
 
 ### 📖 The Manjaro Lounge Chronicles (In-App E-Book)
 - **Full 6-Chapter Story**: Open the built-in fullscreen E-Book reader to discover how a girl from North Ave and a gray Audi V6 built an empire.
