@@ -5,6 +5,7 @@
 # 👑 SNfetchPLAYER • The Queen's Frequency
 **Version 1.0.0.10 • Broadcast & Audio Engine for Android Smartphones, Tablets & Android TV**
 
+[![Website](https://img.shields.io/badge/Website-station--north.net-88c0d0.svg)](https://station-north.net)
 [![Release](https://img.shields.io/badge/release-v1.0.0.10-teal.svg)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v1.0.0.10)
 [![Downloads](https://img.shields.io/github/downloads/StationNorthMedia/SNfetchPLAYER/total.svg?color=brightgreen)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -167,7 +168,7 @@ I watch him through the glass. He’s sitting there, shoulders rigid, fingers da
 
 ## 📄 License & Credits
 
-Built with ❤️ by **StationNorthMedia**. Distributed under the [MIT License](LICENSE).
+Built with ❤️ by [**StationNorthMedia**](https://station-north.net). Distributed under the [MIT License](LICENSE).
 
 ---
 
