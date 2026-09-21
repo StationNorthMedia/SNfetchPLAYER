@@ -9,3 +9,16 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Python / temp cache
+__pycache__/
+*.pyc
+
+# Local Video & Media Folders (do NOT push to GitHub)
+/SNartists/
+/SNid/
+/SNid_720/
+
+# Loose root screenshots/images (only keep docs/)
+/SNfetchPLAYERapp.png
+/SNfetchPLAYERtv.png
