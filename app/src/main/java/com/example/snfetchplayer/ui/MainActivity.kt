@@ -10,6 +10,8 @@ import android.content.ServiceConnection
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
+import android.net.Uri
+import android.widget.ProgressBar
 import android.media.audiofx.Visualizer
 import android.annotation.SuppressLint
 import android.os.Build
@@ -211,6 +213,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         setupTvFocusEffects()
         restoreSavedUiState()
         startAndBindService()
+        checkAppUpdate(isManualCheck = false)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -1131,6 +1134,120 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         binding.btnOpenEbookChronicles.setOnClickListener {
             ChroniclesEbookDialog(this).show()
         }
+
+        binding.btnCheckAppUpdate.setOnClickListener {
+            checkAppUpdate(isManualCheck = true)
+        }
+    }
+
+    private fun checkAppUpdate(isManualCheck: Boolean = false) {
+        val currentVer = com.example.snfetchplayer.BuildConfig.VERSION_NAME
+        binding.btnCheckAppUpdate.isEnabled = false
+        binding.btnCheckAppUpdate.text = "⏳ Check..."
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            val updateInfo = com.example.snfetchplayer.manager.AppUpdateManager.checkForUpdate(currentVer)
+            withContext(Dispatchers.Main) {
+                binding.btnCheckAppUpdate.isEnabled = true
+                binding.btnCheckAppUpdate.text = "🚀 Update Check"
+
+                if (updateInfo != null && updateInfo.isUpdateAvailable) {
+                    showAppUpdateDialog(updateInfo)
+                } else {
+                    if (isManualCheck) {
+                        val cleanCurrent = com.example.snfetchplayer.manager.AppUpdateManager.cleanVersionString(currentVer)
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Du hast bereits die neueste Version (v$cleanCurrent)!",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showAppUpdateDialog(updateInfo: com.example.snfetchplayer.manager.AppUpdateInfo) {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_app_update, null)
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setCancelable(true)
+            .create()
+
+        dialog.window?.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT))
+
+        val tvBadge = dialogView.findViewById<TextView>(R.id.tvNewVersionBadge)
+        val tvSub = dialogView.findViewById<TextView>(R.id.tvUpdateVersionSub)
+        val tvChangelog = dialogView.findViewById<TextView>(R.id.tvUpdateChangelog)
+        val layoutProgress = dialogView.findViewById<LinearLayout>(R.id.layoutDownloadProgress)
+        val pbProgress = dialogView.findViewById<ProgressBar>(R.id.pbDownloadProgress)
+        val tvProgressStatus = dialogView.findViewById<TextView>(R.id.tvDownloadProgressStatus)
+        val btnDownload = dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnDownloadUpdate)
+        val btnLater = dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnLaterUpdate)
+        val btnGitHub = dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnOpenGitHub)
+
+        val currVerClean = com.example.snfetchplayer.manager.AppUpdateManager.cleanVersionString(com.example.snfetchplayer.BuildConfig.VERSION_NAME)
+        tvBadge.text = updateInfo.tagName
+        tvSub.text = "Installiert: v$currVerClean  •  Verfügbar auf GitHub: ${updateInfo.tagName}"
+        tvChangelog.text = updateInfo.releaseNotes.ifBlank { "Keine Release-Notes angegeben." }
+
+        btnGitHub.setOnClickListener {
+            val targetUrl = updateInfo.htmlUrl.ifEmpty { "https://github.com/StationNorthMedia/SNfetchPLAYER/releases" }
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(targetUrl)))
+        }
+
+        btnLater.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        btnDownload.setOnClickListener {
+            if (updateInfo.apkDownloadUrl.isEmpty()) {
+                Toast.makeText(this, "Keine APK-Datei im GitHub Release gefunden. Öffne Browser...", Toast.LENGTH_SHORT).show()
+                val targetUrl = updateInfo.htmlUrl.ifEmpty { "https://github.com/StationNorthMedia/SNfetchPLAYER/releases" }
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(targetUrl)))
+                dialog.dismiss()
+                return@setOnClickListener
+            }
+
+            btnDownload.isEnabled = false
+            btnLater.isEnabled = false
+            btnGitHub.isEnabled = false
+            layoutProgress.visibility = View.VISIBLE
+
+            lifecycleScope.launch(Dispatchers.IO) {
+                val apkFile = com.example.snfetchplayer.manager.AppUpdateManager.downloadApk(
+                    context = applicationContext,
+                    downloadUrl = updateInfo.apkDownloadUrl,
+                    fileName = updateInfo.apkFileName,
+                    onProgress = { percent, downloadedBytes, totalBytes ->
+                        pbProgress.progress = percent
+                        val downloadedMb = String.format(Locale.US, "%.1f", downloadedBytes / (1024.0 * 1024.0))
+                        val totalMb = String.format(Locale.US, "%.1f", totalBytes / (1024.0 * 1024.0))
+                        tvProgressStatus.text = "Lade APK herunter... $percent% ($downloadedMb MB / $totalMb MB)"
+                    }
+                )
+
+                withContext(Dispatchers.Main) {
+                    if (apkFile != null && apkFile.exists()) {
+                        tvProgressStatus.text = "Download abgeschlossen! Starte Installation..."
+                        val installed = com.example.snfetchplayer.manager.AppUpdateManager.installApk(this@MainActivity, apkFile)
+                        if (!installed) {
+                            Toast.makeText(this@MainActivity, "Installation konnte nicht direkt gestartet werden. Öffne Browser...", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(updateInfo.htmlUrl)))
+                        }
+                        dialog.dismiss()
+                    } else {
+                        tvProgressStatus.text = "Download fehlgeschlagen!"
+                        btnDownload.isEnabled = true
+                        btnLater.isEnabled = true
+                        btnGitHub.isEnabled = true
+                        Toast.makeText(this@MainActivity, "Download fehlgeschlagen! Bitte später erneut versuchen.", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+
+        dialog.show()
     }
 
     private fun updateAssetSyncUi(progress: com.example.snfetchplayer.manager.SyncProgress) {

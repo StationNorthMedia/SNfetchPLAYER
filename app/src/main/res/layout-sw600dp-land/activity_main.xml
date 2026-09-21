@@ -1623,14 +1623,35 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tvAppVersion"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Version 1.0.0.1 • Station North Media"
-                        android:textColor="@color/nord8"
-                        android:textSize="11sp" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvAppVersion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Version 1.0.0.5 • Station North Media"
+                            android:textColor="@color/nord8"
+                            android:textSize="11sp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCheckAppUpdate"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:layout_marginStart="8dp"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="0dp"
+                            android:text="🚀 Update Check"
+                            android:textColor="@color/nord14"
+                            android:textSize="10sp"
+                            app:strokeColor="@color/nord14"
+                            app:strokeWidth="1dp" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
