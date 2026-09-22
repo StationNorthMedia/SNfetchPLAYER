@@ -65,12 +65,14 @@ object QueenQuotesManager {
 
     private fun parseAmbientColor(colorClass: String): Int {
         return when (colorClass.lowercase()) {
-            "radio-red" -> Color.parseColor("#FF5252")    // Bright Neon Red / Nord 11 accent
-            "radio-orange" -> Color.parseColor("#FF9800") // Warm Orange / Nord 12 accent
-            "radio-yellow" -> Color.parseColor("#FFD54F") // Gold Yellow / Nord 13 accent
-            "radio-green" -> Color.parseColor("#69F0AE")  // Emerald Green / Nord 14 accent
-            "radio-purple" -> Color.parseColor("#E040FB") // Velvet Purple / Nord 15 accent
-            else -> Color.parseColor("#88C0D0")           // Default Nord Cyan
+            "radio-red" -> Color.parseColor("#BF616A")    // Nord 11 Aurora Red (TV Badge / Accent)
+            "radio-orange" -> Color.parseColor("#D08770") // Nord 12 Aurora Orange
+            "radio-yellow" -> Color.parseColor("#EBCB8B") // Nord 13 Aurora Gold / Queen Yellow
+            "radio-green" -> Color.parseColor("#A3BE8C")  // Nord 14 Aurora Green (Play-Pause Tint / Active Controls)
+            "radio-purple" -> Color.parseColor("#B48EAD") // Nord 15 Aurora Purple
+            "radio-frost" -> Color.parseColor("#8FBCBB")  // Nord 7 Frost Teal
+            "radio-blue" -> Color.parseColor("#81A1C1")   // Nord 9 Ice Blue
+            else -> Color.parseColor("#88C0D0")           // Nord 8 Primary Cyan (Main Player Control Accent)
         }
     }
 }
