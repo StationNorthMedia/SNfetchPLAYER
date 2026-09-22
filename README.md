@@ -3,10 +3,10 @@
 <img src="docs/logo.png" alt="Station North Logo" width="260" />
 
 # 👑 SNfetchPLAYER • The Queen's Frequency
-**Version 1.0.0.17 • Broadcast & Audio Engine for Android Smartphones, Tablets & Android TV**
+**Version 1.0.0.18 • Broadcast & Audio Engine for Android Smartphones, Tablets & Android TV**
 
 [![Website](https://img.shields.io/badge/Website-station--north.net-88c0d0.svg)](https://station-north.net)
-[![Release](https://img.shields.io/badge/release-v1.0.0.17-teal.svg)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v1.0.0.17)
+[![Release](https://img.shields.io/badge/release-v1.0.0.18-teal.svg)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v1.0.0.18)
 [![Downloads](https://img.shields.io/github/downloads/StationNorthMedia/SNfetchPLAYER/total.svg?color=brightgreen)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Android%205.0%2B-blue.svg)](https://developer.android.com/)

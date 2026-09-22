@@ -2,20 +2,15 @@ package net.sn.fetchplayer.ui
 
 import android.content.Context
 import android.graphics.Typeface
-import android.text.SpannableStringBuilder
-import android.text.Spanned
-import android.text.style.ForegroundColorSpan
-import android.text.style.RelativeSizeSpan
-import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.imageview.ShapeableImageView
 import net.sn.fetchplayer.R
 import net.sn.fetchplayer.model.Track
-import com.google.android.material.imageview.ShapeableImageView
 
 data class ArtistHistoryItem(
     val track: Track,
@@ -34,7 +29,9 @@ class ArtistHistoryAdapter(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imgArtistPhoto: ShapeableImageView = view.findViewById(R.id.imgArtistPhoto)
-        val tvArtistInfoText: TextView = view.findViewById(R.id.tvArtistInfoText)
+        val tvArtistTitle: TextView = view.findViewById(R.id.tvArtistTitle)
+        val tvTrackTitle: TextView = view.findViewById(R.id.tvTrackTitle)
+        val tvArtistExtract: TextView = view.findViewById(R.id.tvArtistExtract)
         val dividerView: View = view.findViewById(R.id.viewDivider)
     }
 
@@ -52,50 +49,29 @@ class ArtistHistoryAdapter(
             holder.imgArtistPhoto.setImageResource(R.drawable.sn_logo)
         }
 
-        val density = context.resources.displayMetrics.density
-        val imgWidthPx = (80 * density + 10 * density).toInt()
+        // Artist Title
+        holder.tvArtistTitle.text = item.displayTitle
+        val titleColor = item.textColor ?: ContextCompat.getColor(context, R.color.nord8)
+        holder.tvArtistTitle.setTextColor(titleColor)
 
-        val ssb = SpannableStringBuilder()
-
-        // Artist Title (Paragraph 1: Bold + Nord8 Cyan, 1-line margin)
-        val titleStart = ssb.length
-        ssb.append(item.displayTitle).append("\n")
-        val titleEnd = ssb.length
-        ssb.setSpan(StyleSpan(Typeface.BOLD), titleStart, titleEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        val headerColor = if (item.textColor != null) item.textColor else ContextCompat.getColor(context, R.color.nord8)
-        ssb.setSpan(ForegroundColorSpan(headerColor), titleStart, titleEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        ssb.setSpan(RelativeSizeSpan(1.25f), titleStart, titleEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        ssb.setSpan(FloatingTextMarginSpan(imgWidthPx, 1), titleStart, titleEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-        var hasSubHeader = false
-
-        // Track Title Sub-Header if available (Paragraph 2: Italic + Nord6, 1-line margin)
+        // Track Title Subheader (if distinct)
         if (item.track.title.isNotBlank() && item.track.title != item.displayTitle) {
-            hasSubHeader = true
-            val subStart = ssb.length
-            ssb.append("Track: ").append(item.track.title).append("\n")
-            val subEnd = ssb.length
-            ssb.setSpan(StyleSpan(Typeface.ITALIC), subStart, subEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            ssb.setSpan(ForegroundColorSpan(ContextCompat.getColor(context, R.color.nord6)), subStart, subEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            ssb.setSpan(RelativeSizeSpan(1.05f), subStart, subEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            ssb.setSpan(FloatingTextMarginSpan(imgWidthPx, 1), subStart, subEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        }
-
-        // Bio Extract Text (Paragraph 3: 3 lines margin if subheader present, else 4 lines)
-        val extractStart = ssb.length
-        ssb.append(item.extract)
-        val extractEnd = ssb.length
-        if (item.textColor != null) {
-            ssb.setSpan(ForegroundColorSpan(item.textColor), extractStart, extractEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            ssb.setSpan(StyleSpan(Typeface.BOLD), extractStart, extractEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            holder.tvTrackTitle.text = "Track: ${item.track.title}"
+            holder.tvTrackTitle.visibility = View.VISIBLE
         } else {
-            ssb.setSpan(ForegroundColorSpan(ContextCompat.getColor(context, R.color.nord4)), extractStart, extractEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            holder.tvTrackTitle.visibility = View.GONE
         }
 
-        val extractIndentLines = if (hasSubHeader) 3 else 4
-        ssb.setSpan(FloatingTextMarginSpan(imgWidthPx, extractIndentLines), extractStart, extractEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        // Bio Extract Text
+        holder.tvArtistExtract.text = item.extract
+        if (item.textColor != null) {
+            holder.tvArtistExtract.setTextColor(item.textColor)
+            holder.tvArtistExtract.setTypeface(null, Typeface.BOLD)
+        } else {
+            holder.tvArtistExtract.setTextColor(ContextCompat.getColor(context, R.color.nord4))
+            holder.tvArtistExtract.setTypeface(null, Typeface.NORMAL)
+        }
 
-        holder.tvArtistInfoText.text = ssb
         holder.dividerView.visibility = if (position == items.size - 1) View.GONE else View.VISIBLE
 
         holder.itemView.setOnClickListener {
