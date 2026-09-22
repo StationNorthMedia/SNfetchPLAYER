@@ -40,7 +40,7 @@
                 android:background="@drawable/badge_update_bg"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
-                android:text="v1.0.0.12"
+                android:text="v1.0.0.13"
                 android:textColor="@color/nord0"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="Installed: v1.0.0.11  •  Available on GitHub: v1.0.0.12"
+            android:text="Installed: v1.0.0.12  •  Available on GitHub: v1.0.0.13"
             android:textColor="@color/nord6"
             android:textSize="11sp" />
 
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:lineSpacingExtra="2dp"
-                android:text="• Restored Butter-Smooth Zero-Gap MediaItem Pre-Queueing Engine\n• Eliminated Black Screen &amp; Buffering Spinner Flicker Between Tracks\n• ExoPlayer holds last frame and pre-buffers next stream in background"
+                android:text="• Integrated KINETIC 'CRATE DIGGING' Broadcast Shimmer Loading Overlay\n• Replaced boring Android spinner with rotating Vinyl badge &amp; Nord gradient bands\n• Custom Monospace Text: CRATE DIGGING... STATION NORTH // AUDIO &amp; TV REALM"
                 android:textColor="@color/nord4"
                 android:textSize="11sp" />
         </androidx.core.widget.NestedScrollView>
