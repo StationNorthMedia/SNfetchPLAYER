@@ -580,7 +580,6 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                     R.id.btnModeSettings -> {
                         isSettingsModeActive = true
                         AppLogger.d("MainActivity", "Switched UI mode to SETTINGS HUB")
-                        radioService?.player?.pause()
                         updateUiMode(radioService?.currentMode ?: PlaybackMode.SN_TV)
                     }
                 }
@@ -875,15 +874,14 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             return
         }
 
+        binding.cardPlayerContainer.visibility = View.VISIBLE
+        binding.cardTrackInfo.visibility = View.VISIBLE
+
         if (isSettingsModeActive) {
             binding.cardArtistInfoContainer.visibility = View.GONE
-            binding.cardPlayerContainer.visibility = View.GONE
-            binding.cardTrackInfo.visibility = View.GONE
             binding.cardSettingsContainer.visibility = View.VISIBLE
         } else {
             binding.cardSettingsContainer.visibility = View.GONE
-            binding.cardPlayerContainer.visibility = View.VISIBLE
-            binding.cardTrackInfo.visibility = View.VISIBLE
             binding.cardArtistInfoContainer.visibility = View.VISIBLE
         }
     }
