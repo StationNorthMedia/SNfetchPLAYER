@@ -1,0 +1,24 @@
+SNfetchPLAYER is an open-source media broadcast and audio engine designed for Android smartphones, tablets, and Android TV. Built for music enthusiasts and media curators, SNfetchPLAYER turns your Android device into a complete TV and Radio broadcast station.
+
+KEY FEATURES:
+
+• SN-TV Mode (16:9 60 FPS Video Engine):
+Powered by AndroidX Media3 ExoPlayer draped in custom slanted lower-third Bauchbinden displaying real-time track metadata and station branding. Features full HUD OSD touch and Android TV D-Pad remote control.
+
+• SN-RADIO Mode (60 FPS Audio Engine):
+Equipped with a real-time 60 FPS FFT frequency spectrum visualizer synchronized with deep bass and R&B audio streams. Displays dynamic Station North quotes and glowing ambient highlight colors.
+
+• Curator Studio (Command Center):
+Pre-configured with a 100-hit main mix. Supports pasting YouTube playlist links or IDs to extract and append video streams instantly, community playlist sharing (JSON / URLs), and full catalog curation.
+
+• SN-Lexicon (4,438+ Entity Encyclopedia):
+A comprehensive music encyclopedia covering Urban Culture, US Hip-Hop, and R&B legends, complete with discographies, tracklists, and detailed artist biographies.
+
+• Optimized for Smartphones, Tablets & Android TV:
+Full D-Pad remote navigation support alongside intuitive touchscreen controls. Provides customized layouts for portrait phones and widescreen 10-inch tablets or TV setups.
+
+• Lightweight & Remote Asset Cloud Delivery:
+Lazy background synchronization of jingles and TV station IDs to keep the initial application download size minimal.
+
+• Open Source & Privacy Focused:
+No advertising, no tracker SDKs, no user telemetry, and full user sovereignty over your broadcast signals.
