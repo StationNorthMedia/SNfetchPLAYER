@@ -1,15 +1,15 @@
 <div align="center">
 
-<img src="docs/logo.png" alt="Station North Logo" width="260" />
+<img src="docs/logo.png" alt="Station North Logo" width="280" />
 
 # 👑 SNfetchPLAYER • The Queen's Frequency
 **Version 1.0.0.23 • Broadcast & Audio Engine for Android Smartphones, Tablets & Android TV**
 
-[![Website](https://img.shields.io/badge/Website-station--north.net-88c0d0.svg)](https://station-north.net)
-[![Release](https://img.shields.io/badge/release-v1.0.0.23-teal.svg)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v1.0.0.23)
-[![Downloads](https://img.shields.io/github/downloads/StationNorthMedia/SNfetchPLAYER/total.svg?color=brightgreen)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/Platform-Android%205.0%2B-blue.svg)](https://developer.android.com/)
+[![Website](https://img.shields.io/badge/Website-station--north.net-88C0D0?style=for-the-badge&logo=google-chrome&logoColor=white)](https://station-north.net)
+[![Release](https://img.shields.io/badge/Release-v1.0.0.23-8FBCBB?style=for-the-badge&logo=android&logoColor=white)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v1.0.0.23)
+[![Downloads](https://img.shields.io/github/downloads/StationNorthMedia/SNfetchPLAYER/total?style=for-the-badge&color=A3BE8C&logo=github)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases)
+[![TV Ready](https://img.shields.io/badge/Android_TV-100%25_Compatible-BF616A?style=for-the-badge&logo=androidtv&logoColor=white)](https://developer.android.com/tv)
+[![License](https://img.shields.io/badge/License-MIT-B48EAD?style=for-the-badge)](LICENSE)
 
 ---
 
@@ -24,6 +24,18 @@
 > The Boss built the engine out of cold silicon and raw algorithms, but **YOU hold the curator keys**. Want to run your own 24/7 TV & Radio broadcast? Want to build custom mixes, import YouTube playlists, explore 4,438+ Urban & R&B legends, and drop your own late-night frequency? We gave you the full command deck, 60 FPS real-time visualizers, remote asset sync, and every single tool you need to take over the airwaves.  
 > 
 > Build your catalog. Share your curated mixes across social media, forums, or with your crew. Curate your signal. Be a part of Station North."*
+
+---
+
+## 🎨 Nord Theme Feature Matrix
+
+| Engine Mode | Theme Color | Target | Core Capabilities |
+| :--- | :---: | :---: | :--- |
+| 📺 **SN-TV** | `Aurora Red` <br> `#BF616A` | TV & Landscape | 1080p 60 FPS ExoPlayer Engine, Custom Slanted Lower-Third OSD, Full D-Pad & Remote Control |
+| 📻 **SN-RADIO** | `Frost Cyan` <br> `#88C0D0` | Audio Lounge | 60 FPS Real-Time FFT Spectrum Visualizer, 59 Queen Quotes (`sprueche.json`), Ambient Highlights |
+| 🛠️ **Curator Studio** | `Aurora Purple` <br> `#B48EAD` | Command Center | YouTube Playlist Importer, Default Main Mix (100 Hits), Asset Sync Manager |
+| 📖 **SN-Lexicon** | `Frost Teal` <br> `#8FBCBB` | Encyclopedia | 4,438+ R&B / Urban Music Legends, Smart Fuzzy Search, Local DB Priority & Offline Caching |
+| 📚 **The Chronicles** | `Aurora Yellow` <br> `#EBCB8B` | E-Book Reader | 6-Chapter Story Reader with Custom Artwork ("The Manjaro Lounge Chronicles") |
 
 ---
 
@@ -160,7 +172,7 @@ I watch him through the glass. He’s sitting there, shoulders rigid, fingers da
 
 ## 📥 Download & Installation
 
-1. Download **[`SNfetchPLAYER-v1.0.0.17.apk`](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/latest)** (76.7 MB) from GitHub Releases.
+1. Download **[`SNfetchPLAYER-v1.0.0.23.apk`](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v1.0.0.23)** (76.7 MB) from GitHub Releases.
 2. Install the APK on your Android Smartphone, Tablet, or Android TV Box.
 3. Launch **SNfetchPLAYER** and let the Queen take over!
 
