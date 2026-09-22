@@ -27,18 +27,6 @@
 
 ---
 
-## 🎨 Nord Theme Feature Matrix
-
-| Engine Mode | Theme Color | Target | Core Capabilities |
-| :--- | :---: | :---: | :--- |
-| 📺 **SN-TV** | `Aurora Red` <br> `#BF616A` | TV & Landscape | 1080p 60 FPS ExoPlayer Engine, Custom Slanted Lower-Third OSD, Full D-Pad & Remote Control |
-| 📻 **SN-RADIO** | `Frost Cyan` <br> `#88C0D0` | Audio Lounge | 60 FPS Real-Time FFT Spectrum Visualizer, 59 Queen Quotes (`sprueche.json`), Ambient Highlights |
-| 🛠️ **Curator Studio** | `Aurora Purple` <br> `#B48EAD` | Command Center | YouTube Playlist Importer, Default Main Mix (100 Hits), Asset Sync Manager |
-| 📖 **SN-Lexicon** | `Frost Teal` <br> `#8FBCBB` | Encyclopedia | 4,438+ R&B / Urban Music Legends, Smart Fuzzy Search, Local DB Priority & Offline Caching |
-| 📚 **The Chronicles** | `Aurora Yellow` <br> `#EBCB8B` | E-Book Reader | 6-Chapter Story Reader with Custom Artwork ("The Manjaro Lounge Chronicles") |
-
----
-
 ## 🏛️ The Station North Universe & Queen Gallery
 
 <div align="center">
