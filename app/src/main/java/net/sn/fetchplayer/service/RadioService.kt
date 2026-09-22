@@ -109,6 +109,7 @@ class RadioService : Service() {
                         AppLogger.d("RadioService", "Track Transition -> '${tag.artist} - ${tag.title}' [Mode: $currentMode]")
                         listener?.onTrackChanged(tag, currentMode)
                         updateNotification()
+                        queueNextMediaItem()
                     }
                 }
             }
@@ -130,7 +131,7 @@ class RadioService : Service() {
                         AppLogger.d("RadioService", "Repeat One active -> Replaying current song")
                         player.seekTo(0)
                         player.play()
-                    } else {
+                    } else if (player.mediaItemCount <= 1) {
                         playNextTrack()
                     }
                 }
@@ -223,8 +224,13 @@ class RadioService : Service() {
         prepareJob?.cancel()
         prepareJob = serviceScope.launch {
             AppLogger.d("RadioService", "playNextTrack requested immediately")
-            val nextTrack = playlistManager.getNextTrack(currentMode)
-            loadAndPlayTrack(nextTrack)
+            if (player.mediaItemCount > 1 && player.hasNextMediaItem()) {
+                player.seekToNextMediaItem()
+                player.play()
+            } else {
+                val nextTrack = playlistManager.getNextTrack(currentMode)
+                loadAndPlayTrack(nextTrack)
+            }
         }
     }
 
@@ -256,17 +262,42 @@ class RadioService : Service() {
                 .build()
 
             withContext(Dispatchers.Main) {
-                player.stop()
-                player.clearMediaItems()
                 player.setMediaItem(mediaItem)
                 player.prepare()
                 player.playWhenReady = true
             }
+            queueNextMediaItem()
         } else {
             AppLogger.e("RadioService", "Cannot play track [${track.title}], stream URL is null or empty")
         }
 
         playlistManager.prefetchNextTracks(currentMode, 2)
+    }
+
+    private fun queueNextMediaItem() {
+        serviceScope.launch {
+            val nextTrack = playlistManager.getNextTrack(currentMode)
+            val streamUrl = nextTrack.resolvedStreamUrl
+            if (!streamUrl.isNullOrEmpty()) {
+                val mediaMetadata = MediaMetadata.Builder()
+                    .setTitle(nextTrack.title)
+                    .setArtist(nextTrack.artist)
+                    .build()
+
+                val mediaItem = MediaItem.Builder()
+                    .setUri(Uri.parse(streamUrl))
+                    .setMediaMetadata(mediaMetadata)
+                    .setTag(nextTrack)
+                    .build()
+
+                withContext(Dispatchers.Main) {
+                    if (player.mediaItemCount <= 1) {
+                        player.addMediaItem(mediaItem)
+                        AppLogger.d("RadioService", "Seamless pre-queued next track in ExoPlayer: '${nextTrack.artist} - ${nextTrack.title}'")
+                    }
+                }
+            }
+        }
     }
 
     private fun createNotificationChannel() {
