@@ -66,8 +66,10 @@ class ArtistHistoryAdapter(
         ssb.setSpan(ForegroundColorSpan(headerColor), titleStart, titleEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         ssb.setSpan(RelativeSizeSpan(1.25f), titleStart, titleEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
+        var lineCount = 3
         // Track Title Sub-Header if available
         if (item.track.title.isNotBlank() && item.track.title != item.displayTitle) {
+            lineCount = 4
             val subStart = ssb.length
             ssb.append("Track: ").append(item.track.title).append("\n")
             val subEnd = ssb.length
@@ -87,8 +89,8 @@ class ArtistHistoryAdapter(
             ssb.setSpan(ForegroundColorSpan(ContextCompat.getColor(context, R.color.nord4)), extractStart, extractEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
 
-        // Floating Text Margin Span
-        ssb.setSpan(FloatingTextMarginSpan(imgWidthPx, 6), 0, ssb.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        // Floating Text Margin Span: indent only lines 1..lineCount adjacent to 85dp image
+        ssb.setSpan(FloatingTextMarginSpan(imgWidthPx, lineCount), 0, ssb.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         holder.tvArtistInfoText.text = ssb
         holder.dividerView.visibility = if (position == items.size - 1) View.GONE else View.VISIBLE
