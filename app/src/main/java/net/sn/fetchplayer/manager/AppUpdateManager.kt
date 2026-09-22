@@ -37,21 +37,15 @@ object AppUpdateManager {
      */
     suspend fun checkForUpdate(currentVersionName: String): AppUpdateInfo? = withContext(Dispatchers.IO) {
         try {
-            val url = URL(GITHUB_LATEST_RELEASE_URL)
-            val connection = (url.openConnection() as HttpURLConnection).apply {
-                requestMethod = "GET"
-                connectTimeout = 8000
-                readTimeout = 8000
-                setRequestProperty("Accept", "application/vnd.github.v3+json")
-                setRequestProperty("User-Agent", "SNfetchPLAYER-App")
-            }
-
+            val connection = openConnectionFollowingRedirects(GITHUB_LATEST_RELEASE_URL)
             if (connection.responseCode != HttpURLConnection.HTTP_OK) {
                 AppLogger.w(TAG, "GitHub API returned HTTP response code: ${connection.responseCode}")
+                connection.disconnect()
                 return@withContext null
             }
 
             val responseStr = connection.inputStream.bufferedReader().use { it.readText() }
+            connection.disconnect()
             val json = JSONObject(responseStr)
 
             val tagName = json.optString("tag_name", "")
@@ -100,6 +94,41 @@ object AppUpdateManager {
     }
 
     /**
+     * Helper method to open HttpURLConnection following cross-domain and cross-protocol 301/302/303/307/308 redirects.
+     */
+    private fun openConnectionFollowingRedirects(initialUrl: String): HttpURLConnection {
+        var currentUrl = initialUrl
+        var redirects = 0
+        val maxRedirects = 8
+
+        while (redirects < maxRedirects) {
+            val url = URL(currentUrl)
+            val conn = (url.openConnection() as HttpURLConnection).apply {
+                connectTimeout = 15000
+                readTimeout = 20000
+                instanceFollowRedirects = true
+                setRequestProperty("User-Agent", "SNfetchPLAYER-App")
+                setRequestProperty("Accept", "*/*")
+            }
+            val code = conn.responseCode
+            if (code == HttpURLConnection.HTTP_MOVED_TEMP ||
+                code == HttpURLConnection.HTTP_MOVED_PERM ||
+                code == HttpURLConnection.HTTP_SEE_OTHER ||
+                code == 307 || code == 308) {
+                val location = conn.getHeaderField("Location")
+                conn.disconnect()
+                if (!location.isNullOrEmpty()) {
+                    currentUrl = location
+                    redirects++
+                    continue
+                }
+            }
+            return conn
+        }
+        return (URL(currentUrl).openConnection() as HttpURLConnection)
+    }
+
+    /**
      * Cleans version strings like "v1.0.0.4", "1.0.0.4 (2026.09.21-22:12)" down to pure numbers e.g. "1.0.0.4".
      */
     fun cleanVersionString(rawVersion: String): String {
@@ -145,14 +174,11 @@ object AppUpdateManager {
                 targetFile.delete()
             }
 
-            val connection = (URL(downloadUrl).openConnection() as HttpURLConnection).apply {
-                connectTimeout = 10000
-                readTimeout = 15000
-                instanceFollowRedirects = true
-            }
+            val connection = openConnectionFollowingRedirects(downloadUrl)
 
             if (connection.responseCode != HttpURLConnection.HTTP_OK) {
-                AppLogger.e(TAG, "Download failed with HTTP status: ${connection.responseCode}")
+                AppLogger.e(TAG, "Download failed with HTTP status: ${connection.responseCode} for URL: $downloadUrl")
+                connection.disconnect()
                 return@withContext null
             }
 
@@ -161,7 +187,7 @@ object AppUpdateManager {
 
             connection.inputStream.use { input ->
                 FileOutputStream(targetFile).use { output ->
-                    val buffer = ByteArray(8192)
+                    val buffer = ByteArray(16384)
                     var bytesRead: Int
                     var lastReportPercent = -1
 
@@ -181,6 +207,7 @@ object AppUpdateManager {
                     }
                 }
             }
+            connection.disconnect()
 
             withContext(Dispatchers.Main) {
                 onProgress(100, downloadedBytes, downloadedBytes)
@@ -211,6 +238,7 @@ object AppUpdateManager {
                         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     }
                     context.startActivity(settingsIntent)
+                    return false
                 }
             }
 

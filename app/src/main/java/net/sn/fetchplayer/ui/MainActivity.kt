@@ -1233,10 +1233,13 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                         tvProgressStatus.text = "Download complete! Launching package installer..."
                         val installed = net.sn.fetchplayer.manager.AppUpdateManager.installApk(this@MainActivity, apkFile)
                         if (!installed) {
-                            Toast.makeText(this@MainActivity, "Direct installation could not be launched. Opening browser...", Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(updateInfo.htmlUrl)))
+                            Toast.makeText(this@MainActivity, "Please allow 'Install unknown apps' in Android Settings and tap Download again!", Toast.LENGTH_LONG).show()
+                            btnDownload.isEnabled = true
+                            btnLater.isEnabled = true
+                            btnGitHub.isEnabled = true
+                        } else {
+                            dialog.dismiss()
                         }
-                        dialog.dismiss()
                     } else {
                         tvProgressStatus.text = "Download failed!"
                         btnDownload.isEnabled = true

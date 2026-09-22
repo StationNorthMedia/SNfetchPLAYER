@@ -103,6 +103,15 @@ class RadioService : Service() {
 
         player.addListener(object : Player.Listener {
             override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
+                if (player.currentMediaItemIndex > 0) {
+                    try {
+                        player.removeMediaItem(0)
+                        AppLogger.d("RadioService", "Removed old played media item at index 0 from queue")
+                    } catch (e: Exception) {
+                        AppLogger.e("RadioService", "Error removing old media item from queue", e)
+                    }
+                }
+
                 mediaItem?.localConfiguration?.tag?.let { tag ->
                     if (tag is Track) {
                         currentTrack = tag
@@ -131,7 +140,8 @@ class RadioService : Service() {
                         AppLogger.d("RadioService", "Repeat One active -> Replaying current song")
                         player.seekTo(0)
                         player.play()
-                    } else if (player.mediaItemCount <= 1) {
+                    } else {
+                        AppLogger.d("RadioService", "Playback ENDED -> Triggering playNextTrack()")
                         playNextTrack()
                     }
                 }
