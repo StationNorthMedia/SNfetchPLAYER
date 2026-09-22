@@ -1608,151 +1608,200 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="12dp">
 
-                    <ImageView
-                        android:layout_width="140dp"
-                        android:layout_height="50dp"
-                        android:contentDescription="@string/station_north"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/sn_logo" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:letterSpacing="0.05"
-                        android:text="SNfetchPLAYER • Broadcast &amp; Audio Engine"
-                        android:textColor="@color/nord6"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/tvAppVersion"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Version 1.0.0.12 • Station North Media"
-                            android:textColor="@color/nord8"
-                            android:textSize="11sp" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnCheckAppUpdate"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="28dp"
-                            android:layout_marginStart="8dp"
-                            android:paddingHorizontal="8dp"
-                            android:paddingVertical="0dp"
-                            android:text="🚀 Update Check"
-                            android:textColor="@color/nord14"
-                            android:textSize="10sp"
-                            app:strokeColor="@color/nord14"
-                            app:strokeWidth="1dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnShowNordLogs"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="32dp"
-                            android:paddingHorizontal="10dp"
-                            android:paddingVertical="0dp"
-                            android:text="💻 Toggle Logs"
-                            android:textColor="@color/nord6"
-                            android:textSize="10sp"
-                            app:strokeColor="@color/nord7"
-                            app:strokeWidth="1dp" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnCopyNordLogs"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="32dp"
-                            android:layout_marginStart="4dp"
-                            android:paddingHorizontal="10dp"
-                            android:paddingVertical="0dp"
-                            android:text="📋 Copy Logs"
-                            android:textColor="@color/nord8"
-                            android:textSize="10sp"
-                            app:strokeColor="@color/nord8"
-                            app:strokeWidth="1dp" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnSaveNordLogsTxt"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="32dp"
-                            android:layout_marginStart="4dp"
-                            android:paddingHorizontal="10dp"
-                            android:paddingVertical="0dp"
-                            android:text="💾 Save .txt"
-                            android:textColor="@color/nord14"
-                            android:textSize="10sp"
-                            app:strokeColor="@color/nord14"
-                            app:strokeWidth="1dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/layoutNordLogsInline"
+                    <!-- 1. App Header & Version Badge Card -->
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
-                        android:layout_height="180dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@color/nord1"
-                        android:orientation="vertical"
-                        android:padding="8dp"
-                        android:visibility="gone">
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/nord1"
+                        app:cardCornerRadius="10dp"
+                        app:strokeColor="@color/nord8"
+                        app:strokeWidth="1.5dp">
 
-                        <androidx.core.widget.NestedScrollView
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <ImageView
+                                android:layout_width="140dp"
+                                android:layout_height="46dp"
+                                android:contentDescription="@string/station_north"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/sn_logo" />
 
                             <TextView
-                                android:id="@+id/tvNordLogsTerminal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:letterSpacing="0.05"
+                                android:text="SNfetchPLAYER • Broadcast &amp; Audio Engine"
+                                android:textColor="@color/nord6"
+                                android:textSize="13.5sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvAppVersion"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="Version 1.0.0.21 • Station North Media"
+                                android:textColor="@color/nord8"
+                                android:textSize="11sp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnCheckAppUpdate"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="34dp"
+                                android:layout_marginTop="10dp"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="0dp"
+                                android:text="🚀 Check for App Updates"
+                                android:textColor="@color/nord14"
+                                android:textSize="11sp"
+                                android:textStyle="bold"
+                                app:strokeColor="@color/nord14"
+                                app:strokeWidth="1.5dp" />
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- 2. Queen's Academy & Curator Masterclass Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:cardBackgroundColor="@color/nord1"
+                        app:cardCornerRadius="10dp"
+                        app:strokeColor="@color/nord8"
+                        app:strokeWidth="1.5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="👑 THE QUEEN'S ACADEMY &amp; TUTORIAL"
+                                android:textColor="@color/nord8"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="monospace"
-                                android:textColor="@color/nord14"
-                                android:textSize="10sp" />
+                                android:layout_marginTop="4dp"
+                                android:lineSpacingExtra="2dp"
+                                android:text="Interactive app guide &amp; deep-dive Curator Studio masterclass personally explained by Her Majesty."
+                                android:textColor="@color/nord4"
+                                android:textSize="11sp" />
 
-                        </androidx.core.widget.NestedScrollView>
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnOpenQueenTutorial"
+                                android:layout_width="match_parent"
+                                android:layout_height="38dp"
+                                android:layout_marginTop="10dp"
+                                android:backgroundTint="@color/nord8"
+                                android:text="🎓 Open Queen's Tutorial &amp; Curator Guide"
+                                android:textColor="@color/nord0"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
 
-                    </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <!-- 3. Offline Storage & Media Cache Manager Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:gravity="center"
-                        android:lineSpacingExtra="2dp"
-                        android:text="Crafted for high-fidelity audio playback, curated YouTube video streaming, authentic real-time FFT spectrum visualization, and deep musical exploration via SN-Lexicon.\n\nDesigned for Smartphones, Tablets &amp; Android TV."
-                        android:textColor="@color/nord4"
-                        android:textSize="11sp" />
+                        android:layout_marginTop="10dp"
+                        app:cardBackgroundColor="@color/nord1"
+                        app:cardCornerRadius="10dp"
+                        app:strokeColor="@color/nord13"
+                        app:strokeWidth="1dp">
 
-                    <!-- Remote Assets Sync Status & Progress -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:text="💾 OFFLINE MEDIA &amp; BIO CACHE"
+                                    android:textColor="@color/nord13"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+
+                                <com.google.android.material.switchmaterial.SwitchMaterial
+                                    android:id="@+id/switchEnableCache"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:checked="false"
+                                    android:text="OFF"
+                                    android:textColor="@color/nord4"
+                                    android:textSize="11sp" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/tvCacheSizeInfo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Cache Status: Disabled • 0 Bytes Used"
+                                android:textColor="@color/nord8"
+                                android:textSize="11sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:lineSpacingExtra="2dp"
+                                android:text="Saves downloaded Wikipedia bios and thumbnails locally for 0ms instant offline loading. Recommended for phones/tablets. Leave OFF for Android TVs with limited storage."
+                                android:textColor="@color/nord4"
+                                android:textSize="10.5sp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnClearCacheNow"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="34dp"
+                                android:layout_marginTop="10dp"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="0dp"
+                                android:text="🗑️ Clear Offline Cache Now"
+                                android:textColor="@color/nord11"
+                                android:textSize="10.5sp"
+                                app:strokeColor="@color/nord11"
+                                app:strokeWidth="1dp" />
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- 4. Remote Assets Cloud Sync Card -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cardRemoteAssetSync"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="10dp"
                         app:cardBackgroundColor="@color/nord1"
-                        app:cardCornerRadius="8dp"
+                        app:cardCornerRadius="10dp"
                         app:strokeColor="@color/nord14"
                         app:strokeWidth="1dp">
 
@@ -1811,29 +1860,14 @@
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- E-Book Button -->
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnOpenEbookChronicles"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="12dp"
-                        android:text="📖 Open Station North Chronicles (E-Book)"
-                        android:textColor="@color/nord15"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        app:strokeColor="@color/nord15"
-                        app:strokeWidth="1.5dp" />
-
-                    <!-- Her Majesty's Royal FAQ & User Guide -->
+                    <!-- 5. System Diagnostics & Terminal Logs Card -->
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="10dp"
                         app:cardBackgroundColor="@color/nord1"
-                        app:cardCornerRadius="8dp"
-                        app:strokeColor="@color/nord8"
+                        app:cardCornerRadius="10dp"
+                        app:strokeColor="@color/nord7"
                         app:strokeWidth="1dp">
 
                         <LinearLayout
@@ -1843,120 +1877,109 @@
                             android:padding="14dp">
 
                             <TextView
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="👑 HER MAJESTY'S ROYAL USER MANUAL &amp; FAQ"
-                                android:textColor="@color/nord13"
-                                android:textSize="13sp"
+                                android:text="💻 SYSTEM DIAGNOSTICS &amp; LOGS"
+                                android:textColor="@color/nord7"
+                                android:textSize="12sp"
                                 android:textStyle="bold" />
 
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:text="By Royal Appointment to Her Majesty's Station North Realm"
-                                android:textColor="@color/nord8"
-                                android:textSize="10sp"
-                                android:textStyle="italic" />
+                                android:layout_marginTop="8dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginVertical="10dp"
-                                android:background="@color/nord3" />
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnShowNordLogs"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:layout_width="0dp"
+                                    android:layout_height="32dp"
+                                    android:layout_weight="1"
+                                    android:paddingHorizontal="6dp"
+                                    android:paddingVertical="0dp"
+                                    android:text="💻 Terminal"
+                                    android:textColor="@color/nord6"
+                                    android:textSize="10sp"
+                                    app:strokeColor="@color/nord7"
+                                    app:strokeWidth="1dp" />
 
-                            <!-- Q1 -->
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Q: How does one command Her Majesty's Television &amp; Radio Streams?"
-                                android:textColor="@color/nord14"
-                                android:textSize="11sp"
-                                android:textStyle="bold" />
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnCopyNordLogs"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:layout_width="0dp"
+                                    android:layout_height="32dp"
+                                    android:layout_marginStart="4dp"
+                                    android:layout_weight="1"
+                                    android:paddingHorizontal="6dp"
+                                    android:paddingVertical="0dp"
+                                    android:text="📋 Copy"
+                                    android:textColor="@color/nord8"
+                                    android:textSize="10sp"
+                                    app:strokeColor="@color/nord8"
+                                    app:strokeWidth="1dp" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:layout_marginBottom="8dp"
-                                android:text="A: One simply toggles between SN-TV (for majestic video broadcasts) and SN-RADIO (for glorious audio streams with spectrum visualizer). Should one desire true regal immersion, tapping the screen reveals Her Majesty's Heads-Up Display (HUD) or enters True Fullscreen."
-                                android:textColor="@color/nord4"
-                                android:textSize="10.5sp" />
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnSaveNordLogsTxt"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:layout_width="0dp"
+                                    android:layout_height="32dp"
+                                    android:layout_marginStart="4dp"
+                                    android:layout_weight="1"
+                                    android:paddingHorizontal="6dp"
+                                    android:paddingVertical="0dp"
+                                    android:text="💾 Save .txt"
+                                    android:textColor="@color/nord14"
+                                    android:textSize="10sp"
+                                    app:strokeColor="@color/nord14"
+                                    app:strokeWidth="1dp" />
 
-                            <!-- Q2 -->
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Q: How does one administer playlists in the Royal Curator Studio?"
-                                android:textColor="@color/nord14"
-                                android:textSize="11sp"
-                                android:textStyle="bold" />
+                            </LinearLayout>
 
-                            <TextView
+                            <LinearLayout
+                                android:id="@+id/layoutNordLogsInline"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:layout_marginBottom="8dp"
-                                android:text="A: We command that all playlist administration take place exclusively inside the Settings Hub. Tapping Saved Playlists allows one to select the Station North Main Mix (100 Hits), US R&amp;B Top 50, or US HipHop Top 50, as well as create, rename, or delete custom royal playlists."
-                                android:textColor="@color/nord4"
-                                android:textSize="10.5sp" />
+                                android:layout_height="160dp"
+                                android:layout_marginTop="8dp"
+                                android:background="@color/nord0"
+                                android:orientation="vertical"
+                                android:padding="8dp"
+                                android:visibility="gone">
 
-                            <!-- Q3 -->
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Q: May one import YouTube Playlists by Royal Decree?"
-                                android:textColor="@color/nord14"
-                                android:textSize="11sp"
-                                android:textStyle="bold" />
+                                <androidx.core.widget.NestedScrollView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:layout_marginBottom="8dp"
-                                android:text="A: Indeed! Paste any YouTube playlist link or ID into the input bar and press Load. One may then append or replace tracks at Her Majesty's pleasure."
-                                android:textColor="@color/nord4"
-                                android:textSize="10.5sp" />
+                                    <TextView
+                                        android:id="@+id/tvNordLogsTerminal"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="monospace"
+                                        android:textColor="@color/nord14"
+                                        android:textSize="10sp" />
 
-                            <!-- Q4 -->
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Q: How does one explore the Royal SN-Lexicon (4,400+ Entities)?"
-                                android:textColor="@color/nord14"
-                                android:textSize="11sp"
-                                android:textStyle="bold" />
+                                </androidx.core.widget.NestedScrollView>
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:layout_marginBottom="8dp"
-                                android:text="A: Open the Lexicon tab to explore over 4,438 artists across US Hip-Hop, R&amp;B, and Urban Culture. Each artist features complete biographies, discographies, and direct YouTube search links. Look out for Her Majesty's Genre Badges: 🎤 US HIP-HOP, 🎵 R&amp;B / URBAN, and 🔥 R&amp;B &amp; HIP-HOP."
-                                android:textColor="@color/nord4"
-                                android:textSize="10.5sp" />
-
-                            <!-- Q5 -->
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Q: How does one inspect or export System Diagnostics &amp; Terminal Logs?"
-                                android:textColor="@color/nord14"
-                                android:textSize="11sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:text="A: One may tap 💻 Toggle Logs to inspect real-time operations, 📋 Copy Logs to store them in the clipboard, or 💾 Save .txt to export a permanent diagnostic file via the Storage Access Framework."
-                                android:textColor="@color/nord4"
-                                android:textSize="10.5sp" />
+                            </LinearLayout>
 
                         </LinearLayout>
-
                     </com.google.android.material.card.MaterialCardView>
+
+                    <!-- 6. Chronicles & E-Book Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnOpenEbookChronicles"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="📖 Open Station North Chronicles (E-Book)"
+                        android:textColor="@color/nord15"
+                        android:textSize="11.5sp"
+                        android:textStyle="bold"
+                        app:strokeColor="@color/nord15"
+                        app:strokeWidth="1.5dp" />
 
                 </LinearLayout>
 
