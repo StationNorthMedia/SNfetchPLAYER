@@ -874,13 +874,14 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             return
         }
 
-        binding.cardPlayerContainer.visibility = View.VISIBLE
-        binding.cardTrackInfo.visibility = View.VISIBLE
-
         if (isSettingsModeActive) {
+            binding.cardPlayerContainer.visibility = View.GONE
+            binding.cardTrackInfo.visibility = View.GONE
             binding.cardArtistInfoContainer.visibility = View.GONE
             binding.cardSettingsContainer.visibility = View.VISIBLE
         } else {
+            binding.cardPlayerContainer.visibility = View.VISIBLE
+            binding.cardTrackInfo.visibility = View.VISIBLE
             binding.cardSettingsContainer.visibility = View.GONE
             binding.cardArtistInfoContainer.visibility = View.VISIBLE
         }

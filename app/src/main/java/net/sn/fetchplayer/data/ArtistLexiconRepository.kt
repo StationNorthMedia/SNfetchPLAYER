@@ -139,10 +139,13 @@ object ArtistLexiconRepository {
                         discography = albums,
                         relatedArtists = related
                     )
-                    val key = normalizeKey(name)
-                    artistMap[key] = artist
+                    val key1 = normalizeKey(name)
+                    val key2 = normalizeKeyAdvanced(name)
+                    artistMap[key1] = artist
+                    artistMap[key2] = artist
                     if (id.isNotEmpty()) {
                         artistMap[id] = artist
+                        artistMap[normalizeKeyAdvanced(id)] = artist
                     }
                     tempArtists.add(artist)
                 }
@@ -172,11 +175,24 @@ object ArtistLexiconRepository {
         val cleanName = cleanArtistName(rawName)
         if (cleanName.isEmpty()) return null
 
-        val key = normalizeKey(cleanName)
-        artistMap[key]?.let { return it }
+        val keyAdv = normalizeKeyAdvanced(cleanName)
+        artistMap[keyAdv]?.let { return it }
+
+        val keyNorm = normalizeKey(cleanName)
+        artistMap[keyNorm]?.let { return it }
+
+        val normalizedRawAdv = normalizeKeyAdvanced(rawName)
+        artistMap[normalizedRawAdv]?.let { return it }
 
         val normalizedRaw = normalizeKey(rawName)
         artistMap[normalizedRaw]?.let { return it }
+
+        if (keyAdv.length >= 3) {
+            artistList.firstOrNull { artist ->
+                val artistAdv = normalizeKeyAdvanced(artist.name)
+                artistAdv == keyAdv || artistAdv.contains(keyAdv) || keyAdv.contains(artistAdv)
+            }?.let { return it }
+        }
 
         return null
     }
@@ -190,64 +206,79 @@ object ArtistLexiconRepository {
         val query = rawQuery.trim().lowercase()
         if (query.isEmpty() || artistList.isEmpty()) return emptyList()
 
+        val normQuery = normalizeKeyAdvanced(query)
         val results = mutableListOf<LexiconSearchSuggestion>()
 
+        // 1. Check Artist Name Matches (Exact & Normalized Substring)
         for (artist in artistList) {
             if (results.size >= maxResults) break
 
             val cleanArtistName = cleanArtistName(artist.name)
             val cleanArtistLower = cleanArtistName.lowercase()
             val rawNameLower = artist.name.lowercase()
+            val normArtist = normalizeKeyAdvanced(artist.name)
 
-            // 1. Check Artist Name Match
-            if (cleanArtistLower.contains(query) || rawNameLower.contains(query)) {
-                results.add(
-                    LexiconSearchSuggestion(
-                        type = LexiconSuggestionType.ARTIST,
-                        title = cleanArtistName,
-                        badge = "🎤 ${artist.genre} (${artist.discography.size} Albums)",
-                        artist = artist
-                    )
-                )
-            }
+            val isMatch = cleanArtistLower.contains(query) ||
+                    rawNameLower.contains(query) ||
+                    (normQuery.isNotEmpty() && normArtist.contains(normQuery)) ||
+                    (normQuery.isNotEmpty() && normQuery.contains(normArtist))
 
-            // 2. Check Albums & Songs if query is >= 2 chars
-            if (query.length >= 2 && artist.discography.isNotEmpty()) {
-                for (album in artist.discography) {
-                    if (results.size >= maxResults) break
-
-                    val albumTitle = album.title
-                    val albumTitleLower = albumTitle.lowercase()
-
-                    // Album Match
-                    if (albumTitleLower.contains(query) && !results.any { it.type == LexiconSuggestionType.ALBUM && it.albumTitle == albumTitle && it.artist.id == artist.id }) {
-                        results.add(
-                            LexiconSearchSuggestion(
-                                type = LexiconSuggestionType.ALBUM,
-                                title = albumTitle,
-                                badge = "💿 Album by $cleanArtistName (${album.year.ifEmpty { "N/A" }})",
-                                artist = artist,
-                                albumTitle = albumTitle
-                            )
+            if (isMatch) {
+                if (!results.any { it.type == LexiconSuggestionType.ARTIST && it.artist.id == artist.id }) {
+                    results.add(
+                        LexiconSearchSuggestion(
+                            type = LexiconSuggestionType.ARTIST,
+                            title = cleanArtistName,
+                            badge = "🎤 ${artist.genre} (${artist.discography.size} Albums)",
+                            artist = artist
                         )
-                    }
+                    )
+                }
+            }
+        }
 
-                    // Track Matches
-                    for (track in album.tracks) {
+        // 2. Check Albums & Songs if query is >= 2 chars
+        if (query.length >= 2 && results.size < maxResults) {
+            for (artist in artistList) {
+                if (results.size >= maxResults) break
+
+                if (artist.discography.isNotEmpty()) {
+                    for (album in artist.discography) {
                         if (results.size >= maxResults) break
-                        val trackLower = track.lowercase()
 
-                        if (trackLower.contains(query) && !results.any { it.type == LexiconSuggestionType.TRACK && it.trackName == track && it.artist.id == artist.id }) {
+                        val albumTitle = album.title
+                        val albumTitleLower = albumTitle.lowercase()
+
+                        // Album Match
+                        if (albumTitleLower.contains(query) && !results.any { it.type == LexiconSuggestionType.ALBUM && it.albumTitle == albumTitle && it.artist.id == artist.id }) {
                             results.add(
                                 LexiconSearchSuggestion(
-                                    type = LexiconSuggestionType.TRACK,
-                                    title = track,
-                                    badge = "🎵 Track by $cleanArtistName",
+                                    type = LexiconSuggestionType.ALBUM,
+                                    title = albumTitle,
+                                    badge = "💿 Album by ${artist.name} (${album.year.ifEmpty { "N/A" }})",
                                     artist = artist,
-                                    albumTitle = albumTitle,
-                                    trackName = track
+                                    albumTitle = albumTitle
                                 )
                             )
+                        }
+
+                        // Track Matches
+                        for (track in album.tracks) {
+                            if (results.size >= maxResults) break
+                            val trackLower = track.lowercase()
+
+                            if (trackLower.contains(query) && !results.any { it.type == LexiconSuggestionType.TRACK && it.trackName == track && it.artist.id == artist.id }) {
+                                results.add(
+                                    LexiconSearchSuggestion(
+                                        type = LexiconSuggestionType.TRACK,
+                                        title = track,
+                                        badge = "🎵 Track by ${artist.name}",
+                                        artist = artist,
+                                        albumTitle = albumTitle,
+                                        trackName = track
+                                    )
+                                )
+                            }
                         }
                     }
                 }
@@ -269,5 +300,19 @@ object ArtistLexiconRepository {
         return name.lowercase()
             .replace(Regex("[^a-z0-9]"), "")
             .trim()
+    }
+
+    private fun normalizeKeyAdvanced(name: String): String {
+        var s = name.lowercase().trim()
+        if (s.contains("aschere")) {
+            s = s.replace("aschere", "usher")
+        }
+        s = s.replace(Regex("\\b(ii|to|two)\\b"), "2")
+            .replace(Regex("\\b(iii)\\b"), "3")
+            .replace(Regex("\\b(iv)\\b"), "4")
+            .replace(Regex("\\b(and|\\&)\\b"), "and")
+            .replace(Regex("boys\\b"), "boyz")
+
+        return s.replace(Regex("[^a-z0-9]"), "").trim()
     }
 }

@@ -40,7 +40,7 @@
                 android:background="@drawable/badge_update_bg"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
-                android:text="v1.0.0.22"
+                android:text="v1.0.0.23"
                 android:textColor="@color/nord0"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="Installed: v1.0.0.21  •  Available on GitHub: v1.0.0.22"
+            android:text="Installed: v1.0.0.22  •  Available on GitHub: v1.0.0.23"
             android:textColor="@color/nord6"
             android:textSize="11sp" />
 
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:lineSpacingExtra="2dp"
-                android:text="• Synced Landscape &amp; Tablet Layouts (layout-land &amp; layout-sw600dp-land) to 6 Nord Cards About Design\n• Positioned Update Check Button directly under Version Number as styled full-width button\n• Continuous Media Playback &amp; Top Video Player Visibility active"
+                android:text="• Fixed Settings Mode Layout: Player box hidden in Settings Mode so Settings Hub takes 100% full screen cleanly without overlapping in 16:9 landscape\n• Fixed Lexicon Database Priority: Local database (4,438+ artists) queried FIRST with phonetic &amp; alias matching (Usher, Boyz II Men, Boys to Men, Boyz 2 Men)\n• Filtered Wikipedia film/movie pages (e.g. Bad Boys II) from search results"
                 android:textColor="@color/nord4"
                 android:textSize="11sp" />
         </androidx.core.widget.NestedScrollView>

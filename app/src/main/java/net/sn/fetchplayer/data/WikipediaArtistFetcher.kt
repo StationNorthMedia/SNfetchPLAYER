@@ -136,6 +136,21 @@ object WikipediaArtistFetcher {
                 lower.contains("is a disambiguation")
     }
 
+    private fun isNonMusicianPage(title: String, extract: String): Boolean {
+        val lowerTitle = title.lowercase()
+        val lowerExtract = extract.lowercase()
+
+        return lowerTitle.contains("(film)") ||
+                lowerTitle.contains("(movie)") ||
+                lowerTitle.contains("film)") ||
+                lowerExtract.contains("action comedy film") ||
+                lowerExtract.contains("directed by michael bay") ||
+                lowerExtract.contains("american action film") ||
+                lowerExtract.contains("is a feature film") ||
+                lowerExtract.contains("film directed by") ||
+                lowerExtract.contains("video game")
+    }
+
     private fun fetchSummaryWithFallbacks(cleanName: String): ArtistInfo? {
         val candidateTitles = listOf(
             "$cleanName (musician)",
@@ -205,8 +220,8 @@ object WikipediaArtistFetcher {
                 val rawExtract = json.optString("extract", "")
                 val cleanedExtract = cleanExtractText(rawExtract)
 
-                if (isDisambiguation(pageType, cleanedExtract)) {
-                    AppLogger.d(TAG, "Skipping disambiguation page for $title on en.wikipedia")
+                if (isDisambiguation(pageType, cleanedExtract) || isNonMusicianPage(pageTitle, cleanedExtract)) {
+                    AppLogger.d(TAG, "Skipping disambiguation or non-musician page for $title on en.wikipedia")
                     return null
                 }
 
