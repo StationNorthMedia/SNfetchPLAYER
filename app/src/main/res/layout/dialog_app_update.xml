@@ -40,7 +40,7 @@
                 android:background="@drawable/badge_update_bg"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
-                android:text="v1.0.0.14"
+                android:text="v1.0.0.15"
                 android:textColor="@color/nord0"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="Installed: v1.0.0.13  •  Available on GitHub: v1.0.0.14"
+            android:text="Installed: v1.0.0.14  •  Available on GitHub: v1.0.0.15"
             android:textColor="@color/nord6"
             android:textSize="11sp" />
 
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:lineSpacingExtra="2dp"
-                android:text="• Fixed GitHub HTTP 302 Redirect APK Download Issue (Instant In-App Updates)\n• Fixed Playback Stall / Stop After Station IDs and Radio Jingles\n• Integrated Kinetic CRATE DIGGING Broadcast Shimmer Loading Overlay"
+                android:text="• Aligned Queen Quote Ambient Colors with Nord Theme Player Controls\n• Optimized Floating Text Wrap for 16:9 &amp; 16:10 TV/Monitor Displays\n• Seamless In-App Updates &amp; Gapless Jingle Transitions"
                 android:textColor="@color/nord4"
                 android:textSize="11sp" />
         </androidx.core.widget.NestedScrollView>

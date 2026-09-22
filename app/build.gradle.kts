@@ -11,8 +11,8 @@ android {
         applicationId = "net.sn.fetchplayer"
         minSdk = 24
         targetSdk = 34
-        versionCode = 2026092234
-        versionName = "1.0.0.14 (2026.09.22-13:45)"
+        versionCode = 2026092235
+        versionName = "1.0.0.15 (2026.09.22-15:00)"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
