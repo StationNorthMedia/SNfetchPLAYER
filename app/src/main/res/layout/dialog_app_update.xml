@@ -40,7 +40,7 @@
                 android:background="@drawable/badge_update_bg"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
-                android:text="v1.0.0.18"
+                android:text="v1.0.0.19"
                 android:textColor="@color/nord0"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="Installed: v1.0.0.17  •  Available on GitHub: v1.0.0.18"
+            android:text="Installed: v1.0.0.18  •  Available on GitHub: v1.0.0.19"
             android:textColor="@color/nord6"
             android:textSize="11sp" />
 
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:lineSpacingExtra="2dp"
-                android:text="• Redesigned Wikipedia Feed Layout (Option 1 Header + Full-Width Bio) for 16:9 TV Compatibility\n• Fixed Wikipedia Artist Fetcher for Artists like Usher with Disambiguation &amp; Multi-Language Fallback\n• Cleaned Extract Text Formatting and Normalized Image Thumbnail Retrieval"
+                android:text="• Styled Wikipedia Feed Header Row with Player Surface Card Background (Nord1) &amp; Border (Nord2)\n• Enforced English Wikipedia Endpoint (en.wikipedia.org) Exclusively for All Artist Lookups\n• Resolved Disambiguation Fallbacks for Artists like Usher (musician) &amp; Cleaned Extract Formatting"
                 android:textColor="@color/nord4"
                 android:textSize="11sp" />
         </androidx.core.widget.NestedScrollView>

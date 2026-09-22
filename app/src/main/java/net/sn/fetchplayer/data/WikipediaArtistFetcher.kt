@@ -55,8 +55,8 @@ object WikipediaArtistFetcher {
                 return@withContext info
             }
 
-            // 2. Network Fallback if artist not in local lexicon
-            AppLogger.d(TAG, "Fetching Wikipedia summary for artist: $cleanName")
+            // 2. English Wikipedia Summary Fallback
+            AppLogger.d(TAG, "Fetching English Wikipedia summary for artist: $cleanName")
             val info: ArtistInfo? = fetchSummaryWithFallbacks(cleanName)
 
             if (info != null) {
@@ -68,7 +68,7 @@ object WikipediaArtistFetcher {
                 return@withContext info
             }
         } catch (e: Exception) {
-            AppLogger.e(TAG, "Error fetching Wikipedia info for $cleanName", e)
+            AppLogger.e(TAG, "Error fetching English Wikipedia info for $cleanName", e)
         }
 
         return@withContext null
@@ -102,43 +102,35 @@ object WikipediaArtistFetcher {
         if (type.equals("disambiguation", ignoreCase = true)) return true
         val lower = extract.lowercase()
         return lower.contains("may refer to:") ||
-                lower.contains("bezeichnet:") ||
-                lower.contains("steht für:") ||
-                lower.contains("ist der name folgender") ||
                 lower.contains("refers to:") ||
                 lower.contains("is a disambiguation")
     }
 
     private fun fetchSummaryWithFallbacks(cleanName: String): ArtistInfo? {
         val candidateTitles = listOf(
-            "$cleanName (Musiker)",
             "$cleanName (musician)",
-            "$cleanName (Sänger)",
             "$cleanName (singer)",
             "$cleanName (band)",
+            "$cleanName (rapper)",
+            "$cleanName (group)",
             cleanName
         )
-        val languages = listOf("de", "en")
 
-        // Try direct summary REST API endpoint across candidates and languages
+        // Try English Wikipedia REST API endpoint across candidate titles
         for (cand in candidateTitles) {
-            for (lang in languages) {
-                val info = fetchDirectSummary(cand, lang)
-                if (info != null && info.extract.isNotEmpty()) {
-                    return info
-                }
+            val info = fetchDirectSummary(cand)
+            if (info != null && info.extract.isNotEmpty()) {
+                return info
             }
         }
 
-        // Try searching Wikipedia search API
-        for (lang in languages) {
-            val searchKw = if (lang == "de") "$cleanName Musiker" else "$cleanName musician"
-            val searchTitle = searchWikipediaTitle(searchKw, lang)
-            if (searchTitle != null) {
-                val info = fetchDirectSummary(searchTitle, lang)
-                if (info != null && info.extract.isNotEmpty()) {
-                    return info
-                }
+        // Try searching English Wikipedia search API
+        val searchKw = "$cleanName musician"
+        val searchTitle = searchWikipediaTitle(searchKw)
+        if (searchTitle != null) {
+            val info = fetchDirectSummary(searchTitle)
+            if (info != null && info.extract.isNotEmpty()) {
+                return info
             }
         }
 
@@ -147,29 +139,25 @@ object WikipediaArtistFetcher {
 
     private fun fetchImageUrlForArtist(artistName: String): String? {
         val candidates = listOf(
-            "$artistName (Musiker)",
             "$artistName (musician)",
-            "$artistName (Sänger)",
             "$artistName (singer)",
+            "$artistName (band)",
             artistName
         )
-        val languages = listOf("de", "en")
 
         for (cand in candidates) {
-            for (lang in languages) {
-                val summary = fetchDirectSummary(cand, lang)
-                if (summary != null && !summary.imageUrl.isNullOrEmpty()) {
-                    return summary.imageUrl
-                }
+            val summary = fetchDirectSummary(cand)
+            if (summary != null && !summary.imageUrl.isNullOrEmpty()) {
+                return summary.imageUrl
             }
         }
         return null
     }
 
-    private fun fetchDirectSummary(title: String, lang: String = "de"): ArtistInfo? {
+    private fun fetchDirectSummary(title: String): ArtistInfo? {
         return try {
             val encodedTitle = URLEncoder.encode(title.replace(" ", "_"), "UTF-8")
-            val urlString = "https://$lang.wikipedia.org/api/rest_v1/page/summary/$encodedTitle"
+            val urlString = "https://en.wikipedia.org/api/rest_v1/page/summary/$encodedTitle"
             
             val connection = (URL(urlString).openConnection() as HttpURLConnection).apply {
                 requestMethod = "GET"
@@ -188,7 +176,7 @@ object WikipediaArtistFetcher {
                 val cleanedExtract = cleanExtractText(rawExtract)
 
                 if (isDisambiguation(pageType, cleanedExtract)) {
-                    AppLogger.d(TAG, "Skipping disambiguation page for $title ($lang)")
+                    AppLogger.d(TAG, "Skipping disambiguation page for $title on en.wikipedia")
                     return null
                 }
 
@@ -205,10 +193,10 @@ object WikipediaArtistFetcher {
         }
     }
 
-    private fun searchWikipediaTitle(query: String, lang: String = "de"): String? {
+    private fun searchWikipediaTitle(query: String): String? {
         return try {
             val encodedQuery = URLEncoder.encode(query, "UTF-8")
-            val urlString = "https://$lang.wikipedia.org/w/api.php?action=query&list=search&srsearch=$encodedQuery&format=json"
+            val urlString = "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=$encodedQuery&format=json"
 
             val connection = (URL(urlString).openConnection() as HttpURLConnection).apply {
                 requestMethod = "GET"
