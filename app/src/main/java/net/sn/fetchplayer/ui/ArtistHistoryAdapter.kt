@@ -53,11 +53,11 @@ class ArtistHistoryAdapter(
         }
 
         val density = context.resources.displayMetrics.density
-        val imgWidthPx = (85 * density + 10 * density).toInt()
+        val imgWidthPx = (80 * density + 10 * density).toInt()
 
         val ssb = SpannableStringBuilder()
 
-        // Artist Title (Bold + Nord8 Cyan)
+        // Artist Title (Paragraph 1: Bold + Nord8 Cyan, 1-line margin)
         val titleStart = ssb.length
         ssb.append(item.displayTitle).append("\n")
         val titleEnd = ssb.length
@@ -65,20 +65,23 @@ class ArtistHistoryAdapter(
         val headerColor = if (item.textColor != null) item.textColor else ContextCompat.getColor(context, R.color.nord8)
         ssb.setSpan(ForegroundColorSpan(headerColor), titleStart, titleEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         ssb.setSpan(RelativeSizeSpan(1.25f), titleStart, titleEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        ssb.setSpan(FloatingTextMarginSpan(imgWidthPx, 1), titleStart, titleEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
-        var lineCount = 3
-        // Track Title Sub-Header if available
+        var hasSubHeader = false
+
+        // Track Title Sub-Header if available (Paragraph 2: Italic + Nord6, 1-line margin)
         if (item.track.title.isNotBlank() && item.track.title != item.displayTitle) {
-            lineCount = 4
+            hasSubHeader = true
             val subStart = ssb.length
             ssb.append("Track: ").append(item.track.title).append("\n")
             val subEnd = ssb.length
             ssb.setSpan(StyleSpan(Typeface.ITALIC), subStart, subEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             ssb.setSpan(ForegroundColorSpan(ContextCompat.getColor(context, R.color.nord6)), subStart, subEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             ssb.setSpan(RelativeSizeSpan(1.05f), subStart, subEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            ssb.setSpan(FloatingTextMarginSpan(imgWidthPx, 1), subStart, subEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
 
-        // Bio Extract Text (Styled with ambient color if present)
+        // Bio Extract Text (Paragraph 3: 3 lines margin if subheader present, else 4 lines)
         val extractStart = ssb.length
         ssb.append(item.extract)
         val extractEnd = ssb.length
@@ -89,8 +92,8 @@ class ArtistHistoryAdapter(
             ssb.setSpan(ForegroundColorSpan(ContextCompat.getColor(context, R.color.nord4)), extractStart, extractEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
 
-        // Floating Text Margin Span: indent only lines 1..lineCount adjacent to 85dp image
-        ssb.setSpan(FloatingTextMarginSpan(imgWidthPx, lineCount), 0, ssb.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        val extractIndentLines = if (hasSubHeader) 3 else 4
+        ssb.setSpan(FloatingTextMarginSpan(imgWidthPx, extractIndentLines), extractStart, extractEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         holder.tvArtistInfoText.text = ssb
         holder.dividerView.visibility = if (position == items.size - 1) View.GONE else View.VISIBLE

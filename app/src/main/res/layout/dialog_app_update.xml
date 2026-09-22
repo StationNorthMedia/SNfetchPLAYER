@@ -40,7 +40,7 @@
                 android:background="@drawable/badge_update_bg"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
-                android:text="v1.0.0.16"
+                android:text="v1.0.0.17"
                 android:textColor="@color/nord0"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="Installed: v1.0.0.15  •  Available on GitHub: v1.0.0.16"
+            android:text="Installed: v1.0.0.16  •  Available on GitHub: v1.0.0.17"
             android:textColor="@color/nord6"
             android:textSize="11sp" />
 
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:lineSpacingExtra="2dp"
-                android:text="• Fixed Text Overlapping Artist Image Icon in Wikipedia Feed\n• Adjusted Artist Photo Dimensions to 80dp &amp; Leading Margin Span to 5 Lines\n• Aligned Queen Quote Ambient Colors with Nord Theme Player Controls"
+                android:text="• Fixed 2:1 Rotation Engine with Deterministic History-Based Rotation Check\n• Fixed Paragraph-Scoped Text Flow Margin Wrapping for Wikipedia Feed Items\n• Removed Duplicate Asynchronous Track Queueing Calls in RadioService"
                 android:textColor="@color/nord4"
                 android:textSize="11sp" />
         </androidx.core.widget.NestedScrollView>

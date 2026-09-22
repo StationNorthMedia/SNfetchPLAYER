@@ -35,7 +35,6 @@ class PlaylistManager(
     private val currentShuffleList = mutableListOf<RawPlaylistItem>()
     private var shuffleIndex = 0
     private var globalTrackCounter = 0
-    private var ytPlayedInCurrentCycle = 0
 
     data class RawPlaylistItem(
         val youtubeId: String,
@@ -116,9 +115,19 @@ class PlaylistManager(
         mutex.withLock {
             globalTrackCounter++
 
-            // Check if 2 YouTube tracks played in current cycle -> try Station Content
-            if (ytPlayedInCurrentCycle >= 2) {
-                ytPlayedInCurrentCycle = 0
+            // Count how many consecutive YouTube tracks exist at the top of historyStack since the last Station Content
+            var ytTracksSinceLastStation = 0
+            for (pastTrack in historyStack) {
+                if (pastTrack.isStationContent) {
+                    break
+                }
+                ytTracksSinceLastStation++
+            }
+
+            AppLogger.d("PlaylistManager", "2:1 Rotation Check -> YouTube tracks since last Station Content: $ytTracksSinceLastStation")
+
+            // Check if 2 YouTube tracks played since last Station Content -> insert Station Content (ID or Jingle)
+            if (ytTracksSinceLastStation >= 2) {
                 val stationTrack = stationContentManager.getStationContentForMode(mode)
                 if (stationTrack != null) {
                     AppLogger.d("PlaylistManager", "ROTATION -> Inserting Station Content [${stationTrack.title}] for mode $mode")
@@ -146,8 +155,7 @@ class PlaylistManager(
                 val resolvedUrl = resolveStreamUri(rawItem.youtubeId, isAudioOnly)
 
                 if (!resolvedUrl.isNullOrEmpty()) {
-                    ytPlayedInCurrentCycle++
-                    AppLogger.d("PlaylistManager", "SUCCESS resolved stream URL for [${rawItem.youtubeId}] (Cycle YT count: $ytPlayedInCurrentCycle/2)")
+                    AppLogger.d("PlaylistManager", "SUCCESS resolved stream URL for [${rawItem.youtubeId}]")
                     val track = Track(
                         id = rawItem.youtubeId + "_" + globalTrackCounter,
                         title = rawItem.title,

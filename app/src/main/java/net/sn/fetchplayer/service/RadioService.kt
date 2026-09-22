@@ -276,7 +276,6 @@ class RadioService : Service() {
                 player.prepare()
                 player.playWhenReady = true
             }
-            queueNextMediaItem()
         } else {
             AppLogger.e("RadioService", "Cannot play track [${track.title}], stream URL is null or empty")
         }
