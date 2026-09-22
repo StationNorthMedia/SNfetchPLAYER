@@ -1,8 +1,10 @@
 package net.sn.fetchplayer.data
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import net.sn.fetchplayer.util.AppLogger
+import net.sn.fetchplayer.util.CacheManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
@@ -23,11 +25,22 @@ object WikipediaArtistFetcher {
     private const val TAG = "WikipediaArtistFetcher"
     private val cache = ConcurrentHashMap<String, ArtistInfo>()
 
-    suspend fun fetchArtistInfo(artistName: String): ArtistInfo? = withContext(Dispatchers.IO) {
+    suspend fun fetchArtistInfo(artistName: String, context: Context? = null): ArtistInfo? = withContext(Dispatchers.IO) {
         val cleanName = cleanArtistName(artistName)
         if (cleanName.isEmpty() || isStationContentName(cleanName)) return@withContext null
 
+        // 0. Check in-memory RAM cache
         cache[cleanName]?.let { return@withContext it }
+
+        // 0b. Check persistent Disk Cache if enabled
+        if (context != null && CacheManager.isCacheEnabled(context)) {
+            val diskCached = CacheManager.getCachedWikiBio(context, cleanName)
+            if (diskCached != null && diskCached.extract.isNotEmpty()) {
+                AppLogger.d(TAG, "Found disk-cached Wikipedia bio for artist: $cleanName")
+                cache[cleanName] = diskCached
+                return@withContext diskCached
+            }
+        }
 
         try {
             // 1. Check local SN-Lexikon repository first!
@@ -41,17 +54,25 @@ object WikipediaArtistFetcher {
                     imgUrl = fetchImageUrlForArtist(cleanName)
                 }
 
+                var bitmap: Bitmap? = null
+                if (context != null && !imgUrl.isNullOrEmpty()) {
+                    bitmap = CacheManager.getCachedImageBitmap(context, imgUrl)
+                }
+                if (bitmap == null && !imgUrl.isNullOrEmpty()) {
+                    bitmap = downloadBitmap(imgUrl)
+                }
+
                 val info = ArtistInfo(
                     title = lexiconArtist.name,
                     imageUrl = imgUrl,
-                    extract = cleanBio
+                    extract = cleanBio,
+                    imageBitmap = bitmap
                 )
 
-                if (!imgUrl.isNullOrEmpty()) {
-                    info.imageBitmap = downloadBitmap(imgUrl)
-                }
-
                 cache[cleanName] = info
+                if (context != null && CacheManager.isCacheEnabled(context)) {
+                    CacheManager.saveCachedWikiBio(context, cleanName, info)
+                }
                 return@withContext info
             }
 
@@ -61,10 +82,19 @@ object WikipediaArtistFetcher {
 
             if (info != null) {
                 val imgUrl = info.imageUrl
-                if (!imgUrl.isNullOrEmpty()) {
-                    info.imageBitmap = downloadBitmap(imgUrl)
+                var bitmap: Bitmap? = null
+                if (context != null && !imgUrl.isNullOrEmpty()) {
+                    bitmap = CacheManager.getCachedImageBitmap(context, imgUrl)
                 }
+                if (bitmap == null && !imgUrl.isNullOrEmpty()) {
+                    bitmap = downloadBitmap(imgUrl)
+                }
+                info.imageBitmap = bitmap
+
                 cache[cleanName] = info
+                if (context != null && CacheManager.isCacheEnabled(context)) {
+                    CacheManager.saveCachedWikiBio(context, cleanName, info)
+                }
                 return@withContext info
             }
         } catch (e: Exception) {

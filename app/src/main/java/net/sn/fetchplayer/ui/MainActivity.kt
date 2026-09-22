@@ -54,6 +54,8 @@ import net.sn.fetchplayer.model.PlaybackMode
 import net.sn.fetchplayer.model.Track
 import net.sn.fetchplayer.service.RadioService
 import net.sn.fetchplayer.util.AppLogger
+import net.sn.fetchplayer.util.CacheManager
+import net.sn.fetchplayer.ui.QueenTutorialDialog
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -1136,8 +1138,40 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             ChroniclesEbookDialog(this).show()
         }
 
+        binding.btnOpenQueenTutorial?.setOnClickListener {
+            QueenTutorialDialog(this).show()
+        }
+
+        val cacheEnabled = CacheManager.isCacheEnabled(this)
+        binding.switchEnableCache?.isChecked = cacheEnabled
+        updateCacheSizeUi()
+
+        binding.switchEnableCache?.setOnCheckedChangeListener { _, isChecked ->
+            CacheManager.setCacheEnabled(this, isChecked)
+            updateCacheSizeUi()
+            val msg = if (isChecked) "Offline Media & Bio Cache Enabled" else "Offline Cache Disabled"
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        }
+
+        binding.btnClearCacheNow?.setOnClickListener {
+            CacheManager.clearAllCache(this)
+            updateCacheSizeUi()
+            Toast.makeText(this, "Offline Cache Cleared!", Toast.LENGTH_SHORT).show()
+        }
+
         binding.btnCheckAppUpdate.setOnClickListener {
             checkAppUpdate(isManualCheck = true)
+        }
+    }
+
+    private fun updateCacheSizeUi() {
+        val isEnabled = CacheManager.isCacheEnabled(this)
+        val formattedSize = CacheManager.getFormattedCacheSize(this)
+        binding.switchEnableCache?.text = if (isEnabled) "ON" else "OFF"
+        binding.tvCacheSizeInfo?.text = if (isEnabled) {
+            "Cache Status: ENABLED • $formattedSize Used"
+        } else {
+            "Cache Status: DISABLED • $formattedSize Used"
         }
     }
 
@@ -1328,7 +1362,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         binding.progressArtistInfo.visibility = View.VISIBLE
 
         lifecycleScope.launch(Dispatchers.Main) {
-            val info = net.sn.fetchplayer.data.WikipediaArtistFetcher.fetchArtistInfo(track.artist)
+            val info = net.sn.fetchplayer.data.WikipediaArtistFetcher.fetchArtistInfo(track.artist, this@MainActivity)
             binding.progressArtistInfo.visibility = View.GONE
 
             val displayTitle = info?.title ?: track.artist
@@ -1735,7 +1769,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         }
 
         lifecycleScope.launch(Dispatchers.IO) {
-            val info = WikipediaArtistFetcher.fetchArtistInfo(artist.name)
+            val info = WikipediaArtistFetcher.fetchArtistInfo(artist.name, this@MainActivity)
             val bitmap = info?.imageBitmap
             withContext(Dispatchers.Main) {
                 if (currentLexiconArtist?.id == artist.id && bitmap != null) {
