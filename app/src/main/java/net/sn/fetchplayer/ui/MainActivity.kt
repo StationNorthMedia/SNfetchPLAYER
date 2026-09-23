@@ -84,6 +84,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
     private lateinit var lexiconSearchDropdownAdapter: LexiconSearchDropdownAdapter
     private var currentLexiconArtist: LexiconArtist? = null
     private var isSettingsModeActive = false
+    private var activeSettingsModuleId = 0
     private var isShowingSavedCatalogTab = false
 
     private val importedPlaylistItems = mutableListOf<RawPlaylistItem>()
@@ -188,6 +189,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
 
         if (savedInstanceState != null) {
             isSettingsModeActive = savedInstanceState.getBoolean("isSettingsModeActive", false)
+            activeSettingsModuleId = savedInstanceState.getInt("activeSettingsModuleId", 0)
             isShowingSavedCatalogTab = savedInstanceState.getBoolean("isShowingSavedCatalogTab", false)
             isFullscreen = savedInstanceState.getBoolean("isFullscreen", false)
             @Suppress("UNCHECKED_CAST")
@@ -224,6 +226,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putBoolean("isSettingsModeActive", isSettingsModeActive)
+        outState.putInt("activeSettingsModuleId", activeSettingsModuleId)
         outState.putBoolean("isShowingSavedCatalogTab", isShowingSavedCatalogTab)
         outState.putBoolean("isFullscreen", isFullscreen)
         outState.putSerializable("importedPlaylistItems", ArrayList(importedPlaylistItems))
@@ -236,6 +239,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             binding.cardArtistInfoContainer.visibility = View.GONE
             binding.cardPlayerContainer.visibility = View.GONE
             binding.cardTrackInfo.visibility = View.GONE
+            showSettingsModule(activeSettingsModuleId)
             if (isShowingSavedCatalogTab) {
                 binding.settingsHub.toggleCuratorTabGroup.check(R.id.btnTabSaved)
                 binding.settingsHub.layoutPlaylistInputRow.visibility = View.GONE
@@ -1080,44 +1084,45 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         binding.rvArtistHistory.adapter = artistHistoryAdapter
     }
 
+    private fun showSettingsModule(moduleId: Int) {
+        activeSettingsModuleId = moduleId
+        val hub = binding.settingsHub
+        hub.layoutSettingsDashboardGrid.visibility = if (moduleId == 0) View.VISIBLE else View.GONE
+        hub.layoutBroadcastSettings.visibility = if (moduleId == 1) View.VISIBLE else View.GONE
+        hub.layoutCuratorStudio.visibility = if (moduleId == 2) View.VISIBLE else View.GONE
+        hub.layoutNordLogsStudio.visibility = if (moduleId == 3) View.VISIBLE else View.GONE
+        hub.layoutTvDisplaySettings.visibility = if (moduleId == 4) View.VISIBLE else View.GONE
+        hub.layoutAudioVisualizerSettings.visibility = if (moduleId == 5) View.VISIBLE else View.GONE
+        hub.layoutChroniclesSettings.visibility = if (moduleId == 6) View.VISIBLE else View.GONE
+        hub.layoutQueenTutorialSettings.visibility = if (moduleId == 7) View.VISIBLE else View.GONE
+        hub.layoutSystemCacheUpdateSettings.visibility = if (moduleId == 8) View.VISIBLE else View.GONE
+
+        // Dynamic border accent per module
+        val accentColorRes = when (moduleId) {
+            1 -> R.color.nord11 // Broadcast: #BF616A Aurora Red
+            2 -> R.color.nord15 // Curator: #B48EAD Aurora Purple
+            3 -> R.color.nord7  // Lexicon: #8FBCBB Soft Teal
+            4 -> R.color.nord12 // TV Display: #D08770 Aurora Orange
+            5 -> R.color.nord8  // Audio Visualizer: #88C0D0 Frost Cyan
+            6 -> R.color.nord13 // Chronicles: #EBCB8B Aurora Yellow
+            7 -> R.color.nord9  // Queen Tutorial: #81A1C1 Soft Blue
+            8 -> R.color.nord14 // System & Cache: #A3BE8C Aurora Green
+            else -> R.color.nord14 // Dashboard Grid: default Aurora Green
+        }
+        binding.cardSettingsContainer.strokeColor = ContextCompat.getColor(this, accentColorRes)
+
+        if (moduleId == 3) {
+            displayRandomLexiconArtist()
+        }
+    }
+
     private fun setupSettingsHub() {
         setupLexiconStudio()
 
         val hub = binding.settingsHub
 
-        // Helper function to navigate between 8-Tile Dashboard Grid (0) and specific module detail views (1-8)
-        fun showSettingsModule(moduleId: Int) {
-            hub.layoutSettingsDashboardGrid.visibility = if (moduleId == 0) View.VISIBLE else View.GONE
-            hub.layoutBroadcastSettings.visibility = if (moduleId == 1) View.VISIBLE else View.GONE
-            hub.layoutCuratorStudio.visibility = if (moduleId == 2) View.VISIBLE else View.GONE
-            hub.layoutNordLogsStudio.visibility = if (moduleId == 3) View.VISIBLE else View.GONE
-            hub.layoutTvDisplaySettings.visibility = if (moduleId == 4) View.VISIBLE else View.GONE
-            hub.layoutAudioVisualizerSettings.visibility = if (moduleId == 5) View.VISIBLE else View.GONE
-            hub.layoutChroniclesSettings.visibility = if (moduleId == 6) View.VISIBLE else View.GONE
-            hub.layoutQueenTutorialSettings.visibility = if (moduleId == 7) View.VISIBLE else View.GONE
-            hub.layoutSystemCacheUpdateSettings.visibility = if (moduleId == 8) View.VISIBLE else View.GONE
-
-            // Dynamic border accent per module
-            val accentColorRes = when (moduleId) {
-                1 -> R.color.nord11 // Broadcast: #BF616A Aurora Red
-                2 -> R.color.nord15 // Curator: #B48EAD Aurora Purple
-                3 -> R.color.nord7  // Lexicon: #8FBCBB Soft Teal
-                4 -> R.color.nord12 // TV Display: #D08770 Aurora Orange
-                5 -> R.color.nord8  // Audio Visualizer: #88C0D0 Frost Cyan
-                6 -> R.color.nord13 // Chronicles: #EBCB8B Aurora Yellow
-                7 -> R.color.nord9  // Queen Tutorial: #81A1C1 Soft Blue
-                8 -> R.color.nord14 // System & Cache: #A3BE8C Aurora Green
-                else -> R.color.nord14 // Dashboard Grid: default Aurora Green
-            }
-            binding.cardSettingsContainer.strokeColor = ContextCompat.getColor(this, accentColorRes)
-
-            if (moduleId == 3) {
-                displayRandomLexiconArtist()
-            }
-        }
-
-        // Start on Dashboard Grid (0)
-        showSettingsModule(0)
+        // Open current active module (defaults to Dashboard Grid 0)
+        showSettingsModule(activeSettingsModuleId)
 
         // 1. Dashboard 8-Tile Click Listeners
         hub.cardTileBroadcast.setOnClickListener { showSettingsModule(1) }
@@ -1466,17 +1471,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                 setOnClickListener {
                     curatedCatalogManager.setActivePlaylistId(playlist.id)
                     setupCuratorStudio()
-                    // Jump directly to Curator Studio (Module 2)
-                    binding.settingsHub.layoutSettingsDashboardGrid.visibility = View.GONE
-                    binding.settingsHub.layoutBroadcastSettings.visibility = View.GONE
-                    binding.settingsHub.layoutCuratorStudio.visibility = View.VISIBLE
-                    binding.settingsHub.layoutNordLogsStudio.visibility = View.GONE
-                    binding.settingsHub.layoutTvDisplaySettings.visibility = View.GONE
-                    binding.settingsHub.layoutAudioVisualizerSettings.visibility = View.GONE
-                    binding.settingsHub.layoutChroniclesSettings.visibility = View.GONE
-                    binding.settingsHub.layoutQueenTutorialSettings.visibility = View.GONE
-                    binding.settingsHub.layoutSystemCacheUpdateSettings.visibility = View.GONE
-                    binding.cardSettingsContainer.strokeColor = ContextCompat.getColor(this@MainActivity, R.color.nord15)
+                    showSettingsModule(2)
                 }
             }
 
@@ -2064,6 +2059,10 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         }
 
         if (isSettingsModeActive) {
+            if (activeSettingsModuleId != 0) {
+                showSettingsModule(0)
+                return true
+            }
             isSettingsModeActive = false
             val activeMode = radioService?.currentMode ?: PlaybackMode.SN_TV
             binding.toggleModeGroup.check(if (activeMode == PlaybackMode.SN_RADIO) R.id.btnModeRadio else R.id.btnModeTv)

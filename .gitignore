@@ -24,3 +24,7 @@ __pycache__/
 # Loose root screenshots/images (only keep docs/)
 /SNfetchPLAYERapp.png
 /SNfetchPLAYERtv.png
+
+# Generated APKs
+*.apk
+/releases/*.apk
