@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardBackgroundColor="@color/nord1"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="8dp"
+    app:strokeColor="@color/nord8"
+    app:strokeWidth="1.5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Title Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:letterSpacing="0.05"
+                android:text="🚀 NEW UPDATE AVAILABLE!"
+                android:textColor="@color/nord8"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvNewVersionBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/badge_update_bg"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="v1.0.0.23"
+                android:textColor="@color/nord0"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Version Comparison Subtitle -->
+        <TextView
+            android:id="@+id/tvUpdateVersionSub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Installed: v1.0.0.22  •  Available on GitHub: v1.0.0.23"
+            android:textColor="@color/nord6"
+            android:textSize="11sp" />
+
+        <!-- Divider line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="12dp"
+            android:background="@color/nord3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📋 Release Notes / Changelog:"
+            android:textColor="@color/nord14"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <!-- Release Notes Scroll View -->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/nord0"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tvUpdateChangelog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:lineSpacingExtra="2dp"
+                android:text="• Fixed Settings Mode Layout: Player box hidden in Settings Mode so Settings Hub takes 100% full screen cleanly without overlapping in 16:9 landscape\n• Fixed Lexicon Database Priority: Local database (4,438+ artists) queried FIRST with phonetic &amp; alias matching (Usher, Boyz II Men, Boys to Men, Boyz 2 Men)\n• Filtered Wikipedia film/movie pages (e.g. Bad Boys II) from search results"
+                android:textColor="@color/nord4"
+                android:textSize="11sp" />
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- Download Progress Container -->
+        <LinearLayout
+            android:id="@+id/layoutDownloadProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/pbDownloadProgress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="@color/nord14" />
+
+            <TextView
+                android:id="@+id/tvDownloadProgressStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_horizontal"
+                android:text="Downloading APK... 0%"
+                android:textColor="@color/nord14"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOpenGitHub"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:paddingHorizontal="10dp"
+                android:text="🌐 GitHub"
+                android:textColor="@color/nord7"
+                android:textSize="11sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLaterUpdate"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginStart="6dp"
+                android:paddingHorizontal="12dp"
+                android:text="LATER"
+                android:textColor="@color/nord4"
+                android:textSize="11sp"
+                app:strokeColor="@color/nord3"
+                app:strokeWidth="1dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDownloadUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="@color/nord14"
+                android:paddingHorizontal="14dp"
+                android:text="⚡ UPDATE NOW"
+                android:textColor="@color/nord0"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

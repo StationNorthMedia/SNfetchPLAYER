@@ -1132,47 +1132,43 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         hub.btnBackFromQueenTutorial.setOnClickListener { showSettingsModule(0) }
         hub.btnBackFromSystemCache.setOnClickListener { showSettingsModule(0) }
 
-        // 3. Module 1: Broadcast & Channel Routing
-        val currentTvSource = SettingsManager.getTvChannelSource(this)
-        when (currentTvSource) {
-            "curator_queue" -> hub.rbTvSourceCurator.isChecked = true
-            "saved_catalog" -> hub.rbTvSourceSaved.isChecked = true
-            "custom" -> hub.rbTvSourceCustom.isChecked = true
-            else -> hub.rbTvSourceTop50.isChecked = true
+        // 3. Module 1: Playlist Manager (TV & Radio Channel Routing Spinners)
+        val playlists = curatedCatalogManager.getPlaylists()
+        val playlistNames = playlists.map { it.name }
+
+        val spinnerAdapter = android.widget.ArrayAdapter(this, android.R.layout.simple_spinner_item, playlistNames).apply {
+            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         }
 
-        val currentRadioSource = SettingsManager.getRadioChannelSource(this)
-        when (currentRadioSource) {
-            "curator_queue" -> hub.rbRadioSourceCurator.isChecked = true
-            "saved_catalog" -> hub.rbRadioSourceSaved.isChecked = true
-            "custom" -> hub.rbRadioSourceCustom.isChecked = true
-            else -> hub.rbRadioSourceTop50.isChecked = true
+        hub.spinnerTvPlaylist.adapter = spinnerAdapter
+        hub.spinnerRadioPlaylist.adapter = spinnerAdapter
+
+        val currentTvId = SettingsManager.getTvPlaylistId(this)
+        val tvIdx = playlists.indexOfFirst { it.id == currentTvId }.coerceAtLeast(0)
+        hub.spinnerTvPlaylist.setSelection(tvIdx)
+
+        val currentRadioId = SettingsManager.getRadioPlaylistId(this)
+        val radioIdx = playlists.indexOfFirst { it.id == currentRadioId }.coerceAtLeast(0)
+        hub.spinnerRadioPlaylist.setSelection(radioIdx)
+
+        hub.spinnerTvPlaylist.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if (position in playlists.indices) {
+                    val selected = playlists[position]
+                    SettingsManager.setTvPlaylistId(this@MainActivity, selected.id)
+                }
+            }
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
         }
 
-        hub.etTvCustomUrl.setText(SettingsManager.getTvCustomUrl(this))
-        hub.etRadioCustomUrl.setText(SettingsManager.getRadioCustomUrl(this))
-
-        hub.btnApplyChannelRouting.setOnClickListener {
-            val selectedTvSource = when (hub.rgTvChannelSource.checkedRadioButtonId) {
-                R.id.rbTvSourceCurator -> "curator_queue"
-                R.id.rbTvSourceSaved -> "saved_catalog"
-                R.id.rbTvSourceCustom -> "custom"
-                else -> "default_top50"
+        hub.spinnerRadioPlaylist.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if (position in playlists.indices) {
+                    val selected = playlists[position]
+                    SettingsManager.setRadioPlaylistId(this@MainActivity, selected.id)
+                }
             }
-
-            val selectedRadioSource = when (hub.rgRadioChannelSource.checkedRadioButtonId) {
-                R.id.rbRadioSourceCurator -> "curator_queue"
-                R.id.rbRadioSourceSaved -> "saved_catalog"
-                R.id.rbRadioSourceCustom -> "custom"
-                else -> "default_top50"
-            }
-
-            SettingsManager.setTvChannelSource(this, selectedTvSource)
-            SettingsManager.setRadioChannelSource(this, selectedRadioSource)
-            SettingsManager.setTvCustomUrl(this, hub.etTvCustomUrl.text.toString().trim())
-            SettingsManager.setRadioCustomUrl(this, hub.etRadioCustomUrl.text.toString().trim())
-
-            Toast.makeText(this, "📺 Radio & TV Channel Routing updated!", Toast.LENGTH_SHORT).show()
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
         }
 
         // 4. Module 4: TV & Display Settings

@@ -106,4 +106,21 @@ object SettingsManager {
     fun setRadioCustomUrl(context: Context, url: String) {
         getPrefs(context).edit().putString(KEY_RADIO_CUSTOM_URL, url).apply()
     }
+
+    // Playlist Channel Routing IDs
+    fun getTvPlaylistId(context: Context): String {
+        return getPrefs(context).getString("tv_playlist_id", "default_main_top100") ?: "default_main_top100"
+    }
+
+    fun setTvPlaylistId(context: Context, playlistId: String) {
+        getPrefs(context).edit().putString("tv_playlist_id", playlistId).apply()
+    }
+
+    fun getRadioPlaylistId(context: Context): String {
+        return getPrefs(context).getString("radio_playlist_id", "default_main_top100") ?: "default_main_top100"
+    }
+
+    fun setRadioPlaylistId(context: Context, playlistId: String) {
+        getPrefs(context).edit().putString("radio_playlist_id", playlistId).apply()
+    }
 }

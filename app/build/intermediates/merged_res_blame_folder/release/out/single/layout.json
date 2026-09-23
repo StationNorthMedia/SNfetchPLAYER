@@ -1,0 +1,58 @@
+[
+    {
+        "merged": "net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/item_lexicon_studio_result.xml",
+        "source": "net.sn.fetchplayer.app-main-37:/layout/item_lexicon_studio_result.xml"
+    },
+    {
+        "merged": "net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/dialog_chronicles_ebook.xml",
+        "source": "net.sn.fetchplayer.app-main-37:/layout/dialog_chronicles_ebook.xml"
+    },
+    {
+        "merged": "net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/item_lexicon_dropdown_suggestion.xml",
+        "source": "net.sn.fetchplayer.app-main-37:/layout/item_lexicon_dropdown_suggestion.xml"
+    },
+    {
+        "merged": "net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/dialog_queen_tutorial.xml",
+        "source": "net.sn.fetchplayer.app-main-37:/layout/dialog_queen_tutorial.xml"
+    },
+    {
+        "merged": "net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/item_curator_track.xml",
+        "source": "net.sn.fetchplayer.app-main-37:/layout/item_curator_track.xml"
+    },
+    {
+        "merged": "net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/item_related_artist.xml",
+        "source": "net.sn.fetchplayer.app-main-37:/layout/item_related_artist.xml"
+    },
+    {
+        "merged": "net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/item_artist_history.xml",
+        "source": "net.sn.fetchplayer.app-main-37:/layout/item_artist_history.xml"
+    },
+    {
+        "merged": "net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/activity_main.xml",
+        "source": "net.sn.fetchplayer.app-main-37:/layout/activity_main.xml"
+    },
+    {
+        "merged": "net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/dialog_lexicon_browser.xml",
+        "source": "net.sn.fetchplayer.app-main-37:/layout/dialog_lexicon_browser.xml"
+    },
+    {
+        "merged": "net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/dialog_app_update.xml",
+        "source": "net.sn.fetchplayer.app-main-37:/layout/dialog_app_update.xml"
+    },
+    {
+        "merged": "net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/dialog_edit_track.xml",
+        "source": "net.sn.fetchplayer.app-main-37:/layout/dialog_edit_track.xml"
+    },
+    {
+        "merged": "net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/layout_settings_hub.xml",
+        "source": "net.sn.fetchplayer.app-main-37:/layout/layout_settings_hub.xml"
+    },
+    {
+        "merged": "net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/item_lexicon_album.xml",
+        "source": "net.sn.fetchplayer.app-main-37:/layout/item_lexicon_album.xml"
+    },
+    {
+        "merged": "net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/item_lexicon_artist.xml",
+        "source": "net.sn.fetchplayer.app-main-37:/layout/item_lexicon_artist.xml"
+    }
+]
