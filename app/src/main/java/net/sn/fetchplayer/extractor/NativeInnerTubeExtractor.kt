@@ -18,6 +18,8 @@ object NativeInnerTubeExtractor {
     private const val PLAYER_ENDPOINT = "https://www.youtube.com/youtubei/v1/player"
     private const val USER_AGENT_ANDROID = "com.google.android.youtube/21.02.35 (Linux; U; Android 11) gzip"
     private const val USER_AGENT_VR = "com.google.android.apps.youtube.vr.oculus/1.65.10 (Linux; U; Android 12L; eureka-user Build/SQ3A.220605.009.A1) gzip"
+    private const val USER_AGENT_TV = "Mozilla/5.0 (SmartTV; Cobalt/24.lts.4-G) gzip"
+    private const val USER_AGENT_ANDROID_TV = "com.google.android.youtube.tv/21.02.35 (Linux; U; Android 11) gzip"
 
     private val JSON_MEDIA_TYPE = "application/json; charset=utf-8".toMediaType()
 
@@ -30,6 +32,20 @@ object NativeInnerTubeExtractor {
             .readTimeout(12, TimeUnit.SECONDS)
             .build()
     }
+
+    private data class ClientConfig(
+        val clientName: String,
+        val clientVersion: String,
+        val userAgent: String
+    )
+
+    private val CLIENT_CASCADE = listOf(
+        ClientConfig("ANDROID", "21.02.35", USER_AGENT_ANDROID),
+        ClientConfig("ANDROID_VR", "1.65.10", USER_AGENT_VR),
+        ClientConfig("TVHTML5", "7.20260920.00.00", USER_AGENT_TV),
+        ClientConfig("TVHTML5_SIMPLY", "7.20260920.00.00", USER_AGENT_TV),
+        ClientConfig("ANDROID_TV", "21.02.35", USER_AGENT_ANDROID_TV)
+    )
 
     private suspend fun getVisitorData(): String? = withContext(Dispatchers.IO) {
         cachedVisitorData?.let { return@withContext it }
@@ -81,40 +97,26 @@ object NativeInnerTubeExtractor {
 
     suspend fun extractStreamUrl(youtubeId: String, isAudioOnly: Boolean): String? = withContext(Dispatchers.IO) {
         val visitorData = getVisitorData()
-        AppLogger.d(TAG, "Extracting stream for [$youtubeId] (isAudioOnly=$isAudioOnly, target=720p HD)")
+        AppLogger.d(TAG, "Extracting stream for [$youtubeId] (isAudioOnly=$isAudioOnly, 5-tier cascade)")
 
-        // Primary: ANDROID client (returns HTTP 200 playable combined streams)
-        val primaryResult = queryInnerTubePlayer(
-            youtubeId = youtubeId,
-            clientName = "ANDROID",
-            clientVersion = "21.02.35",
-            userAgent = USER_AGENT_ANDROID,
-            visitorData = visitorData,
-            isAudioOnly = isAudioOnly
-        )
+        for (config in CLIENT_CASCADE) {
+            AppLogger.d(TAG, "Attempting extraction via client [${config.clientName}] for [$youtubeId]...")
+            val result = queryInnerTubePlayer(
+                youtubeId = youtubeId,
+                clientName = config.clientName,
+                clientVersion = config.clientVersion,
+                userAgent = config.userAgent,
+                visitorData = visitorData,
+                isAudioOnly = isAudioOnly
+            )
 
-        if (!primaryResult.isNullOrEmpty()) {
-            AppLogger.d(TAG, "SUCCESS (ANDROID Client) resolved stream for [$youtubeId]")
-            return@withContext primaryResult
+            if (!result.isNullOrEmpty()) {
+                AppLogger.d(TAG, "SUCCESS [${config.clientName}] resolved stream for [$youtubeId]")
+                return@withContext result
+            }
         }
 
-        // Fallback: ANDROID_VR client
-        AppLogger.d(TAG, "Primary ANDROID client failed, trying ANDROID_VR client fallback for [$youtubeId]...")
-        val vrResult = queryInnerTubePlayer(
-            youtubeId = youtubeId,
-            clientName = "ANDROID_VR",
-            clientVersion = "1.65.10",
-            userAgent = USER_AGENT_VR,
-            visitorData = visitorData,
-            isAudioOnly = isAudioOnly
-        )
-
-        if (!vrResult.isNullOrEmpty()) {
-            AppLogger.d(TAG, "SUCCESS (ANDROID_VR Client) resolved stream for [$youtubeId]")
-            return@withContext vrResult
-        }
-
-        AppLogger.e(TAG, "All native InnerTube extraction attempts failed for [$youtubeId]")
+        AppLogger.e(TAG, "All 5 InnerTube client extraction attempts failed for [$youtubeId]")
         return@withContext null
     }
 
@@ -132,16 +134,30 @@ object NativeInnerTubeExtractor {
                 addProperty("clientVersion", clientVersion)
                 addProperty("hl", "en")
                 addProperty("gl", "US")
-                if (clientName == "ANDROID") {
-                    addProperty("androidSdkVersion", 30)
-                    addProperty("osName", "Android")
-                    addProperty("osVersion", "11")
-                } else if (clientName == "ANDROID_VR") {
-                    addProperty("deviceMake", "Oculus")
-                    addProperty("deviceModel", "Quest 3")
-                    addProperty("androidSdkVersion", 32)
-                    addProperty("osName", "Android")
-                    addProperty("osVersion", "12L")
+                when (clientName) {
+                    "ANDROID" -> {
+                        addProperty("androidSdkVersion", 30)
+                        addProperty("osName", "Android")
+                        addProperty("osVersion", "11")
+                    }
+                    "ANDROID_VR" -> {
+                        addProperty("deviceMake", "Oculus")
+                        addProperty("deviceModel", "Quest 3")
+                        addProperty("androidSdkVersion", 32)
+                        addProperty("osName", "Android")
+                        addProperty("osVersion", "12L")
+                    }
+                    "TVHTML5", "TVHTML5_SIMPLY" -> {
+                        addProperty("deviceMake", "Cobalt")
+                        addProperty("deviceModel", "SmartTV")
+                        addProperty("userInterfaceTheme", "USER_INTERFACE_THEME_DARK")
+                    }
+                    "ANDROID_TV" -> {
+                        addProperty("androidSdkVersion", 30)
+                        addProperty("osName", "Android")
+                        addProperty("osVersion", "11")
+                        addProperty("userInterfaceTheme", "USER_INTERFACE_THEME_DARK")
+                    }
                 }
                 if (!visitorData.isNullOrEmpty()) {
                     addProperty("visitorData", visitorData)
