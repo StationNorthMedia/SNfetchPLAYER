@@ -352,6 +352,21 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         AppLogger.d("MainActivity", "Synced master catalog with RadioService (${currentCatalog.size} tracks)")
     }
 
+    private fun updateCuratorTabStyles() {
+        val hub = binding.settingsHub
+        if (isShowingSavedCatalogTab) {
+            hub.btnTabSaved.setBackgroundColor(ContextCompat.getColor(this, R.color.nord15))
+            hub.btnTabSaved.setTextColor(ContextCompat.getColor(this, R.color.nord0))
+            hub.btnTabImported.setBackgroundColor(ContextCompat.getColor(this, R.color.nord2))
+            hub.btnTabImported.setTextColor(ContextCompat.getColor(this, R.color.nord4))
+        } else {
+            hub.btnTabImported.setBackgroundColor(ContextCompat.getColor(this, R.color.nord8))
+            hub.btnTabImported.setTextColor(ContextCompat.getColor(this, R.color.nord0))
+            hub.btnTabSaved.setBackgroundColor(ContextCompat.getColor(this, R.color.nord2))
+            hub.btnTabSaved.setTextColor(ContextCompat.getColor(this, R.color.nord4))
+        }
+    }
+
     private fun updateCuratorStatusCount() {
         val loadedCount = importedPlaylistItems.size
         val activePlaylist = curatedCatalogManager.getActivePlaylist()
@@ -361,6 +376,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
 
         val currentCount = curatorAdapter.itemCount
         binding.settingsHub.tvCuratorStatusCount.text = if (isShowingSavedCatalogTab) "$currentCount in Playlist" else "$currentCount Loaded"
+        updateCuratorTabStyles()
     }
 
     private fun updateCuratorCatalogView() {
@@ -577,18 +593,19 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                     R.id.btnModeTv -> {
                         isSettingsModeActive = false
                         AppLogger.d("MainActivity", "Switched UI mode to SN-TV (16:9 HD)")
-                        radioService?.setPlaybackMode(PlaybackMode.SN_TV)
+                        radioService?.loadModePlaylistAndPlay(PlaybackMode.SN_TV, curatedCatalogManager)
                         updateUiMode(PlaybackMode.SN_TV)
                     }
                     R.id.btnModeRadio -> {
                         isSettingsModeActive = false
                         AppLogger.d("MainActivity", "Switched UI mode to SN-RADIO")
-                        radioService?.setPlaybackMode(PlaybackMode.SN_RADIO)
+                        radioService?.loadModePlaylistAndPlay(PlaybackMode.SN_RADIO, curatedCatalogManager)
                         updateUiMode(PlaybackMode.SN_RADIO)
                     }
                     R.id.btnModeSettings -> {
                         isSettingsModeActive = true
                         AppLogger.d("MainActivity", "Switched UI mode to SETTINGS HUB")
+                        radioService?.stopAndClear()
                         updateUiMode(radioService?.currentMode ?: PlaybackMode.SN_TV)
                     }
                 }
@@ -972,12 +989,19 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         hudTimeoutRunnable?.let { mainHandler.removeCallbacks(it) }
         binding.layoutTouchHud.visibility = View.VISIBLE
 
+        val timeoutSec = SettingsManager.getOsdTimeoutSeconds(this)
+        if (timeoutSec < 0) {
+            // -1 means Always Visible (do not schedule hide)
+            return
+        }
+
         hudTimeoutRunnable = Runnable {
             val fadeOut = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fade_out)
             binding.layoutTouchHud.startAnimation(fadeOut)
             binding.layoutTouchHud.visibility = View.GONE
         }
-        mainHandler.postDelayed(hudTimeoutRunnable!!, 3500)
+        val timeoutMs = if (timeoutSec > 0) timeoutSec * 1000L else 5000L
+        mainHandler.postDelayed(hudTimeoutRunnable!!, timeoutMs)
     }
 
     private fun startAndBindService() {
@@ -1047,6 +1071,11 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
 
     private fun triggerLowerThirdsBauchbinde(track: Track) {
         bauchbindeRunnable?.let { mainHandler.removeCallbacks(it) }
+
+        if (!SettingsManager.isSlantedBauchbindenEnabled(this)) {
+            binding.cardLowerThirds.visibility = View.GONE
+            return
+        }
 
         if (track.isStationContent) {
             binding.tvBauchbindeBadge.text = "STATION ID // TV SIGNAL"
@@ -1155,6 +1184,9 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                 if (position in playlists.indices) {
                     val selected = playlists[position]
                     SettingsManager.setTvPlaylistId(this@MainActivity, selected.id)
+                    if (!isSettingsModeActive && radioService?.currentMode == PlaybackMode.SN_TV) {
+                        radioService?.loadModePlaylistAndPlay(PlaybackMode.SN_TV, curatedCatalogManager)
+                    }
                 }
             }
             override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
@@ -1166,6 +1198,9 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                 if (position in playlists.indices) {
                     val selected = playlists[position]
                     SettingsManager.setRadioPlaylistId(this@MainActivity, selected.id)
+                    if (!isSettingsModeActive && radioService?.currentMode == PlaybackMode.SN_RADIO) {
+                        radioService?.loadModePlaylistAndPlay(PlaybackMode.SN_RADIO, curatedCatalogManager)
+                    }
                 }
             }
             override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
@@ -1178,7 +1213,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                     val selected = playlists[position]
                     if (selected.id != curatedCatalogManager.getActivePlaylistId()) {
                         curatedCatalogManager.setActivePlaylistId(selected.id)
-                        setupCuratorStudio()
+                        updateCuratorCatalogView()
                     }
                 }
             }
@@ -1218,6 +1253,10 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         hub.switchSlantedBauchbinden.isChecked = bauchbindenEnabled
         hub.switchSlantedBauchbinden.setOnCheckedChangeListener { _, isChecked ->
             SettingsManager.setSlantedBauchbindenEnabled(this, isChecked)
+            if (!isChecked) {
+                bauchbindeRunnable?.let { mainHandler.removeCallbacks(it) }
+                binding.cardLowerThirds.visibility = View.GONE
+            }
             Toast.makeText(this, if (isChecked) "Bauchbinden Enabled" else "Bauchbinden Disabled", Toast.LENGTH_SHORT).show()
         }
 
@@ -1470,7 +1509,17 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                 setPadding((6 * density).toInt(), 0, (6 * density).toInt(), 0)
                 setOnClickListener {
                     curatedCatalogManager.setActivePlaylistId(playlist.id)
-                    setupCuratorStudio()
+                    isShowingSavedCatalogTab = true
+                    binding.settingsHub.toggleCuratorTabGroup.check(R.id.btnTabSaved)
+                    binding.settingsHub.layoutPlaylistInputRow.visibility = View.GONE
+                    curatorAdapter.isSavedCatalogView = true
+                    updateCuratorCatalogView()
+                    updateCuratorStatusCount()
+
+                    val allPlaylists = curatedCatalogManager.getPlaylists()
+                    val targetCuratorIdx = allPlaylists.indexOfFirst { it.id == playlist.id }.coerceAtLeast(0)
+                    binding.settingsHub.spinnerCuratorPlaylistSelect.setSelection(targetCuratorIdx)
+
                     showSettingsModule(2)
                 }
             }

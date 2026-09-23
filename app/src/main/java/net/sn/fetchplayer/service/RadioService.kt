@@ -17,7 +17,9 @@ import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import net.sn.fetchplayer.R
+import net.sn.fetchplayer.manager.CuratedCatalogManager
 import net.sn.fetchplayer.manager.PlaylistManager
+import net.sn.fetchplayer.manager.SettingsManager
 import net.sn.fetchplayer.manager.StationContentManager
 import net.sn.fetchplayer.model.PlaybackMode
 import net.sn.fetchplayer.model.Track
@@ -187,6 +189,31 @@ class RadioService : Service() {
         listener?.onTrackChanged(currentTrack, currentMode)
         listener?.onPlaybackStateChanged(player.isPlaying, player.playbackState == Player.STATE_BUFFERING)
         listener?.onRepeatStateChanged(isRepeatOneActive)
+    }
+
+    fun stopAndClear() {
+        prepareJob?.cancel()
+        player.stop()
+        player.clearMediaItems()
+        currentTrack = null
+        listener?.onTrackChanged(null, currentMode)
+        listener?.onPlaybackStateChanged(false, false)
+        AppLogger.d("RadioService", "Playback stopped and media items cleared completely")
+    }
+
+    fun loadModePlaylistAndPlay(mode: PlaybackMode, catalogManager: CuratedCatalogManager) {
+        currentMode = mode
+        val playlistId = if (mode == PlaybackMode.SN_TV) {
+            SettingsManager.getTvPlaylistId(this)
+        } else {
+            SettingsManager.getRadioPlaylistId(this)
+        }
+        val playlist = catalogManager.getPlaylistById(playlistId) ?: catalogManager.getActivePlaylist()
+        val rawItems = playlist.tracks.map { PlaylistManager.RawPlaylistItem(it.youtubeId, it.title, it.artist) }
+        playlistManager.updateMasterCatalog(rawItems)
+        AppLogger.d("RadioService", "Loaded playlist '${playlist.name}' (${rawItems.size} items) for mode $mode")
+        player.clearMediaItems()
+        playNextTrack()
     }
 
     fun setPlaybackMode(newMode: PlaybackMode) {

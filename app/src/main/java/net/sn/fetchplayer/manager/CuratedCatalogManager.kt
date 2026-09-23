@@ -173,7 +173,7 @@ class CuratedCatalogManager(private val context: Context) {
         return deleted
     }
 
-    private fun getPlaylistById(id: String): CustomPlaylist? {
+    fun getPlaylistById(id: String): CustomPlaylist? {
         val file = File(playlistsDir, "$id.json")
         if (!file.exists()) return null
         return try {

@@ -850,8 +850,8 @@
             <com.google.android.material.button.MaterialButtonToggleGroup
                 android:id="@+id/toggleCuratorTabGroup"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="4dp"
                 app:checkedButton="@+id/btnTabImported"
                 app:singleSelection="true">
 
@@ -859,31 +859,37 @@
                     android:id="@+id/btnTabImported"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:paddingHorizontal="4dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:paddingHorizontal="8dp"
                     android:text="Import Queue"
                     android:textColor="@color/nord6"
-                    android:textSize="10sp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
                     app:strokeColor="@color/nord8"
-                    app:strokeWidth="1dp" />
+                    app:strokeWidth="1.5dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnTabSaved"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:paddingHorizontal="4dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:paddingHorizontal="8dp"
                     android:text="Saved Playlists"
                     android:textColor="@color/nord6"
-                    android:textSize="10sp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
                     app:icon="@drawable/ic_check"
-                    app:iconPadding="2dp"
-                    app:iconSize="12dp"
+                    app:iconPadding="4dp"
+                    app:iconSize="14dp"
                     app:iconTint="@color/nord14"
-                    app:strokeColor="@color/nord14"
-                    app:strokeWidth="1dp" />
+                    app:strokeColor="@color/nord15"
+                    app:strokeWidth="1.5dp" />
 
             </com.google.android.material.button.MaterialButtonToggleGroup>
 
