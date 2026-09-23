@@ -171,7 +171,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         setContentView(binding.root)
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        binding.tvAppSubHeader.text = "SNfetchPLAYER v${net.sn.fetchplayer.BuildConfig.VERSION_NAME} • TV Engine"
+        binding.tvAppSubHeader.text = "SNfetchPLAYER • Your TV & Radio Engine"
         binding.settingsHub.tvAppVersion.text = "Installierte Version: v${net.sn.fetchplayer.BuildConfig.VERSION_NAME}"
 
         curatedCatalogManager = CuratedCatalogManager(this)
@@ -1241,12 +1241,102 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             SettingsManager.setQueenQuotesEnabled(this, isChecked)
         }
 
-        // 6. Module 6: Chronicles E-Book
+        // 6. Module 6: Chronicles E-Book (Inline Content)
+        val rawChroniclesText = net.sn.fetchplayer.manager.QueenQuotesManager.getChroniclesText(this)
+        hub.tvChroniclesContent.text = formatChroniclesSsb(rawChroniclesText)
         hub.btnOpenEbookChronicles.setOnClickListener {
             ChroniclesEbookDialog(this).show()
         }
 
-        // 7. Module 7: Queen Tutorial
+        // 7. Module 7: Queen Tutorial (Inline Content & Tabs)
+        fun showTutorialChapter(index: Int) {
+            val content = when (index) {
+                1 -> """
+                    👑 CHAPTER 1: MASTERING THE CURATOR STUDIO
+                    
+                    "Listen up, sunshine. The Curator Studio is your master command deck where you build and shape your station frequency."
+                    
+                    📥 1. IMPORTING PLAYLISTS & CATALOGS:
+                    • Paste any YouTube Playlist URL into the input field and press 'Load' or hit ENTER.
+                    • Tap 'JSON Import' to load custom catalog files or saved Station North playlists.
+                    
+                    📋 2. ACTIVE QUEUE vs. SAVED CATALOG:
+                    • Use the Curator Sub-Tab buttons to switch between your current active Queue and your permanent Saved Catalog.
+                    • Tap 'JSON Export' to export your curated playlist as a shareable JSON file.
+                    
+                    ✏️ 3. EDIT TRACK & METADATA:
+                    • Tap the '✏️' icon on any track to open the Track Editor. Adjust artist names, track titles, or custom tags on-the-fly.
+                    • Tap '🗑️' to instantly remove tracks from your list.
+                    
+                    🔀 4. REORDERING & CATALOG RESETS:
+                    • Drag and drop or use queue actions to reorder songs.
+                    • Tap 'Reset Top 50' to restore default Queen's Choice playlists anytime!
+                """.trimIndent()
+
+                2 -> """
+                    📺 CHAPTER 2: BROADCAST DECK & 2:1 ROTATION ENGINE
+                    
+                    "Station North TV & Radio aren't standard media players—they are real broadcast streams."
+                    
+                    🔄 1. THE IMMUTABLE 2:1 ROTATION ENGINE:
+                    • Every 2 YouTube music tracks are automatically followed by 1 Station ID or Jingle.
+                    • This guarantees genuine broadcast feel without manual intervention.
+                    
+                    📺 2. 16:9 TV MODE vs. SN-RADIO MODE:
+                    • SN-TV: Plays 16:9 video content with side-by-side Wikipedia feed.
+                    • SN-RADIO: Switches to real-time FFT spectrum visualizers with beat-synced artist portraits!
+                    
+                    📖 3. DYNAMIC WIKIPEDIA FEED:
+                    • Automatically fetches and displays English Wikipedia bios and high-res thumbnails for currently playing artists.
+                """.trimIndent()
+
+                3 -> """
+                    📖 CHAPTER 3: THE SN-LEXIKON ARCHIVE
+                    
+                    "Explore 4,438+ Urban, R&B, and Hip-Hop legends indexed straight into the application."
+                    
+                    🔍 1. INSTANT SEARCH:
+                    • Type any artist, album, or song title into the Lexicon search bar to view complete discographies and biographies.
+                    
+                    🎲 2. RANDOM ARTIST DISCOVERY:
+                    • Tap '🎲 Random' to pick a random legend from the archive and explore their full discography.
+                    
+                    ▶️ 3. ONE-TAP YOUTUBE STREAMING:
+                    • Tap any album or track inside an artist's discography to immediately search and play it on YouTube.
+                """.trimIndent()
+
+                4 -> """
+                    ⚡ CHAPTER 4: PRO TIPS & TV OPTIMIZATION
+                    
+                    "Here are Her Majesty's insider secrets for maximum performance:"
+                    
+                    💾 1. OFFLINE MEDIA & BIO CACHING (SETTINGS):
+                    • Enable the Cache toggle in SETTINGS to save Wikipedia bios and images locally on your device.
+                    • IMPORTANT: Leave disabled on Android TVs with limited storage!
+                    
+                    📡 2. REMOTE ASSET CLOUD SYNC:
+                    • Tap '🔄 Sync Now' in SETTINGS to download the latest Station IDs, Jingles, and quotes from our servers.
+                    
+                    🖥️ 3. TRUE FULLSCREEN TV MODE:
+                    • Tap the Fullscreen button or press your TV remote OK button to expand video output to 100% full screen.
+                """.trimIndent()
+
+                else -> ""
+            }
+            hub.tvTutorialChapterContent.text = content
+        }
+
+        hub.toggleTutorialTabGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.btnTutorialCh1 -> showTutorialChapter(1)
+                    R.id.btnTutorialCh2 -> showTutorialChapter(2)
+                    R.id.btnTutorialCh3 -> showTutorialChapter(3)
+                    R.id.btnTutorialCh4 -> showTutorialChapter(4)
+                }
+            }
+        }
+        showTutorialChapter(1)
         hub.btnOpenQueenTutorial.setOnClickListener {
             QueenTutorialDialog(this).show()
         }
@@ -2058,6 +2148,39 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             AppLogger.e("MainActivity", "Failed to open YouTube link for query: $query", e)
             Toast.makeText(this, "Could not open web browser.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun formatChroniclesSsb(raw: String): android.text.SpannableStringBuilder {
+        val ssb = android.text.SpannableStringBuilder()
+        val lines = raw.split("\n")
+
+        val nord15 = ContextCompat.getColor(this, R.color.nord15)
+        val nord8 = ContextCompat.getColor(this, R.color.nord8)
+        val nord4 = ContextCompat.getColor(this, R.color.nord4)
+
+        for (line in lines) {
+            val trimmed = line.trim()
+            if (trimmed.startsWith("Chapter", ignoreCase = true) || trimmed.startsWith("THE MANJARO", ignoreCase = true)) {
+                val start = ssb.length
+                ssb.append(trimmed).append("\n\n")
+                val end = ssb.length
+                ssb.setSpan(android.text.style.StyleSpan(android.graphics.Typeface.BOLD), start, end, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                ssb.setSpan(android.text.style.ForegroundColorSpan(nord15), start, end, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                ssb.setSpan(android.text.style.RelativeSizeSpan(1.3f), start, end, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            } else if (trimmed.startsWith("Volume", ignoreCase = true) || trimmed.contains("//")) {
+                val start = ssb.length
+                ssb.append(trimmed).append("\n\n")
+                val end = ssb.length
+                ssb.setSpan(android.text.style.StyleSpan(android.graphics.Typeface.ITALIC), start, end, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                ssb.setSpan(android.text.style.ForegroundColorSpan(nord8), start, end, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            } else {
+                val start = ssb.length
+                ssb.append(line).append("\n")
+                val end = ssb.length
+                ssb.setSpan(android.text.style.ForegroundColorSpan(nord4), start, end, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+        }
+        return ssb
     }
 
     override fun onDestroy() {

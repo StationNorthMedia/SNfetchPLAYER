@@ -48,7 +48,7 @@
                 android:id="@+id/tvAppSubHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SNfetchPLAYER • TV Engine"
+                android:text="SNfetchPLAYER • Your TV &amp; Radio Engine"
                 android:textColor="@color/nord8"
                 android:textSize="10sp"
                 android:textStyle="bold" />
