@@ -95,9 +95,13 @@ object NativeInnerTubeExtractor {
         return@withContext null
     }
 
-    suspend fun extractStreamUrl(youtubeId: String, isAudioOnly: Boolean): String? = withContext(Dispatchers.IO) {
+    suspend fun extractStreamUrl(
+        youtubeId: String,
+        isAudioOnly: Boolean,
+        targetQuality: String = "auto"
+    ): String? = withContext(Dispatchers.IO) {
         val visitorData = getVisitorData()
-        AppLogger.d(TAG, "Extracting stream for [$youtubeId] (isAudioOnly=$isAudioOnly, 5-tier cascade)")
+        AppLogger.d(TAG, "Extracting stream for [$youtubeId] (isAudioOnly=$isAudioOnly, targetQuality=$targetQuality, 5-tier cascade)")
 
         for (config in CLIENT_CASCADE) {
             AppLogger.d(TAG, "Attempting extraction via client [${config.clientName}] for [$youtubeId]...")
@@ -107,7 +111,8 @@ object NativeInnerTubeExtractor {
                 clientVersion = config.clientVersion,
                 userAgent = config.userAgent,
                 visitorData = visitorData,
-                isAudioOnly = isAudioOnly
+                isAudioOnly = isAudioOnly,
+                targetQuality = targetQuality
             )
 
             if (!result.isNullOrEmpty()) {
@@ -126,7 +131,8 @@ object NativeInnerTubeExtractor {
         clientVersion: String,
         userAgent: String,
         visitorData: String?,
-        isAudioOnly: Boolean
+        isAudioOnly: Boolean,
+        targetQuality: String
     ): String? {
         try {
             val clientObj = JsonObject().apply {
@@ -200,10 +206,25 @@ object NativeInnerTubeExtractor {
 
             val streamingData = root.getAsJsonObject("streamingData") ?: return null
 
-            // 1. Check formats array (combined video + audio) - Prefer 720p (itag 22) first, then 360p (itag 18)
+            // 1. Check formats array (combined video + audio)
             val formats = streamingData.getAsJsonArray("formats")
             if (formats != null && formats.size() > 0) {
-                // Pass 1: Look for 720p HD (itag 22 or qualityLabel 720p)
+                // Pass 1: Try matching requested targetQuality (e.g. 1080, 720, 480, 360, 2160/4k)
+                if (targetQuality != "auto") {
+                    val searchToken = if (targetQuality == "4k") "2160" else targetQuality
+                    for (i in 0 until formats.size()) {
+                        val fmt = formats.get(i).asJsonObject
+                        val url = fmt.get("url")?.asString
+                        val quality = fmt.get("qualityLabel")?.asString ?: ""
+                        if (!url.isNullOrEmpty() && quality.contains(searchToken)) {
+                            val itag = fmt.get("itag")?.asInt ?: 0
+                            AppLogger.d(TAG, "Selected targetQuality [$targetQuality] format itag=$itag ($quality) for [$youtubeId]")
+                            return url
+                        }
+                    }
+                }
+
+                // Pass 2: Prefer 720p HD (itag 22) or highest combined format
                 for (i in 0 until formats.size()) {
                     val fmt = formats.get(i).asJsonObject
                     val url = fmt.get("url")?.asString
@@ -215,7 +236,7 @@ object NativeInnerTubeExtractor {
                     }
                 }
 
-                // Pass 2: Fallback to any valid combined format (e.g. itag 18)
+                // Pass 3: Fallback to any valid combined format (e.g. itag 18)
                 for (i in 0 until formats.size()) {
                     val fmt = formats.get(i).asJsonObject
                     val url = fmt.get("url")?.asString
@@ -245,14 +266,29 @@ object NativeInnerTubeExtractor {
                     }
                 }
 
-                // Pass 1 for Video mode: Look for 720p adaptive video format
+                // Pass 1 for Video mode: Match requested targetQuality if set
+                if (targetQuality != "auto") {
+                    val searchToken = if (targetQuality == "4k") "2160" else targetQuality
+                    for (i in 0 until adaptiveFormats.size()) {
+                        val fmt = adaptiveFormats.get(i).asJsonObject
+                        val url = fmt.get("url")?.asString
+                        val quality = fmt.get("qualityLabel")?.asString ?: ""
+                        if (!url.isNullOrEmpty() && quality.contains(searchToken)) {
+                            val itag = fmt.get("itag")?.asInt ?: 0
+                            AppLogger.d(TAG, "Selected targetQuality [$targetQuality] adaptive format itag=$itag for [$youtubeId]")
+                            return url
+                        }
+                    }
+                }
+
+                // Pass 2 for Video mode: Look for 720p or 1080p adaptive video format
                 for (i in 0 until adaptiveFormats.size()) {
                     val fmt = adaptiveFormats.get(i).asJsonObject
                     val url = fmt.get("url")?.asString
                     val quality = fmt.get("qualityLabel")?.asString ?: ""
-                    if (!url.isNullOrEmpty() && quality.contains("720")) {
+                    if (!url.isNullOrEmpty() && (quality.contains("720") || quality.contains("1080"))) {
                         val itag = fmt.get("itag")?.asInt ?: 0
-                        AppLogger.d(TAG, "Selected 720p adaptive video format itag=$itag for [$youtubeId]")
+                        AppLogger.d(TAG, "Selected HD adaptive video format itag=$itag ($quality) for [$youtubeId]")
                         return url
                     }
                 }

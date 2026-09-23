@@ -221,13 +221,14 @@ class PlaylistManager(
     }
 
     suspend fun resolveStreamUri(youtubeId: String, isAudioOnly: Boolean): String? {
-        val cacheKey = "${youtubeId}_${if (isAudioOnly) "AUDIO" else "VIDEO"}"
+        val targetQuality = if (isAudioOnly) "auto" else SettingsManager.getVideoQuality(context)
+        val cacheKey = "${youtubeId}_${if (isAudioOnly) "AUDIO" else "VIDEO_${targetQuality}"}"
         resolvedCache[cacheKey]?.let {
-            AppLogger.d("PlaylistManager", "Using cached stream URL for $youtubeId")
+            AppLogger.d("PlaylistManager", "Using cached stream URL for $youtubeId ($cacheKey)")
             return it
         }
 
-        val resolvedUrl = NativeInnerTubeExtractor.extractStreamUrl(youtubeId, isAudioOnly)
+        val resolvedUrl = NativeInnerTubeExtractor.extractStreamUrl(youtubeId, isAudioOnly, targetQuality)
         if (!resolvedUrl.isNullOrEmpty()) {
             resolvedCache[cacheKey] = resolvedUrl
             return resolvedUrl

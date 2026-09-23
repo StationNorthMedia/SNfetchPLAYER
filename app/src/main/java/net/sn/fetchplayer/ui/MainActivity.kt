@@ -55,6 +55,7 @@ import net.sn.fetchplayer.model.Track
 import net.sn.fetchplayer.service.RadioService
 import net.sn.fetchplayer.util.AppLogger
 import net.sn.fetchplayer.util.CacheManager
+import net.sn.fetchplayer.manager.SettingsManager
 import net.sn.fetchplayer.ui.QueenTutorialDialog
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -170,7 +171,8 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         setContentView(binding.root)
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        binding.tvAppVersion.text = "Version ${net.sn.fetchplayer.BuildConfig.VERSION_NAME} • Station North Media"
+        binding.tvAppSubHeader.text = "SNfetchPLAYER v${net.sn.fetchplayer.BuildConfig.VERSION_NAME} • TV Engine"
+        binding.settingsHub.tvAppVersion.text = "Installierte Version: v${net.sn.fetchplayer.BuildConfig.VERSION_NAME}"
 
         curatedCatalogManager = CuratedCatalogManager(this)
         net.sn.fetchplayer.data.ArtistLexiconRepository.init(this)
@@ -234,15 +236,14 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             binding.cardPlayerContainer.visibility = View.GONE
             binding.cardTrackInfo.visibility = View.GONE
             if (isShowingSavedCatalogTab) {
-                binding.toggleCuratorTabGroup.check(R.id.btnTabSaved)
-                binding.layoutPlaylistInputRow.visibility = View.GONE
+                binding.settingsHub.toggleCuratorTabGroup.check(R.id.btnTabSaved)
+                binding.settingsHub.layoutPlaylistInputRow.visibility = View.GONE
                 curatorAdapter.isSavedCatalogView = true
                 val savedTracks = curatedCatalogManager.getCuratedTracks().map { RawPlaylistItem(it.youtubeId, it.title, it.artist) }
                 curatorAdapter.setItems(savedTracks)
             } else {
-                binding.toggleCuratorTabGroup.check(R.id.btnTabImported)
-                binding.layoutPlaylistInputRow.visibility = View.GONE // Wait, imported tab shows layoutPlaylistInputRow in Curator Studio
-                binding.layoutPlaylistInputRow.visibility = View.VISIBLE
+                binding.settingsHub.toggleCuratorTabGroup.check(R.id.btnTabImported)
+                binding.settingsHub.layoutPlaylistInputRow.visibility = View.VISIBLE
                 curatorAdapter.isSavedCatalogView = false
                 curatorAdapter.setItems(importedPlaylistItems)
             }
@@ -288,8 +289,8 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             }
         )
 
-        binding.rvCuratorPlaylist.layoutManager = LinearLayoutManager(this)
-        binding.rvCuratorPlaylist.adapter = curatorAdapter
+        binding.settingsHub.rvCuratorPlaylist.layoutManager = LinearLayoutManager(this)
+        binding.settingsHub.rvCuratorPlaylist.adapter = curatorAdapter
 
         updateCuratorStatusCount()
     }
@@ -350,11 +351,11 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         val loadedCount = importedPlaylistItems.size
         val activePlaylist = curatedCatalogManager.getActivePlaylist()
         val savedCount = activePlaylist.tracks.size
-        binding.btnTabImported.text = "Import Queue ($loadedCount)"
-        binding.btnTabSaved.text = "✓ ${activePlaylist.name} ($savedCount)"
+        binding.settingsHub.btnTabImported.text = "Import Queue ($loadedCount)"
+        binding.settingsHub.btnTabSaved.text = "✓ ${activePlaylist.name} ($savedCount)"
 
         val currentCount = curatorAdapter.itemCount
-        binding.tvCuratorStatusCount.text = if (isShowingSavedCatalogTab) "$currentCount in Playlist" else "$currentCount Loaded"
+        binding.settingsHub.tvCuratorStatusCount.text = if (isShowingSavedCatalogTab) "$currentCount in Playlist" else "$currentCount Loaded"
     }
 
     private fun updateCuratorCatalogView() {
@@ -587,19 +588,19 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         }
 
         // Curator Sub-Tab Switcher: [ Import-Arbeitsliste ] vs [ Gespeicherter Katalog ]
-        binding.toggleCuratorTabGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+        binding.settingsHub.toggleCuratorTabGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
                 when (checkedId) {
                     R.id.btnTabImported -> {
                         isShowingSavedCatalogTab = false
-                        binding.layoutPlaylistInputRow.visibility = View.VISIBLE
+                        binding.settingsHub.layoutPlaylistInputRow.visibility = View.VISIBLE
                         curatorAdapter.isSavedCatalogView = false
                         curatorAdapter.setItems(importedPlaylistItems)
                         updateCuratorStatusCount()
                     }
                     R.id.btnTabSaved -> {
                         isShowingSavedCatalogTab = true
-                        binding.layoutPlaylistInputRow.visibility = View.GONE
+                        binding.settingsHub.layoutPlaylistInputRow.visibility = View.GONE
                         curatorAdapter.isSavedCatalogView = true
                         val savedTracks = curatedCatalogManager.getCuratedTracks()
                         curatorAdapter.setItems(savedTracks)
@@ -609,7 +610,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             }
         }
 
-        binding.btnTabSaved.setOnClickListener {
+        binding.settingsHub.btnTabSaved.setOnClickListener {
             if (isShowingSavedCatalogTab) {
                 showPlaylistManagerDialog()
             }
@@ -620,31 +621,31 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             radioService?.playPreviousTrack()
             showHudTemporarily()
         }
-        binding.btnCuratorPrev.setOnClickListener { radioService?.playPreviousTrack() }
+        binding.settingsHub.btnCuratorPrev.setOnClickListener { radioService?.playPreviousTrack() }
 
         binding.fabPlayPause.setOnClickListener { radioService?.togglePlayPause() }
         binding.hudPlayPause.setOnClickListener {
             radioService?.togglePlayPause()
             showHudTemporarily()
         }
-        binding.btnCuratorPlayPause.setOnClickListener { radioService?.togglePlayPause() }
+        binding.settingsHub.btnCuratorPlayPause.setOnClickListener { radioService?.togglePlayPause() }
 
         binding.fabNext.setOnClickListener { radioService?.playNextTrack() }
         binding.hudNext.setOnClickListener {
             radioService?.playNextTrack()
             showHudTemporarily()
         }
-        binding.btnCuratorNext.setOnClickListener { radioService?.playNextTrack() }
+        binding.settingsHub.btnCuratorNext.setOnClickListener { radioService?.playNextTrack() }
 
         binding.fabRepeat.setOnClickListener { radioService?.toggleRepeatOne() }
         binding.hudRepeat.setOnClickListener {
             radioService?.toggleRepeatOne()
             showHudTemporarily()
         }
-        binding.btnCuratorRepeat.setOnClickListener { radioService?.toggleRepeatOne() }
+        binding.settingsHub.btnCuratorRepeat.setOnClickListener { radioService?.toggleRepeatOne() }
 
         binding.btnFullscreenToggle.setOnClickListener { toggleFullscreen() }
-        binding.btnCuratorFullscreen.setOnClickListener { toggleFullscreen() }
+        binding.settingsHub.btnCuratorFullscreen.setOnClickListener { toggleFullscreen() }
         binding.btnExitFullscreen.setOnClickListener { exitTrueFullscreen() }
 
         binding.playerView.setOnClickListener {
@@ -652,7 +653,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                 showHudTemporarily()
             }
         }
-        binding.curatorPlayerView.setOnClickListener {
+        binding.settingsHub.curatorPlayerView.setOnClickListener {
             if (isFullscreen) {
                 showHudTemporarily()
             }
@@ -684,28 +685,28 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         setupButtonTouchEffects()
 
         // Curator Playlist Load Button
-        binding.btnLoadPlaylist.setOnClickListener {
-            val input = binding.etPlaylistInput.text.toString().trim()
+        binding.settingsHub.btnLoadPlaylist.setOnClickListener {
+            val input = binding.settingsHub.etPlaylistInput.text.toString().trim()
             if (input.isEmpty()) {
                 Toast.makeText(this, "Bitte YouTube-Playlist URL oder ID eingeben", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            binding.progressLoadPlaylist.visibility = View.VISIBLE
-            binding.btnLoadPlaylist.isEnabled = false
+            binding.settingsHub.progressLoadPlaylist.visibility = View.VISIBLE
+            binding.settingsHub.btnLoadPlaylist.isEnabled = false
 
             lifecycleScope.launch(Dispatchers.IO) {
                 AppLogger.d("MainActivity", "CURATOR -> Fetching YouTube playlist: $input")
                 val tracks = YouTubePlaylistExtractor.fetchPlaylistTracks(input)
                 withContext(Dispatchers.Main) {
-                    binding.progressLoadPlaylist.visibility = View.GONE
-                    binding.btnLoadPlaylist.isEnabled = true
+                    binding.settingsHub.progressLoadPlaylist.visibility = View.GONE
+                    binding.settingsHub.btnLoadPlaylist.isEnabled = true
 
                     if (tracks.isNotEmpty()) {
                         importedPlaylistItems.clear()
                         importedPlaylistItems.addAll(tracks)
 
-                        binding.toggleCuratorTabGroup.check(R.id.btnTabImported)
+                        binding.settingsHub.toggleCuratorTabGroup.check(R.id.btnTabImported)
                         curatorAdapter.isSavedCatalogView = false
                         curatorAdapter.setItems(importedPlaylistItems)
                         updateCuratorStatusCount()
@@ -719,17 +720,17 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         }
 
         // Curator Export JSON Button
-        binding.btnExportJson.setOnClickListener {
+        binding.settingsHub.btnExportJson.setOnClickListener {
             showExportJsonDialog()
         }
 
         // Curator Import JSON File Button (SAF)
-        binding.btnImportJsonFile.setOnClickListener {
+        binding.settingsHub.btnImportJsonFile.setOnClickListener {
             importJsonLauncher.launch(arrayOf("application/json", "*/*"))
         }
 
         // Curator Reset Catalog Button (Reset to Top 50 default)
-        binding.btnResetCatalog.setOnClickListener {
+        binding.settingsHub.btnResetCatalog.setOnClickListener {
             AlertDialog.Builder(this)
                 .setTitle("Reset Catalog to Top 50?")
                 .setMessage("Do you really want to reset the curated catalog to the default Top 50 R&B Hits?")
@@ -747,7 +748,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         }
 
         // Curator Clear List Button
-        binding.btnClearCuratorList.setOnClickListener {
+        binding.settingsHub.btnClearCuratorList.setOnClickListener {
             if (isShowingSavedCatalogTab) {
                 AlertDialog.Builder(this)
                     .setTitle("Clear Entire Catalog?")
@@ -1022,13 +1023,13 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
     private fun updatePlayerBinding() {
         val player = radioService?.player
         if (isFullscreen) {
-            binding.curatorPlayerView.player = null
+            binding.settingsHub.curatorPlayerView.player = null
             binding.playerView.player = player
         } else if (isSettingsModeActive) {
             binding.playerView.player = null
-            binding.curatorPlayerView.player = player
+            binding.settingsHub.curatorPlayerView.player = player
         } else {
-            binding.curatorPlayerView.player = null
+            binding.settingsHub.curatorPlayerView.player = null
             binding.playerView.player = player
         }
     }
@@ -1075,46 +1076,198 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
     private fun setupSettingsHub() {
         setupLexiconStudio()
 
-        binding.toggleSettingsTabGroup.check(R.id.btnTabCurator)
-        binding.layoutCuratorStudio.visibility = View.VISIBLE
-        binding.layoutNordLogsStudio.visibility = View.GONE
-        binding.layoutAboutShareStudio.visibility = View.GONE
+        val hub = binding.settingsHub
 
-        binding.toggleSettingsTabGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+        // Helper function to navigate between 8-Tile Dashboard Grid (0) and specific module detail views (1-8)
+        fun showSettingsModule(moduleId: Int) {
+            hub.layoutSettingsDashboardGrid.visibility = if (moduleId == 0) View.VISIBLE else View.GONE
+            hub.layoutBroadcastSettings.visibility = if (moduleId == 1) View.VISIBLE else View.GONE
+            hub.layoutCuratorStudio.visibility = if (moduleId == 2) View.VISIBLE else View.GONE
+            hub.layoutNordLogsStudio.visibility = if (moduleId == 3) View.VISIBLE else View.GONE
+            hub.layoutTvDisplaySettings.visibility = if (moduleId == 4) View.VISIBLE else View.GONE
+            hub.layoutAudioVisualizerSettings.visibility = if (moduleId == 5) View.VISIBLE else View.GONE
+            hub.layoutChroniclesSettings.visibility = if (moduleId == 6) View.VISIBLE else View.GONE
+            hub.layoutQueenTutorialSettings.visibility = if (moduleId == 7) View.VISIBLE else View.GONE
+            hub.layoutSystemCacheUpdateSettings.visibility = if (moduleId == 8) View.VISIBLE else View.GONE
+
+            // Dynamic border accent per module
+            val accentColorRes = when (moduleId) {
+                1 -> R.color.nord11 // Broadcast: #BF616A Aurora Red
+                2 -> R.color.nord15 // Curator: #B48EAD Aurora Purple
+                3 -> R.color.nord7  // Lexicon: #8FBCBB Soft Teal
+                4 -> R.color.nord12 // TV Display: #D08770 Aurora Orange
+                5 -> R.color.nord8  // Audio Visualizer: #88C0D0 Frost Cyan
+                6 -> R.color.nord13 // Chronicles: #EBCB8B Aurora Yellow
+                7 -> R.color.nord9  // Queen Tutorial: #81A1C1 Soft Blue
+                8 -> R.color.nord14 // System & Cache: #A3BE8C Aurora Green
+                else -> R.color.nord14 // Dashboard Grid: default Aurora Green
+            }
+            binding.cardSettingsContainer.strokeColor = ContextCompat.getColor(this, accentColorRes)
+
+            if (moduleId == 3) {
+                displayRandomLexiconArtist()
+            }
+        }
+
+        // Start on Dashboard Grid (0)
+        showSettingsModule(0)
+
+        // 1. Dashboard 8-Tile Click Listeners
+        hub.cardTileBroadcast.setOnClickListener { showSettingsModule(1) }
+        hub.cardTileCurator.setOnClickListener { showSettingsModule(2) }
+        hub.cardTileLexicon.setOnClickListener { showSettingsModule(3) }
+        hub.cardTileTvDisplay.setOnClickListener { showSettingsModule(4) }
+        hub.cardTileAudioVisualizer.setOnClickListener { showSettingsModule(5) }
+        hub.cardTileChronicles.setOnClickListener { showSettingsModule(6) }
+        hub.cardTileQueenTutorial.setOnClickListener { showSettingsModule(7) }
+        hub.cardTileSystemCache.setOnClickListener { showSettingsModule(8) }
+
+        // 2. Standardized Back Buttons (Return to Dashboard 8-Tile Grid)
+        hub.btnBackFromBroadcast.setOnClickListener { showSettingsModule(0) }
+        hub.btnBackFromCurator.setOnClickListener { showSettingsModule(0) }
+        hub.btnBackFromLexicon.setOnClickListener { showSettingsModule(0) }
+        hub.btnBackFromTvDisplay.setOnClickListener { showSettingsModule(0) }
+        hub.btnBackFromAudioVisualizer.setOnClickListener { showSettingsModule(0) }
+        hub.btnBackFromChronicles.setOnClickListener { showSettingsModule(0) }
+        hub.btnBackFromQueenTutorial.setOnClickListener { showSettingsModule(0) }
+        hub.btnBackFromSystemCache.setOnClickListener { showSettingsModule(0) }
+
+        // 3. Module 1: Broadcast & Channel Routing
+        val currentTvSource = SettingsManager.getTvChannelSource(this)
+        when (currentTvSource) {
+            "curator_queue" -> hub.rbTvSourceCurator.isChecked = true
+            "saved_catalog" -> hub.rbTvSourceSaved.isChecked = true
+            "custom" -> hub.rbTvSourceCustom.isChecked = true
+            else -> hub.rbTvSourceTop50.isChecked = true
+        }
+
+        val currentRadioSource = SettingsManager.getRadioChannelSource(this)
+        when (currentRadioSource) {
+            "curator_queue" -> hub.rbRadioSourceCurator.isChecked = true
+            "saved_catalog" -> hub.rbRadioSourceSaved.isChecked = true
+            "custom" -> hub.rbRadioSourceCustom.isChecked = true
+            else -> hub.rbRadioSourceTop50.isChecked = true
+        }
+
+        hub.etTvCustomUrl.setText(SettingsManager.getTvCustomUrl(this))
+        hub.etRadioCustomUrl.setText(SettingsManager.getRadioCustomUrl(this))
+
+        hub.btnApplyChannelRouting.setOnClickListener {
+            val selectedTvSource = when (hub.rgTvChannelSource.checkedRadioButtonId) {
+                R.id.rbTvSourceCurator -> "curator_queue"
+                R.id.rbTvSourceSaved -> "saved_catalog"
+                R.id.rbTvSourceCustom -> "custom"
+                else -> "default_top50"
+            }
+
+            val selectedRadioSource = when (hub.rgRadioChannelSource.checkedRadioButtonId) {
+                R.id.rbRadioSourceCurator -> "curator_queue"
+                R.id.rbRadioSourceSaved -> "saved_catalog"
+                R.id.rbRadioSourceCustom -> "custom"
+                else -> "default_top50"
+            }
+
+            SettingsManager.setTvChannelSource(this, selectedTvSource)
+            SettingsManager.setRadioChannelSource(this, selectedRadioSource)
+            SettingsManager.setTvCustomUrl(this, hub.etTvCustomUrl.text.toString().trim())
+            SettingsManager.setRadioCustomUrl(this, hub.etRadioCustomUrl.text.toString().trim())
+
+            Toast.makeText(this, "📺 Radio & TV Channel Routing updated!", Toast.LENGTH_SHORT).show()
+        }
+
+        // 4. Module 4: TV & Display Settings
+        val currentQuality = SettingsManager.getVideoQuality(this)
+        val initialQualityBtn = when (currentQuality) {
+            "360p", "360" -> R.id.btnQuality360
+            "480p", "480" -> R.id.btnQuality480
+            "720p", "720" -> R.id.btnQuality720
+            "1080p", "1080" -> R.id.btnQuality1080
+            "4k", "2160" -> R.id.btnQuality4K
+            else -> R.id.btnQualityAuto
+        }
+        hub.toggleQualityGroup.check(initialQualityBtn)
+
+        hub.toggleQualityGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
-                when (checkedId) {
-                    R.id.btnTabCurator -> {
-                        binding.layoutCuratorStudio.visibility = View.VISIBLE
-                        binding.layoutNordLogsStudio.visibility = View.GONE
-                        binding.layoutAboutShareStudio.visibility = View.GONE
-                    }
-                    R.id.btnTabNordLogs -> {
-                        binding.layoutCuratorStudio.visibility = View.GONE
-                        binding.layoutNordLogsStudio.visibility = View.VISIBLE
-                        binding.layoutAboutShareStudio.visibility = View.GONE
-                        displayRandomLexiconArtist()
-                    }
-                    R.id.btnTabAboutShare -> {
-                        binding.layoutCuratorStudio.visibility = View.GONE
-                        binding.layoutNordLogsStudio.visibility = View.GONE
-                        binding.layoutAboutShareStudio.visibility = View.VISIBLE
-                    }
+                val selectedQuality = when (checkedId) {
+                    R.id.btnQuality360 -> "360p"
+                    R.id.btnQuality480 -> "480p"
+                    R.id.btnQuality720 -> "720p"
+                    R.id.btnQuality1080 -> "1080p"
+                    R.id.btnQuality4K -> "4k"
+                    else -> "auto"
                 }
+                SettingsManager.setVideoQuality(this, selectedQuality)
+                Toast.makeText(this, "📺 Stream resolution set to $selectedQuality", Toast.LENGTH_SHORT).show()
             }
         }
 
-        binding.btnShowNordLogs.setOnClickListener {
-            if (binding.layoutNordLogsInline.visibility == View.VISIBLE) {
-                binding.layoutNordLogsInline.visibility = View.GONE
-                binding.btnShowNordLogs.text = "💻 Toggle Logs"
+        val bauchbindenEnabled = SettingsManager.isSlantedBauchbindenEnabled(this)
+        hub.switchSlantedBauchbinden.isChecked = bauchbindenEnabled
+        hub.switchSlantedBauchbinden.setOnCheckedChangeListener { _, isChecked ->
+            SettingsManager.setSlantedBauchbindenEnabled(this, isChecked)
+            Toast.makeText(this, if (isChecked) "Bauchbinden Enabled" else "Bauchbinden Disabled", Toast.LENGTH_SHORT).show()
+        }
+
+        val currentTimeout = SettingsManager.getOsdTimeoutSeconds(this)
+        val initialTimeoutBtn = when (currentTimeout) {
+            3 -> R.id.btnOsd3s
+            10 -> R.id.btnOsd10s
+            -1 -> R.id.btnOsdAlways
+            else -> R.id.btnOsd5s
+        }
+        hub.toggleOsdTimeoutGroup.check(initialTimeoutBtn)
+        hub.toggleOsdTimeoutGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                val timeoutSec = when (checkedId) {
+                    R.id.btnOsd3s -> 3
+                    R.id.btnOsd10s -> 10
+                    R.id.btnOsdAlways -> -1
+                    else -> 5
+                }
+                SettingsManager.setOsdTimeoutSeconds(this, timeoutSec)
+            }
+        }
+
+        // 5. Module 5: Audio & Visualizer Settings
+        hub.switchFftVisualizer.isChecked = SettingsManager.isFftVisualizerEnabled(this)
+        hub.switchFftVisualizer.setOnCheckedChangeListener { _, isChecked ->
+            SettingsManager.setFftVisualizerEnabled(this, isChecked)
+        }
+
+        hub.switchBassPulse.isChecked = SettingsManager.isBassPulseEnabled(this)
+        hub.switchBassPulse.setOnCheckedChangeListener { _, isChecked ->
+            SettingsManager.setBassPulseEnabled(this, isChecked)
+        }
+
+        hub.switchQueenQuotes.isChecked = SettingsManager.isQueenQuotesEnabled(this)
+        hub.switchQueenQuotes.setOnCheckedChangeListener { _, isChecked ->
+            SettingsManager.setQueenQuotesEnabled(this, isChecked)
+        }
+
+        // 6. Module 6: Chronicles E-Book
+        hub.btnOpenEbookChronicles.setOnClickListener {
+            ChroniclesEbookDialog(this).show()
+        }
+
+        // 7. Module 7: Queen Tutorial
+        hub.btnOpenQueenTutorial.setOnClickListener {
+            QueenTutorialDialog(this).show()
+        }
+
+        // 8. Module 8: System Diagnostics, Cache & Updates
+        hub.btnShowNordLogs.setOnClickListener {
+            if (hub.layoutNordLogsInline.visibility == View.VISIBLE) {
+                hub.layoutNordLogsInline.visibility = View.GONE
+                hub.btnShowNordLogs.text = "💻 Toggle Logs"
             } else {
-                binding.layoutNordLogsInline.visibility = View.VISIBLE
-                binding.btnShowNordLogs.text = "💻 Hide Logs"
-                binding.tvNordLogsTerminal.text = AppLogger.getLogHistory().ifEmpty { "System Initialized. Awaiting YouTube stream pipeline..." }
+                hub.layoutNordLogsInline.visibility = View.VISIBLE
+                hub.btnShowNordLogs.text = "💻 Hide Logs"
+                hub.tvNordLogsTerminal.text = AppLogger.getLogHistory().ifEmpty { "System Initialized. Awaiting YouTube stream pipeline..." }
             }
         }
 
-        binding.btnCopyNordLogs.setOnClickListener {
+        hub.btnCopyNordLogs.setOnClickListener {
             val logs = AppLogger.getLogHistory()
             val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip = ClipData.newPlainText("SN Terminal Logs", logs)
@@ -1122,43 +1275,35 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             Toast.makeText(this, "Logs copied to clipboard!", Toast.LENGTH_SHORT).show()
         }
 
-        binding.btnSaveNordLogsTxt.setOnClickListener {
+        hub.btnSaveNordLogsTxt.setOnClickListener {
             val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
             exportLogsTxtLauncher.launch("sn_terminal_logs_$timestamp.txt")
         }
 
-        binding.btnSyncAssetsNow.setOnClickListener {
+        hub.btnSyncAssetsNow.setOnClickListener {
             net.sn.fetchplayer.manager.RemoteAssetSyncManager.startRemoteAssetSync(this) { progress ->
                 updateAssetSyncUi(progress)
             }
         }
 
-        binding.btnOpenEbookChronicles.setOnClickListener {
-            ChroniclesEbookDialog(this).show()
-        }
-
-        binding.btnOpenQueenTutorial?.setOnClickListener {
-            QueenTutorialDialog(this).show()
-        }
-
         val cacheEnabled = CacheManager.isCacheEnabled(this)
-        binding.switchEnableCache?.isChecked = cacheEnabled
+        hub.switchEnableCache.isChecked = cacheEnabled
         updateCacheSizeUi()
 
-        binding.switchEnableCache?.setOnCheckedChangeListener { _, isChecked ->
+        hub.switchEnableCache.setOnCheckedChangeListener { _, isChecked ->
             CacheManager.setCacheEnabled(this, isChecked)
             updateCacheSizeUi()
             val msg = if (isChecked) "Offline Media & Bio Cache Enabled" else "Offline Cache Disabled"
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
         }
 
-        binding.btnClearCacheNow?.setOnClickListener {
+        hub.btnClearCacheNow.setOnClickListener {
             CacheManager.clearAllCache(this)
             updateCacheSizeUi()
             Toast.makeText(this, "Offline Cache Cleared!", Toast.LENGTH_SHORT).show()
         }
 
-        binding.btnCheckAppUpdate.setOnClickListener {
+        hub.btnCheckAppUpdate.setOnClickListener {
             checkAppUpdate(isManualCheck = true)
         }
     }
@@ -1166,8 +1311,8 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
     private fun updateCacheSizeUi() {
         val isEnabled = CacheManager.isCacheEnabled(this)
         val formattedSize = CacheManager.getFormattedCacheSize(this)
-        binding.switchEnableCache?.text = if (isEnabled) "ON" else "OFF"
-        binding.tvCacheSizeInfo?.text = if (isEnabled) {
+        binding.settingsHub.switchEnableCache.text = if (isEnabled) "ON" else "OFF"
+        binding.settingsHub.tvCacheSizeInfo.text = if (isEnabled) {
             "Cache Status: ENABLED • $formattedSize Used"
         } else {
             "Cache Status: DISABLED • $formattedSize Used"
@@ -1176,14 +1321,14 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
 
     private fun checkAppUpdate(isManualCheck: Boolean = false) {
         val currentVer = net.sn.fetchplayer.BuildConfig.VERSION_NAME
-        binding.btnCheckAppUpdate.isEnabled = false
-        binding.btnCheckAppUpdate.text = "⏳ Check..."
+        binding.settingsHub.btnCheckAppUpdate.isEnabled = false
+        binding.settingsHub.btnCheckAppUpdate.text = "⏳ Check..."
 
         lifecycleScope.launch(Dispatchers.IO) {
             val updateInfo = net.sn.fetchplayer.manager.AppUpdateManager.checkForUpdate(currentVer)
             withContext(Dispatchers.Main) {
-                binding.btnCheckAppUpdate.isEnabled = true
-                binding.btnCheckAppUpdate.text = "🚀 Update Check"
+                binding.settingsHub.btnCheckAppUpdate.isEnabled = true
+                binding.settingsHub.btnCheckAppUpdate.text = "🚀 Update Check"
 
                 if (updateInfo != null && updateInfo.isUpdateAvailable) {
                     showAppUpdateDialog(updateInfo)
@@ -1289,14 +1434,14 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
 
     private fun updateAssetSyncUi(progress: net.sn.fetchplayer.manager.SyncProgress) {
         runOnUiThread {
-            binding.pbRemoteAssetSync.progress = progress.progressPercent
-            binding.tvAssetSyncStatus.text = progress.statusMessage
+            binding.settingsHub.pbRemoteAssetSync.progress = progress.progressPercent
+            binding.settingsHub.tvAssetSyncStatus.text = progress.statusMessage
             if (progress.isSyncing) {
-                binding.btnSyncAssetsNow.isEnabled = false
-                binding.btnSyncAssetsNow.text = "⏳ Syncing..."
+                binding.settingsHub.btnSyncAssetsNow.isEnabled = false
+                binding.settingsHub.btnSyncAssetsNow.text = "⏳ Syncing..."
             } else {
-                binding.btnSyncAssetsNow.isEnabled = true
-                binding.btnSyncAssetsNow.text = "🔄 Sync Now"
+                binding.settingsHub.btnSyncAssetsNow.isEnabled = true
+                binding.settingsHub.btnSyncAssetsNow.text = "🔄 Sync Now"
             }
         }
     }
@@ -1390,8 +1535,8 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             if (track != null) {
                 binding.tvTrackTitle.text = track.title
                 binding.tvTrackArtist.text = track.artist
-                binding.tvCuratorPreviewTitle.text = track.title
-                binding.tvCuratorPreviewArtist.text = track.artist
+                binding.settingsHub.tvCuratorPreviewTitle.text = track.title
+                binding.settingsHub.tvCuratorPreviewArtist.text = track.artist
 
                 if (track.youtubeId != null) {
                     curatorAdapter.updatePlayingId(track.youtubeId)
@@ -1403,8 +1548,8 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             } else {
                 binding.tvTrackTitle.text = getString(R.string.unknown_title)
                 binding.tvTrackArtist.text = getString(R.string.unknown_artist)
-                binding.tvCuratorPreviewTitle.text = "Select a track to play"
-                binding.tvCuratorPreviewArtist.text = "SNFETCH PLAYER // CURATOR STUDIO"
+                binding.settingsHub.tvCuratorPreviewTitle.text = "Select a track to play"
+                binding.settingsHub.tvCuratorPreviewArtist.text = "SNFETCH PLAYER // CURATOR STUDIO"
                 updateRadioWikipediaPanel("SN-RADIO", "LIVE AUDIO", "Station North Digital Radio Stream • Pure R&B & Urban Culture", null)
             }
         }
@@ -1415,11 +1560,11 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             if (isPlaying) {
                 binding.fabPlayPause.setIconResource(R.drawable.ic_pause)
                 binding.hudPlayPause.setIconResource(R.drawable.ic_pause)
-                binding.btnCuratorPlayPause.setIconResource(R.drawable.ic_pause)
+                binding.settingsHub.btnCuratorPlayPause.setIconResource(R.drawable.ic_pause)
             } else {
                 binding.fabPlayPause.setIconResource(R.drawable.ic_play)
                 binding.hudPlayPause.setIconResource(R.drawable.ic_play)
-                binding.btnCuratorPlayPause.setIconResource(R.drawable.ic_play)
+                binding.settingsHub.btnCuratorPlayPause.setIconResource(R.drawable.ic_play)
             }
 
             if (radioService?.currentMode == PlaybackMode.SN_RADIO) {
@@ -1450,9 +1595,9 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             binding.hudRepeat.iconTint = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord0))
             binding.hudRepeat.strokeColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord14))
 
-            binding.btnCuratorRepeat.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord14))
-            binding.btnCuratorRepeat.iconTint = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord0))
-            binding.btnCuratorRepeat.strokeColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord14))
+            binding.settingsHub.btnCuratorRepeat.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord14))
+            binding.settingsHub.btnCuratorRepeat.iconTint = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord0))
+            binding.settingsHub.btnCuratorRepeat.strokeColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord14))
         } else {
             binding.fabRepeat.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord13))
             binding.fabRepeat.iconTint = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord0))
@@ -1462,9 +1607,9 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             binding.hudRepeat.iconTint = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord0))
             binding.hudRepeat.strokeColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord13))
 
-            binding.btnCuratorRepeat.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord13))
-            binding.btnCuratorRepeat.iconTint = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord0))
-            binding.btnCuratorRepeat.strokeColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord13))
+            binding.settingsHub.btnCuratorRepeat.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord13))
+            binding.settingsHub.btnCuratorRepeat.iconTint = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord0))
+            binding.settingsHub.btnCuratorRepeat.strokeColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord13))
         }
     }
 
@@ -1487,11 +1632,8 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             binding.btnModeTv,
             binding.btnModeRadio,
             binding.btnModeSettings,
-            binding.btnTabCurator,
-            binding.btnTabNordLogs,
-            binding.btnTabAboutShare,
-            binding.btnTabImported,
-            binding.btnTabSaved
+            binding.settingsHub.btnTabImported,
+            binding.settingsHub.btnTabSaved
         )
 
         val standaloneButtons = listOf(
@@ -1505,15 +1647,15 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             binding.hudPlayPause,
             binding.hudNext,
             binding.hudRepeat,
-            binding.btnCuratorPlayPause,
-            binding.btnCuratorPrev,
-            binding.btnCuratorNext,
-            binding.btnCuratorRepeat,
-            binding.btnCuratorFullscreen,
-            binding.etPlaylistInput,
-            binding.btnLoadPlaylist,
-            binding.btnExportJson,
-            binding.btnClearCuratorList
+            binding.settingsHub.btnCuratorPlayPause,
+            binding.settingsHub.btnCuratorPrev,
+            binding.settingsHub.btnCuratorNext,
+            binding.settingsHub.btnCuratorRepeat,
+            binding.settingsHub.btnCuratorFullscreen,
+            binding.settingsHub.etPlaylistInput,
+            binding.settingsHub.btnLoadPlaylist,
+            binding.settingsHub.btnExportJson,
+            binding.settingsHub.btnClearCuratorList
         )
 
         // 1. Toggle Group Buttons: Field Illumination / Inward Glow (No scaling blowout)
@@ -1672,10 +1814,10 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
     }
 
     private fun setupLexiconStudio() {
-        binding.rvSearchDropdown.layoutManager = LinearLayoutManager(this)
+        binding.settingsHub.rvSearchDropdown.layoutManager = LinearLayoutManager(this)
         lexiconSearchDropdownAdapter = LexiconSearchDropdownAdapter(emptyList()) { suggestion ->
-            binding.cardSearchDropdown.visibility = View.GONE
-            binding.etLexiconSearch.clearFocus()
+            binding.settingsHub.cardSearchDropdown.visibility = View.GONE
+            binding.settingsHub.etLexiconSearch.clearFocus()
 
             val artist = suggestion.artist
             renderLexiconArtistDetail(
@@ -1684,23 +1826,23 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                 highlightTrackName = suggestion.trackName
             )
         }
-        binding.rvSearchDropdown.adapter = lexiconSearchDropdownAdapter
+        binding.settingsHub.rvSearchDropdown.adapter = lexiconSearchDropdownAdapter
 
-        binding.etLexiconSearch.addTextChangedListener(object : android.text.TextWatcher {
+        binding.settingsHub.etLexiconSearch.addTextChangedListener(object : android.text.TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val query = s?.toString()?.trim() ?: ""
                 if (query.isEmpty()) {
-                    binding.cardSearchDropdown.visibility = View.GONE
+                    binding.settingsHub.cardSearchDropdown.visibility = View.GONE
                 } else {
                     lifecycleScope.launch(Dispatchers.IO) {
                         val suggestions = ArtistLexiconRepository.searchSuggestions(query, maxResults = 12)
                         withContext(Dispatchers.Main) {
-                            if (suggestions.isNotEmpty() && binding.etLexiconSearch.hasFocus()) {
+                            if (suggestions.isNotEmpty() && binding.settingsHub.etLexiconSearch.hasFocus()) {
                                 lexiconSearchDropdownAdapter.updateData(suggestions)
-                                binding.cardSearchDropdown.visibility = View.VISIBLE
+                                binding.settingsHub.cardSearchDropdown.visibility = View.VISIBLE
                             } else {
-                                binding.cardSearchDropdown.visibility = View.GONE
+                                binding.settingsHub.cardSearchDropdown.visibility = View.GONE
                             }
                         }
                     }
@@ -1709,18 +1851,18 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             override fun afterTextChanged(s: android.text.Editable?) {}
         })
 
-        binding.etLexiconSearch.setOnFocusChangeListener { _, hasFocus ->
+        binding.settingsHub.etLexiconSearch.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                binding.cardSearchDropdown.visibility = View.GONE
+                binding.settingsHub.cardSearchDropdown.visibility = View.GONE
             } else {
-                val query = binding.etLexiconSearch.text.toString().trim()
+                val query = binding.settingsHub.etLexiconSearch.text.toString().trim()
                 if (query.isNotEmpty()) {
                     lifecycleScope.launch(Dispatchers.IO) {
                         val suggestions = ArtistLexiconRepository.searchSuggestions(query, maxResults = 12)
                         withContext(Dispatchers.Main) {
                             if (suggestions.isNotEmpty()) {
                                 lexiconSearchDropdownAdapter.updateData(suggestions)
-                                binding.cardSearchDropdown.visibility = View.VISIBLE
+                                binding.settingsHub.cardSearchDropdown.visibility = View.VISIBLE
                             }
                         }
                     }
@@ -1728,7 +1870,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             }
         }
 
-        binding.btnRandomArtist.setOnClickListener {
+        binding.settingsHub.btnRandomArtist.setOnClickListener {
             displayRandomLexiconArtist()
         }
     }
@@ -1751,19 +1893,19 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         highlightTrackName: String = ""
     ) {
         currentLexiconArtist = artist
-        binding.cardSearchDropdown.visibility = View.GONE
-        binding.etLexiconSearch.setText("")
+        binding.settingsHub.cardSearchDropdown.visibility = View.GONE
+        binding.settingsHub.etLexiconSearch.setText("")
 
-        binding.tvArtistDetailName.text = artist.name
-        binding.tvArtistDetailGenreBadge.text = when (artist.genre) {
+        binding.settingsHub.tvArtistDetailName.text = artist.name
+        binding.settingsHub.tvArtistDetailGenreBadge.text = when (artist.genre) {
             "US Hip-Hop" -> "🎤 US HIP-HOP"
             "R&B & Hip-Hop" -> "🔥 R&B & HIP-HOP"
             else -> "🎵 R&B / URBAN"
         }
-        binding.imgArtistAvatar.setImageResource(R.drawable.sn_logo)
-        binding.tvArtistDetailBio.text = artist.bio.ifEmpty { "No biography available in SN-Lexicon." }
+        binding.settingsHub.imgArtistAvatar.setImageResource(R.drawable.sn_logo)
+        binding.settingsHub.tvArtistDetailBio.text = artist.bio.ifEmpty { "No biography available in SN-Lexicon." }
 
-        binding.btnArtistYoutube.setOnClickListener {
+        binding.settingsHub.btnArtistYoutube.setOnClickListener {
             openYoutubeSearch(artist.name)
         }
 
@@ -1772,12 +1914,12 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             val bitmap = info?.imageBitmap
             withContext(Dispatchers.Main) {
                 if (currentLexiconArtist?.id == artist.id && bitmap != null) {
-                    binding.imgArtistAvatar.setImageBitmap(bitmap)
+                    binding.settingsHub.imgArtistAvatar.setImageBitmap(bitmap)
                 }
             }
         }
 
-        binding.layoutDiscographyContainer.removeAllViews()
+        binding.settingsHub.layoutDiscographyContainer.removeAllViews()
 
         if (artist.discography.isEmpty()) {
             val tvEmpty = TextView(this).apply {
@@ -1786,10 +1928,10 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                 textSize = 11f
                 setPadding(0, 8, 0, 8)
             }
-            binding.layoutDiscographyContainer.addView(tvEmpty)
+            binding.settingsHub.layoutDiscographyContainer.addView(tvEmpty)
         } else {
             for (album in artist.discography) {
-                val albumView = layoutInflater.inflate(R.layout.item_lexicon_album, binding.layoutDiscographyContainer, false)
+                val albumView = layoutInflater.inflate(R.layout.item_lexicon_album, binding.settingsHub.layoutDiscographyContainer, false)
                 val tvAlbumYear = albumView.findViewById<TextView>(R.id.tvAlbumYear)
                 val tvAlbumTitle = albumView.findViewById<TextView>(R.id.tvAlbumTitle)
                 val tvAlbumTrackBadge = albumView.findViewById<TextView>(R.id.tvAlbumTrackBadge)
@@ -1871,18 +2013,18 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                     }
                 }
 
-                binding.layoutDiscographyContainer.addView(albumView)
+                binding.settingsHub.layoutDiscographyContainer.addView(albumView)
             }
         }
 
-        binding.layoutRelatedContainer.removeAllViews()
+        binding.settingsHub.layoutRelatedContainer.removeAllViews()
 
         if (artist.relatedArtists.isEmpty()) {
-            binding.tvRelatedTitle.visibility = View.GONE
+            binding.settingsHub.tvRelatedTitle.visibility = View.GONE
         } else {
-            binding.tvRelatedTitle.visibility = View.VISIBLE
+            binding.settingsHub.tvRelatedTitle.visibility = View.VISIBLE
             for (rel in artist.relatedArtists) {
-                val relCard = layoutInflater.inflate(R.layout.item_related_artist, binding.layoutRelatedContainer, false)
+                val relCard = layoutInflater.inflate(R.layout.item_related_artist, binding.settingsHub.layoutRelatedContainer, false)
                 val tvPlaceholder = relCard.findViewById<TextView>(R.id.tvRelatedAvatarPlaceholder)
                 val tvName = relCard.findViewById<TextView>(R.id.tvRelatedName)
 
@@ -1903,11 +2045,11 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                     }
                 }
 
-                binding.layoutRelatedContainer.addView(relCard)
+                binding.settingsHub.layoutRelatedContainer.addView(relCard)
             }
         }
 
-        binding.scrollArtistDetail.scrollTo(0, 0)
+        binding.settingsHub.scrollArtistDetail.scrollTo(0, 0)
     }
 
     private fun openYoutubeSearch(query: String) {
