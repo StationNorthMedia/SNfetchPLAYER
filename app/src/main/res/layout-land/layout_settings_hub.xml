@@ -392,28 +392,28 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBackFromBroadcast"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="40dp"
-                android:layout_height="36dp"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="⬅️"
-                android:textColor="@color/nord11"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:strokeColor="@color/nord11"
-                app:strokeWidth="1.5dp" />
+                app:backgroundTint="@color/nord11"
+                app:cornerRadius="6dp"
+                app:icon="@drawable/ic_arrow_back"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="22dp"
+                app:iconTint="@color/nord0"
+                app:strokeWidth="0dp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/nord1"
                 app:cardCornerRadius="6dp"
-                app:strokeColor="@color/nord11"
-                app:strokeWidth="1dp">
+                app:strokeWidth="0dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -421,7 +421,7 @@
                     android:padding="6dp"
                     android:text="👑 &quot;Route your audio &amp; video playlists with royal precision.&quot; — Her Majesty Queen Directives"
                     android:textColor="@color/nord11"
-                    android:textSize="12.5sp"
+                    android:textSize="15sp"
                     android:textStyle="bold|italic" />
             </com.google.android.material.card.MaterialCardView>
 
@@ -542,19 +542,19 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnBackFromCurator"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp"
+                    android:layout_width="44dp"
+                    android:layout_height="40dp"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="0dp"
-                    android:text="⬅️ ZURÜCK ZUM DASHBOARD"
-                    android:textColor="@color/nord15"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    app:strokeColor="@color/nord15"
-                    app:strokeWidth="1.5dp" />
+                    android:padding="0dp"
+                    app:backgroundTint="@color/nord15"
+                    app:cornerRadius="6dp"
+                    app:icon="@drawable/ic_arrow_back"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="22dp"
+                    app:iconTint="@color/nord0"
+                    app:strokeWidth="0dp" />
 
             </LinearLayout>
 
@@ -984,19 +984,19 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnBackFromLexicon"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="34dp"
+                    android:layout_width="44dp"
+                    android:layout_height="40dp"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="0dp"
-                    android:text="⬅️ ZURÜCK ZUM DASHBOARD"
-                    android:textColor="@color/nord7"
-                    android:textSize="10.5sp"
-                    android:textStyle="bold"
-                    app:strokeColor="@color/nord7"
-                    app:strokeWidth="1.5dp" />
+                    android:padding="0dp"
+                    app:backgroundTint="@color/nord7"
+                    app:cornerRadius="6dp"
+                    app:icon="@drawable/ic_arrow_back"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="22dp"
+                    app:iconTint="@color/nord0"
+                    app:strokeWidth="0dp" />
 
             </LinearLayout>
 
@@ -1267,28 +1267,28 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBackFromTvDisplay"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="40dp"
-                android:layout_height="36dp"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="⬅️"
-                android:textColor="@color/nord12"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:strokeColor="@color/nord12"
-                app:strokeWidth="1.5dp" />
+                app:backgroundTint="@color/nord12"
+                app:cornerRadius="6dp"
+                app:icon="@drawable/ic_arrow_back"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="22dp"
+                app:iconTint="@color/nord0"
+                app:strokeWidth="0dp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/nord1"
                 app:cardCornerRadius="6dp"
-                app:strokeColor="@color/nord12"
-                app:strokeWidth="1dp">
+                app:strokeWidth="0dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -1296,7 +1296,7 @@
                     android:padding="6dp"
                     android:text="👑 &quot;Visual clarity reflects royal standards. Set your screen resolution to perfection.&quot; — Her Majesty Queen Directives"
                     android:textColor="@color/nord12"
-                    android:textSize="12.5sp"
+                    android:textSize="15sp"
                     android:textStyle="bold|italic" />
             </com.google.android.material.card.MaterialCardView>
 
@@ -1581,28 +1581,28 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBackFromAudioVisualizer"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="40dp"
-                android:layout_height="36dp"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="⬅️"
-                android:textColor="@color/nord8"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:strokeColor="@color/nord8"
-                app:strokeWidth="1.5dp" />
+                app:backgroundTint="@color/nord8"
+                app:cornerRadius="6dp"
+                app:icon="@drawable/ic_arrow_back"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="22dp"
+                app:iconTint="@color/nord0"
+                app:strokeWidth="0dp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/nord1"
                 app:cardCornerRadius="6dp"
-                app:strokeColor="@color/nord8"
-                app:strokeWidth="1dp">
+                app:strokeWidth="0dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -1610,7 +1610,7 @@
                     android:padding="6dp"
                     android:text="👑 &quot;Resonate with pure sound and rhythm. Tune the audio spectrum to your majesty's ear.&quot; — Her Majesty Queen Directives"
                     android:textColor="@color/nord8"
-                    android:textSize="12.5sp"
+                    android:textSize="15sp"
                     android:textStyle="bold|italic" />
             </com.google.android.material.card.MaterialCardView>
 
@@ -1805,28 +1805,28 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBackFromChronicles"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="40dp"
-                android:layout_height="36dp"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="⬅️"
-                android:textColor="@color/nord13"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:strokeColor="@color/nord13"
-                app:strokeWidth="1.5dp" />
+                app:backgroundTint="@color/nord13"
+                app:cornerRadius="6dp"
+                app:icon="@drawable/ic_arrow_back"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="22dp"
+                app:iconTint="@color/nord0"
+                app:strokeWidth="0dp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/nord1"
                 app:cardCornerRadius="6dp"
-                app:strokeColor="@color/nord13"
-                app:strokeWidth="1dp">
+                app:strokeWidth="0dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -1834,7 +1834,7 @@
                     android:padding="6dp"
                     android:text="👑 &quot;Every legend has a beginning. Read the stories of Station North.&quot; — Her Majesty Queen Directives"
                     android:textColor="@color/nord13"
-                    android:textSize="12.5sp"
+                    android:textSize="15sp"
                     android:textStyle="bold|italic" />
             </com.google.android.material.card.MaterialCardView>
 
@@ -1899,28 +1899,28 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBackFromQueenTutorial"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="40dp"
-                android:layout_height="36dp"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="⬅️"
-                android:textColor="@color/nord9"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:strokeColor="@color/nord9"
-                app:strokeWidth="1.5dp" />
+                app:backgroundTint="@color/nord9"
+                app:cornerRadius="6dp"
+                app:icon="@drawable/ic_arrow_back"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="22dp"
+                app:iconTint="@color/nord0"
+                app:strokeWidth="0dp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/nord1"
                 app:cardCornerRadius="6dp"
-                app:strokeColor="@color/nord9"
-                app:strokeWidth="1dp">
+                app:strokeWidth="0dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -1928,7 +1928,7 @@
                     android:padding="6dp"
                     android:text="👑 &quot;Welcome to the academy, darling. Master our broadcast network.&quot; — Her Majesty Queen Directives"
                     android:textColor="@color/nord9"
-                    android:textSize="12.5sp"
+                    android:textSize="15sp"
                     android:textStyle="bold|italic" />
             </com.google.android.material.card.MaterialCardView>
 
@@ -2052,28 +2052,28 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBackFromSystemCache"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="40dp"
-                android:layout_height="36dp"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:text="⬅️"
-                android:textColor="@color/nord14"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:strokeColor="@color/nord14"
-                app:strokeWidth="1.5dp" />
+                app:backgroundTint="@color/nord14"
+                app:cornerRadius="6dp"
+                app:icon="@drawable/ic_arrow_back"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="22dp"
+                app:iconTint="@color/nord0"
+                app:strokeWidth="0dp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/nord1"
                 app:cardCornerRadius="6dp"
-                app:strokeColor="@color/nord14"
-                app:strokeWidth="1dp">
+                app:strokeWidth="0dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -2081,7 +2081,7 @@
                     android:padding="6dp"
                     android:text="👑 &quot;A well-maintained machine rules without interruption. Manage storage &amp; updates.&quot; — Her Majesty Queen Directives"
                     android:textColor="@color/nord14"
-                    android:textSize="12.5sp"
+                    android:textSize="15sp"
                     android:textStyle="bold|italic" />
             </com.google.android.material.card.MaterialCardView>
 
