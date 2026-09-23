@@ -49,6 +49,7 @@ import net.sn.fetchplayer.data.LexiconArtist
 import net.sn.fetchplayer.data.WikipediaArtistFetcher
 import net.sn.fetchplayer.extractor.YouTubePlaylistExtractor
 import net.sn.fetchplayer.manager.CuratedCatalogManager
+import net.sn.fetchplayer.manager.CustomPlaylist
 import net.sn.fetchplayer.manager.PlaylistManager.RawPlaylistItem
 import net.sn.fetchplayer.model.PlaybackMode
 import net.sn.fetchplayer.model.Track
@@ -399,6 +400,8 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         val input = EditText(this).apply {
             hint = "Playlist Name"
             setPadding(32, 24, 32, 24)
+            setTextColor(ContextCompat.getColor(this@MainActivity, R.color.nord6))
+            setHintTextColor(ContextCompat.getColor(this@MainActivity, R.color.nord3))
         }
         AlertDialog.Builder(this)
             .setTitle("Create New Playlist")
@@ -409,6 +412,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                     val created = curatedCatalogManager.createPlaylist(name)
                     updateCuratorCatalogView()
                     syncMasterCatalogWithRadioService()
+                    renderPlaylistManagerList()
                     Toast.makeText(this, "Created playlist '${created.name}'", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -880,6 +884,9 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             binding.cardTrackInfo.visibility = View.GONE
             binding.cardArtistInfoContainer.visibility = View.GONE
             binding.cardSettingsContainer.visibility = View.VISIBLE
+            if (radioService?.player?.isPlaying == true) {
+                radioService?.player?.pause()
+            }
         } else {
             binding.cardPlayerContainer.visibility = View.VISIBLE
             binding.cardTrackInfo.visibility = View.VISIBLE
@@ -1132,27 +1139,14 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         hub.btnBackFromQueenTutorial.setOnClickListener { showSettingsModule(0) }
         hub.btnBackFromSystemCache.setOnClickListener { showSettingsModule(0) }
 
-        // 3. Module 1: Playlist Manager (TV & Radio Channel Routing Spinners)
-        val playlists = curatedCatalogManager.getPlaylists()
-        val playlistNames = playlists.map { it.name }
-
-        val spinnerAdapter = android.widget.ArrayAdapter(this, android.R.layout.simple_spinner_item, playlistNames).apply {
-            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // 3. Module 1: Playlist Manager & Module 2 Curator Dropdown
+        hub.btnCreateNewPlaylist.setOnClickListener {
+            showCreatePlaylistDialog()
         }
-
-        hub.spinnerTvPlaylist.adapter = spinnerAdapter
-        hub.spinnerRadioPlaylist.adapter = spinnerAdapter
-
-        val currentTvId = SettingsManager.getTvPlaylistId(this)
-        val tvIdx = playlists.indexOfFirst { it.id == currentTvId }.coerceAtLeast(0)
-        hub.spinnerTvPlaylist.setSelection(tvIdx)
-
-        val currentRadioId = SettingsManager.getRadioPlaylistId(this)
-        val radioIdx = playlists.indexOfFirst { it.id == currentRadioId }.coerceAtLeast(0)
-        hub.spinnerRadioPlaylist.setSelection(radioIdx)
 
         hub.spinnerTvPlaylist.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val playlists = curatedCatalogManager.getPlaylists()
                 if (position in playlists.indices) {
                     val selected = playlists[position]
                     SettingsManager.setTvPlaylistId(this@MainActivity, selected.id)
@@ -1163,6 +1157,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
 
         hub.spinnerRadioPlaylist.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val playlists = curatedCatalogManager.getPlaylists()
                 if (position in playlists.indices) {
                     val selected = playlists[position]
                     SettingsManager.setRadioPlaylistId(this@MainActivity, selected.id)
@@ -1170,6 +1165,22 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             }
             override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
         }
+
+        hub.spinnerCuratorPlaylistSelect.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val playlists = curatedCatalogManager.getPlaylists()
+                if (position in playlists.indices) {
+                    val selected = playlists[position]
+                    if (selected.id != curatedCatalogManager.getActivePlaylistId()) {
+                        curatedCatalogManager.setActivePlaylistId(selected.id)
+                        setupCuratorStudio()
+                    }
+                }
+            }
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
+        }
+
+        renderPlaylistManagerList()
 
         // 4. Module 4: TV & Display Settings
         val currentQuality = SettingsManager.getVideoQuality(this)
@@ -1393,6 +1404,188 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             checkAppUpdate(isManualCheck = true)
         }
     }
+
+    private fun renderPlaylistManagerList() {
+        val hub = binding.settingsHub
+        hub.layoutPlaylistManagerList.removeAllViews()
+
+        val playlists = curatedCatalogManager.getPlaylists()
+        val playlistNames = playlists.map { it.name }
+
+        val spinnerAdapter = android.widget.ArrayAdapter(this, android.R.layout.simple_spinner_item, playlistNames).apply {
+            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        }
+
+        hub.spinnerTvPlaylist.adapter = spinnerAdapter
+        hub.spinnerRadioPlaylist.adapter = spinnerAdapter
+        hub.spinnerCuratorPlaylistSelect.adapter = spinnerAdapter
+
+        val currentTvId = SettingsManager.getTvPlaylistId(this)
+        val tvIdx = playlists.indexOfFirst { it.id == currentTvId }.coerceAtLeast(0)
+        hub.spinnerTvPlaylist.setSelection(tvIdx)
+
+        val currentRadioId = SettingsManager.getRadioPlaylistId(this)
+        val radioIdx = playlists.indexOfFirst { it.id == currentRadioId }.coerceAtLeast(0)
+        hub.spinnerRadioPlaylist.setSelection(radioIdx)
+
+        val activeCuratorId = curatedCatalogManager.getActivePlaylistId()
+        val curatorIdx = playlists.indexOfFirst { it.id == activeCuratorId }.coerceAtLeast(0)
+        hub.spinnerCuratorPlaylistSelect.setSelection(curatorIdx)
+
+        val density = resources.displayMetrics.density
+
+        for (playlist in playlists) {
+            val itemContainer = LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                setPadding(0, (6 * density).toInt(), 0, (6 * density).toInt())
+            }
+
+            val topRow = LinearLayout(this).apply {
+                orientation = LinearLayout.HORIZONTAL
+                gravity = android.view.Gravity.CENTER_VERTICAL
+            }
+
+            val tvInfo = TextView(this).apply {
+                layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+                text = "🎵 ${playlist.name} (${playlist.tracks.size} Tracks)"
+                setTextColor(ContextCompat.getColor(this@MainActivity, R.color.nord6))
+                textSize = 12.5f
+                setTypeface(null, android.graphics.Typeface.BOLD)
+            }
+
+            val btnJumpToCurator = com.google.android.material.button.MaterialButton(this, null, com.google.android.material.R.attr.borderlessButtonStyle).apply {
+                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, (36 * density).toInt()).apply {
+                    marginStart = (4 * density).toInt()
+                }
+                text = "✏️ Edit in Curator"
+                setTextColor(ContextCompat.getColor(this@MainActivity, R.color.nord15))
+                textSize = 10.5f
+                insetTop = 0
+                insetBottom = 0
+                setPadding((6 * density).toInt(), 0, (6 * density).toInt(), 0)
+                setOnClickListener {
+                    curatedCatalogManager.setActivePlaylistId(playlist.id)
+                    setupCuratorStudio()
+                    // Jump directly to Curator Studio (Module 2)
+                    binding.settingsHub.layoutSettingsDashboardGrid.visibility = View.GONE
+                    binding.settingsHub.layoutBroadcastSettings.visibility = View.GONE
+                    binding.settingsHub.layoutCuratorStudio.visibility = View.VISIBLE
+                    binding.settingsHub.layoutNordLogsStudio.visibility = View.GONE
+                    binding.settingsHub.layoutTvDisplaySettings.visibility = View.GONE
+                    binding.settingsHub.layoutAudioVisualizerSettings.visibility = View.GONE
+                    binding.settingsHub.layoutChroniclesSettings.visibility = View.GONE
+                    binding.settingsHub.layoutQueenTutorialSettings.visibility = View.GONE
+                    binding.settingsHub.layoutSystemCacheUpdateSettings.visibility = View.GONE
+                    binding.cardSettingsContainer.strokeColor = ContextCompat.getColor(this@MainActivity, R.color.nord15)
+                }
+            }
+
+            val btnRename = com.google.android.material.button.MaterialButton(this, null, com.google.android.material.R.attr.borderlessButtonStyle).apply {
+                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, (36 * density).toInt()).apply {
+                    marginStart = (2 * density).toInt()
+                }
+                text = "✏️ Rename"
+                setTextColor(ContextCompat.getColor(this@MainActivity, R.color.nord8))
+                textSize = 10.5f
+                insetTop = 0
+                insetBottom = 0
+                setPadding((4 * density).toInt(), 0, (4 * density).toInt(), 0)
+                setOnClickListener {
+                    showRenamePlaylistDialog(playlist)
+                }
+            }
+
+            val btnExport = com.google.android.material.button.MaterialButton(this, null, com.google.android.material.R.attr.borderlessButtonStyle).apply {
+                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, (36 * density).toInt()).apply {
+                    marginStart = (2 * density).toInt()
+                }
+                text = "💾 Export"
+                setTextColor(ContextCompat.getColor(this@MainActivity, R.color.nord13))
+                textSize = 10.5f
+                insetTop = 0
+                insetBottom = 0
+                setPadding((4 * density).toInt(), 0, (4 * density).toInt(), 0)
+                setOnClickListener {
+                    val safeName = playlist.name.replace(Regex("[^a-zA-Z0-9_]"), "_")
+                    exportJsonLauncher.launch("$safeName.json")
+                }
+            }
+
+            val btnDelete = com.google.android.material.button.MaterialButton(this, null, com.google.android.material.R.attr.borderlessButtonStyle).apply {
+                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, (36 * density).toInt()).apply {
+                    marginStart = (2 * density).toInt()
+                }
+                text = "🗑️ Delete"
+                setTextColor(ContextCompat.getColor(this@MainActivity, R.color.nord11))
+                textSize = 10.5f
+                insetTop = 0
+                insetBottom = 0
+                setPadding((4 * density).toInt(), 0, (4 * density).toInt(), 0)
+                setOnClickListener {
+                    confirmDeletePlaylist(playlist)
+                }
+            }
+
+            topRow.addView(tvInfo)
+            topRow.addView(btnJumpToCurator)
+            topRow.addView(btnRename)
+            topRow.addView(btnExport)
+            topRow.addView(btnDelete)
+
+            itemContainer.addView(topRow)
+
+            val divider = View(this).apply {
+                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1).apply {
+                    topMargin = (6 * density).toInt()
+                }
+                setBackgroundColor(ContextCompat.getColor(this@MainActivity, R.color.nord3))
+            }
+            itemContainer.addView(divider)
+
+            hub.layoutPlaylistManagerList.addView(itemContainer)
+        }
+    }
+
+    private fun showRenamePlaylistDialog(playlist: CustomPlaylist) {
+        val etInput = EditText(this).apply {
+            setText(playlist.name)
+            setPadding(40, 30, 40, 30)
+            setTextColor(ContextCompat.getColor(this@MainActivity, R.color.nord6))
+        }
+        AlertDialog.Builder(this)
+            .setTitle("Rename Playlist")
+            .setView(etInput)
+            .setPositiveButton("Save") { _, _ ->
+                val newName = etInput.text.toString().trim()
+                if (newName.isNotEmpty()) {
+                    curatedCatalogManager.renamePlaylist(playlist.id, newName)
+                    renderPlaylistManagerList()
+                    Toast.makeText(this, "Playlist renamed to $newName", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun confirmDeletePlaylist(playlist: CustomPlaylist) {
+        if (curatedCatalogManager.getPlaylists().size <= 1) {
+            Toast.makeText(this, "Cannot delete the last remaining playlist!", Toast.LENGTH_SHORT).show()
+            return
+        }
+        AlertDialog.Builder(this)
+            .setTitle("Delete Playlist")
+            .setMessage("Are you sure you want to delete '${playlist.name}'?")
+            .setPositiveButton("Delete") { _, _ ->
+                val deleted = curatedCatalogManager.deletePlaylist(playlist.id)
+                if (deleted) {
+                    renderPlaylistManagerList()
+                    Toast.makeText(this, "Playlist deleted!", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
 
     private fun updateCacheSizeUi() {
         val isEnabled = CacheManager.isCacheEnabled(this)
