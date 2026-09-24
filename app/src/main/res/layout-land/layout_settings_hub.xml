@@ -590,7 +590,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3.8"
+            android:layout_weight="2.8"
             android:orientation="vertical"
             android:paddingEnd="4dp">
 
@@ -645,165 +645,151 @@
 
             </LinearLayout>
 
-            <!-- Video Deck (16:9 Video Box + Right 5-Button Column) -->
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <!-- Video Deck Box (16:9 Video Player) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardCuratorPreviewPlayer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp">
+                android:layout_marginTop="4dp"
+                app:cardBackgroundColor="@color/black"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="3dp"
+                app:strokeColor="@color/nord15"
+                app:strokeWidth="1.5dp">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardCuratorPreviewPlayer"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.media3.ui.PlayerView
+                        android:id="@+id/curatorPlayerView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintDimensionRatio="16:9"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:resize_mode="fit"
+                        app:use_controller="false" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Player Controls (Horizontal row directly BELOW player, matching player width) -->
+            <LinearLayout
+                android:id="@+id/layoutCuratorControls"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCuratorPlayPause"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/black"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="3dp"
-                    app:layout_constraintEnd_toStartOf="@+id/layoutCuratorControls"
-                    app:layout_constraintHorizontal_weight="8"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:padding="0dp"
+                    app:backgroundTint="@color/nord8"
+                    app:cornerRadius="4dp"
+                    app:icon="@drawable/ic_play"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="16dp"
+                    app:iconTint="@color/nord0"
+                    app:rippleColor="@color/nord6"
+                    app:strokeColor="@color/nord7"
+                    app:strokeWidth="1.5dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCuratorPrev"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="2dp"
+                    android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:padding="0dp"
+                    app:backgroundTint="@color/nord12"
+                    app:cornerRadius="4dp"
+                    app:icon="@drawable/ic_previous"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="16dp"
+                    app:iconTint="@color/nord0"
+                    app:rippleColor="@color/nord6"
+                    app:strokeColor="@color/nord12"
+                    app:strokeWidth="1.5dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCuratorNext"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="2dp"
+                    android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:padding="0dp"
+                    app:backgroundTint="@color/nord15"
+                    app:cornerRadius="4dp"
+                    app:icon="@drawable/ic_next"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="16dp"
+                    app:iconTint="@color/nord0"
+                    app:rippleColor="@color/nord6"
                     app:strokeColor="@color/nord15"
-                    app:strokeWidth="1.5dp">
+                    app:strokeWidth="1.5dp" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <androidx.media3.ui.PlayerView
-                            android:id="@+id/curatorPlayerView"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintDimensionRatio="16:9"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:resize_mode="fit"
-                            app:use_controller="false" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <LinearLayout
-                    android:id="@+id/layoutCuratorControls"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCuratorRepeat"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="4dp"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="@id/cardCuratorPreviewPlayer"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="2"
-                    app:layout_constraintStart_toEndOf="@id/cardCuratorPreviewPlayer"
-                    app:layout_constraintTop_toTopOf="@id/cardCuratorPreviewPlayer">
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="2dp"
+                    android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:padding="0dp"
+                    app:backgroundTint="@color/nord13"
+                    app:cornerRadius="4dp"
+                    app:icon="@drawable/ic_repeat"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="16dp"
+                    app:iconTint="@color/nord0"
+                    app:rippleColor="@color/nord6"
+                    app:strokeColor="@color/nord13"
+                    app:strokeWidth="1.5dp" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCuratorPlayPause"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:padding="0dp"
-                        app:backgroundTint="@color/nord8"
-                        app:cornerRadius="4dp"
-                        app:icon="@drawable/ic_play"
-                        app:iconGravity="textStart"
-                        app:iconPadding="0dp"
-                        app:iconSize="14dp"
-                        app:iconTint="@color/nord0"
-                        app:rippleColor="@color/nord6"
-                        app:strokeColor="@color/nord7"
-                        app:strokeWidth="1.5dp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCuratorFullscreen"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="2dp"
+                    android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:padding="0dp"
+                    app:backgroundTint="@color/nord7"
+                    app:cornerRadius="4dp"
+                    app:icon="@drawable/ic_fullscreen"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="16dp"
+                    app:iconTint="@color/nord0"
+                    app:rippleColor="@color/nord6"
+                    app:strokeColor="@color/nord7"
+                    app:strokeWidth="1.5dp" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCuratorPrev"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_weight="1"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:padding="0dp"
-                        app:backgroundTint="@color/nord12"
-                        app:cornerRadius="4dp"
-                        app:icon="@drawable/ic_previous"
-                        app:iconGravity="textStart"
-                        app:iconPadding="0dp"
-                        app:iconSize="14dp"
-                        app:iconTint="@color/nord0"
-                        app:rippleColor="@color/nord6"
-                        app:strokeColor="@color/nord12"
-                        app:strokeWidth="1.5dp" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCuratorNext"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_weight="1"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:padding="0dp"
-                        app:backgroundTint="@color/nord15"
-                        app:cornerRadius="4dp"
-                        app:icon="@drawable/ic_next"
-                        app:iconGravity="textStart"
-                        app:iconPadding="0dp"
-                        app:iconSize="14dp"
-                        app:iconTint="@color/nord0"
-                        app:rippleColor="@color/nord6"
-                        app:strokeColor="@color/nord15"
-                        app:strokeWidth="1.5dp" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCuratorRepeat"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_weight="1"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:padding="0dp"
-                        app:backgroundTint="@color/nord13"
-                        app:cornerRadius="4dp"
-                        app:icon="@drawable/ic_repeat"
-                        app:iconGravity="textStart"
-                        app:iconPadding="0dp"
-                        app:iconSize="14dp"
-                        app:iconTint="@color/nord0"
-                        app:rippleColor="@color/nord6"
-                        app:strokeColor="@color/nord13"
-                        app:strokeWidth="1.5dp" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnCuratorFullscreen"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_weight="1"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:padding="0dp"
-                        app:backgroundTint="@color/nord7"
-                        app:cornerRadius="4dp"
-                        app:icon="@drawable/ic_fullscreen"
-                        app:iconGravity="textStart"
-                        app:iconPadding="0dp"
-                        app:iconSize="14dp"
-                        app:iconTint="@color/nord0"
-                        app:rippleColor="@color/nord6"
-                        app:strokeColor="@color/nord7"
-                        app:strokeWidth="1.5dp" />
-
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvCuratorPreviewTitle"
@@ -834,7 +820,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="6.2"
+            android:layout_weight="7.2"
             android:orientation="vertical"
             android:paddingStart="4dp">
 
