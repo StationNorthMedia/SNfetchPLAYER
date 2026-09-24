@@ -550,6 +550,10 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
     }
 
     private fun setupAudioSessionVisualizer() {
+        if (!SettingsManager.isFftVisualizerEnabled(this)) {
+            releaseAudioVisualizer()
+            return
+        }
         val srv = radioService ?: return
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             AppLogger.d("MainActivity", "RECORD_AUDIO permission required for Real FFT Audio Visualizer")
@@ -564,7 +568,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                     setDataCaptureListener(object : Visualizer.OnDataCaptureListener {
                         override fun onWaveFormDataCapture(visualizer: Visualizer?, waveform: ByteArray?, samplingRate: Int) {}
                         override fun onFftDataCapture(visualizer: Visualizer?, fft: ByteArray?, samplingRate: Int) {
-                            if (fft != null && srv.currentMode == PlaybackMode.SN_RADIO) {
+                            if (fft != null && srv.currentMode == PlaybackMode.SN_RADIO && SettingsManager.isFftVisualizerEnabled(this@MainActivity)) {
                                 binding.audioVisualizer.updateFft(fft)
                             }
                         }
@@ -584,6 +588,50 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             audioVisualizerFx?.release()
             audioVisualizerFx = null
         } catch (_: Exception) {}
+    }
+
+    private fun applyVisualizerSettings() {
+        val isFftEnabled = SettingsManager.isFftVisualizerEnabled(this)
+        val isRadioActive = radioService?.currentMode == PlaybackMode.SN_RADIO && !isSettingsModeActive
+
+        if (isFftEnabled && isRadioActive) {
+            binding.audioVisualizer.visibility = View.VISIBLE
+            binding.audioVisualizer.setAudioPlaying(radioService?.player?.isPlaying == true)
+            setupAudioSessionVisualizer()
+        } else {
+            binding.audioVisualizer.visibility = View.GONE
+            releaseAudioVisualizer()
+        }
+
+        val isQueenQuotesEnabled = SettingsManager.isQueenQuotesEnabled(this)
+        if (!isRadioActive || !isQueenQuotesEnabled) {
+            binding.cardRadioWikipediaPanel.visibility = View.GONE
+        }
+    }
+
+    private fun setupTvFocusHighlight(view: View) {
+        view.isFocusable = true
+        view.isClickable = true
+        view.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                v.animate().scaleX(1.03f).scaleY(1.03f).setDuration(150).start()
+                if (v is com.google.android.material.card.MaterialCardView) {
+                    v.strokeColor = ContextCompat.getColor(this, R.color.nord8)
+                    v.strokeWidth = (3 * resources.displayMetrics.density).toInt()
+                } else if (v is com.google.android.material.button.MaterialButton) {
+                    v.strokeColor = android.content.res.ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nord8))
+                    v.strokeWidth = (2 * resources.displayMetrics.density).toInt()
+                }
+            } else {
+                v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(150).start()
+                if (v is com.google.android.material.card.MaterialCardView) {
+                    v.strokeColor = ContextCompat.getColor(this, R.color.nord2)
+                    v.strokeWidth = (1 * resources.displayMetrics.density).toInt()
+                } else if (v is com.google.android.material.button.MaterialButton) {
+                    v.strokeWidth = 0
+                }
+            }
+        }
     }
 
     private fun setupListeners() {
@@ -701,6 +749,11 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
 
         binding.audioVisualizer.setOnBassPulseListener(object : NordAudioVisualizerView.OnBassPulseListener {
             override fun onBassPulse(amplitude: Float) {
+                if (!SettingsManager.isBassPulseEnabled(this@MainActivity)) {
+                    binding.cardRadioArtistIconContainer.scaleX = 1.0f
+                    binding.cardRadioArtistIconContainer.scaleY = 1.0f
+                    return
+                }
                 val scale = 1.0f + (amplitude * 0.15f)
                 binding.cardRadioArtistIconContainer.scaleX = scale
                 binding.cardRadioArtistIconContainer.scaleY = scale
@@ -1143,6 +1196,20 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         if (moduleId == 3) {
             displayRandomLexiconArtist()
         }
+
+        hub.root.post {
+            when (moduleId) {
+                0 -> hub.cardTileBroadcast.requestFocus()
+                1 -> hub.btnBackFromBroadcast.requestFocus()
+                2 -> hub.btnBackFromCurator.requestFocus()
+                3 -> hub.btnBackFromLexicon.requestFocus()
+                4 -> hub.btnBackFromTvDisplay.requestFocus()
+                5 -> hub.btnBackFromAudioVisualizer.requestFocus()
+                6 -> hub.btnBackFromChronicles.requestFocus()
+                7 -> hub.btnBackFromQueenTutorial.requestFocus()
+                8 -> hub.btnBackFromSystemCache.requestFocus()
+            }
+        }
     }
 
     private fun setupSettingsHub() {
@@ -1284,17 +1351,34 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         hub.switchFftVisualizer.isChecked = SettingsManager.isFftVisualizerEnabled(this)
         hub.switchFftVisualizer.setOnCheckedChangeListener { _, isChecked ->
             SettingsManager.setFftVisualizerEnabled(this, isChecked)
+            applyVisualizerSettings()
         }
 
         hub.switchBassPulse.isChecked = SettingsManager.isBassPulseEnabled(this)
         hub.switchBassPulse.setOnCheckedChangeListener { _, isChecked ->
             SettingsManager.setBassPulseEnabled(this, isChecked)
+            if (!isChecked) {
+                binding.cardRadioArtistIconContainer.scaleX = 1.0f
+                binding.cardRadioArtistIconContainer.scaleY = 1.0f
+            }
         }
 
         hub.switchQueenQuotes.isChecked = SettingsManager.isQueenQuotesEnabled(this)
         hub.switchQueenQuotes.setOnCheckedChangeListener { _, isChecked ->
             SettingsManager.setQueenQuotesEnabled(this, isChecked)
+            applyVisualizerSettings()
         }
+
+        // Apply Focus Highlights for TV remote navigation
+        val allFocusableElements = listOf(
+            hub.cardTileBroadcast, hub.cardTileCurator, hub.cardTileLexicon, hub.cardTileTvDisplay,
+            hub.cardTileAudioVisualizer, hub.cardTileChronicles, hub.cardTileQueenTutorial, hub.cardTileSystemCache,
+            hub.btnBackFromBroadcast, hub.btnBackFromCurator, hub.btnBackFromLexicon, hub.btnBackFromTvDisplay,
+            hub.btnBackFromAudioVisualizer, hub.btnBackFromChronicles, hub.btnBackFromQueenTutorial, hub.btnBackFromSystemCache,
+            hub.btnCreateNewPlaylist, hub.switchFftVisualizer, hub.switchBassPulse, hub.switchQueenQuotes,
+            hub.switchSlantedBauchbinden, hub.btnTabImported, hub.btnTabSaved, hub.btnLoadPlaylist
+        )
+        allFocusableElements.forEach { setupTvFocusHighlight(it) }
 
         // 6. Module 6: Chronicles E-Book (Inline Content)
         val rawChroniclesText = net.sn.fetchplayer.manager.QueenQuotesManager.getChroniclesText(this)
@@ -1479,34 +1563,56 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         val density = resources.displayMetrics.density
 
         for (playlist in playlists) {
-            val itemContainer = LinearLayout(this).apply {
-                orientation = LinearLayout.VERTICAL
-                setPadding(0, (6 * density).toInt(), 0, (6 * density).toInt())
+            val cardContainer = com.google.android.material.card.MaterialCardView(this).apply {
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    bottomMargin = (8 * density).toInt()
+                }
+                setCardBackgroundColor(ContextCompat.getColor(this@MainActivity, R.color.nord1))
+                strokeColor = ContextCompat.getColor(this@MainActivity, R.color.nord2)
+                strokeWidth = (1 * density).toInt()
+                radius = 8 * density
+                isFocusable = true
+                isClickable = true
             }
 
-            val topRow = LinearLayout(this).apply {
-                orientation = LinearLayout.HORIZONTAL
-                gravity = android.view.Gravity.CENTER_VERTICAL
+            val contentBox = LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                setPadding((12 * density).toInt(), (10 * density).toInt(), (12 * density).toInt(), (10 * density).toInt())
             }
 
             val tvInfo = TextView(this).apply {
-                layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
                 text = "🎵 ${playlist.name} (${playlist.tracks.size} Tracks)"
-                setTextColor(ContextCompat.getColor(this@MainActivity, R.color.nord6))
-                textSize = 12.5f
+                setTextColor(ContextCompat.getColor(this@MainActivity, R.color.nord8))
+                textSize = 13.5f
                 setTypeface(null, android.graphics.Typeface.BOLD)
+            }
+            contentBox.addView(tvInfo)
+
+            // Sub-row 1: Edit in Curator & Rename
+            val rowButtonsTop = LinearLayout(this).apply {
+                orientation = LinearLayout.HORIZONTAL
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    topMargin = (6 * density).toInt()
+                }
             }
 
             val btnJumpToCurator = com.google.android.material.button.MaterialButton(this, null, com.google.android.material.R.attr.borderlessButtonStyle).apply {
-                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, (36 * density).toInt()).apply {
-                    marginStart = (4 * density).toInt()
-                }
+                layoutParams = LinearLayout.LayoutParams(0, (38 * density).toInt(), 1f)
                 text = "✏️ Edit in Curator"
                 setTextColor(ContextCompat.getColor(this@MainActivity, R.color.nord15))
-                textSize = 10.5f
+                textSize = 11f
                 insetTop = 0
                 insetBottom = 0
-                setPadding((6 * density).toInt(), 0, (6 * density).toInt(), 0)
                 setOnClickListener {
                     curatedCatalogManager.setActivePlaylistId(playlist.id)
                     isShowingSavedCatalogTab = true
@@ -1525,30 +1631,41 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             }
 
             val btnRename = com.google.android.material.button.MaterialButton(this, null, com.google.android.material.R.attr.borderlessButtonStyle).apply {
-                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, (36 * density).toInt()).apply {
-                    marginStart = (2 * density).toInt()
+                layoutParams = LinearLayout.LayoutParams(0, (38 * density).toInt(), 1f).apply {
+                    marginStart = (4 * density).toInt()
                 }
                 text = "✏️ Rename"
-                setTextColor(ContextCompat.getColor(this@MainActivity, R.color.nord8))
-                textSize = 10.5f
+                setTextColor(ContextCompat.getColor(this@MainActivity, R.color.nord6))
+                textSize = 11f
                 insetTop = 0
                 insetBottom = 0
-                setPadding((4 * density).toInt(), 0, (4 * density).toInt(), 0)
                 setOnClickListener {
                     showRenamePlaylistDialog(playlist)
                 }
             }
 
-            val btnExport = com.google.android.material.button.MaterialButton(this, null, com.google.android.material.R.attr.borderlessButtonStyle).apply {
-                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, (36 * density).toInt()).apply {
-                    marginStart = (2 * density).toInt()
+            rowButtonsTop.addView(btnJumpToCurator)
+            rowButtonsTop.addView(btnRename)
+            contentBox.addView(rowButtonsTop)
+
+            // Sub-row 2: Export & Delete
+            val rowButtonsBottom = LinearLayout(this).apply {
+                orientation = LinearLayout.HORIZONTAL
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    topMargin = (4 * density).toInt()
                 }
-                text = "💾 Export"
+            }
+
+            val btnExport = com.google.android.material.button.MaterialButton(this, null, com.google.android.material.R.attr.borderlessButtonStyle).apply {
+                layoutParams = LinearLayout.LayoutParams(0, (38 * density).toInt(), 1f)
+                text = "💾 Export JSON"
                 setTextColor(ContextCompat.getColor(this@MainActivity, R.color.nord13))
-                textSize = 10.5f
+                textSize = 11f
                 insetTop = 0
                 insetBottom = 0
-                setPadding((4 * density).toInt(), 0, (4 * density).toInt(), 0)
                 setOnClickListener {
                     val safeName = playlist.name.replace(Regex("[^a-zA-Z0-9_]"), "_")
                     exportJsonLauncher.launch("$safeName.json")
@@ -1556,37 +1673,31 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             }
 
             val btnDelete = com.google.android.material.button.MaterialButton(this, null, com.google.android.material.R.attr.borderlessButtonStyle).apply {
-                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, (36 * density).toInt()).apply {
-                    marginStart = (2 * density).toInt()
+                layoutParams = LinearLayout.LayoutParams(0, (38 * density).toInt(), 1f).apply {
+                    marginStart = (4 * density).toInt()
                 }
                 text = "🗑️ Delete"
                 setTextColor(ContextCompat.getColor(this@MainActivity, R.color.nord11))
-                textSize = 10.5f
+                textSize = 11f
                 insetTop = 0
                 insetBottom = 0
-                setPadding((4 * density).toInt(), 0, (4 * density).toInt(), 0)
                 setOnClickListener {
                     confirmDeletePlaylist(playlist)
                 }
             }
 
-            topRow.addView(tvInfo)
-            topRow.addView(btnJumpToCurator)
-            topRow.addView(btnRename)
-            topRow.addView(btnExport)
-            topRow.addView(btnDelete)
+            rowButtonsBottom.addView(btnExport)
+            rowButtonsBottom.addView(btnDelete)
+            contentBox.addView(rowButtonsBottom)
 
-            itemContainer.addView(topRow)
+            setupTvFocusHighlight(cardContainer)
+            setupTvFocusHighlight(btnJumpToCurator)
+            setupTvFocusHighlight(btnRename)
+            setupTvFocusHighlight(btnExport)
+            setupTvFocusHighlight(btnDelete)
 
-            val divider = View(this).apply {
-                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1).apply {
-                    topMargin = (6 * density).toInt()
-                }
-                setBackgroundColor(ContextCompat.getColor(this@MainActivity, R.color.nord3))
-            }
-            itemContainer.addView(divider)
-
-            hub.layoutPlaylistManagerList.addView(itemContainer)
+            cardContainer.addView(contentBox)
+            hub.layoutPlaylistManagerList.addView(cardContainer)
         }
     }
 
