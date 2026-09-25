@@ -222,22 +222,17 @@ class PlaylistManager(
     }
 
     suspend fun resolveStreamUri(youtubeId: String, isAudioOnly: Boolean): String? {
-        val mode = SettingsManager.getExtractionMode(context)
         val targetQuality = if (isAudioOnly) "auto" else SettingsManager.getVideoQuality(context)
-        val cacheKey = "${youtubeId}_${mode}_${if (isAudioOnly) "AUDIO" else "VIDEO_${targetQuality}"}"
+        val cacheKey = "${youtubeId}_${if (isAudioOnly) "AUDIO" else "VIDEO_${targetQuality}"}"
         resolvedCache[cacheKey]?.let {
             AppLogger.d("PlaylistManager", "Using cached stream URL for $youtubeId ($cacheKey)")
             return it
         }
 
-        val tryTier1 = (mode == "auto")
-        val tryTier2 = (mode == "auto" || mode == "piped" || mode == "external")
-        val tryTier3 = (mode == "auto" || mode == "invidious" || mode == "external")
-
-        AppLogger.d("PlaylistManager", "Stream resolution for $youtubeId [Mode: $mode | T1:$tryTier1, T2:$tryTier2, T3:$tryTier3]")
-
-        // Tier 1: Native InnerTube Extractor
-        if (tryTier1) {
+        // Waterfall resolution in priority order based on user checkboxes
+        // Tier 1: Native InnerTube Engine
+        if (SettingsManager.isInnerTubeEnabled(context)) {
+            AppLogger.d("PlaylistManager", "Tier 1: Native InnerTube Engine for $youtubeId")
             val resolvedUrl = NativeInnerTubeExtractor.extractStreamUrl(youtubeId, isAudioOnly, targetQuality)
             if (!resolvedUrl.isNullOrEmpty()) {
                 AppLogger.d("PlaylistManager", "Tier 1 SUCCESS via Native InnerTube")
@@ -246,46 +241,75 @@ class PlaylistManager(
             }
         }
 
-        // Tier 2: Decentralized Piped Extractor Instances
-        if (tryTier2) {
-            val customUrl = SettingsManager.getCustomExtractorUrl(context)
-            val pipedInstances = if (customUrl.isNotEmpty()) (listOf(customUrl) + RemoteConfigManager.getPipedInstances()).distinct() else RemoteConfigManager.getPipedInstances()
-            for (instance in pipedInstances) {
-                AppLogger.d("PlaylistManager", "Tier 2 Extractor: Trying Piped instance [$instance] for $youtubeId")
-                val pipedUrl = ExternalApiExtractor.resolveViaPiped(youtubeId, instance, isAudioOnly)
-                if (!pipedUrl.isNullOrEmpty()) {
-                    AppLogger.d("PlaylistManager", "Tier 2 SUCCESS via Piped [$instance]")
-                    resolvedCache[cacheKey] = pipedUrl
-                    return pipedUrl
+        // Tier 2: Official Station North Cloud (obfuscated endpoints)
+        if (SettingsManager.isStationNorthEnabled(context)) {
+            val snEndpoints = ExternalApiExtractor.getStationNorthEndpoints()
+            for (endpoint in snEndpoints) {
+                AppLogger.d("PlaylistManager", "Tier 2: Station North Cloud [$endpoint] for $youtubeId")
+                val snUrl = ExternalApiExtractor.resolveViaStationNorthApi(youtubeId, endpoint, isAudioOnly)
+                if (!snUrl.isNullOrEmpty()) {
+                    AppLogger.d("PlaylistManager", "Tier 2 SUCCESS via Station North Cloud")
+                    resolvedCache[cacheKey] = snUrl
+                    return snUrl
                 }
             }
         }
 
-        // Tier 3: Decentralized Invidious Extractor Instances (with Live Registry Health Filter)
-        if (tryTier3) {
-            val customUrl = SettingsManager.getCustomExtractorUrl(context)
-            val invidiousInstances = if (customUrl.isNotEmpty()) (listOf(customUrl) + RemoteConfigManager.getInvidiousInstances()).distinct() else RemoteConfigManager.getInvidiousInstances()
-            for (instance in invidiousInstances) {
-                AppLogger.d("PlaylistManager", "Tier 3 Extractor: Trying Invidious instance [$instance] for $youtubeId")
+        // Tier 3: yt-dlp API (User Portainer / Private Server)
+        if (SettingsManager.isYtdlpApiEnabled(context)) {
+            val customYtdlpUrl = SettingsManager.getYtdlpApiUrl(context)
+            if (customYtdlpUrl.isNotEmpty()) {
+                AppLogger.d("PlaylistManager", "Tier 3: yt-dlp Private Server [$customYtdlpUrl] for $youtubeId")
+                val ytdlpUrl = ExternalApiExtractor.resolveViaStationNorthApi(youtubeId, customYtdlpUrl, isAudioOnly)
+                if (!ytdlpUrl.isNullOrEmpty()) {
+                    AppLogger.d("PlaylistManager", "Tier 3 SUCCESS via yt-dlp Private Server")
+                    resolvedCache[cacheKey] = ytdlpUrl
+                    return ytdlpUrl
+                }
+            }
+        }
+
+        // Tier 4: Invidious Instances
+        if (SettingsManager.isInvidiousEnabled(context)) {
+            val customInvidiousUrl = SettingsManager.getInvidiousUrl(context)
+            val instances = if (customInvidiousUrl.isNotEmpty()) listOf(customInvidiousUrl) else RemoteConfigManager.getInvidiousInstances()
+            for (instance in instances) {
+                AppLogger.d("PlaylistManager", "Tier 4: Invidious [$instance] for $youtubeId")
                 val invidiousUrl = ExternalApiExtractor.resolveViaInvidious(youtubeId, instance, isAudioOnly)
                 if (!invidiousUrl.isNullOrEmpty()) {
-                    AppLogger.d("PlaylistManager", "Tier 3 SUCCESS via Invidious [$instance]")
+                    AppLogger.d("PlaylistManager", "Tier 4 SUCCESS via Invidious [$instance]")
                     resolvedCache[cacheKey] = invidiousUrl
                     return invidiousUrl
                 }
             }
         }
 
-        // Tier 4: Cobalt Media Downloader / Private API Rest Extractor
-        if (mode == "auto" || mode == "external") {
-            val cobaltInstances = RemoteConfigManager.getCobaltInstances()
-            for (instance in cobaltInstances) {
-                AppLogger.d("PlaylistManager", "Tier 4 Extractor: Trying Cobalt API [$instance] for $youtubeId")
+        // Tier 5: Cobalt API
+        if (SettingsManager.isCobaltEnabled(context)) {
+            val customCobaltUrl = SettingsManager.getCobaltUrl(context)
+            val instances = if (customCobaltUrl.isNotEmpty()) listOf(customCobaltUrl) else RemoteConfigManager.getCobaltInstances()
+            for (instance in instances) {
+                AppLogger.d("PlaylistManager", "Tier 5: Cobalt API [$instance] for $youtubeId")
                 val cobaltUrl = ExternalApiExtractor.resolveViaCobalt(youtubeId, instance, isAudioOnly)
                 if (!cobaltUrl.isNullOrEmpty()) {
-                    AppLogger.d("PlaylistManager", "Tier 4 SUCCESS via Cobalt [$instance]")
+                    AppLogger.d("PlaylistManager", "Tier 5 SUCCESS via Cobalt [$instance]")
                     resolvedCache[cacheKey] = cobaltUrl
                     return cobaltUrl
+                }
+            }
+        }
+
+        // Tier 6: Piped API
+        if (SettingsManager.isPipedEnabled(context)) {
+            val customPipedUrl = SettingsManager.getPipedUrl(context)
+            val instances = if (customPipedUrl.isNotEmpty()) listOf(customPipedUrl) else RemoteConfigManager.getPipedInstances()
+            for (instance in instances) {
+                AppLogger.d("PlaylistManager", "Tier 6: Piped [$instance] for $youtubeId")
+                val pipedUrl = ExternalApiExtractor.resolveViaPiped(youtubeId, instance, isAudioOnly)
+                if (!pipedUrl.isNullOrEmpty()) {
+                    AppLogger.d("PlaylistManager", "Tier 6 SUCCESS via Piped [$instance]")
+                    resolvedCache[cacheKey] = pipedUrl
+                    return pipedUrl
                 }
             }
         }

@@ -1,5 +1,6 @@
 package net.sn.fetchplayer.extractor
 
+import android.util.Base64
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
@@ -14,6 +15,22 @@ import java.util.concurrent.TimeUnit
 object ExternalApiExtractor {
 
     private const val TAG = "ExternalApiExtractor"
+
+    // Obfuscated official Station North endpoints to prevent GitHub scraping
+    // Base64 encoded: "https://stream-a.station-north.net" & "https://stream-b.station-north.net"
+    private const val OBFUSCATED_EP_A = "aHR0cHM6Ly9zdHJlYW0tYS5zdGF0aW9uLW5vcnRoLm5ldA=="
+    private const val OBFUSCATED_EP_B = "aHR0cHM6Ly9zdHJlYW0tYi5zdGF0aW9uLW5vcnRoLm5ldA=="
+
+    fun getStationNorthEndpoints(): List<String> {
+        return try {
+            val epA = String(Base64.decode(OBFUSCATED_EP_A, Base64.DEFAULT), Charsets.UTF_8).trim()
+            val epB = String(Base64.decode(OBFUSCATED_EP_B, Base64.DEFAULT), Charsets.UTF_8).trim()
+            listOf(epB, epA) // Try stream-b first, then stream-a
+        } catch (e: Exception) {
+            AppLogger.w(TAG, "Error decoding official endpoints: ${e.message}")
+            emptyList()
+        }
+    }
 
     private val httpClient = OkHttpClient.Builder()
         .connectTimeout(4, TimeUnit.SECONDS)
@@ -41,7 +58,6 @@ object ExternalApiExtractor {
                     val bodyStr = response.body?.string() ?: return@withTimeoutOrNull null
                     val json = JSONObject(bodyStr)
 
-                    // 1. Check for root "hls" M3U8 stream URL
                     val hlsUrl = json.optString("hls", "").trim()
                     if (hlsUrl.startsWith("http://") || hlsUrl.startsWith("https://")) {
                         AppLogger.d(TAG, "Piped [$cleanBaseUrl] found HLS stream for $youtubeId")
@@ -100,7 +116,6 @@ object ExternalApiExtractor {
                     val bodyStr = response.body?.string() ?: return@withTimeoutOrNull null
                     val json = JSONObject(bodyStr)
 
-                    // 1. Try "formatStreams" first (combined video+audio)
                     val formatStreams = json.optJSONArray("formatStreams")
                     if (formatStreams != null && formatStreams.length() > 0) {
                         for (i in 0 until formatStreams.length()) {
@@ -113,7 +128,6 @@ object ExternalApiExtractor {
                         }
                     }
 
-                    // 2. Try "adaptiveFormats"
                     val adaptiveFormats = json.optJSONArray("adaptiveFormats")
                     if (adaptiveFormats != null && adaptiveFormats.length() > 0) {
                         val targetType = if (isAudioOnly) "audio/" else "video/"
@@ -127,7 +141,6 @@ object ExternalApiExtractor {
                             }
                         }
 
-                        // 3. Fallback to any valid URL in adaptiveFormats
                         for (i in 0 until adaptiveFormats.length()) {
                             val stream = adaptiveFormats.getJSONObject(i)
                             val url = stream.optString("url", "").trim()
@@ -149,7 +162,7 @@ object ExternalApiExtractor {
             withTimeoutOrNull(5000L) {
                 try {
                     val cleanBaseUrl = baseUrl.trim().removeSuffix("/")
-                    val targetUrl = "$cleanBaseUrl/"
+                    val targetUrl = if (cleanBaseUrl.endsWith("/api")) cleanBaseUrl else "$cleanBaseUrl/"
                     val payload = JSONObject().apply {
                         put("url", "https://www.youtube.com/watch?v=$youtubeId")
                         put("downloadMode", if (isAudioOnly) "audio" else "auto")
@@ -185,5 +198,102 @@ object ExternalApiExtractor {
                 null
             }
         }
-}
 
+    suspend fun resolveViaStationNorthApi(youtubeId: String, baseUrl: String, isAudioOnly: Boolean): String? =
+        withContext(Dispatchers.IO) {
+            withTimeoutOrNull(6000L) {
+                try {
+                    val cleanBaseUrl = baseUrl.trim().removeSuffix("/")
+                    val targetUrl = "$cleanBaseUrl/api/extract?video_id=$youtubeId&is_audio=$isAudioOnly"
+                    val request = Request.Builder()
+                        .url(targetUrl)
+                        .header("User-Agent", "SNfetchPLAYER-App")
+                        .build()
+
+                    val response = httpClient.newCall(request).execute()
+                    if (response.isSuccessful) {
+                        val bodyStr = response.body?.string()
+                        if (!bodyStr.isNullOrEmpty()) {
+                            val json = JSONObject(bodyStr)
+                            val status = json.optString("status", "")
+                            val url = json.optString("url", "").trim()
+                            if (status == "success" && (url.startsWith("http://") || url.startsWith("https://"))) {
+                                AppLogger.d(TAG, "StationNorth Private Extractor [$cleanBaseUrl] SUCCESS for $youtubeId")
+                                return@withTimeoutOrNull url
+                            }
+                        }
+                    } else {
+                        // Fallback to /api/stream
+                        val fallbackUrl = "$cleanBaseUrl/api/stream?video_id=$youtubeId&is_audio=$isAudioOnly"
+                        val reqFallback = Request.Builder()
+                            .url(fallbackUrl)
+                            .header("User-Agent", "SNfetchPLAYER-App")
+                            .build()
+                        val respFallback = httpClient.newCall(reqFallback).execute()
+                        if (respFallback.isSuccessful) {
+                            val bodyStr = respFallback.body?.string()
+                            if (!bodyStr.isNullOrEmpty()) {
+                                val json = JSONObject(bodyStr)
+                                val status = json.optString("status", "")
+                                val url = json.optString("url", "").trim()
+                                if (status == "success" && (url.startsWith("http://") || url.startsWith("https://"))) {
+                                    AppLogger.d(TAG, "StationNorth Private Extractor [$cleanBaseUrl] (/api/stream) SUCCESS for $youtubeId")
+                                    return@withTimeoutOrNull url
+                                }
+                            }
+                        }
+                    }
+                } catch (e: Exception) {
+                    AppLogger.w(TAG, "Error resolving via StationNorth Private API [$baseUrl] for $youtubeId: ${e.message}")
+                }
+                null
+            }
+        }
+
+    // Health check benchmark helper for Settings Hub "Test Connection" buttons
+    suspend fun testConnection(sourceType: String, customUrl: String = ""): Pair<Boolean, String> =
+        withContext(Dispatchers.IO) {
+            val startTime = System.currentTimeMillis()
+            val testVideoId = "GxBSyx85Kp8"
+            try {
+                val url = when (sourceType) {
+                    "innertube" -> NativeInnerTubeExtractor.extractStreamUrl(testVideoId, isAudioOnly = true)
+                    "station_north" -> {
+                        val endpoints = getStationNorthEndpoints()
+                        var result: String? = null
+                        for (ep in endpoints) {
+                            result = resolveViaStationNorthApi(testVideoId, ep, isAudioOnly = true)
+                            if (!result.isNullOrEmpty()) break
+                        }
+                        result
+                    }
+                    "ytdlp_api" -> {
+                        val target = customUrl.ifEmpty { getStationNorthEndpoints().firstOrNull() ?: "" }
+                        if (target.isEmpty()) null else resolveViaStationNorthApi(testVideoId, target, isAudioOnly = true)
+                    }
+                    "invidious" -> {
+                        val target = customUrl.ifEmpty { "https://yewtu.be" }
+                        resolveViaInvidious(testVideoId, target, isAudioOnly = true)
+                    }
+                    "cobalt" -> {
+                        val target = customUrl.ifEmpty { "https://api.cobalt.tools" }
+                        resolveViaCobalt(testVideoId, target, isAudioOnly = true)
+                    }
+                    "piped" -> {
+                        val target = customUrl.ifEmpty { "https://pipedapi.kavin.rocks" }
+                        resolveViaPiped(testVideoId, target, isAudioOnly = true)
+                    }
+                    else -> null
+                }
+
+                val latency = System.currentTimeMillis() - startTime
+                if (!url.isNullOrEmpty()) {
+                    Pair(true, "🟢 Connected (${latency}ms)")
+                } else {
+                    Pair(false, "🔴 Connection Failed")
+                }
+            } catch (e: Exception) {
+                Pair(false, "🔴 Error: ${e.message}")
+            }
+        }
+}

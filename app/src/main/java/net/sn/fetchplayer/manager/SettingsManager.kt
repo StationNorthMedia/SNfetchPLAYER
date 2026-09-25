@@ -13,12 +13,24 @@ object SettingsManager {
     private const val KEY_FFT_VISUALIZER_ENABLED = "fft_visualizer_enabled"
     private const val KEY_BASS_PULSE_ENABLED = "bass_pulse_enabled"
     private const val KEY_QUEEN_QUOTES_ENABLED = "queen_quotes_enabled"
-    private const val KEY_TV_CHANNEL_SOURCE = "tv_channel_source" // "default_top50", "curator_queue", "saved_catalog", "custom"
-    private const val KEY_RADIO_CHANNEL_SOURCE = "radio_channel_source" // "default_top50", "curator_queue", "saved_catalog", "custom"
+    private const val KEY_TV_CHANNEL_SOURCE = "tv_channel_source"
+    private const val KEY_RADIO_CHANNEL_SOURCE = "radio_channel_source"
     private const val KEY_TV_CUSTOM_URL = "tv_custom_url"
     private const val KEY_RADIO_CUSTOM_URL = "radio_custom_url"
-    private const val KEY_EXTRACTION_MODE = "extraction_mode" // "auto", "piped", "invidious", "external"
-    private const val KEY_CUSTOM_EXTRACTOR_URL = "custom_extractor_url"
+
+    // Extractor Source Toggle Keys
+    private const val KEY_ENABLE_INNERTUBE = "enable_innertube"
+    private const val KEY_ENABLE_STATION_NORTH = "enable_station_north"
+    private const val KEY_ENABLE_YTDLP_API = "enable_ytdlp_api"
+    private const val KEY_ENABLE_INVIDIOUS = "enable_invidious"
+    private const val KEY_ENABLE_COBALT = "enable_cobalt"
+    private const val KEY_ENABLE_PIPED = "enable_piped"
+
+    // Custom Extractor URLs
+    private const val KEY_YTDLP_API_URL = "custom_extractor_url" // Retain legacy key for smooth migration
+    private const val KEY_INVIDIOUS_URL = "invidious_custom_url"
+    private const val KEY_COBALT_URL = "cobalt_custom_url"
+    private const val KEY_PIPED_URL = "piped_custom_url"
 
     private fun getPrefs(context: Context): SharedPreferences {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -126,21 +138,35 @@ object SettingsManager {
         getPrefs(context).edit().putString("radio_playlist_id", playlistId).apply()
     }
 
-    // Extraction Mode
-    fun getExtractionMode(context: Context): String {
-        return getPrefs(context).getString(KEY_EXTRACTION_MODE, "auto") ?: "auto"
-    }
+    // Extractor Toggles
+    fun isInnerTubeEnabled(context: Context): Boolean = getPrefs(context).getBoolean(KEY_ENABLE_INNERTUBE, true)
+    fun setInnerTubeEnabled(context: Context, enabled: Boolean) = getPrefs(context).edit().putBoolean(KEY_ENABLE_INNERTUBE, enabled).apply()
 
-    fun setExtractionMode(context: Context, mode: String) {
-        getPrefs(context).edit().putString(KEY_EXTRACTION_MODE, mode).apply()
-    }
+    fun isStationNorthEnabled(context: Context): Boolean = getPrefs(context).getBoolean(KEY_ENABLE_STATION_NORTH, true)
+    fun setStationNorthEnabled(context: Context, enabled: Boolean) = getPrefs(context).edit().putBoolean(KEY_ENABLE_STATION_NORTH, enabled).apply()
 
-    // Custom Extractor Instance URL
-    fun getCustomExtractorUrl(context: Context): String {
-        return getPrefs(context).getString(KEY_CUSTOM_EXTRACTOR_URL, "") ?: ""
-    }
+    fun isYtdlpApiEnabled(context: Context): Boolean = getPrefs(context).getBoolean(KEY_ENABLE_YTDLP_API, true)
+    fun setYtdlpApiEnabled(context: Context, enabled: Boolean) = getPrefs(context).edit().putBoolean(KEY_ENABLE_YTDLP_API, enabled).apply()
 
-    fun setCustomExtractorUrl(context: Context, url: String) {
-        getPrefs(context).edit().putString(KEY_CUSTOM_EXTRACTOR_URL, url.trim()).apply()
-    }
+    fun isInvidiousEnabled(context: Context): Boolean = getPrefs(context).getBoolean(KEY_ENABLE_INVIDIOUS, true)
+    fun setInvidiousEnabled(context: Context, enabled: Boolean) = getPrefs(context).edit().putBoolean(KEY_ENABLE_INVIDIOUS, enabled).apply()
+
+    fun isCobaltEnabled(context: Context): Boolean = getPrefs(context).getBoolean(KEY_ENABLE_COBALT, true)
+    fun setCobaltEnabled(context: Context, enabled: Boolean) = getPrefs(context).edit().putBoolean(KEY_ENABLE_COBALT, enabled).apply()
+
+    fun isPipedEnabled(context: Context): Boolean = getPrefs(context).getBoolean(KEY_ENABLE_PIPED, true)
+    fun setPipedEnabled(context: Context, enabled: Boolean) = getPrefs(context).edit().putBoolean(KEY_ENABLE_PIPED, enabled).apply()
+
+    // Custom Extractor Instance URLs
+    fun getYtdlpApiUrl(context: Context): String = getPrefs(context).getString(KEY_YTDLP_API_URL, "") ?: ""
+    fun setYtdlpApiUrl(context: Context, url: String) = getPrefs(context).edit().putString(KEY_YTDLP_API_URL, url.trim()).apply()
+
+    fun getInvidiousUrl(context: Context): String = getPrefs(context).getString(KEY_INVIDIOUS_URL, "") ?: ""
+    fun setInvidiousUrl(context: Context, url: String) = getPrefs(context).edit().putString(KEY_INVIDIOUS_URL, url.trim()).apply()
+
+    fun getCobaltUrl(context: Context): String = getPrefs(context).getString(KEY_COBALT_URL, "") ?: ""
+    fun setCobaltUrl(context: Context, url: String) = getPrefs(context).edit().putString(KEY_COBALT_URL, url.trim()).apply()
+
+    fun getPipedUrl(context: Context): String = getPrefs(context).getString(KEY_PIPED_URL, "") ?: ""
+    fun setPipedUrl(context: Context, url: String) = getPrefs(context).edit().putString(KEY_PIPED_URL, url.trim()).apply()
 }

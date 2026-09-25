@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # =================================================================
+  # 1. SN-yt-dlp Extractor API Service
+  # =================================================================
+  ytdlp-api:
+    image: python:3.11-slim
+    container_name: sn-ytdlp-api
+    restart: always
+    ports:
+      - "9003:9003"
+    environment:
+      - PORT=9003
+      - PYTHONUNBUFFERED=1
+    command: >
+      sh -c "
+        apt-get update && apt-get install -y ffmpeg curl cron &&
+        pip install --no-cache-dir fastapi uvicorn yt-dlp requests &&
+        mkdir -p /app &&
+        echo 'import yt_dlp\nfrom fastapi import FastAPI, Request\nfrom fastapi.responses import StreamingResponse\nfrom fastapi.middleware.cors import CORSMiddleware\nimport requests, json, os\n\napp = FastAPI()\napp.add_middleware(CORSMiddleware, allow_origins=[\"*\"], allow_methods=[\"GET\"], allow_headers=[\"*\"])\n\n@app.get(\"/api/health\")\ndef health():\n    return {\"status\": \"ok\", \"engine\": \"yt-dlp\"}\n\n@app.get(\"/api/extract\")\ndef extract(video_id: str = \"\", is_audio: bool = False):\n    if not video_id:\n        return {\"status\": \"error\", \"message\": \"video_id is required\"}\n    url = f\"https://www.youtube.com/watch?v={video_id}\"\n    ydl_opts = {\n        \"quiet\": True,\n        \"no_warnings\": True,\n        \"format\": \"bestaudio/best\" if is_audio else \"bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best\",\n        \"extractor_args\": {\"youtube\": {\"player_client\": [\"android\", \"android_tv\", \"ios\", \"tv\"]}}\n    }\n    try:\n        with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n            info = ydl.extract_info(url, download=False)\n            stream_url = info.get(\"url\")\n            title = info.get(\"title\", \"\")\n            return {\"status\": \"success\", \"url\": stream_url, \"title\": title}\n    except Exception as e:\n        return {\"status\": \"error\", \"message\": str(e)}\n\nif __name__ == \"__main__\":\n    import uvicorn\n    uvicorn.run(app, host=\"0.0.0.0\", port=9003)\n' > /app/main.py &&
+        echo '0 */12 * * * pip install --upgrade --no-cache-dir yt-dlp >> /var/log/ytdlp-update.log 2>&1' > /etc/cron.d/ytdlp-cron &&
+        chmod 0644 /etc/cron.d/ytdlp-cron &&
+        crontab /etc/cron.d/ytdlp-cron &&
+        cron &&
+        python /app/main.py
+      "
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9003/api/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # =================================================================
+  # 2. Cloudflare Zero Trust Tunnel (Optional - for remote HTTPS)
+  # =================================================================
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: sn-cloudflared-tunnel
+    restart: always
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN:-replace_with_your_cloudflare_token}
+
+  # =================================================================
+  # 3. Watchtower (Auto-update container images)
+  # =================================================================
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: sn-watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 43200 --cleanup

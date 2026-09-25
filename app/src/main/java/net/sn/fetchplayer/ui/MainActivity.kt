@@ -48,6 +48,7 @@ import net.sn.fetchplayer.data.ArtistLexiconRepository
 import net.sn.fetchplayer.data.LexiconArtist
 import net.sn.fetchplayer.data.WikipediaArtistFetcher
 import net.sn.fetchplayer.extractor.YouTubePlaylistExtractor
+import net.sn.fetchplayer.extractor.ExternalApiExtractor
 import net.sn.fetchplayer.manager.CuratedCatalogManager
 import net.sn.fetchplayer.manager.CustomPlaylist
 import net.sn.fetchplayer.manager.PlaylistManager.RawPlaylistItem
@@ -1381,7 +1382,9 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             hub.btnBackFromBroadcast, hub.btnBackFromCurator, hub.btnBackFromLexicon, hub.btnBackFromTvDisplay,
             hub.btnBackFromAudioVisualizer, hub.btnBackFromChronicles, hub.btnBackFromQueenTutorial, hub.btnBackFromSystemCache,
             hub.btnCreateNewPlaylist, hub.switchFftVisualizer, hub.switchBassPulse, hub.switchQueenQuotes,
-            hub.switchSlantedBauchbinden, hub.btnTabImported, hub.btnTabSaved, hub.btnLoadPlaylist
+            hub.switchSlantedBauchbinden, hub.btnTabImported, hub.btnTabSaved, hub.btnLoadPlaylist,
+            hub.cbInnerTube, hub.cbStationNorth, hub.cbYtdlpApi, hub.cbInvidious, hub.cbCobalt, hub.cbPiped,
+            hub.btnTestInnerTube, hub.btnTestStationNorth, hub.btnTestYtdlpApi, hub.btnTestInvidious, hub.btnTestCobalt, hub.btnTestPiped, hub.btnHelpYtdlpApi
         )
         allFocusableElements.forEach { setupTvFocusHighlight(it) }
 
@@ -1537,133 +1540,96 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             checkAppUpdate(isManualCheck = true)
         }
 
-        updateExtractionModeButtonUi()
-        hub.btnCycleExtractionMode.setOnClickListener {
-            val currentMode = SettingsManager.getExtractionMode(this)
-            val nextMode = when (currentMode) {
-                "auto" -> "piped"
-                "piped" -> "invidious"
-                "invidious" -> "external"
-                else -> "auto"
-            }
-            SettingsManager.setExtractionMode(this, nextMode)
-            updateExtractionModeButtonUi()
-            val label = when (nextMode) {
-                "piped" -> "Force Piped Only (Tier 2)"
-                "invidious" -> "Force Invidious Only (Tier 3)"
-                "external" -> "Force External APIs (Piped + Invidious)"
-                else -> "Auto Cascade (All Tiers)"
-            }
-            Toast.makeText(this, "Extractor Mode: $label", Toast.LENGTH_SHORT).show()
-            AppLogger.d("MainActivity", "Extractor Mode changed to '$nextMode'")
+        // Multi-Choice Extractor Sources Binding
+        hub.cbInnerTube.isChecked = SettingsManager.isInnerTubeEnabled(this)
+        hub.cbInnerTube.setOnCheckedChangeListener { _, isChecked ->
+            SettingsManager.setInnerTubeEnabled(this, isChecked)
         }
 
-        hub.btnTestOtaInstances.setOnClickListener {
-            Toast.makeText(this, "Testing OTA Instances Latency...", Toast.LENGTH_SHORT).show()
-            lifecycleScope.launch(Dispatchers.IO) {
-                testOtaInstancesLatency()
+        hub.cbStationNorth.isChecked = SettingsManager.isStationNorthEnabled(this)
+        hub.cbStationNorth.setOnCheckedChangeListener { _, isChecked ->
+            SettingsManager.setStationNorthEnabled(this, isChecked)
+        }
+
+        hub.cbYtdlpApi.isChecked = SettingsManager.isYtdlpApiEnabled(this)
+        hub.cbYtdlpApi.setOnCheckedChangeListener { _, isChecked ->
+            SettingsManager.setYtdlpApiEnabled(this, isChecked)
+        }
+        hub.etYtdlpApiUrl.setText(SettingsManager.getYtdlpApiUrl(this))
+
+        hub.cbInvidious.isChecked = SettingsManager.isInvidiousEnabled(this)
+        hub.cbInvidious.setOnCheckedChangeListener { _, isChecked ->
+            SettingsManager.setInvidiousEnabled(this, isChecked)
+        }
+        hub.etInvidiousUrl.setText(SettingsManager.getInvidiousUrl(this))
+
+        hub.cbCobalt.isChecked = SettingsManager.isCobaltEnabled(this)
+        hub.cbCobalt.setOnCheckedChangeListener { _, isChecked ->
+            SettingsManager.setCobaltEnabled(this, isChecked)
+        }
+        hub.etCobaltUrl.setText(SettingsManager.getCobaltUrl(this))
+
+        hub.cbPiped.isChecked = SettingsManager.isPipedEnabled(this)
+        hub.cbPiped.setOnCheckedChangeListener { _, isChecked ->
+            SettingsManager.setPipedEnabled(this, isChecked)
+        }
+        hub.etPipedUrl.setText(SettingsManager.getPipedUrl(this))
+
+        fun saveExtractorUrls() {
+            SettingsManager.setYtdlpApiUrl(this, hub.etYtdlpApiUrl.text.toString())
+            SettingsManager.setInvidiousUrl(this, hub.etInvidiousUrl.text.toString())
+            SettingsManager.setCobaltUrl(this, hub.etCobaltUrl.text.toString())
+            SettingsManager.setPipedUrl(this, hub.etPipedUrl.text.toString())
+        }
+
+        fun runSourceTest(sourceType: String, customUrl: String, button: com.google.android.material.button.MaterialButton) {
+            saveExtractorUrls()
+            val originalText = button.text
+            button.text = "⏳"
+            button.isEnabled = false
+            lifecycleScope.launch {
+                val (_, resultMsg) = ExternalApiExtractor.testConnection(sourceType, customUrl)
+                button.text = originalText
+                button.isEnabled = true
+                Toast.makeText(this@MainActivity, "Source Test [$sourceType]: $resultMsg", Toast.LENGTH_LONG).show()
             }
         }
 
-        val savedCustomUrl = SettingsManager.getCustomExtractorUrl(this)
-        hub.etCustomExtractorUrl.setText(savedCustomUrl)
-        hub.btnSaveCustomExtractorUrl.setOnClickListener {
-            val url = hub.etCustomExtractorUrl.text.toString().trim()
-            SettingsManager.setCustomExtractorUrl(this, url)
-            val msg = if (url.isNotEmpty()) "Custom Extractor Server saved!" else "Custom Extractor Server cleared."
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-            AppLogger.d("MainActivity", "Custom Extractor URL set to: '$url'")
+        hub.btnTestInnerTube.setOnClickListener { runSourceTest("innertube", "", hub.btnTestInnerTube) }
+        hub.btnTestStationNorth.setOnClickListener { runSourceTest("station_north", "", hub.btnTestStationNorth) }
+        hub.btnTestYtdlpApi.setOnClickListener { runSourceTest("ytdlp_api", hub.etYtdlpApiUrl.text.toString().trim(), hub.btnTestYtdlpApi) }
+        hub.btnTestInvidious.setOnClickListener { runSourceTest("invidious", hub.etInvidiousUrl.text.toString().trim(), hub.btnTestInvidious) }
+        hub.btnTestCobalt.setOnClickListener { runSourceTest("cobalt", hub.etCobaltUrl.text.toString().trim(), hub.btnTestCobalt) }
+        hub.btnTestPiped.setOnClickListener { runSourceTest("piped", hub.etPipedUrl.text.toString().trim(), hub.btnTestPiped) }
+
+        hub.btnHelpYtdlpApi.setOnClickListener {
+            showYtdlpApiSetupGuide()
         }
     }
 
-    private fun updateExtractionModeButtonUi() {
-        val hub = binding.settingsHub
-        val mode = SettingsManager.getExtractionMode(this)
-        val text = when (mode) {
-            "piped" -> "🚀 Mode: Force Piped Only (Tier 2)"
-            "invidious" -> "🛡️ Mode: Force Invidious Only (Tier 3)"
-            "external" -> "🌐 Mode: Force External APIs (Piped + Invidious)"
-            else -> "⚡ Mode: Auto Cascade (InnerTube → Piped → Invidious)"
-        }
-        hub.btnCycleExtractionMode.text = text
-    }
+    private fun showYtdlpApiSetupGuide() {
+        val guideText = """
+            🚀 PRIVATE YT-DLP EXTRACTOR API SETUP GUIDE
+            
+            1. Deploy Portainer Stack from docker/Portainer-Stack.yml
+            2. Run on local network (http://192.168.x.x:9003) or Cloudflare Zero Trust domain.
+            3. Enter URL in Module 8 -> '3. yt-dlp API (Private Extractor / Portainer)'
+            4. Tap 'Test Connection' to verify!
+            
+            Included Services in Docker Stack:
+            • FastAPI + yt-dlp server (Port 9003)
+            • Automatic 12-hour yt-dlp background update cron (Watchdog)
+            • Optional Cloudflare Zero Trust Tunnel
+            • Watchtower container auto-updates
+            
+            Detailed guide available at: docs/PRIVATE_EXTRACTOR_SETUP.md
+        """.trimIndent()
 
-    private suspend fun testOtaInstancesLatency() = withContext(Dispatchers.IO) {
-        val testYoutubeId = "GxBSyx85Kp8"
-        AppLogger.d("OTABenchmark", "--- STARTING OTA INSTANCES LATENCY BENCHMARK ---")
-
-        AppLogger.d("OTABenchmark", "Testing Tier 1: Native InnerTube Engine...")
-        val startInnerTube = System.currentTimeMillis()
-        val innerTubeUrl = net.sn.fetchplayer.extractor.NativeInnerTubeExtractor.extractStreamUrl(testYoutubeId, isAudioOnly = true)
-        val elapsedInnerTube = System.currentTimeMillis() - startInnerTube
-        if (!innerTubeUrl.isNullOrEmpty()) {
-            AppLogger.d("OTABenchmark", "✅ Tier 1 Native InnerTube -> SUCCESS (${elapsedInnerTube}ms)")
-        } else {
-            AppLogger.w("OTABenchmark", "❌ Tier 1 Native InnerTube -> FAILED (${elapsedInnerTube}ms)")
-        }
-
-        val customUrl = SettingsManager.getCustomExtractorUrl(this@MainActivity)
-        if (customUrl.isNotEmpty()) {
-            AppLogger.d("OTABenchmark", "Testing Custom Private Extractor Server: [$customUrl]...")
-            val startTime = System.currentTimeMillis()
-            val urlPiped = net.sn.fetchplayer.extractor.ExternalApiExtractor.resolveViaPiped(testYoutubeId, customUrl, isAudioOnly = true)
-            val elapsedPiped = System.currentTimeMillis() - startTime
-            if (!urlPiped.isNullOrEmpty()) {
-                AppLogger.d("OTABenchmark", "✅ Custom Server (Piped Format) [$customUrl] -> SUCCESS (${elapsedPiped}ms)")
-            } else {
-                val startTimeInv = System.currentTimeMillis()
-                val urlInv = net.sn.fetchplayer.extractor.ExternalApiExtractor.resolveViaInvidious(testYoutubeId, customUrl, isAudioOnly = true)
-                val elapsedInv = System.currentTimeMillis() - startTimeInv
-                if (!urlInv.isNullOrEmpty()) {
-                    AppLogger.d("OTABenchmark", "✅ Custom Server (Invidious Format) [$customUrl] -> SUCCESS (${elapsedInv}ms)")
-                } else {
-                    AppLogger.w("OTABenchmark", "❌ Custom Server [$customUrl] -> FAILED / TIMEOUT")
-                }
-            }
-        }
-
-        val pipedInstances = net.sn.fetchplayer.manager.RemoteConfigManager.getPipedInstances()
-        AppLogger.d("OTABenchmark", "Testing ${pipedInstances.size} Piped Instances...")
-        for (instance in pipedInstances) {
-            val startTime = System.currentTimeMillis()
-            val url = net.sn.fetchplayer.extractor.ExternalApiExtractor.resolveViaPiped(testYoutubeId, instance, isAudioOnly = true)
-            val elapsed = System.currentTimeMillis() - startTime
-            if (!url.isNullOrEmpty()) {
-                AppLogger.d("OTABenchmark", "✅ Piped [$instance] -> SUCCESS (${elapsed}ms)")
-            } else {
-                AppLogger.w("OTABenchmark", "❌ Piped [$instance] -> FAILED / TIMEOUT (${elapsed}ms)")
-            }
-        }
-
-        val invidiousInstances = net.sn.fetchplayer.manager.RemoteConfigManager.getInvidiousInstances()
-        AppLogger.d("OTABenchmark", "Testing ${invidiousInstances.size} Invidious Instances...")
-        for (instance in invidiousInstances) {
-            val startTime = System.currentTimeMillis()
-            val url = net.sn.fetchplayer.extractor.ExternalApiExtractor.resolveViaInvidious(testYoutubeId, instance, isAudioOnly = true)
-            val elapsed = System.currentTimeMillis() - startTime
-            if (!url.isNullOrEmpty()) {
-                AppLogger.d("OTABenchmark", "✅ Invidious [$instance] -> SUCCESS (${elapsed}ms)")
-            } else {
-                AppLogger.w("OTABenchmark", "❌ Invidious [$instance] -> FAILED / TIMEOUT (${elapsed}ms)")
-            }
-        }
-        val cobaltInstances = net.sn.fetchplayer.manager.RemoteConfigManager.getCobaltInstances()
-        AppLogger.d("OTABenchmark", "Testing ${cobaltInstances.size} Cobalt Instances...")
-        for (instance in cobaltInstances) {
-            val startTime = System.currentTimeMillis()
-            val url = net.sn.fetchplayer.extractor.ExternalApiExtractor.resolveViaCobalt(testYoutubeId, instance, isAudioOnly = true)
-            val elapsed = System.currentTimeMillis() - startTime
-            if (!url.isNullOrEmpty()) {
-                AppLogger.d("OTABenchmark", "✅ Cobalt [$instance] -> SUCCESS (${elapsed}ms)")
-            } else {
-                AppLogger.w("OTABenchmark", "❌ Cobalt [$instance] -> FAILED / TIMEOUT (${elapsed}ms)")
-            }
-        }
-
-        AppLogger.d("OTABenchmark", "--- BENCHMARK FINISHED. Check Terminal Logs! ---")
-        withContext(Dispatchers.Main) {
-            Toast.makeText(this@MainActivity, "OTA Benchmark Complete! Check Nord Terminal Logs.", Toast.LENGTH_LONG).show()
-        }
+        com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+            .setTitle("📖 yt-dlp Extractor API Setup Guide")
+            .setMessage(guideText)
+            .setPositiveButton("Close", null)
+            .show()
     }
 
     private fun renderPlaylistManagerList() {

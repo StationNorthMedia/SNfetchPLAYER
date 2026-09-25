@@ -2366,6 +2366,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <!-- OTA Stream Extraction Cascade Card -->
+                <!-- 3. Extraction Engines & Sources (MULTIPLE-CHOICE CASCADE) -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -2384,7 +2385,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="🌐 OTA YOUTUBE STREAM EXTRACTOR CASCADE"
+                            android:text="🌐 EXTRACTION PIPELINES &amp; SOURCES"
                             android:textColor="@color/nord8"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -2393,39 +2394,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Select extraction engine or test public instance latency."
+                            android:text="Select enabled extraction sources and test connection latency."
                             android:textColor="@color/nord4"
                             android:textSize="10.5sp" />
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnCycleExtractionMode"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="36dp"
-                            android:layout_marginTop="8dp"
-                            android:paddingHorizontal="10dp"
-                            android:paddingVertical="0dp"
-                            android:text="⚡ Mode: Auto Cascade (InnerTube → Piped → Invidious)"
-                            android:textColor="@color/nord8"
-                            android:textSize="10.5sp"
-                            app:strokeColor="@color/nord8"
-                            app:strokeWidth="1dp" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnTestOtaInstances"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="36dp"
-                            android:layout_marginTop="6dp"
-                            android:paddingHorizontal="10dp"
-                            android:paddingVertical="0dp"
-                            android:text="📡 Test All Public Instances Now (Latency Benchmark)"
-                            android:textColor="@color/nord14"
-                            android:textSize="10.5sp"
-                            app:strokeColor="@color/nord14"
-                            app:strokeWidth="1dp" />
-
-                        <!-- Custom Extractor Server URL Section -->
+                        <!-- 1. Native InnerTube -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -2433,33 +2406,282 @@
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
 
-                            <EditText
-                                android:id="@+id/etCustomExtractorUrl"
+                            <CheckBox
+                                android:id="@+id/cbInnerTube"
                                 android:layout_width="0dp"
-                                android:layout_height="36dp"
+                                android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@drawable/bg_rounded_edittext"
-                                android:hint="https://my-custom-invidious-instance.com"
-                                android:imeOptions="actionDone"
-                                android:inputType="textUri"
-                                android:paddingHorizontal="10dp"
-                                android:textColor="@color/nord4"
-                                android:textColorHint="@color/nord3"
+                                android:checked="true"
+                                android:text="1. Native InnerTube Engine (Built-in)"
+                                android:textColor="@color/nord6"
                                 android:textSize="11sp" />
 
                             <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btnSaveCustomExtractorUrl"
+                                android:id="@+id/btnTestInnerTube"
                                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                                 android:layout_width="wrap_content"
-                                android:layout_height="36dp"
-                                android:layout_marginStart="6dp"
-                                android:paddingHorizontal="10dp"
+                                android:layout_height="32dp"
+                                android:paddingHorizontal="8dp"
                                 android:paddingVertical="0dp"
-                                android:text="💾 Save Server"
+                                android:text="⚡ Test"
+                                android:textColor="@color/nord8"
+                                android:textSize="10sp"
+                                app:strokeColor="@color/nord8"
+                                app:strokeWidth="1dp" />
+                        </LinearLayout>
+
+                        <!-- 2. Station North Cloud -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/cbStationNorth"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked="true"
+                                android:text="2. Station North Cloud (Official)"
+                                android:textColor="@color/nord6"
+                                android:textSize="11sp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnTestStationNorth"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="32dp"
+                                android:paddingHorizontal="8dp"
+                                android:paddingVertical="0dp"
+                                android:text="⚡ Test"
                                 android:textColor="@color/nord7"
-                                android:textSize="10.5sp"
+                                android:textSize="10sp"
                                 app:strokeColor="@color/nord7"
                                 app:strokeWidth="1dp" />
+                        </LinearLayout>
+
+                        <!-- 3. yt-dlp API (Private Extractor / Portainer) -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <CheckBox
+                                    android:id="@+id/cbYtdlpApi"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:checked="true"
+                                    android:text="3. yt-dlp API (Private Extractor / Portainer)"
+                                    android:textColor="@color/nord6"
+                                    android:textSize="11sp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnHelpYtdlpApi"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="32dp"
+                                    android:layout_marginEnd="4dp"
+                                    android:paddingHorizontal="6dp"
+                                    android:paddingVertical="0dp"
+                                    android:text="📖 Guide"
+                                    android:textColor="@color/nord13"
+                                    android:textSize="10sp"
+                                    app:strokeColor="@color/nord13"
+                                    app:strokeWidth="1dp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnTestYtdlpApi"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="32dp"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="0dp"
+                                    android:text="⚡ Test"
+                                    android:textColor="@color/nord14"
+                                    android:textSize="10sp"
+                                    app:strokeColor="@color/nord14"
+                                    app:strokeWidth="1dp" />
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/etYtdlpApiUrl"
+                                android:layout_width="match_parent"
+                                android:layout_height="34dp"
+                                android:layout_marginTop="2dp"
+                                android:background="@drawable/bg_rounded_edittext"
+                                android:hint="URL: http://192.168.x.x:9003 or https://..."
+                                android:imeOptions="actionDone"
+                                android:inputType="textUri"
+                                android:paddingHorizontal="8dp"
+                                android:textColor="@color/nord4"
+                                android:textColorHint="@color/nord3"
+                                android:textSize="10.5sp" />
+                        </LinearLayout>
+
+                        <!-- 4. Invidious Instances -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <CheckBox
+                                    android:id="@+id/cbInvidious"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:checked="true"
+                                    android:text="4. Invidious Instances (Live Registry)"
+                                    android:textColor="@color/nord6"
+                                    android:textSize="11sp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnTestInvidious"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="32dp"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="0dp"
+                                    android:text="⚡ Test"
+                                    android:textColor="@color/nord9"
+                                    android:textSize="10sp"
+                                    app:strokeColor="@color/nord9"
+                                    app:strokeWidth="1dp" />
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/etInvidiousUrl"
+                                android:layout_width="match_parent"
+                                android:layout_height="34dp"
+                                android:layout_marginTop="2dp"
+                                android:background="@drawable/bg_rounded_edittext"
+                                android:hint="Custom URL (leave empty for auto registry)"
+                                android:imeOptions="actionDone"
+                                android:inputType="textUri"
+                                android:paddingHorizontal="8dp"
+                                android:textColor="@color/nord4"
+                                android:textColorHint="@color/nord3"
+                                android:textSize="10.5sp" />
+                        </LinearLayout>
+
+                        <!-- 5. Cobalt Media API -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <CheckBox
+                                    android:id="@+id/cbCobalt"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:checked="true"
+                                    android:text="5. Cobalt Media Engine"
+                                    android:textColor="@color/nord6"
+                                    android:textSize="11sp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnTestCobalt"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="32dp"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="0dp"
+                                    android:text="⚡ Test"
+                                    android:textColor="@color/nord15"
+                                    android:textSize="10sp"
+                                    app:strokeColor="@color/nord15"
+                                    app:strokeWidth="1dp" />
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/etCobaltUrl"
+                                android:layout_width="match_parent"
+                                android:layout_height="34dp"
+                                android:layout_marginTop="2dp"
+                                android:background="@drawable/bg_rounded_edittext"
+                                android:hint="Custom Cobalt API (default: https://api.cobalt.tools)"
+                                android:imeOptions="actionDone"
+                                android:inputType="textUri"
+                                android:paddingHorizontal="8dp"
+                                android:textColor="@color/nord4"
+                                android:textColorHint="@color/nord3"
+                                android:textSize="10.5sp" />
+                        </LinearLayout>
+
+                        <!-- 6. Piped Decentralized API -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <CheckBox
+                                    android:id="@+id/cbPiped"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:checked="true"
+                                    android:text="6. Piped Decentralized API"
+                                    android:textColor="@color/nord6"
+                                    android:textSize="11sp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnTestPiped"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="32dp"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="0dp"
+                                    android:text="⚡ Test"
+                                    android:textColor="@color/nord12"
+                                    android:textSize="10sp"
+                                    app:strokeColor="@color/nord12"
+                                    app:strokeWidth="1dp" />
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/etPipedUrl"
+                                android:layout_width="match_parent"
+                                android:layout_height="34dp"
+                                android:layout_marginTop="2dp"
+                                android:background="@drawable/bg_rounded_edittext"
+                                android:hint="Custom Piped API (default: https://pipedapi.kavin.rocks)"
+                                android:imeOptions="actionDone"
+                                android:inputType="textUri"
+                                android:paddingHorizontal="8dp"
+                                android:textColor="@color/nord4"
+                                android:textColorHint="@color/nord3"
+                                android:textSize="10.5sp" />
                         </LinearLayout>
 
                     </LinearLayout>
