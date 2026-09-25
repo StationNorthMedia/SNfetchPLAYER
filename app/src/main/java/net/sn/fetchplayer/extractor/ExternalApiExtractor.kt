@@ -152,8 +152,9 @@ object ExternalApiExtractor {
                     val targetUrl = "$cleanBaseUrl/"
                     val payload = JSONObject().apply {
                         put("url", "https://www.youtube.com/watch?v=$youtubeId")
+                        put("downloadMode", if (isAudioOnly) "audio" else "auto")
                         if (isAudioOnly) {
-                            put("downloadMode", "audio")
+                            put("audioFormat", "mp3")
                         }
                     }
 
