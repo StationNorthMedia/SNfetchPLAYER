@@ -71,6 +71,9 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
   public final MaterialButton btnCopyNordLogs;
 
   @NonNull
+  public final MaterialButton btnCreateNewPlaylist;
+
+  @NonNull
   public final MaterialButton btnCuratorFullscreen;
 
   @NonNull
@@ -84,6 +87,9 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
 
   @NonNull
   public final MaterialButton btnCuratorRepeat;
+
+  @NonNull
+  public final MaterialButton btnCycleExtractionMode;
 
   @NonNull
   public final MaterialButton btnExportJson;
@@ -137,6 +143,9 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
   public final MaterialButton btnResetCatalog;
 
   @NonNull
+  public final MaterialButton btnSaveCustomExtractorUrl;
+
+  @NonNull
   public final MaterialButton btnSaveNordLogsTxt;
 
   @NonNull
@@ -150,6 +159,21 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
 
   @NonNull
   public final MaterialButton btnTabSaved;
+
+  @NonNull
+  public final MaterialButton btnTestOtaInstances;
+
+  @NonNull
+  public final MaterialButton btnTutorialCh1;
+
+  @NonNull
+  public final MaterialButton btnTutorialCh2;
+
+  @NonNull
+  public final MaterialButton btnTutorialCh3;
+
+  @NonNull
+  public final MaterialButton btnTutorialCh4;
 
   @NonNull
   public final MaterialCardView cardCuratorPreviewPlayer;
@@ -188,6 +212,9 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
   public final PlayerView curatorPlayerView;
 
   @NonNull
+  public final EditText etCustomExtractorUrl;
+
+  @NonNull
   public final EditText etLexiconSearch;
 
   @NonNull
@@ -224,6 +251,9 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
   public final LinearLayout layoutPlaylistInputRow;
 
   @NonNull
+  public final LinearLayout layoutPlaylistManagerList;
+
+  @NonNull
   public final LinearLayout layoutQueenTutorialSettings;
 
   @NonNull
@@ -252,6 +282,9 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
 
   @NonNull
   public final NestedScrollView scrollArtistDetail;
+
+  @NonNull
+  public final Spinner spinnerCuratorPlaylistSelect;
 
   @NonNull
   public final Spinner spinnerRadioPlaylist;
@@ -284,6 +317,9 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
   public final MaterialButtonToggleGroup toggleQualityGroup;
 
   @NonNull
+  public final MaterialButtonToggleGroup toggleTutorialTabGroup;
+
+  @NonNull
   public final TextView tvAppVersion;
 
   @NonNull
@@ -300,6 +336,9 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
 
   @NonNull
   public final TextView tvCacheSizeInfo;
+
+  @NonNull
+  public final TextView tvChroniclesContent;
 
   @NonNull
   public final TextView tvCuratorPreviewArtist;
@@ -319,6 +358,9 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
   @NonNull
   public final TextView tvRelatedTitle;
 
+  @NonNull
+  public final TextView tvTutorialChapterContent;
+
   private LayoutSettingsHubBinding(@NonNull FrameLayout rootView,
       @NonNull MaterialButton btnArtistYoutube, @NonNull MaterialButton btnBackFromAudioVisualizer,
       @NonNull MaterialButton btnBackFromBroadcast, @NonNull MaterialButton btnBackFromChronicles,
@@ -327,9 +369,10 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
       @NonNull MaterialButton btnBackFromSystemCache, @NonNull MaterialButton btnBackFromTvDisplay,
       @NonNull MaterialButton btnCheckAppUpdate, @NonNull MaterialButton btnClearCacheNow,
       @NonNull MaterialButton btnClearCuratorList, @NonNull MaterialButton btnCopyNordLogs,
-      @NonNull MaterialButton btnCuratorFullscreen, @NonNull MaterialButton btnCuratorNext,
-      @NonNull MaterialButton btnCuratorPlayPause, @NonNull MaterialButton btnCuratorPrev,
-      @NonNull MaterialButton btnCuratorRepeat, @NonNull MaterialButton btnExportJson,
+      @NonNull MaterialButton btnCreateNewPlaylist, @NonNull MaterialButton btnCuratorFullscreen,
+      @NonNull MaterialButton btnCuratorNext, @NonNull MaterialButton btnCuratorPlayPause,
+      @NonNull MaterialButton btnCuratorPrev, @NonNull MaterialButton btnCuratorRepeat,
+      @NonNull MaterialButton btnCycleExtractionMode, @NonNull MaterialButton btnExportJson,
       @NonNull MaterialButton btnImportJsonFile, @NonNull MaterialButton btnLoadPlaylist,
       @NonNull MaterialButton btnOpenEbookChronicles, @NonNull MaterialButton btnOpenQueenTutorial,
       @NonNull MaterialButton btnOsd10s, @NonNull MaterialButton btnOsd3s,
@@ -338,22 +381,26 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
       @NonNull MaterialButton btnQuality480, @NonNull MaterialButton btnQuality4K,
       @NonNull MaterialButton btnQuality720, @NonNull MaterialButton btnQualityAuto,
       @NonNull MaterialButton btnRandomArtist, @NonNull MaterialButton btnResetCatalog,
-      @NonNull MaterialButton btnSaveNordLogsTxt, @NonNull MaterialButton btnShowNordLogs,
-      @NonNull MaterialButton btnSyncAssetsNow, @NonNull MaterialButton btnTabImported,
-      @NonNull MaterialButton btnTabSaved, @NonNull MaterialCardView cardCuratorPreviewPlayer,
+      @NonNull MaterialButton btnSaveCustomExtractorUrl, @NonNull MaterialButton btnSaveNordLogsTxt,
+      @NonNull MaterialButton btnShowNordLogs, @NonNull MaterialButton btnSyncAssetsNow,
+      @NonNull MaterialButton btnTabImported, @NonNull MaterialButton btnTabSaved,
+      @NonNull MaterialButton btnTestOtaInstances, @NonNull MaterialButton btnTutorialCh1,
+      @NonNull MaterialButton btnTutorialCh2, @NonNull MaterialButton btnTutorialCh3,
+      @NonNull MaterialButton btnTutorialCh4, @NonNull MaterialCardView cardCuratorPreviewPlayer,
       @NonNull MaterialCardView cardRemoteAssetSync, @NonNull MaterialCardView cardSearchDropdown,
       @NonNull MaterialCardView cardTileAudioVisualizer,
       @NonNull MaterialCardView cardTileBroadcast, @NonNull MaterialCardView cardTileChronicles,
       @NonNull MaterialCardView cardTileCurator, @NonNull MaterialCardView cardTileLexicon,
       @NonNull MaterialCardView cardTileQueenTutorial,
       @NonNull MaterialCardView cardTileSystemCache, @NonNull MaterialCardView cardTileTvDisplay,
-      @NonNull PlayerView curatorPlayerView, @NonNull EditText etLexiconSearch,
-      @NonNull EditText etPlaylistInput, @NonNull ImageView imgArtistAvatar,
-      @NonNull LinearLayout layoutAudioVisualizerSettings,
+      @NonNull PlayerView curatorPlayerView, @NonNull EditText etCustomExtractorUrl,
+      @NonNull EditText etLexiconSearch, @NonNull EditText etPlaylistInput,
+      @NonNull ImageView imgArtistAvatar, @NonNull LinearLayout layoutAudioVisualizerSettings,
       @NonNull LinearLayout layoutBroadcastSettings, @NonNull LinearLayout layoutChroniclesSettings,
       @NonNull LinearLayout layoutCuratorControls, @NonNull LinearLayout layoutCuratorStudio,
       @NonNull LinearLayout layoutDiscographyContainer, @NonNull LinearLayout layoutNordLogsInline,
       @NonNull FrameLayout layoutNordLogsStudio, @NonNull LinearLayout layoutPlaylistInputRow,
+      @NonNull LinearLayout layoutPlaylistManagerList,
       @NonNull LinearLayout layoutQueenTutorialSettings,
       @NonNull LinearLayout layoutRelatedContainer,
       @NonNull LinearLayout layoutSettingsDashboardGrid,
@@ -361,19 +408,21 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
       @NonNull LinearLayout layoutTvDisplaySettings, @NonNull ProgressBar pbRemoteAssetSync,
       @NonNull ProgressBar progressLoadPlaylist, @NonNull RecyclerView rvCuratorPlaylist,
       @NonNull RecyclerView rvSearchDropdown, @NonNull NestedScrollView scrollArtistDetail,
-      @NonNull Spinner spinnerRadioPlaylist, @NonNull Spinner spinnerTvPlaylist,
-      @NonNull SwitchMaterial switchBassPulse, @NonNull SwitchMaterial switchEnableCache,
-      @NonNull SwitchMaterial switchFftVisualizer, @NonNull SwitchMaterial switchQueenQuotes,
-      @NonNull SwitchMaterial switchSlantedBauchbinden,
+      @NonNull Spinner spinnerCuratorPlaylistSelect, @NonNull Spinner spinnerRadioPlaylist,
+      @NonNull Spinner spinnerTvPlaylist, @NonNull SwitchMaterial switchBassPulse,
+      @NonNull SwitchMaterial switchEnableCache, @NonNull SwitchMaterial switchFftVisualizer,
+      @NonNull SwitchMaterial switchQueenQuotes, @NonNull SwitchMaterial switchSlantedBauchbinden,
       @NonNull MaterialButtonToggleGroup toggleCuratorTabGroup,
       @NonNull MaterialButtonToggleGroup toggleOsdTimeoutGroup,
-      @NonNull MaterialButtonToggleGroup toggleQualityGroup, @NonNull TextView tvAppVersion,
+      @NonNull MaterialButtonToggleGroup toggleQualityGroup,
+      @NonNull MaterialButtonToggleGroup toggleTutorialTabGroup, @NonNull TextView tvAppVersion,
       @NonNull TextView tvArtistDetailBio, @NonNull TextView tvArtistDetailGenreBadge,
       @NonNull TextView tvArtistDetailName, @NonNull TextView tvAssetSyncStatus,
-      @NonNull TextView tvCacheSizeInfo, @NonNull TextView tvCuratorPreviewArtist,
-      @NonNull TextView tvCuratorPreviewTitle, @NonNull TextView tvCuratorStatusCount,
-      @NonNull TextView tvDiscographyTitle, @NonNull TextView tvNordLogsTerminal,
-      @NonNull TextView tvRelatedTitle) {
+      @NonNull TextView tvCacheSizeInfo, @NonNull TextView tvChroniclesContent,
+      @NonNull TextView tvCuratorPreviewArtist, @NonNull TextView tvCuratorPreviewTitle,
+      @NonNull TextView tvCuratorStatusCount, @NonNull TextView tvDiscographyTitle,
+      @NonNull TextView tvNordLogsTerminal, @NonNull TextView tvRelatedTitle,
+      @NonNull TextView tvTutorialChapterContent) {
     this.rootView = rootView;
     this.btnArtistYoutube = btnArtistYoutube;
     this.btnBackFromAudioVisualizer = btnBackFromAudioVisualizer;
@@ -388,11 +437,13 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
     this.btnClearCacheNow = btnClearCacheNow;
     this.btnClearCuratorList = btnClearCuratorList;
     this.btnCopyNordLogs = btnCopyNordLogs;
+    this.btnCreateNewPlaylist = btnCreateNewPlaylist;
     this.btnCuratorFullscreen = btnCuratorFullscreen;
     this.btnCuratorNext = btnCuratorNext;
     this.btnCuratorPlayPause = btnCuratorPlayPause;
     this.btnCuratorPrev = btnCuratorPrev;
     this.btnCuratorRepeat = btnCuratorRepeat;
+    this.btnCycleExtractionMode = btnCycleExtractionMode;
     this.btnExportJson = btnExportJson;
     this.btnImportJsonFile = btnImportJsonFile;
     this.btnLoadPlaylist = btnLoadPlaylist;
@@ -410,11 +461,17 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
     this.btnQualityAuto = btnQualityAuto;
     this.btnRandomArtist = btnRandomArtist;
     this.btnResetCatalog = btnResetCatalog;
+    this.btnSaveCustomExtractorUrl = btnSaveCustomExtractorUrl;
     this.btnSaveNordLogsTxt = btnSaveNordLogsTxt;
     this.btnShowNordLogs = btnShowNordLogs;
     this.btnSyncAssetsNow = btnSyncAssetsNow;
     this.btnTabImported = btnTabImported;
     this.btnTabSaved = btnTabSaved;
+    this.btnTestOtaInstances = btnTestOtaInstances;
+    this.btnTutorialCh1 = btnTutorialCh1;
+    this.btnTutorialCh2 = btnTutorialCh2;
+    this.btnTutorialCh3 = btnTutorialCh3;
+    this.btnTutorialCh4 = btnTutorialCh4;
     this.cardCuratorPreviewPlayer = cardCuratorPreviewPlayer;
     this.cardRemoteAssetSync = cardRemoteAssetSync;
     this.cardSearchDropdown = cardSearchDropdown;
@@ -427,6 +484,7 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
     this.cardTileSystemCache = cardTileSystemCache;
     this.cardTileTvDisplay = cardTileTvDisplay;
     this.curatorPlayerView = curatorPlayerView;
+    this.etCustomExtractorUrl = etCustomExtractorUrl;
     this.etLexiconSearch = etLexiconSearch;
     this.etPlaylistInput = etPlaylistInput;
     this.imgArtistAvatar = imgArtistAvatar;
@@ -439,6 +497,7 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
     this.layoutNordLogsInline = layoutNordLogsInline;
     this.layoutNordLogsStudio = layoutNordLogsStudio;
     this.layoutPlaylistInputRow = layoutPlaylistInputRow;
+    this.layoutPlaylistManagerList = layoutPlaylistManagerList;
     this.layoutQueenTutorialSettings = layoutQueenTutorialSettings;
     this.layoutRelatedContainer = layoutRelatedContainer;
     this.layoutSettingsDashboardGrid = layoutSettingsDashboardGrid;
@@ -449,6 +508,7 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
     this.rvCuratorPlaylist = rvCuratorPlaylist;
     this.rvSearchDropdown = rvSearchDropdown;
     this.scrollArtistDetail = scrollArtistDetail;
+    this.spinnerCuratorPlaylistSelect = spinnerCuratorPlaylistSelect;
     this.spinnerRadioPlaylist = spinnerRadioPlaylist;
     this.spinnerTvPlaylist = spinnerTvPlaylist;
     this.switchBassPulse = switchBassPulse;
@@ -459,18 +519,21 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
     this.toggleCuratorTabGroup = toggleCuratorTabGroup;
     this.toggleOsdTimeoutGroup = toggleOsdTimeoutGroup;
     this.toggleQualityGroup = toggleQualityGroup;
+    this.toggleTutorialTabGroup = toggleTutorialTabGroup;
     this.tvAppVersion = tvAppVersion;
     this.tvArtistDetailBio = tvArtistDetailBio;
     this.tvArtistDetailGenreBadge = tvArtistDetailGenreBadge;
     this.tvArtistDetailName = tvArtistDetailName;
     this.tvAssetSyncStatus = tvAssetSyncStatus;
     this.tvCacheSizeInfo = tvCacheSizeInfo;
+    this.tvChroniclesContent = tvChroniclesContent;
     this.tvCuratorPreviewArtist = tvCuratorPreviewArtist;
     this.tvCuratorPreviewTitle = tvCuratorPreviewTitle;
     this.tvCuratorStatusCount = tvCuratorStatusCount;
     this.tvDiscographyTitle = tvDiscographyTitle;
     this.tvNordLogsTerminal = tvNordLogsTerminal;
     this.tvRelatedTitle = tvRelatedTitle;
+    this.tvTutorialChapterContent = tvTutorialChapterContent;
   }
 
   @Override
@@ -578,6 +641,12 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btnCreateNewPlaylist;
+      MaterialButton btnCreateNewPlaylist = ViewBindings.findChildViewById(rootView, id);
+      if (btnCreateNewPlaylist == null) {
+        break missingId;
+      }
+
       id = R.id.btnCuratorFullscreen;
       MaterialButton btnCuratorFullscreen = ViewBindings.findChildViewById(rootView, id);
       if (btnCuratorFullscreen == null) {
@@ -605,6 +674,12 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
       id = R.id.btnCuratorRepeat;
       MaterialButton btnCuratorRepeat = ViewBindings.findChildViewById(rootView, id);
       if (btnCuratorRepeat == null) {
+        break missingId;
+      }
+
+      id = R.id.btnCycleExtractionMode;
+      MaterialButton btnCycleExtractionMode = ViewBindings.findChildViewById(rootView, id);
+      if (btnCycleExtractionMode == null) {
         break missingId;
       }
 
@@ -710,6 +785,12 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btnSaveCustomExtractorUrl;
+      MaterialButton btnSaveCustomExtractorUrl = ViewBindings.findChildViewById(rootView, id);
+      if (btnSaveCustomExtractorUrl == null) {
+        break missingId;
+      }
+
       id = R.id.btnSaveNordLogsTxt;
       MaterialButton btnSaveNordLogsTxt = ViewBindings.findChildViewById(rootView, id);
       if (btnSaveNordLogsTxt == null) {
@@ -737,6 +818,36 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
       id = R.id.btnTabSaved;
       MaterialButton btnTabSaved = ViewBindings.findChildViewById(rootView, id);
       if (btnTabSaved == null) {
+        break missingId;
+      }
+
+      id = R.id.btnTestOtaInstances;
+      MaterialButton btnTestOtaInstances = ViewBindings.findChildViewById(rootView, id);
+      if (btnTestOtaInstances == null) {
+        break missingId;
+      }
+
+      id = R.id.btnTutorialCh1;
+      MaterialButton btnTutorialCh1 = ViewBindings.findChildViewById(rootView, id);
+      if (btnTutorialCh1 == null) {
+        break missingId;
+      }
+
+      id = R.id.btnTutorialCh2;
+      MaterialButton btnTutorialCh2 = ViewBindings.findChildViewById(rootView, id);
+      if (btnTutorialCh2 == null) {
+        break missingId;
+      }
+
+      id = R.id.btnTutorialCh3;
+      MaterialButton btnTutorialCh3 = ViewBindings.findChildViewById(rootView, id);
+      if (btnTutorialCh3 == null) {
+        break missingId;
+      }
+
+      id = R.id.btnTutorialCh4;
+      MaterialButton btnTutorialCh4 = ViewBindings.findChildViewById(rootView, id);
+      if (btnTutorialCh4 == null) {
         break missingId;
       }
 
@@ -812,6 +923,12 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.etCustomExtractorUrl;
+      EditText etCustomExtractorUrl = ViewBindings.findChildViewById(rootView, id);
+      if (etCustomExtractorUrl == null) {
+        break missingId;
+      }
+
       id = R.id.etLexiconSearch;
       EditText etLexiconSearch = ViewBindings.findChildViewById(rootView, id);
       if (etLexiconSearch == null) {
@@ -884,6 +1001,12 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.layoutPlaylistManagerList;
+      LinearLayout layoutPlaylistManagerList = ViewBindings.findChildViewById(rootView, id);
+      if (layoutPlaylistManagerList == null) {
+        break missingId;
+      }
+
       id = R.id.layoutQueenTutorialSettings;
       LinearLayout layoutQueenTutorialSettings = ViewBindings.findChildViewById(rootView, id);
       if (layoutQueenTutorialSettings == null) {
@@ -941,6 +1064,12 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
       id = R.id.scrollArtistDetail;
       NestedScrollView scrollArtistDetail = ViewBindings.findChildViewById(rootView, id);
       if (scrollArtistDetail == null) {
+        break missingId;
+      }
+
+      id = R.id.spinnerCuratorPlaylistSelect;
+      Spinner spinnerCuratorPlaylistSelect = ViewBindings.findChildViewById(rootView, id);
+      if (spinnerCuratorPlaylistSelect == null) {
         break missingId;
       }
 
@@ -1004,6 +1133,12 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.toggleTutorialTabGroup;
+      MaterialButtonToggleGroup toggleTutorialTabGroup = ViewBindings.findChildViewById(rootView, id);
+      if (toggleTutorialTabGroup == null) {
+        break missingId;
+      }
+
       id = R.id.tvAppVersion;
       TextView tvAppVersion = ViewBindings.findChildViewById(rootView, id);
       if (tvAppVersion == null) {
@@ -1037,6 +1172,12 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
       id = R.id.tvCacheSizeInfo;
       TextView tvCacheSizeInfo = ViewBindings.findChildViewById(rootView, id);
       if (tvCacheSizeInfo == null) {
+        break missingId;
+      }
+
+      id = R.id.tvChroniclesContent;
+      TextView tvChroniclesContent = ViewBindings.findChildViewById(rootView, id);
+      if (tvChroniclesContent == null) {
         break missingId;
       }
 
@@ -1076,31 +1217,41 @@ public final class LayoutSettingsHubBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tvTutorialChapterContent;
+      TextView tvTutorialChapterContent = ViewBindings.findChildViewById(rootView, id);
+      if (tvTutorialChapterContent == null) {
+        break missingId;
+      }
+
       return new LayoutSettingsHubBinding((FrameLayout) rootView, btnArtistYoutube,
           btnBackFromAudioVisualizer, btnBackFromBroadcast, btnBackFromChronicles,
           btnBackFromCurator, btnBackFromLexicon, btnBackFromQueenTutorial, btnBackFromSystemCache,
           btnBackFromTvDisplay, btnCheckAppUpdate, btnClearCacheNow, btnClearCuratorList,
-          btnCopyNordLogs, btnCuratorFullscreen, btnCuratorNext, btnCuratorPlayPause,
-          btnCuratorPrev, btnCuratorRepeat, btnExportJson, btnImportJsonFile, btnLoadPlaylist,
-          btnOpenEbookChronicles, btnOpenQueenTutorial, btnOsd10s, btnOsd3s, btnOsd5s, btnOsdAlways,
-          btnQuality1080, btnQuality360, btnQuality480, btnQuality4K, btnQuality720, btnQualityAuto,
-          btnRandomArtist, btnResetCatalog, btnSaveNordLogsTxt, btnShowNordLogs, btnSyncAssetsNow,
-          btnTabImported, btnTabSaved, cardCuratorPreviewPlayer, cardRemoteAssetSync,
-          cardSearchDropdown, cardTileAudioVisualizer, cardTileBroadcast, cardTileChronicles,
-          cardTileCurator, cardTileLexicon, cardTileQueenTutorial, cardTileSystemCache,
-          cardTileTvDisplay, curatorPlayerView, etLexiconSearch, etPlaylistInput, imgArtistAvatar,
-          layoutAudioVisualizerSettings, layoutBroadcastSettings, layoutChroniclesSettings,
-          layoutCuratorControls, layoutCuratorStudio, layoutDiscographyContainer,
-          layoutNordLogsInline, layoutNordLogsStudio, layoutPlaylistInputRow,
+          btnCopyNordLogs, btnCreateNewPlaylist, btnCuratorFullscreen, btnCuratorNext,
+          btnCuratorPlayPause, btnCuratorPrev, btnCuratorRepeat, btnCycleExtractionMode,
+          btnExportJson, btnImportJsonFile, btnLoadPlaylist, btnOpenEbookChronicles,
+          btnOpenQueenTutorial, btnOsd10s, btnOsd3s, btnOsd5s, btnOsdAlways, btnQuality1080,
+          btnQuality360, btnQuality480, btnQuality4K, btnQuality720, btnQualityAuto,
+          btnRandomArtist, btnResetCatalog, btnSaveCustomExtractorUrl, btnSaveNordLogsTxt,
+          btnShowNordLogs, btnSyncAssetsNow, btnTabImported, btnTabSaved, btnTestOtaInstances,
+          btnTutorialCh1, btnTutorialCh2, btnTutorialCh3, btnTutorialCh4, cardCuratorPreviewPlayer,
+          cardRemoteAssetSync, cardSearchDropdown, cardTileAudioVisualizer, cardTileBroadcast,
+          cardTileChronicles, cardTileCurator, cardTileLexicon, cardTileQueenTutorial,
+          cardTileSystemCache, cardTileTvDisplay, curatorPlayerView, etCustomExtractorUrl,
+          etLexiconSearch, etPlaylistInput, imgArtistAvatar, layoutAudioVisualizerSettings,
+          layoutBroadcastSettings, layoutChroniclesSettings, layoutCuratorControls,
+          layoutCuratorStudio, layoutDiscographyContainer, layoutNordLogsInline,
+          layoutNordLogsStudio, layoutPlaylistInputRow, layoutPlaylistManagerList,
           layoutQueenTutorialSettings, layoutRelatedContainer, layoutSettingsDashboardGrid,
           layoutSystemCacheUpdateSettings, layoutTvDisplaySettings, pbRemoteAssetSync,
           progressLoadPlaylist, rvCuratorPlaylist, rvSearchDropdown, scrollArtistDetail,
-          spinnerRadioPlaylist, spinnerTvPlaylist, switchBassPulse, switchEnableCache,
-          switchFftVisualizer, switchQueenQuotes, switchSlantedBauchbinden, toggleCuratorTabGroup,
-          toggleOsdTimeoutGroup, toggleQualityGroup, tvAppVersion, tvArtistDetailBio,
-          tvArtistDetailGenreBadge, tvArtistDetailName, tvAssetSyncStatus, tvCacheSizeInfo,
-          tvCuratorPreviewArtist, tvCuratorPreviewTitle, tvCuratorStatusCount, tvDiscographyTitle,
-          tvNordLogsTerminal, tvRelatedTitle);
+          spinnerCuratorPlaylistSelect, spinnerRadioPlaylist, spinnerTvPlaylist, switchBassPulse,
+          switchEnableCache, switchFftVisualizer, switchQueenQuotes, switchSlantedBauchbinden,
+          toggleCuratorTabGroup, toggleOsdTimeoutGroup, toggleQualityGroup, toggleTutorialTabGroup,
+          tvAppVersion, tvArtistDetailBio, tvArtistDetailGenreBadge, tvArtistDetailName,
+          tvAssetSyncStatus, tvCacheSizeInfo, tvChroniclesContent, tvCuratorPreviewArtist,
+          tvCuratorPreviewTitle, tvCuratorStatusCount, tvDiscographyTitle, tvNordLogsTerminal,
+          tvRelatedTitle, tvTutorialChapterContent);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

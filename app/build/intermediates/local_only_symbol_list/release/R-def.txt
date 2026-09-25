@@ -33,6 +33,8 @@ color teal_200
 color teal_700
 color white
 drawable badge_update_bg
+drawable bg_rounded_edittext
+drawable ic_arrow_back
 drawable ic_book
 drawable ic_check
 drawable ic_delete
@@ -74,11 +76,13 @@ id btnCloseDialog
 id btnCloseEbook
 id btnCloseTutorial
 id btnCopyNordLogs
+id btnCreateNewPlaylist
 id btnCuratorFullscreen
 id btnCuratorNext
 id btnCuratorPlayPause
 id btnCuratorPrev
 id btnCuratorRepeat
+id btnCycleExtractionMode
 id btnDownloadUpdate
 id btnExitFullscreen
 id btnExportJson
@@ -108,12 +112,18 @@ id btnRandomArtist
 id btnRemove
 id btnResetCatalog
 id btnSave
+id btnSaveCustomExtractorUrl
 id btnSaveNordLogsTxt
 id btnShowNordLogs
 id btnSyncAssetsNow
 id btnTabArtistInfo
 id btnTabImported
 id btnTabSaved
+id btnTestOtaInstances
+id btnTutorialCh1
+id btnTutorialCh2
+id btnTutorialCh3
+id btnTutorialCh4
 id cardArtistInfoContainer
 id cardCuratorPreviewPlayer
 id cardHudPanel
@@ -135,6 +145,7 @@ id cardTileTvDisplay
 id cardTrackContainer
 id cardTrackInfo
 id curatorPlayerView
+id etCustomExtractorUrl
 id etEditArtist
 id etEditTitle
 id etLexiconSearch
@@ -170,6 +181,7 @@ id layoutHeader
 id layoutNordLogsInline
 id layoutNordLogsStudio
 id layoutPlaylistInputRow
+id layoutPlaylistManagerList
 id layoutQueenTutorialSettings
 id layoutRadioHeader
 id layoutRadioOverlay
@@ -194,6 +206,7 @@ id rvLexiconArtists
 id rvSearchDropdown
 id scrollArtistDetail
 id settingsHub
+id spinnerCuratorPlaylistSelect
 id spinnerRadioPlaylist
 id spinnerTvPlaylist
 id switchBassPulse
@@ -206,6 +219,7 @@ id toggleCuratorTabGroup
 id toggleModeGroup
 id toggleOsdTimeoutGroup
 id toggleQualityGroup
+id toggleTutorialTabGroup
 id tvAlbumExpandIndicator
 id tvAlbumTitle
 id tvAlbumTrackBadge
@@ -229,6 +243,7 @@ id tvBauchbindeBadge
 id tvBauchbindeTitle
 id tvCacheSizeInfo
 id tvChapterContent
+id tvChroniclesContent
 id tvCuratorPreviewArtist
 id tvCuratorPreviewTitle
 id tvCuratorStatusCount
@@ -254,6 +269,7 @@ id tvSavedStatusBadge
 id tvTitle
 id tvTrackArtist
 id tvTrackTitle
+id tvTutorialChapterContent
 id tvUpdateChangelog
 id tvUpdateVersionSub
 id tvYtId

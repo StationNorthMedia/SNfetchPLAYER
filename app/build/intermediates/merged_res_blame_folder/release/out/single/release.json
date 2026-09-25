@@ -1,498 +1,510 @@
 [
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0027.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0027.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_book.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_book.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_ic_storage.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/ic_storage.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0007.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0007.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/mipmap-xxhdpi/ic_launcher.png"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0037.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0037.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0050.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0050.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0022.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0022.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0012.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0012.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/layout_dialog_lexicon_browser.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/dialog_lexicon_browser.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0065.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0065.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_next.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_next.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/xml_file_paths.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/xml/file_paths.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0030.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0030.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_ic_tv.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/ic_tv.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_edit.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_edit.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0057.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0057.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0052.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0052.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0005.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0005.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0067.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0067.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_ic_previous.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/ic_previous.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0014.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0014.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0042.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0042.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/layout_item_lexicon_studio_result.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/item_lexicon_studio_result.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0034.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0034.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0059.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0059.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_ic_fullscreen_exit.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/ic_fullscreen_exit.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/mipmap-mdpi/ic_launcher.png"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0060.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0060.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0043.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0043.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_fullscreen_exit.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_fullscreen_exit.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_ic_playlist.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/ic_playlist.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/layout_dialog_app_update.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/dialog_app_update.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/xml_backup_rules.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/xml/backup_rules.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_playlist.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_playlist.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0056.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0056.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0038.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0038.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0011.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0011.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0044.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0044.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0049.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0049.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0031.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0031.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0004.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0004.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0008.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0008.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/layout_item_related_artist.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/layout/item_related_artist.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0066.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0066.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/mipmap-mdpi/ic_launcher_round.png"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_badge_update_bg.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/badge_update_bg.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/layout_activity_main.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/layout/activity_main.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0015.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0015.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_ic_help.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/ic_help.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0053.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0053.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0020.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0020.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0021.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0021.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/layout_item_curator_track.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/layout/item_curator_track.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_arrow_back.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_arrow_back.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0033.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0033.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/mipmap-mdpi/ic_launcher_round.png"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_sn_logo.png.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/sn_logo.png"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/layout_item_curator_track.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/item_curator_track.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0029.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0029.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/layout_item_lexicon_album.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/item_lexicon_album.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0044.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0044.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0043.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0043.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0036.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0036.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_pause.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_pause.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0037.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0037.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0005.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0005.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/layout_item_artist_history.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/layout/item_artist_history.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_previous.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_previous.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0010.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0010.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0039.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0039.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_ic_pause.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/ic_pause.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0069.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0069.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/mipmap-xhdpi/ic_launcher_round.png"
+        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_bg_rounded_edittext.xml.flat",
+        "source": "net.sn.fetchplayer.app-main-37:/drawable/bg_rounded_edittext.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/layout_dialog_lexicon_browser.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/layout/dialog_lexicon_browser.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0009.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0009.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0047.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0047.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0016.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0016.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0026.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0026.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/mipmap-xhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0021.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0021.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0020.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0020.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/mipmap-hdpi_ic_launcher_round.png.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/mipmap-hdpi/ic_launcher_round.png"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/xml_backup_rules.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/xml/backup_rules.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_jingle_1.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_jingle_1.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0054.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0054.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0064.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0064.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/layout_activity_main.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/activity_main.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0009.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0009.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0046.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0046.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0051.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0051.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_tv.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_tv.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0013.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0013.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0006.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0006.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/xml_data_extraction_rules.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/xml/data_extraction_rules.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0019.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0019.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_ic_save.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/ic_save.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_play.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_play.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/layout_item_lexicon_dropdown_suggestion.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/layout/item_lexicon_dropdown_suggestion.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_help.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_help.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_ic_fullscreen.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/ic_fullscreen.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0061.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0061.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/layout_dialog_queen_tutorial.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/layout/dialog_queen_tutorial.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_repeat.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_repeat.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0041.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0041.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0036.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0036.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0054.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0054.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0049.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0049.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0003.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0003.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/mipmap-hdpi/ic_launcher_round.png"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0067.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0067.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_launcher.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_launcher.png"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/layout_layout_settings_hub.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/layout/layout_settings_hub.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0023.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0023.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0006.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0006.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/xml_file_paths.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/xml/file_paths.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_ic_launcher.png.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/ic_launcher.png"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0010.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0010.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0019.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0019.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_fullscreen.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_fullscreen.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/layout-land_activity_main.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/layout-land/activity_main.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0029.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0029.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_ic_play.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/ic_play.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/layout_item_related_artist.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/item_related_artist.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/layout_dialog_edit_track.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/layout/dialog_edit_track.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0051.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0051.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0008.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0008.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0013.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0013.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0016.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0016.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0064.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0064.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0031.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0031.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0026.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0026.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0068.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0068.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/layout_dialog_chronicles_ebook.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/dialog_chronicles_ebook.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0023.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0023.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_radio.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_radio.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0053.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0053.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0011.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0011.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0061.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0061.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_save.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_save.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_ic_repeat.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/ic_repeat.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0056.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0056.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0039.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0039.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/anim_slide_in_right.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/anim/slide_in_right.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_ic_edit.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/ic_edit.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0041.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0041.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/mipmap-xxxhdpi/ic_launcher_round.png"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/anim_fade_out.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/anim/fade_out.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/anim_fade_out.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/anim/fade_out.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0048.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0048.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/layout_dialog_chronicles_ebook.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/layout/dialog_chronicles_ebook.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0003.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0003.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/mipmap-xhdpi/ic_launcher.png"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/layout_dialog_queen_tutorial.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/dialog_queen_tutorial.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0062.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0062.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_storage.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_storage.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_tv_banner.png.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/tv_banner.png"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/layout_item_lexicon_artist.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/item_lexicon_artist.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_ic_radio.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/ic_radio.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0033.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0033.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0030.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0030.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_sn_logo.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/sn_logo.png"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0024.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0024.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/layout-land_layout_settings_hub.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout-land/layout_settings_hub.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0069.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0069.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0057.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0057.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0017.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0017.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0025.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0025.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_badge_update_bg.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/badge_update_bg.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0012.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0012.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_id_1.mp4.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_id_1.mp4"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/layout_item_lexicon_album.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/layout/item_lexicon_album.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_tv_banner.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/tv_banner.png"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0014.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0014.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0050.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0050.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0046.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0046.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_jingle_1.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_jingle_1.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0001.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0001.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0063.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0063.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0059.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0059.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/mipmap-xhdpi/ic_launcher.png"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0052.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0052.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/layout_layout_settings_hub.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/layout_settings_hub.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0025.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0025.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0047.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0047.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0048.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0048.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0002.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0002.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0063.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0063.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/mipmap-mdpi/ic_launcher.png"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_ic_next.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/ic_next.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0034.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0034.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0055.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0055.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_check.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_check.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0018.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0018.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0018.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0018.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0002.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0002.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0040.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0040.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/mipmap-xxhdpi/ic_launcher_round.png"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/mipmap-xxhdpi/ic_launcher.png"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/layout_item_lexicon_studio_result.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/layout/item_lexicon_studio_result.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/layout_dialog_edit_track.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/dialog_edit_track.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0040.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0040.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0024.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0024.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0007.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0007.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/anim_slide_in_left.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/anim/slide_in_left.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0066.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0066.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0028.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0028.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0032.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0032.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0035.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0035.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/layout-sw600dp-land_activity_main.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/layout-sw600dp-land/activity_main.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0062.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0062.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/layout_dialog_app_update.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/layout/dialog_app_update.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0001.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0001.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/layout_item_lexicon_artist.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/layout/item_lexicon_artist.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0027.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0027.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0028.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0028.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0017.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0017.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0058.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0058.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/layout_item_artist_history.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/item_artist_history.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/mipmap-xxxhdpi/ic_launcher.png"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/layout_item_lexicon_dropdown_suggestion.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/item_lexicon_dropdown_suggestion.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0015.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0015.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0065.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0065.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0045.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0045.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/xml_data_extraction_rules.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/xml/data_extraction_rules.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_ic_book.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/ic_book.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_id_1.mp4.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_id_1.mp4"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/anim_slide_in_left.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/anim/slide_in_left.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/mipmap-xxxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0060.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0060.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/layout-sw600dp-land_activity_main.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout-sw600dp-land/activity_main.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_ic_check.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/ic_check.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0068.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0068.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/drawable_ic_delete.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/drawable/ic_delete.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0004.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0004.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0022.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0022.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0042.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0042.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0035.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0035.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0055.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0055.mp3"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0038.mp3.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0038.mp3"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/layout-land_activity_main.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout-land/activity_main.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/anim_slide_in_right.xml.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/anim/slide_in_right.xml"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/drawable_ic_delete.xml.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/drawable/ic_delete.xml"
     },
     {
-        "merged": "net.sn.fetchplayer.app-merged_res-36:/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "net.sn.fetchplayer.app-main-37:/mipmap-hdpi/ic_launcher.png"
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0045.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0045.mp3"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0032.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0032.mp3"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-merged_res-36:/raw_sn_manjaro_lounge_queen_talk_0058.mp3.flat",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/raw/sn_manjaro_lounge_queen_talk_0058.mp3"
     }
 ]

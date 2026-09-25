@@ -1592,6 +1592,16 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         val testYoutubeId = "GxBSyx85Kp8"
         AppLogger.d("OTABenchmark", "--- STARTING OTA INSTANCES LATENCY BENCHMARK ---")
 
+        AppLogger.d("OTABenchmark", "Testing Tier 1: Native InnerTube Engine...")
+        val startInnerTube = System.currentTimeMillis()
+        val innerTubeUrl = net.sn.fetchplayer.extractor.NativeInnerTubeExtractor.extractStreamUrl(testYoutubeId, isAudioOnly = true)
+        val elapsedInnerTube = System.currentTimeMillis() - startInnerTube
+        if (!innerTubeUrl.isNullOrEmpty()) {
+            AppLogger.d("OTABenchmark", "✅ Tier 1 Native InnerTube -> SUCCESS (${elapsedInnerTube}ms)")
+        } else {
+            AppLogger.w("OTABenchmark", "❌ Tier 1 Native InnerTube -> FAILED (${elapsedInnerTube}ms)")
+        }
+
         val customUrl = SettingsManager.getCustomExtractorUrl(this@MainActivity)
         if (customUrl.isNotEmpty()) {
             AppLogger.d("OTABenchmark", "Testing Custom Private Extractor Server: [$customUrl]...")

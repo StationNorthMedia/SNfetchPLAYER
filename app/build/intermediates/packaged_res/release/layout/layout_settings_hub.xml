@@ -401,7 +401,7 @@
         android:padding="6dp"
         android:visibility="gone">
 
-        <!-- Top Bar with Back Button -->
+        <!-- Streamlined Top Bar (Compact Arrow + Queen Card) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -410,19 +410,39 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBackFromBroadcast"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="34dp"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="0dp"
-                android:text="⬅️ ZURÜCK ZUM DASHBOARD"
-                android:textColor="@color/nord11"
-                android:textSize="10.5sp"
-                android:textStyle="bold"
-                app:strokeColor="@color/nord11"
-                app:strokeWidth="1.5dp" />
+                android:padding="0dp"
+                app:backgroundTint="@color/nord11"
+                app:cornerRadius="6dp"
+                app:icon="@drawable/ic_arrow_back"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="22dp"
+                app:iconTint="@color/nord0"
+                app:strokeWidth="0dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="6dp"
+                app:strokeWidth="0dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="👑 &quot;Route your audio &amp; video playlists with royal precision.&quot; — Her Majesty Queen Directives"
+                    android:textColor="@color/nord11"
+                    android:textSize="17sp"
+                    android:textStyle="bold|italic" />
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
@@ -508,6 +528,66 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
+                <!-- Manage All Playlists Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    app:cardBackgroundColor="@color/nord1"
+                    app:cardCornerRadius="8dp"
+                    app:strokeColor="@color/nord15"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="📋 Manage All Playlists"
+                                android:textColor="@color/nord15"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnCreateNewPlaylist"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="36dp"
+                                android:insetTop="0dp"
+                                android:insetBottom="0dp"
+                                android:paddingHorizontal="10dp"
+                                android:text="➕ New Playlist"
+                                android:textColor="@color/nord14"
+                                android:textSize="11sp"
+                                android:textStyle="bold"
+                                app:strokeColor="@color/nord14"
+                                app:strokeWidth="1dp" />
+
+                        </LinearLayout>
+
+                        <!-- Dynamic List Container for Playlists -->
+                        <LinearLayout
+                            android:id="@+id/layoutPlaylistManagerList"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
@@ -533,25 +613,51 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBackFromCurator"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="34dp"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="0dp"
-                android:text="⬅️ ZURÜCK ZUM DASHBOARD"
-                android:textColor="@color/nord15"
-                android:textSize="10.5sp"
-                android:textStyle="bold"
-                app:strokeColor="@color/nord15"
-                app:strokeWidth="1.5dp" />
+                android:padding="0dp"
+                app:backgroundTint="@color/nord15"
+                app:cornerRadius="6dp"
+                app:icon="@drawable/ic_arrow_back"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="22dp"
+                app:iconTint="@color/nord0"
+                app:strokeWidth="0dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Playlist: "
+                    android:textColor="@color/nord15"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spinnerCuratorPlaylistSelect"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:background="@color/nord0"
+                    android:paddingHorizontal="6dp"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvCuratorStatusCount"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginStart="8dp"
                 android:gravity="end"
                 android:text="0 Tracks loaded"
                 android:textColor="@color/nord4"
@@ -559,13 +665,12 @@
 
         </LinearLayout>
 
-        <!-- Horizontal Video Deck: Video Box + Right 5-Button Column matching exact height -->
+        <!-- Horizontal Video Deck: Video Box + Right 5-Button Column -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp">
 
-            <!-- 80% Width 16:9 Video Preview Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardCuratorPreviewPlayer"
                 android:layout_width="0dp"
@@ -600,7 +705,6 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Vertical 5-Button Column matching exact height of cardCuratorPreviewPlayer -->
             <LinearLayout
                 android:id="@+id/layoutCuratorControls"
                 android:layout_width="0dp"
@@ -613,7 +717,6 @@
                 app:layout_constraintStart_toEndOf="@id/cardCuratorPreviewPlayer"
                 app:layout_constraintTop_toTopOf="@id/cardCuratorPreviewPlayer">
 
-                <!-- 1. Play / Pause -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCuratorPlayPause"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -634,7 +737,6 @@
                     app:strokeColor="@color/nord7"
                     app:strokeWidth="1.5dp" />
 
-                <!-- 2. Skip Previous -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCuratorPrev"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -656,7 +758,6 @@
                     app:strokeColor="@color/nord12"
                     app:strokeWidth="1.5dp" />
 
-                <!-- 3. Skip Next -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCuratorNext"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -678,7 +779,6 @@
                     app:strokeColor="@color/nord15"
                     app:strokeWidth="1.5dp" />
 
-                <!-- 4. Re-Loop / Repeat -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCuratorRepeat"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -700,7 +800,6 @@
                     app:strokeColor="@color/nord13"
                     app:strokeWidth="1.5dp" />
 
-                <!-- 5. Fullscreen Toggle -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCuratorFullscreen"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -726,7 +825,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Preview Track Metadata -->
         <TextView
             android:id="@+id/tvCuratorPreviewTitle"
             android:layout_width="match_parent"
@@ -750,12 +848,11 @@
             android:textColor="@color/nord4"
             android:textSize="9.5sp" />
 
-        <!-- Curator Sub-Tab Selector -->
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/toggleCuratorTabGroup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="6dp"
             app:checkedButton="@+id/btnTabImported"
             app:singleSelection="true">
 
@@ -763,35 +860,40 @@
                 android:id="@+id/btnTabImported"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:paddingHorizontal="4dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingHorizontal="8dp"
                 android:text="Import Queue"
                 android:textColor="@color/nord6"
-                android:textSize="10sp"
+                android:textSize="12sp"
+                android:textStyle="bold"
                 app:strokeColor="@color/nord8"
-                app:strokeWidth="1dp" />
+                app:strokeWidth="1.5dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnTabSaved"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:paddingHorizontal="4dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingHorizontal="8dp"
                 android:text="Saved Playlists"
                 android:textColor="@color/nord6"
-                android:textSize="10sp"
+                android:textSize="12sp"
+                android:textStyle="bold"
                 app:icon="@drawable/ic_check"
-                app:iconPadding="2dp"
-                app:iconSize="12dp"
+                app:iconPadding="4dp"
+                app:iconSize="14dp"
                 app:iconTint="@color/nord14"
-                app:strokeColor="@color/nord14"
-                app:strokeWidth="1dp" />
+                app:strokeColor="@color/nord15"
+                app:strokeWidth="1.5dp" />
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
-        <!-- Input Row: Playlist Link/ID + Load Button -->
         <LinearLayout
             android:id="@+id/layoutPlaylistInputRow"
             android:layout_width="match_parent"
@@ -835,7 +937,6 @@
 
         </LinearLayout>
 
-        <!-- Quick Action Toolbar -->
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -939,7 +1040,6 @@
 
         </HorizontalScrollView>
 
-        <!-- RecyclerView of Playlist Items -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCuratorPlaylist"
             android:layout_width="match_parent"
@@ -976,19 +1076,19 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnBackFromLexicon"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="34dp"
+                    android:layout_width="44dp"
+                    android:layout_height="40dp"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="0dp"
-                    android:text="⬅️ ZURÜCK ZUM DASHBOARD"
-                    android:textColor="@color/nord7"
-                    android:textSize="10.5sp"
-                    android:textStyle="bold"
-                    app:strokeColor="@color/nord7"
-                    app:strokeWidth="1.5dp" />
+                    android:padding="0dp"
+                    app:backgroundTint="@color/nord7"
+                    app:cornerRadius="6dp"
+                    app:icon="@drawable/ic_arrow_back"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="22dp"
+                    app:iconTint="@color/nord0"
+                    app:strokeWidth="0dp" />
 
             </LinearLayout>
 
@@ -1250,7 +1350,7 @@
         android:padding="6dp"
         android:visibility="gone">
 
-        <!-- Top Bar with Back Button -->
+        <!-- Streamlined Top Bar (Compact Arrow + Queen Card) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -1259,41 +1359,41 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBackFromTvDisplay"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="34dp"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="0dp"
-                android:text="⬅️ ZURÜCK ZUM DASHBOARD"
-                android:textColor="@color/nord12"
-                android:textSize="10.5sp"
-                android:textStyle="bold"
-                app:strokeColor="@color/nord12"
-                app:strokeWidth="1.5dp" />
+                android:padding="0dp"
+                app:backgroundTint="@color/nord12"
+                app:cornerRadius="6dp"
+                app:icon="@drawable/ic_arrow_back"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="22dp"
+                app:iconTint="@color/nord0"
+                app:strokeWidth="0dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="6dp"
+                app:strokeWidth="0dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="👑 &quot;Visual clarity reflects royal standards. Set your screen resolution to perfection.&quot; — Her Majesty Queen Directives"
+                    android:textColor="@color/nord12"
+                    android:textSize="17sp"
+                    android:textStyle="bold|italic" />
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
-
-        <!-- Queen Directive Header Banner -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            app:cardBackgroundColor="@color/nord1"
-            app:cardCornerRadius="6dp"
-            app:strokeColor="@color/nord12"
-            app:strokeWidth="1dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="👑 &quot;Visual clarity reflects royal standards. Set your screen resolution to perfection.&quot; — Her Majesty Queen Directives"
-                android:textColor="@color/nord12"
-                android:textSize="10.5sp"
-                android:textStyle="italic" />
-        </com.google.android.material.card.MaterialCardView>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -1565,7 +1665,7 @@
         android:padding="6dp"
         android:visibility="gone">
 
-        <!-- Top Bar with Back Button -->
+        <!-- Streamlined Top Bar (Compact Arrow + Queen Card) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -1574,41 +1674,41 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBackFromAudioVisualizer"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="34dp"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="0dp"
-                android:text="⬅️ ZURÜCK ZUM DASHBOARD"
-                android:textColor="@color/nord8"
-                android:textSize="10.5sp"
-                android:textStyle="bold"
-                app:strokeColor="@color/nord8"
-                app:strokeWidth="1.5dp" />
+                android:padding="0dp"
+                app:backgroundTint="@color/nord8"
+                app:cornerRadius="6dp"
+                app:icon="@drawable/ic_arrow_back"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="22dp"
+                app:iconTint="@color/nord0"
+                app:strokeWidth="0dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="6dp"
+                app:strokeWidth="0dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="👑 &quot;Resonate with pure sound and rhythm. Tune the audio spectrum to your majesty's ear.&quot; — Her Majesty Queen Directives"
+                    android:textColor="@color/nord8"
+                    android:textSize="17sp"
+                    android:textStyle="bold|italic" />
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
-
-        <!-- Queen Directive Header Banner -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            app:cardBackgroundColor="@color/nord1"
-            app:cardCornerRadius="6dp"
-            app:strokeColor="@color/nord8"
-            app:strokeWidth="1dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="👑 &quot;Resonate with pure sound and rhythm. Tune the audio spectrum to your majesty's ear.&quot; — Her Majesty Queen Directives"
-                android:textColor="@color/nord8"
-                android:textSize="10.5sp"
-                android:textStyle="italic" />
-        </com.google.android.material.card.MaterialCardView>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -1780,7 +1880,7 @@
 
 
     <!-- ================================================================= -->
-    <!-- MODULE 6: THE CHRONICLES (#EBCB8B)                                -->
+    <!-- MODULE 6: THE CHRONICLES (#EBCB8B) - DIRECT INLINE E-BOOK READER  -->
     <!-- ================================================================= -->
     <LinearLayout
         android:id="@+id/layoutChroniclesSettings"
@@ -1790,7 +1890,7 @@
         android:padding="6dp"
         android:visibility="gone">
 
-        <!-- Top Bar with Back Button -->
+        <!-- Streamlined Top Bar (Compact Arrow + Queen Card) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -1799,108 +1899,83 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBackFromChronicles"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="34dp"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="0dp"
-                android:text="⬅️ ZURÜCK ZUM DASHBOARD"
-                android:textColor="@color/nord13"
-                android:textSize="10.5sp"
-                android:textStyle="bold"
-                app:strokeColor="@color/nord13"
-                app:strokeWidth="1.5dp" />
+                android:padding="0dp"
+                app:backgroundTint="@color/nord13"
+                app:cornerRadius="6dp"
+                app:icon="@drawable/ic_arrow_back"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="22dp"
+                app:iconTint="@color/nord0"
+                app:strokeWidth="0dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="6dp"
+                app:strokeWidth="0dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="👑 &quot;Every legend has a beginning. Read the stories of Station North.&quot; — Her Majesty Queen Directives"
+                    android:textColor="@color/nord13"
+                    android:textSize="17sp"
+                    android:textStyle="bold|italic" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Hidden Legacy Button ID to preserve ViewBinding -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOpenEbookChronicles"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone" />
 
         </LinearLayout>
 
-        <!-- Queen Directive Header Banner -->
+        <!-- Direct Inline Full Screen E-Book Content -->
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            app:cardBackgroundColor="@color/nord1"
-            app:cardCornerRadius="6dp"
-            app:strokeColor="@color/nord13"
-            app:strokeWidth="1dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="👑 &quot;Every legend has a beginning. Read the stories of Station North.&quot; — Her Majesty Queen Directives"
-                android:textColor="@color/nord13"
-                android:textSize="10.5sp"
-                android:textStyle="italic" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="6dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/nord1"
+            app:cardCornerRadius="8dp"
+            app:strokeColor="@color/nord13"
+            app:strokeWidth="1dp">
 
-            <LinearLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:padding="12dp"
+                android:scrollbars="vertical">
 
-                <com.google.android.material.card.MaterialCardView
+                <TextView
+                    android:id="@+id/tvChroniclesContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/nord1"
-                    app:cardCornerRadius="8dp"
-                    app:strokeColor="@color/nord13"
-                    app:strokeWidth="1dp">
+                    android:lineSpacingExtra="3dp"
+                    android:textColor="@color/nord4"
+                    android:textSize="12sp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="14dp">
+            </androidx.core.widget.NestedScrollView>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="📚 The Station North Chronicles (6 Chapters)"
-                            android:textColor="@color/nord13"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:lineSpacingExtra="2dp"
-                            android:text="Explore the official illustrated lore and origin saga of Station North Media, from early radio frequencies to our global broadcast network."
-                            android:textColor="@color/nord4"
-                            android:textSize="11sp" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnOpenEbookChronicles"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="42dp"
-                            android:layout_marginTop="14dp"
-                            android:text="📖 Launch Full Screen E-Book Reader"
-                            android:textColor="@color/nord13"
-                            android:textSize="11.5sp"
-                            android:textStyle="bold"
-                            app:strokeColor="@color/nord13"
-                            app:strokeWidth="1.5dp" />
-
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
 
     <!-- ================================================================= -->
-    <!-- MODULE 7: QUEEN TUTORIAL (#81A1C1)                                -->
+    <!-- MODULE 7: QUEEN TUTORIAL (#81A1C1) - DIRECT INLINE TUTORIAL     -->
     <!-- ================================================================= -->
     <LinearLayout
         android:id="@+id/layoutQueenTutorialSettings"
@@ -1910,7 +1985,7 @@
         android:padding="6dp"
         android:visibility="gone">
 
-        <!-- Top Bar with Back Button -->
+        <!-- Streamlined Top Bar (Compact Arrow + Queen Card) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -1919,106 +1994,142 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBackFromQueenTutorial"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="34dp"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="0dp"
-                android:text="⬅️ ZURÜCK ZUM DASHBOARD"
-                android:textColor="@color/nord9"
-                android:textSize="10.5sp"
-                android:textStyle="bold"
-                app:strokeColor="@color/nord9"
-                app:strokeWidth="1.5dp" />
+                android:padding="0dp"
+                app:backgroundTint="@color/nord9"
+                app:cornerRadius="6dp"
+                app:icon="@drawable/ic_arrow_back"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="22dp"
+                app:iconTint="@color/nord0"
+                app:strokeWidth="0dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="6dp"
+                app:strokeWidth="0dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="👑 &quot;Welcome to the academy, darling. Master our broadcast network.&quot; — Her Majesty Queen Directives"
+                    android:textColor="@color/nord9"
+                    android:textSize="17sp"
+                    android:textStyle="bold|italic" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Hidden Legacy Button ID to preserve ViewBinding -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOpenQueenTutorial"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone" />
 
         </LinearLayout>
 
-        <!-- Queen Directive Header Banner -->
-        <com.google.android.material.card.MaterialCardView
+        <!-- Chapter Tab Selector -->
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/toggleTutorialTabGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            app:cardBackgroundColor="@color/nord1"
-            app:cardCornerRadius="6dp"
-            app:strokeColor="@color/nord9"
-            app:strokeWidth="1dp">
+            app:checkedButton="@+id/btnTutorialCh1"
+            app:singleSelection="true">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="👑 &quot;Welcome to the academy, darling. Allow me to guide you through our broadcast network.&quot; — Her Majesty Queen Directives"
-                android:textColor="@color/nord9"
-                android:textSize="10.5sp"
-                android:textStyle="italic" />
-        </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTutorialCh1"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="2dp"
+                android:text="Ch 1: Curator"
+                android:textColor="@color/nord6"
+                android:textSize="9.5sp"
+                app:strokeColor="@color/nord9" />
 
-        <androidx.core.widget.NestedScrollView
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTutorialCh2"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="2dp"
+                android:text="Ch 2: Broadcast"
+                android:textColor="@color/nord6"
+                android:textSize="9.5sp"
+                app:strokeColor="@color/nord9" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTutorialCh3"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="2dp"
+                android:text="Ch 3: Lexicon"
+                android:textColor="@color/nord6"
+                android:textSize="9.5sp"
+                app:strokeColor="@color/nord9" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTutorialCh4"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="2dp"
+                android:text="Ch 4: Pro Tips"
+                android:textColor="@color/nord6"
+                android:textSize="9.5sp"
+                app:strokeColor="@color/nord9" />
+
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <!-- Direct Inline Tutorial Content -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="6dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/nord1"
+            app:cardCornerRadius="8dp"
+            app:strokeColor="@color/nord9"
+            app:strokeWidth="1dp">
 
-            <LinearLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:padding="12dp"
+                android:scrollbars="vertical">
 
-                <com.google.android.material.card.MaterialCardView
+                <TextView
+                    android:id="@+id/tvTutorialChapterContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/nord1"
-                    app:cardCornerRadius="8dp"
-                    app:strokeColor="@color/nord9"
-                    app:strokeWidth="1dp">
+                    android:lineSpacingExtra="3dp"
+                    android:textColor="@color/nord4"
+                    android:textSize="11.5sp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="14dp">
+            </androidx.core.widget.NestedScrollView>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="🎓 The Queen's Broadcast Masterclass"
-                            android:textColor="@color/nord9"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:lineSpacingExtra="2dp"
-                            android:text="Interactive tutorial personally explaining channel routing, Curator Studio playlist imports, real-time audio visualization, and video resolution controls."
-                            android:textColor="@color/nord4"
-                            android:textSize="11sp" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnOpenQueenTutorial"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="14dp"
-                            android:backgroundTint="@color/nord9"
-                            android:text="🎓 Open Interactive Queen Tutorial"
-                            android:textColor="@color/nord0"
-                            android:textSize="11sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
 
     <!-- ================================================================= -->
-    <!-- MODULE 8: SYSTEM, CACHE & UPDATE (#A3BE8C)                        -->
+    <!-- MODULE 8: SYSTEM, CACHE & UPDATE (#A3BE8C) - REORDERED            -->
     <!-- ================================================================= -->
     <LinearLayout
         android:id="@+id/layoutSystemCacheUpdateSettings"
@@ -2028,7 +2139,7 @@
         android:padding="6dp"
         android:visibility="gone">
 
-        <!-- Top Bar with Back Button -->
+        <!-- Streamlined Top Bar (Compact Arrow + Queen Card) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -2037,41 +2148,41 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBackFromSystemCache"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="34dp"
+                android:layout_width="44dp"
+                android:layout_height="40dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="0dp"
-                android:text="⬅️ ZURÜCK ZUM DASHBOARD"
-                android:textColor="@color/nord14"
-                android:textSize="10.5sp"
-                android:textStyle="bold"
-                app:strokeColor="@color/nord14"
-                app:strokeWidth="1.5dp" />
+                android:padding="0dp"
+                app:backgroundTint="@color/nord14"
+                app:cornerRadius="6dp"
+                app:icon="@drawable/ic_arrow_back"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="22dp"
+                app:iconTint="@color/nord0"
+                app:strokeWidth="0dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="6dp"
+                app:strokeWidth="0dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="👑 &quot;A well-maintained machine rules without interruption. Manage storage &amp; updates.&quot; — Her Majesty Queen Directives"
+                    android:textColor="@color/nord14"
+                    android:textSize="17sp"
+                    android:textStyle="bold|italic" />
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
-
-        <!-- Queen Directive Header Banner -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            app:cardBackgroundColor="@color/nord1"
-            app:cardCornerRadius="6dp"
-            app:strokeColor="@color/nord14"
-            app:strokeWidth="1dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="👑 &quot;A well-maintained machine rules without interruption. Manage storage and updates.&quot; — Her Majesty Queen Directives"
-                android:textColor="@color/nord14"
-                android:textSize="10.5sp"
-                android:textStyle="italic" />
-        </com.google.android.material.card.MaterialCardView>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -2084,81 +2195,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- 1. Offline Media & Bio Cache Card -->
+                <!-- 1. App Version & Updates Card (NEW 1ST POSITION) -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardBackgroundColor="@color/nord1"
                     app:cardCornerRadius="8dp"
                     app:strokeColor="@color/nord14"
-                    app:strokeWidth="1dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:text="💾 OFFLINE MEDIA &amp; BIO CACHE"
-                                android:textColor="@color/nord14"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
-
-                            <com.google.android.material.switchmaterial.SwitchMaterial
-                                android:id="@+id/switchEnableCache"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:checked="false"
-                                android:text="OFF"
-                                android:textColor="@color/nord4"
-                                android:textSize="11sp" />
-
-                        </RelativeLayout>
-
-                        <TextView
-                            android:id="@+id/tvCacheSizeInfo"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="Cache Status: Disabled • 0 Bytes Used"
-                            android:textColor="@color/nord8"
-                            android:textSize="10.5sp" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnClearCacheNow"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="34dp"
-                            android:layout_marginTop="8dp"
-                            android:paddingHorizontal="10dp"
-                            android:paddingVertical="0dp"
-                            android:text="🗑️ Clear Offline Cache Now"
-                            android:textColor="@color/nord11"
-                            android:textSize="10.5sp"
-                            app:strokeColor="@color/nord11"
-                            app:strokeWidth="1dp" />
-
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- 2. App Version & Updates Card -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    app:cardBackgroundColor="@color/nord1"
-                    app:cardCornerRadius="8dp"
-                    app:strokeColor="@color/nord2"
-                    app:strokeWidth="1dp">
+                    app:strokeWidth="1.5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -2201,7 +2245,7 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- 3. Remote Asset Cloud Sync Card -->
+                <!-- 2. Remote Asset Cloud Sync Card (NEW 2ND POSITION) -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardRemoteAssetSync"
                     android:layout_width="match_parent"
@@ -2267,7 +2311,174 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- 4. System Diagnostics & Terminal Logs Card -->
+                <!-- 3. Offline Media & Bio Cache Card (NEW 3RD POSITION) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:cardBackgroundColor="@color/nord1"
+                    app:cardCornerRadius="8dp"
+                    app:strokeColor="@color/nord2"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:text="💾 OFFLINE MEDIA &amp; BIO CACHE"
+                                android:textColor="@color/nord14"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <com.google.android.material.switchmaterial.SwitchMaterial
+                                android:id="@+id/switchEnableCache"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:checked="false"
+                                android:text="OFF"
+                                android:textColor="@color/nord4"
+                                android:textSize="11sp" />
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/tvCacheSizeInfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Cache Status: Disabled • 0 Bytes Used"
+                            android:textColor="@color/nord8"
+                            android:textSize="10.5sp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnClearCacheNow"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="34dp"
+                            android:layout_marginTop="8dp"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="0dp"
+                            android:text="🗑️ Clear Offline Cache Now"
+                            android:textColor="@color/nord11"
+                            android:textSize="10.5sp"
+                            app:strokeColor="@color/nord11"
+                            app:strokeWidth="1dp" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- OTA Stream Extraction Cascade Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:cardBackgroundColor="@color/nord1"
+                    app:cardCornerRadius="8dp"
+                    app:strokeColor="@color/nord2"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🌐 OTA YOUTUBE STREAM EXTRACTOR CASCADE"
+                            android:textColor="@color/nord8"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Select extraction engine or test public instance latency."
+                            android:textColor="@color/nord4"
+                            android:textSize="10.5sp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCycleExtractionMode"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="36dp"
+                            android:layout_marginTop="8dp"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="0dp"
+                            android:text="⚡ Mode: Auto Cascade (InnerTube → Piped → Invidious)"
+                            android:textColor="@color/nord8"
+                            android:textSize="10.5sp"
+                            app:strokeColor="@color/nord8"
+                            app:strokeWidth="1dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnTestOtaInstances"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="36dp"
+                            android:layout_marginTop="6dp"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="0dp"
+                            android:text="📡 Test All Public Instances Now (Latency Benchmark)"
+                            android:textColor="@color/nord14"
+                            android:textSize="10.5sp"
+                            app:strokeColor="@color/nord14"
+                            app:strokeWidth="1dp" />
+
+                        <!-- Custom Extractor Server URL Section -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/etCustomExtractorUrl"
+                                android:layout_width="0dp"
+                                android:layout_height="36dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_rounded_edittext"
+                                android:hint="https://my-custom-invidious-instance.com"
+                                android:imeOptions="actionDone"
+                                android:inputType="textUri"
+                                android:paddingHorizontal="10dp"
+                                android:textColor="@color/nord4"
+                                android:textColorHint="@color/nord3"
+                                android:textSize="11sp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnSaveCustomExtractorUrl"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="36dp"
+                                android:layout_marginStart="6dp"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="0dp"
+                                android:text="💾 Save Server"
+                                android:textColor="@color/nord7"
+                                android:textSize="10.5sp"
+                                app:strokeColor="@color/nord7"
+                                app:strokeWidth="1dp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 4. System Diagnostics & Terminal Logs Card (4TH POSITION AT BOTTOM) -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
