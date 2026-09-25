@@ -1,6 +1,7 @@
 {
   "version": "1.0.0.31",
-  "updated_at": "2026-09-25T16:41:18Z",
+  "android_client_version": "21.02.35",
+  "updated_at": "2026-09-25T17:17:57Z",
   "piped_instances": [
     "https://pipedapi.mha.fi",
     "https://pipedapi.drgns.space",
@@ -9,5 +10,8 @@
   ],
   "invidious_instances": [
     "https://invidious.f5.si"
+  ],
+  "cobalt_instances": [
+    "https://api.cobalt.tools"
   ]
 }

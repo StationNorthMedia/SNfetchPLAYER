@@ -1647,6 +1647,19 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                 AppLogger.w("OTABenchmark", "❌ Invidious [$instance] -> FAILED / TIMEOUT (${elapsed}ms)")
             }
         }
+        val cobaltInstances = net.sn.fetchplayer.manager.RemoteConfigManager.getCobaltInstances()
+        AppLogger.d("OTABenchmark", "Testing ${cobaltInstances.size} Cobalt Instances...")
+        for (instance in cobaltInstances) {
+            val startTime = System.currentTimeMillis()
+            val url = net.sn.fetchplayer.extractor.ExternalApiExtractor.resolveViaCobalt(testYoutubeId, instance, isAudioOnly = true)
+            val elapsed = System.currentTimeMillis() - startTime
+            if (!url.isNullOrEmpty()) {
+                AppLogger.d("OTABenchmark", "✅ Cobalt [$instance] -> SUCCESS (${elapsed}ms)")
+            } else {
+                AppLogger.w("OTABenchmark", "❌ Cobalt [$instance] -> FAILED / TIMEOUT (${elapsed}ms)")
+            }
+        }
+
         AppLogger.d("OTABenchmark", "--- BENCHMARK FINISHED. Check Terminal Logs! ---")
         withContext(Dispatchers.Main) {
             Toast.makeText(this@MainActivity, "OTA Benchmark Complete! Check Nord Terminal Logs.", Toast.LENGTH_LONG).show()

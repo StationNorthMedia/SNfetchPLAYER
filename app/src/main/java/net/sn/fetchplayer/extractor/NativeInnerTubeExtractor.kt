@@ -39,24 +39,30 @@ object NativeInnerTubeExtractor {
         val userAgent: String
     )
 
-    private val CLIENT_CASCADE = listOf(
-        ClientConfig("ANDROID", "21.02.35", USER_AGENT_ANDROID),
-        ClientConfig("ANDROID_VR", "1.65.10", USER_AGENT_VR),
-        ClientConfig("TVHTML5", "7.20260920.00.00", USER_AGENT_TV),
-        ClientConfig("TVHTML5_SIMPLY", "7.20260920.00.00", USER_AGENT_TV),
-        ClientConfig("ANDROID_TV", "21.02.35", USER_AGENT_ANDROID_TV)
-    )
+    private fun getClientCascade(): List<ClientConfig> {
+        val dynamicVer = net.sn.fetchplayer.manager.RemoteConfigManager.androidClientVersion
+        val dynamicUa = net.sn.fetchplayer.manager.RemoteConfigManager.androidUserAgent
+        return listOf(
+            ClientConfig("ANDROID", dynamicVer, dynamicUa),
+            ClientConfig("ANDROID_VR", "1.65.10", USER_AGENT_VR),
+            ClientConfig("TVHTML5", "7.20260920.00.00", USER_AGENT_TV),
+            ClientConfig("TVHTML5_SIMPLY", "7.20260920.00.00", USER_AGENT_TV),
+            ClientConfig("ANDROID_TV", dynamicVer, USER_AGENT_ANDROID_TV)
+        )
+    }
 
     private suspend fun getVisitorData(): String? = withContext(Dispatchers.IO) {
         cachedVisitorData?.let { return@withContext it }
 
         try {
-            AppLogger.d(TAG, "Fetching fresh visitorData from YouTube InnerTube API...")
+            val dynamicVer = net.sn.fetchplayer.manager.RemoteConfigManager.androidClientVersion
+            val dynamicUa = net.sn.fetchplayer.manager.RemoteConfigManager.androidUserAgent
+            AppLogger.d(TAG, "Fetching fresh visitorData from YouTube InnerTube API (version $dynamicVer)...")
             val payload = JsonObject().apply {
                 add("context", JsonObject().apply {
                     add("client", JsonObject().apply {
                         addProperty("clientName", "ANDROID")
-                        addProperty("clientVersion", "21.02.35")
+                        addProperty("clientVersion", dynamicVer)
                     })
                 })
             }
@@ -64,7 +70,7 @@ object NativeInnerTubeExtractor {
             val request = Request.Builder()
                 .url(VISITOR_ID_ENDPOINT)
                 .post(payload.toString().toRequestBody(JSON_MEDIA_TYPE))
-                .header("User-Agent", USER_AGENT_ANDROID)
+                .header("User-Agent", dynamicUa)
                 .build()
 
             val response = client.newCall(request).execute()
@@ -103,7 +109,7 @@ object NativeInnerTubeExtractor {
         val visitorData = getVisitorData()
         AppLogger.d(TAG, "Extracting stream for [$youtubeId] (isAudioOnly=$isAudioOnly, targetQuality=$targetQuality, 5-tier cascade)")
 
-        for (config in CLIENT_CASCADE) {
+        for (config in getClientCascade()) {
             AppLogger.d(TAG, "Attempting extraction via client [${config.clientName}] for [$youtubeId]...")
             val result = queryInnerTubePlayer(
                 youtubeId = youtubeId,

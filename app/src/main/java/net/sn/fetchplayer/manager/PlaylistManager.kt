@@ -261,7 +261,7 @@ class PlaylistManager(
             }
         }
 
-        // Tier 3: Decentralized Invidious Extractor Instances
+        // Tier 3: Decentralized Invidious Extractor Instances (with Live Registry Health Filter)
         if (tryTier3) {
             val customUrl = SettingsManager.getCustomExtractorUrl(context)
             val invidiousInstances = if (customUrl.isNotEmpty()) (listOf(customUrl) + RemoteConfigManager.getInvidiousInstances()).distinct() else RemoteConfigManager.getInvidiousInstances()
@@ -272,6 +272,20 @@ class PlaylistManager(
                     AppLogger.d("PlaylistManager", "Tier 3 SUCCESS via Invidious [$instance]")
                     resolvedCache[cacheKey] = invidiousUrl
                     return invidiousUrl
+                }
+            }
+        }
+
+        // Tier 4: Cobalt Media Downloader / Private API Rest Extractor
+        if (mode == "auto" || mode == "external") {
+            val cobaltInstances = RemoteConfigManager.getCobaltInstances()
+            for (instance in cobaltInstances) {
+                AppLogger.d("PlaylistManager", "Tier 4 Extractor: Trying Cobalt API [$instance] for $youtubeId")
+                val cobaltUrl = ExternalApiExtractor.resolveViaCobalt(youtubeId, instance, isAudioOnly)
+                if (!cobaltUrl.isNullOrEmpty()) {
+                    AppLogger.d("PlaylistManager", "Tier 4 SUCCESS via Cobalt [$instance]")
+                    resolvedCache[cacheKey] = cobaltUrl
+                    return cobaltUrl
                 }
             }
         }

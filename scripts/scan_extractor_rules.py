@@ -78,6 +78,10 @@ def main():
     except Exception as e:
         print(f"Could not fetch official Invidious API list: {e}")
 
+    cobalt_candidates = set([
+        "https://api.cobalt.tools"
+    ])
+
     print(f"Testing {len(invidious_candidates)} Invidious candidates...")
     working_invidious = []
     for c in list(invidious_candidates):
@@ -92,20 +96,24 @@ def main():
             print(f"✅ VERIFIED PIPED: {c}")
             working_piped.append(c)
 
-    print(f"\nFinal Crawl Summary: {len(working_piped)} Piped working, {len(working_invidious)} Invidious working.")
+    working_cobalt = list(cobalt_candidates)
 
-    # Read current rules file to preserve version and existing instances if crawl is empty
-    version = "1.0.0.31"
+    print(f"\nFinal Crawl Summary: {len(working_piped)} Piped, {len(working_invidious)} Invidious, {len(working_cobalt)} Cobalt.")
+
+    version = "1.0.0.33"
     existing_piped = ["https://pipedapi.kavin.rocks", "https://pipedapi.tokhmi.xyz"]
     existing_invidious = ["https://invidious.f5.si"]
+    existing_cobalt = ["https://api.cobalt.tools"]
     try:
         with open(OUTPUT_FILE, "r") as f:
             existing = json.load(f)
-            version = existing.get("version", "1.0.0.31")
+            version = existing.get("version", "1.0.0.33")
             if existing.get("piped_instances"):
                 existing_piped = existing.get("piped_instances")
             if existing.get("invidious_instances"):
                 existing_invidious = existing.get("invidious_instances")
+            if existing.get("cobalt_instances"):
+                existing_cobalt = existing.get("cobalt_instances")
     except Exception:
         pass
 
@@ -113,9 +121,11 @@ def main():
 
     output_data = {
         "version": version,
+        "android_client_version": "21.02.35",
         "updated_at": now_str,
         "piped_instances": working_piped if working_piped else existing_piped,
-        "invidious_instances": working_invidious if working_invidious else existing_invidious
+        "invidious_instances": working_invidious if working_invidious else existing_invidious,
+        "cobalt_instances": working_cobalt if working_cobalt else existing_cobalt
     }
 
     with open(OUTPUT_FILE, "w") as f:

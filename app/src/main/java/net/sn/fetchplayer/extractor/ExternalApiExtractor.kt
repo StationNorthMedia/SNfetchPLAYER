@@ -4,8 +4,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import net.sn.fetchplayer.util.AppLogger
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.util.concurrent.TimeUnit
 
@@ -141,4 +143,46 @@ object ExternalApiExtractor {
                 null
             }
         }
+
+    suspend fun resolveViaCobalt(youtubeId: String, baseUrl: String, isAudioOnly: Boolean): String? =
+        withContext(Dispatchers.IO) {
+            withTimeoutOrNull(5000L) {
+                try {
+                    val cleanBaseUrl = baseUrl.trim().removeSuffix("/")
+                    val targetUrl = "$cleanBaseUrl/"
+                    val payload = JSONObject().apply {
+                        put("url", "https://www.youtube.com/watch?v=$youtubeId")
+                        if (isAudioOnly) {
+                            put("downloadMode", "audio")
+                        }
+                    }
+
+                    val mediaType = "application/json; charset=utf-8".toMediaType()
+                    val request = Request.Builder()
+                        .url(targetUrl)
+                        .header("Accept", "application/json")
+                        .header("Content-Type", "application/json")
+                        .post(payload.toString().toRequestBody(mediaType))
+                        .build()
+
+                    val response = httpClient.newCall(request).execute()
+                    if (!response.isSuccessful) {
+                        AppLogger.w(TAG, "Cobalt instance [$cleanBaseUrl] returned HTTP ${response.code} for $youtubeId")
+                        return@withTimeoutOrNull null
+                    }
+
+                    val bodyStr = response.body?.string() ?: return@withTimeoutOrNull null
+                    val json = JSONObject(bodyStr)
+                    val streamUrl = json.optString("url", "").trim()
+                    if (streamUrl.startsWith("http://") || streamUrl.startsWith("https://")) {
+                        AppLogger.d(TAG, "Cobalt [$cleanBaseUrl] SUCCESS for $youtubeId")
+                        return@withTimeoutOrNull streamUrl
+                    }
+                } catch (e: Exception) {
+                    AppLogger.w(TAG, "Error resolving via Cobalt [$baseUrl] for $youtubeId: ${e.message}")
+                }
+                null
+            }
+        }
 }
+
