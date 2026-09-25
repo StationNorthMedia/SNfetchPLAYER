@@ -1,0 +1,39 @@
+name: OTA Extractor Rules Crawler
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Run every 6 hours
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  crawl-and-update:
+    name: Crawl Active Instances and Update Rules
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Instances Crawler
+        run: python3 scripts/scan_extractor_rules.py
+
+      - name: Commit and Push Updated Extractor Rules
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add remote_assets/extractor_rules.json
+          if git diff --staged --quiet; then
+            echo "No changes in extractor_rules.json. Skipping commit."
+          else
+            git commit -m "chore(ota): Auto-update verified extractor instances [bot]"
+            git push origin main
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

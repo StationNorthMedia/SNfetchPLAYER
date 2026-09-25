@@ -1,17 +1,13 @@
 {
   "version": "1.0.0.31",
-  "updated_at": "2026-09-25T18:30:00Z",
+  "updated_at": "2026-09-25T16:41:18Z",
   "piped_instances": [
-    "https://pipedapi.kavin.rocks",
-    "https://pipedapi.tokhmi.xyz",
+    "https://pipedapi.mha.fi",
     "https://pipedapi.drgns.space",
-    "https://pipedapi.mha.fi"
+    "https://pipedapi.kavin.rocks",
+    "https://pipedapi.tokhmi.xyz"
   ],
   "invidious_instances": [
-    "https://invidious.f5.si",
-    "https://inv.nadeko.net",
-    "https://yewtu.be",
-    "https://invidious.nerdvpn.de",
-    "https://invidious.flokinet.to"
+    "https://invidious.f5.si"
   ]
 }
