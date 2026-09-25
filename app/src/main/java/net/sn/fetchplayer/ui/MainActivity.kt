@@ -1536,6 +1536,81 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         hub.btnCheckAppUpdate.setOnClickListener {
             checkAppUpdate(isManualCheck = true)
         }
+
+        updateExtractionModeButtonUi()
+        hub.btnCycleExtractionMode.setOnClickListener {
+            val currentMode = SettingsManager.getExtractionMode(this)
+            val nextMode = when (currentMode) {
+                "auto" -> "piped"
+                "piped" -> "invidious"
+                "invidious" -> "external"
+                else -> "auto"
+            }
+            SettingsManager.setExtractionMode(this, nextMode)
+            updateExtractionModeButtonUi()
+            val label = when (nextMode) {
+                "piped" -> "Force Piped Only (Tier 2)"
+                "invidious" -> "Force Invidious Only (Tier 3)"
+                "external" -> "Force External APIs (Piped + Invidious)"
+                else -> "Auto Cascade (All Tiers)"
+            }
+            Toast.makeText(this, "Extractor Mode: $label", Toast.LENGTH_SHORT).show()
+            AppLogger.d("MainActivity", "Extractor Mode changed to '$nextMode'")
+        }
+
+        hub.btnTestOtaInstances.setOnClickListener {
+            Toast.makeText(this, "Testing OTA Instances Latency...", Toast.LENGTH_SHORT).show()
+            lifecycleScope.launch(Dispatchers.IO) {
+                testOtaInstancesLatency()
+            }
+        }
+    }
+
+    private fun updateExtractionModeButtonUi() {
+        val hub = binding.settingsHub
+        val mode = SettingsManager.getExtractionMode(this)
+        val text = when (mode) {
+            "piped" -> "🚀 Mode: Force Piped Only (Tier 2)"
+            "invidious" -> "🛡️ Mode: Force Invidious Only (Tier 3)"
+            "external" -> "🌐 Mode: Force External APIs (Piped + Invidious)"
+            else -> "⚡ Mode: Auto Cascade (InnerTube → Piped → Invidious)"
+        }
+        hub.btnCycleExtractionMode.text = text
+    }
+
+    private suspend fun testOtaInstancesLatency() = withContext(Dispatchers.IO) {
+        val testYoutubeId = "GxBSyx85Kp8"
+        AppLogger.d("OTABenchmark", "--- STARTING OTA INSTANCES LATENCY BENCHMARK ---")
+
+        val pipedInstances = net.sn.fetchplayer.manager.RemoteConfigManager.getPipedInstances()
+        AppLogger.d("OTABenchmark", "Testing ${pipedInstances.size} Piped Instances...")
+        for (instance in pipedInstances) {
+            val startTime = System.currentTimeMillis()
+            val url = net.sn.fetchplayer.extractor.ExternalApiExtractor.resolveViaPiped(testYoutubeId, instance, isAudioOnly = true)
+            val elapsed = System.currentTimeMillis() - startTime
+            if (!url.isNullOrEmpty()) {
+                AppLogger.d("OTABenchmark", "✅ Piped [$instance] -> SUCCESS (${elapsed}ms)")
+            } else {
+                AppLogger.w("OTABenchmark", "❌ Piped [$instance] -> FAILED / TIMEOUT (${elapsed}ms)")
+            }
+        }
+
+        val invidiousInstances = net.sn.fetchplayer.manager.RemoteConfigManager.getInvidiousInstances()
+        AppLogger.d("OTABenchmark", "Testing ${invidiousInstances.size} Invidious Instances...")
+        for (instance in invidiousInstances) {
+            val startTime = System.currentTimeMillis()
+            val url = net.sn.fetchplayer.extractor.ExternalApiExtractor.resolveViaInvidious(testYoutubeId, instance, isAudioOnly = true)
+            val elapsed = System.currentTimeMillis() - startTime
+            if (!url.isNullOrEmpty()) {
+                AppLogger.d("OTABenchmark", "✅ Invidious [$instance] -> SUCCESS (${elapsed}ms)")
+            } else {
+                AppLogger.w("OTABenchmark", "❌ Invidious [$instance] -> FAILED / TIMEOUT (${elapsed}ms)")
+            }
+        }
+        AppLogger.d("OTABenchmark", "--- BENCHMARK FINISHED. Check Terminal Logs! ---")
+        withContext(Dispatchers.Main) {
+            Toast.makeText(this@MainActivity, "OTA Benchmark Complete! Check Nord Terminal Logs.", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun renderPlaylistManagerList() {

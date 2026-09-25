@@ -17,6 +17,7 @@ object SettingsManager {
     private const val KEY_RADIO_CHANNEL_SOURCE = "radio_channel_source" // "default_top50", "curator_queue", "saved_catalog", "custom"
     private const val KEY_TV_CUSTOM_URL = "tv_custom_url"
     private const val KEY_RADIO_CUSTOM_URL = "radio_custom_url"
+    private const val KEY_EXTRACTION_MODE = "extraction_mode" // "auto", "piped", "invidious", "external"
 
     private fun getPrefs(context: Context): SharedPreferences {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -122,5 +123,14 @@ object SettingsManager {
 
     fun setRadioPlaylistId(context: Context, playlistId: String) {
         getPrefs(context).edit().putString("radio_playlist_id", playlistId).apply()
+    }
+
+    // Extraction Mode
+    fun getExtractionMode(context: Context): String {
+        return getPrefs(context).getString(KEY_EXTRACTION_MODE, "auto") ?: "auto"
+    }
+
+    fun setExtractionMode(context: Context, mode: String) {
+        getPrefs(context).edit().putString(KEY_EXTRACTION_MODE, mode).apply()
     }
 }

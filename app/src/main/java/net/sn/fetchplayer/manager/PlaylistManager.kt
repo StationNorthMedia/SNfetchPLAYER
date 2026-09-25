@@ -222,41 +222,55 @@ class PlaylistManager(
     }
 
     suspend fun resolveStreamUri(youtubeId: String, isAudioOnly: Boolean): String? {
+        val mode = SettingsManager.getExtractionMode(context)
         val targetQuality = if (isAudioOnly) "auto" else SettingsManager.getVideoQuality(context)
-        val cacheKey = "${youtubeId}_${if (isAudioOnly) "AUDIO" else "VIDEO_${targetQuality}"}"
+        val cacheKey = "${youtubeId}_${mode}_${if (isAudioOnly) "AUDIO" else "VIDEO_${targetQuality}"}"
         resolvedCache[cacheKey]?.let {
             AppLogger.d("PlaylistManager", "Using cached stream URL for $youtubeId ($cacheKey)")
             return it
         }
 
+        val tryTier1 = (mode == "auto")
+        val tryTier2 = (mode == "auto" || mode == "piped" || mode == "external")
+        val tryTier3 = (mode == "auto" || mode == "invidious" || mode == "external")
+
+        AppLogger.d("PlaylistManager", "Stream resolution for $youtubeId [Mode: $mode | T1:$tryTier1, T2:$tryTier2, T3:$tryTier3]")
+
         // Tier 1: Native InnerTube Extractor
-        val resolvedUrl = NativeInnerTubeExtractor.extractStreamUrl(youtubeId, isAudioOnly, targetQuality)
-        if (!resolvedUrl.isNullOrEmpty()) {
-            resolvedCache[cacheKey] = resolvedUrl
-            return resolvedUrl
+        if (tryTier1) {
+            val resolvedUrl = NativeInnerTubeExtractor.extractStreamUrl(youtubeId, isAudioOnly, targetQuality)
+            if (!resolvedUrl.isNullOrEmpty()) {
+                AppLogger.d("PlaylistManager", "Tier 1 SUCCESS via Native InnerTube")
+                resolvedCache[cacheKey] = resolvedUrl
+                return resolvedUrl
+            }
         }
 
         // Tier 2: Decentralized Piped Extractor Instances
-        val pipedInstances = RemoteConfigManager.getPipedInstances()
-        for (instance in pipedInstances) {
-            AppLogger.d("PlaylistManager", "Tier 2 Fallback: Trying Piped instance [$instance] for $youtubeId")
-            val pipedUrl = ExternalApiExtractor.resolveViaPiped(youtubeId, instance, isAudioOnly)
-            if (!pipedUrl.isNullOrEmpty()) {
-                AppLogger.d("PlaylistManager", "Tier 2 SUCCESS via Piped [$instance]")
-                resolvedCache[cacheKey] = pipedUrl
-                return pipedUrl
+        if (tryTier2) {
+            val pipedInstances = RemoteConfigManager.getPipedInstances()
+            for (instance in pipedInstances) {
+                AppLogger.d("PlaylistManager", "Tier 2 Extractor: Trying Piped instance [$instance] for $youtubeId")
+                val pipedUrl = ExternalApiExtractor.resolveViaPiped(youtubeId, instance, isAudioOnly)
+                if (!pipedUrl.isNullOrEmpty()) {
+                    AppLogger.d("PlaylistManager", "Tier 2 SUCCESS via Piped [$instance]")
+                    resolvedCache[cacheKey] = pipedUrl
+                    return pipedUrl
+                }
             }
         }
 
         // Tier 3: Decentralized Invidious Extractor Instances
-        val invidiousInstances = RemoteConfigManager.getInvidiousInstances()
-        for (instance in invidiousInstances) {
-            AppLogger.d("PlaylistManager", "Tier 3 Fallback: Trying Invidious instance [$instance] for $youtubeId")
-            val invidiousUrl = ExternalApiExtractor.resolveViaInvidious(youtubeId, instance, isAudioOnly)
-            if (!invidiousUrl.isNullOrEmpty()) {
-                AppLogger.d("PlaylistManager", "Tier 3 SUCCESS via Invidious [$instance]")
-                resolvedCache[cacheKey] = invidiousUrl
-                return invidiousUrl
+        if (tryTier3) {
+            val invidiousInstances = RemoteConfigManager.getInvidiousInstances()
+            for (instance in invidiousInstances) {
+                AppLogger.d("PlaylistManager", "Tier 3 Extractor: Trying Invidious instance [$instance] for $youtubeId")
+                val invidiousUrl = ExternalApiExtractor.resolveViaInvidious(youtubeId, instance, isAudioOnly)
+                if (!invidiousUrl.isNullOrEmpty()) {
+                    AppLogger.d("PlaylistManager", "Tier 3 SUCCESS via Invidious [$instance]")
+                    resolvedCache[cacheKey] = invidiousUrl
+                    return invidiousUrl
+                }
             }
         }
 
