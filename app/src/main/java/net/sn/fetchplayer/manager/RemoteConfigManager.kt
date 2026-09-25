@@ -34,10 +34,13 @@ object RemoteConfigManager {
 
     private var invidiousInstances: List<String> = listOf(
         "https://invidious.f5.si",
-        "https://vid.puffyan.us",
+        "https://inv.tux.pizza",
         "https://invidious.flokinet.to",
-        "https://invidious.nerdvpn.de",
-        "https://inv.tux.pizza"
+        "https://invidious.privacydev.net",
+        "https://inv.nadeko.net",
+        "https://invidious.drgns.space",
+        "https://yewtu.be",
+        "https://vid.puffyan.us"
     )
 
     private var cobaltInstances: List<String> = listOf(
@@ -179,7 +182,7 @@ object RemoteConfigManager {
                     }
                 }
                 if (list.isNotEmpty()) {
-                    invidiousInstances = list
+                    invidiousInstances = (list + invidiousInstances).distinct()
                 }
             }
 

@@ -3,12 +3,12 @@
 <img src="docs/logo.png" alt="Station North Logo" width="280" />
 
 # 👑 SNfetchPLAYER • The Queen's Frequency
-**Version 1.0.0.34 • Broadcast & Audio Engine for Android Smartphones, Tablets & Android TV**
+**Version 1.0.0.35 • Broadcast & Audio Engine for Android Smartphones, Tablets & Android TV**
 
 [![Website](https://img.shields.io/badge/Website-station--north.net-88C0D0?style=for-the-badge&logo=google-chrome&logoColor=white)](https://station-north.net)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-5E81AC?style=for-the-badge&logo=github&logoColor=white)](https://github.com/StationNorthMedia/SNfetchPLAYER)
 [![GitLab](https://img.shields.io/badge/GitLab-Repository-D08770?style=for-the-badge&logo=gitlab&logoColor=white)](https://gitlab.com/station-north-net-group/snfetchplayer)
-[![Release](https://img.shields.io/badge/Release-v1.0.0.34-8FBCBB?style=for-the-badge&logo=android&logoColor=white)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v1.0.0.34)
+[![Release](https://img.shields.io/badge/Release-v1.0.0.35-8FBCBB?style=for-the-badge&logo=android&logoColor=white)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v1.0.0.35)
 [![Downloads](https://img.shields.io/github/downloads/StationNorthMedia/SNfetchPLAYER/total?style=for-the-badge&color=A3BE8C&logo=github)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases)
 [![TV Ready](https://img.shields.io/badge/Android_TV-100%25_Compatible-BF616A?style=for-the-badge&logo=androidtv&logoColor=white)](https://developer.android.com/tv)
 [![License](https://img.shields.io/badge/License-MIT-B48EAD?style=for-the-badge)](LICENSE)
@@ -164,7 +164,7 @@ I watch him through the glass. He’s sitting there, shoulders rigid, fingers da
 
 - 🐙 **GitHub Releases**: [https://github.com/StationNorthMedia/SNfetchPLAYER/releases](https://github.com/StationNorthMedia/SNfetchPLAYER/releases)
 - 🦊 **GitLab Releases / Mirror**: [https://gitlab.com/station-north-net-group/snfetchplayer/-/tree/main/releases](https://gitlab.com/station-north-net-group/snfetchplayer/-/tree/main/releases)
-- ⚡ **Direct APK Download**: [**`SNfetchPLAYER-v1.0.0.34.apk`**](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/download/v1.0.0.34/SNfetchPLAYER-v1.0.0.34.apk) (70.5 MB)
+- ⚡ **Direct APK Download**: [**`SNfetchPLAYER-v1.0.0.35.apk`**](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/download/v1.0.0.35/SNfetchPLAYER-v1.0.0.35.apk) (70.5 MB)
 
 1. Download the APK file on your Android device or TV box.
 2. Install the APK and launch **SNfetchPLAYER**!
