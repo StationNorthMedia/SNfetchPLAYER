@@ -124,6 +124,16 @@ object ExternalApiExtractor {
                                 return@withTimeoutOrNull url
                             }
                         }
+
+                        // 3. Fallback to any valid URL in adaptiveFormats
+                        for (i in 0 until adaptiveFormats.length()) {
+                            val stream = adaptiveFormats.getJSONObject(i)
+                            val url = stream.optString("url", "").trim()
+                            if (url.startsWith("http://") || url.startsWith("https://")) {
+                                AppLogger.d(TAG, "Invidious [$cleanBaseUrl] fallback adaptive format for $youtubeId")
+                                return@withTimeoutOrNull url
+                            }
+                        }
                     }
                 } catch (e: Exception) {
                     AppLogger.w(TAG, "Error resolving via Invidious instance [$baseUrl] for $youtubeId: ${e.message}")

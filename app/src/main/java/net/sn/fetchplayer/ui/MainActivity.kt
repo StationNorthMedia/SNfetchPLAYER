@@ -1564,6 +1564,16 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                 testOtaInstancesLatency()
             }
         }
+
+        val savedCustomUrl = SettingsManager.getCustomExtractorUrl(this)
+        hub.etCustomExtractorUrl.setText(savedCustomUrl)
+        hub.btnSaveCustomExtractorUrl.setOnClickListener {
+            val url = hub.etCustomExtractorUrl.text.toString().trim()
+            SettingsManager.setCustomExtractorUrl(this, url)
+            val msg = if (url.isNotEmpty()) "Custom Extractor Server saved!" else "Custom Extractor Server cleared."
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+            AppLogger.d("MainActivity", "Custom Extractor URL set to: '$url'")
+        }
     }
 
     private fun updateExtractionModeButtonUi() {
@@ -1581,6 +1591,26 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
     private suspend fun testOtaInstancesLatency() = withContext(Dispatchers.IO) {
         val testYoutubeId = "GxBSyx85Kp8"
         AppLogger.d("OTABenchmark", "--- STARTING OTA INSTANCES LATENCY BENCHMARK ---")
+
+        val customUrl = SettingsManager.getCustomExtractorUrl(this@MainActivity)
+        if (customUrl.isNotEmpty()) {
+            AppLogger.d("OTABenchmark", "Testing Custom Private Extractor Server: [$customUrl]...")
+            val startTime = System.currentTimeMillis()
+            val urlPiped = net.sn.fetchplayer.extractor.ExternalApiExtractor.resolveViaPiped(testYoutubeId, customUrl, isAudioOnly = true)
+            val elapsedPiped = System.currentTimeMillis() - startTime
+            if (!urlPiped.isNullOrEmpty()) {
+                AppLogger.d("OTABenchmark", "✅ Custom Server (Piped Format) [$customUrl] -> SUCCESS (${elapsedPiped}ms)")
+            } else {
+                val startTimeInv = System.currentTimeMillis()
+                val urlInv = net.sn.fetchplayer.extractor.ExternalApiExtractor.resolveViaInvidious(testYoutubeId, customUrl, isAudioOnly = true)
+                val elapsedInv = System.currentTimeMillis() - startTimeInv
+                if (!urlInv.isNullOrEmpty()) {
+                    AppLogger.d("OTABenchmark", "✅ Custom Server (Invidious Format) [$customUrl] -> SUCCESS (${elapsedInv}ms)")
+                } else {
+                    AppLogger.w("OTABenchmark", "❌ Custom Server [$customUrl] -> FAILED / TIMEOUT")
+                }
+            }
+        }
 
         val pipedInstances = net.sn.fetchplayer.manager.RemoteConfigManager.getPipedInstances()
         AppLogger.d("OTABenchmark", "Testing ${pipedInstances.size} Piped Instances...")

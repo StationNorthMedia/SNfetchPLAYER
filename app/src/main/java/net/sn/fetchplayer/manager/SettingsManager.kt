@@ -18,6 +18,7 @@ object SettingsManager {
     private const val KEY_TV_CUSTOM_URL = "tv_custom_url"
     private const val KEY_RADIO_CUSTOM_URL = "radio_custom_url"
     private const val KEY_EXTRACTION_MODE = "extraction_mode" // "auto", "piped", "invidious", "external"
+    private const val KEY_CUSTOM_EXTRACTOR_URL = "custom_extractor_url"
 
     private fun getPrefs(context: Context): SharedPreferences {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -132,5 +133,14 @@ object SettingsManager {
 
     fun setExtractionMode(context: Context, mode: String) {
         getPrefs(context).edit().putString(KEY_EXTRACTION_MODE, mode).apply()
+    }
+
+    // Custom Extractor Instance URL
+    fun getCustomExtractorUrl(context: Context): String {
+        return getPrefs(context).getString(KEY_CUSTOM_EXTRACTOR_URL, "") ?: ""
+    }
+
+    fun setCustomExtractorUrl(context: Context, url: String) {
+        getPrefs(context).edit().putString(KEY_CUSTOM_EXTRACTOR_URL, url.trim()).apply()
     }
 }

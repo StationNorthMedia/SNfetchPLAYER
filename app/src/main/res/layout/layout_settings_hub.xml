@@ -2438,6 +2438,43 @@
                             app:strokeColor="@color/nord14"
                             app:strokeWidth="1dp" />
 
+                        <!-- Custom Extractor Server URL Section -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/etCustomExtractorUrl"
+                                android:layout_width="0dp"
+                                android:layout_height="36dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_rounded_edittext"
+                                android:hint="https://my-custom-invidious-instance.com"
+                                android:imeOptions="actionDone"
+                                android:inputType="textUri"
+                                android:paddingHorizontal="10dp"
+                                android:textColor="@color/nord4"
+                                android:textColorHint="@color/nord3"
+                                android:textSize="11sp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnSaveCustomExtractorUrl"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="36dp"
+                                android:layout_marginStart="6dp"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="0dp"
+                                android:text="💾 Save Server"
+                                android:textColor="@color/nord7"
+                                android:textSize="10.5sp"
+                                app:strokeColor="@color/nord7"
+                                app:strokeWidth="1dp" />
+                        </LinearLayout>
+
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 

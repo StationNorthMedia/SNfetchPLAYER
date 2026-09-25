@@ -248,7 +248,8 @@ class PlaylistManager(
 
         // Tier 2: Decentralized Piped Extractor Instances
         if (tryTier2) {
-            val pipedInstances = RemoteConfigManager.getPipedInstances()
+            val customUrl = SettingsManager.getCustomExtractorUrl(context)
+            val pipedInstances = if (customUrl.isNotEmpty()) (listOf(customUrl) + RemoteConfigManager.getPipedInstances()).distinct() else RemoteConfigManager.getPipedInstances()
             for (instance in pipedInstances) {
                 AppLogger.d("PlaylistManager", "Tier 2 Extractor: Trying Piped instance [$instance] for $youtubeId")
                 val pipedUrl = ExternalApiExtractor.resolveViaPiped(youtubeId, instance, isAudioOnly)
@@ -262,7 +263,8 @@ class PlaylistManager(
 
         // Tier 3: Decentralized Invidious Extractor Instances
         if (tryTier3) {
-            val invidiousInstances = RemoteConfigManager.getInvidiousInstances()
+            val customUrl = SettingsManager.getCustomExtractorUrl(context)
+            val invidiousInstances = if (customUrl.isNotEmpty()) (listOf(customUrl) + RemoteConfigManager.getInvidiousInstances()).distinct() else RemoteConfigManager.getInvidiousInstances()
             for (instance in invidiousInstances) {
                 AppLogger.d("PlaylistManager", "Tier 3 Extractor: Trying Invidious instance [$instance] for $youtubeId")
                 val invidiousUrl = ExternalApiExtractor.resolveViaInvidious(youtubeId, instance, isAudioOnly)
