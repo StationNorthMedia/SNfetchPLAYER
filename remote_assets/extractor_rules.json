@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0.29",
+  "updated_at": "2026-09-25T12:00:00Z",
+  "piped_instances": [
+    "https://pipedapi.kavin.rocks",
+    "https://pipedapi.tokhmi.xyz",
+    "https://pipedapi.drgns.space",
+    "https://pipedapi.mha.fi"
+  ],
+  "invidious_instances": [
+    "https://vid.puffyan.us",
+    "https://invidious.flokinet.to",
+    "https://invidious.nerdvpn.de",
+    "https://inv.tux.pizza"
+  ]
+}

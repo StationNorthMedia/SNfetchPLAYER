@@ -1,6 +1,7 @@
 package net.sn.fetchplayer.manager
 
 import android.content.Context
+import net.sn.fetchplayer.extractor.ExternalApiExtractor
 import net.sn.fetchplayer.extractor.NativeInnerTubeExtractor
 import net.sn.fetchplayer.model.PlaybackMode
 import net.sn.fetchplayer.model.Track
@@ -228,10 +229,35 @@ class PlaylistManager(
             return it
         }
 
+        // Tier 1: Native InnerTube Extractor
         val resolvedUrl = NativeInnerTubeExtractor.extractStreamUrl(youtubeId, isAudioOnly, targetQuality)
         if (!resolvedUrl.isNullOrEmpty()) {
             resolvedCache[cacheKey] = resolvedUrl
             return resolvedUrl
+        }
+
+        // Tier 2: Decentralized Piped Extractor Instances
+        val pipedInstances = RemoteConfigManager.getPipedInstances()
+        for (instance in pipedInstances) {
+            AppLogger.d("PlaylistManager", "Tier 2 Fallback: Trying Piped instance [$instance] for $youtubeId")
+            val pipedUrl = ExternalApiExtractor.resolveViaPiped(youtubeId, instance, isAudioOnly)
+            if (!pipedUrl.isNullOrEmpty()) {
+                AppLogger.d("PlaylistManager", "Tier 2 SUCCESS via Piped [$instance]")
+                resolvedCache[cacheKey] = pipedUrl
+                return pipedUrl
+            }
+        }
+
+        // Tier 3: Decentralized Invidious Extractor Instances
+        val invidiousInstances = RemoteConfigManager.getInvidiousInstances()
+        for (instance in invidiousInstances) {
+            AppLogger.d("PlaylistManager", "Tier 3 Fallback: Trying Invidious instance [$instance] for $youtubeId")
+            val invidiousUrl = ExternalApiExtractor.resolveViaInvidious(youtubeId, instance, isAudioOnly)
+            if (!invidiousUrl.isNullOrEmpty()) {
+                AppLogger.d("PlaylistManager", "Tier 3 SUCCESS via Invidious [$instance]")
+                resolvedCache[cacheKey] = invidiousUrl
+                return invidiousUrl
+            }
         }
 
         return null

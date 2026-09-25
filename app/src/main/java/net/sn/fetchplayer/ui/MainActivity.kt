@@ -56,6 +56,7 @@ import net.sn.fetchplayer.model.Track
 import net.sn.fetchplayer.service.RadioService
 import net.sn.fetchplayer.util.AppLogger
 import net.sn.fetchplayer.util.CacheManager
+import net.sn.fetchplayer.manager.RemoteConfigManager
 import net.sn.fetchplayer.manager.SettingsManager
 import net.sn.fetchplayer.ui.QueenTutorialDialog
 import java.text.SimpleDateFormat
@@ -185,6 +186,10 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
 
         net.sn.fetchplayer.manager.RemoteAssetSyncManager.startRemoteAssetSync(this) { progress ->
             updateAssetSyncUi(progress)
+        }
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            RemoteConfigManager.fetchAndCacheConfig(applicationContext)
         }
 
         if (savedInstanceState != null) {
