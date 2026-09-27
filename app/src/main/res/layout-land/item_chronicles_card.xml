@@ -41,11 +41,10 @@
             <ImageView
                 android:id="@+id/ivParagraphImage"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="180dp"
                 android:layout_weight="0.4"
                 android:layout_marginEnd="14dp"
                 android:adjustViewBounds="true"
-                android:maxHeight="260dp"
                 android:scaleType="fitCenter"
                 android:visibility="gone" />
 

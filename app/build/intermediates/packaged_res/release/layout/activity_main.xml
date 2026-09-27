@@ -102,7 +102,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SETTINGS"
+            android:text="ON AIR"
             android:textColor="@color/nord6"
             app:icon="@drawable/ic_edit"
             app:iconTint="@color/nord14"

@@ -8,20 +8,28 @@
         "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/item_curator_track.xml"
     },
     {
-        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/item_artist_history.xml",
-        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/item_artist_history.xml"
-    },
-    {
         "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/item_related_artist.xml",
         "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/item_related_artist.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/item_artist_history.xml",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/item_artist_history.xml"
     },
     {
         "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/dialog_queen_tutorial.xml",
         "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/dialog_queen_tutorial.xml"
     },
     {
+        "merged": "net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/activity_main.xml",
+        "source": "net.sn.fetchplayer.app-main-37:/layout/activity_main.xml"
+    },
+    {
         "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/activity_main.xml",
         "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/item_chronicles_card.xml",
+        "source": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-main-37:/layout/item_chronicles_card.xml"
     },
     {
         "merged": "/home/plex/.gradle/daemon/8.5/net.sn.fetchplayer.app-mergeReleaseResources-35:/layout/dialog_app_update.xml",

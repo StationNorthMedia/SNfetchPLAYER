@@ -1248,6 +1248,8 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         chroniclesItems = net.sn.fetchplayer.data.ChroniclesRepository.loadChroniclesData(this)
         if (chroniclesItems.isEmpty()) return
 
+        chroniclesCurrentTrackId = SettingsManager.getLastChronicleTrackId(this)
+
         val layoutManager = LinearLayoutManager(this)
         hub.rvChroniclesCardsInline.layoutManager = layoutManager
 
@@ -1268,6 +1270,14 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             }
         )
         hub.rvChroniclesCardsInline.adapter = chroniclesAdapter
+
+        // Restore initial active state & scroll to saved position
+        chroniclesAdapter?.setActiveState(chroniclesCurrentTrackId, false, 0f, 0L, 0L)
+        hub.tvNowPlayingStatusInline.text = "🎧 AUDIO #$chroniclesCurrentTrackId Ready"
+        val initialIndex = chroniclesItems.indexOfFirst { it.id == chroniclesCurrentTrackId }
+        if (initialIndex != -1) {
+            layoutManager.scrollToPositionWithOffset(initialIndex, 0)
+        }
 
         hub.btnTogglePlayAllInline.setOnClickListener {
             if (chroniclesMediaPlayer?.isPlaying == true) {
@@ -1291,10 +1301,11 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
 
         hub.btnAutoScrollToggleInline.setOnClickListener {
             chroniclesIsAutoScroll = !chroniclesIsAutoScroll
-            hub.btnAutoScrollToggleInline.text = if (chroniclesIsAutoScroll) "📜 Auto: AN" else "📜 Auto: AUS"
+            hub.btnAutoScrollToggleInline.text = if (chroniclesIsAutoScroll) "AUTO: ON" else "AUTO: OFF"
             val nord14 = ContextCompat.getColor(this, R.color.nord14)
             val nord3 = ContextCompat.getColor(this, R.color.nord3)
             hub.btnAutoScrollToggleInline.setTextColor(if (chroniclesIsAutoScroll) nord14 else nord3)
+            hub.btnAutoScrollToggleInline.setIconTint(ColorStateList.valueOf(if (chroniclesIsAutoScroll) nord14 else nord3))
             hub.btnAutoScrollToggleInline.setStrokeColorResource(if (chroniclesIsAutoScroll) R.color.nord14 else R.color.nord3)
         }
     }
@@ -1302,6 +1313,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
     private fun playChroniclesTrack(id: Int) {
         stopChroniclesAudio()
         chroniclesCurrentTrackId = id
+        SettingsManager.setLastChronicleTrackId(this, id)
 
         val item = chroniclesItems.find { it.id == id } ?: return
         val audioPath = if (item.audio.startsWith("audio/")) item.audio else "audio/${item.audio}"
@@ -1320,15 +1332,15 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                     if (id < chroniclesItems.size) {
                         playChroniclesTrack(id + 1)
                     } else {
-                        hub.tvNowPlayingStatusInline.text = "✅ Vol. 01 Abgeschlossen!"
-                        hub.btnTogglePlayAllInline.text = "▶ Abspielen"
+                        hub.tvNowPlayingStatusInline.text = "✅ Vol. 01 Completed!"
+                        hub.btnTogglePlayAllInline.setIconResource(R.drawable.ic_play)
                         chroniclesAdapter?.setActiveState(id, false, 1.0f, duration.toLong(), duration.toLong())
                     }
                 }
             }
 
-            hub.tvNowPlayingStatusInline.text = "🎧 AUDIO #$id wird abgespielt..."
-            hub.btnTogglePlayAllInline.text = "⏸ Pause"
+            hub.tvNowPlayingStatusInline.text = "🎧 AUDIO #$id Playing..."
+            hub.btnTogglePlayAllInline.setIconResource(R.drawable.ic_pause)
 
             chroniclesHandler.post(chroniclesProgressRunnable)
 
@@ -1344,7 +1356,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             }
         } catch (e: Exception) {
             AppLogger.e("MainActivity", "Error playing asset audio $assetPath: ${e.message}", e)
-            hub.tvNowPlayingStatusInline.text = "🔴 Audio Fehler (#$id)"
+            hub.tvNowPlayingStatusInline.text = "🔴 Audio Error (#$id)"
         }
     }
 
@@ -1360,8 +1372,8 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             }
         }
         val hub = binding.settingsHub
-        hub.tvNowPlayingStatusInline.text = "⏸ AUDIO #$chroniclesCurrentTrackId pausiert"
-        hub.btnTogglePlayAllInline.text = "▶ Abspielen"
+        hub.tvNowPlayingStatusInline.text = "⏸ AUDIO #$chroniclesCurrentTrackId Paused"
+        hub.btnTogglePlayAllInline.setIconResource(R.drawable.ic_play)
     }
 
     private fun stopChroniclesAudio() {

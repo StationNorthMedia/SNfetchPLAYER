@@ -169,4 +169,8 @@ object SettingsManager {
 
     fun getPipedUrl(context: Context): String = getPrefs(context).getString(KEY_PIPED_URL, "") ?: ""
     fun setPipedUrl(context: Context, url: String) = getPrefs(context).edit().putString(KEY_PIPED_URL, url.trim()).apply()
+
+    // Last Chronicles Position
+    fun getLastChronicleTrackId(context: Context): Int = getPrefs(context).getInt("last_chronicle_track_id", 1)
+    fun setLastChronicleTrackId(context: Context, trackId: Int) = getPrefs(context).edit().putInt("last_chronicle_track_id", trackId).apply()
 }

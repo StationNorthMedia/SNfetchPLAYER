@@ -105,7 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:paddingHorizontal="16dp"
-            android:text="SETTINGS"
+            android:text="ON AIR"
             android:textColor="@color/nord6"
             android:textSize="12sp"
             app:icon="@drawable/ic_edit"

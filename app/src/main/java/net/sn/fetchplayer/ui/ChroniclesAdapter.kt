@@ -21,6 +21,10 @@ class ChroniclesAdapter(
     private val onSeek: (ChronicleCardItem, Float) -> Unit
 ) : RecyclerView.Adapter<ChroniclesAdapter.ChronicleViewHolder>() {
 
+    companion object {
+        private const val PAYLOAD_PROGRESS = "PAYLOAD_PROGRESS"
+    }
+
     private var activeTrackId: Int = -1
     private var isPlaying: Boolean = false
     private var currentProgressPercent: Float = 0f
@@ -29,19 +33,26 @@ class ChroniclesAdapter(
 
     fun setActiveState(trackId: Int, playing: Boolean, progressPercent: Float, currentMs: Long, totalMs: Long) {
         val prevActive = activeTrackId
+        val trackChanged = (prevActive != trackId)
         activeTrackId = trackId
         isPlaying = playing
         currentProgressPercent = progressPercent
         currentTimeMs = currentMs
         durationMs = totalMs
 
-        if (prevActive != -1 && prevActive != trackId) {
+        if (prevActive != -1 && trackChanged) {
             val prevIndex = items.indexOfFirst { it.id == prevActive }
             if (prevIndex != -1) notifyItemChanged(prevIndex)
         }
 
         val currIndex = items.indexOfFirst { it.id == trackId }
-        if (currIndex != -1) notifyItemChanged(currIndex)
+        if (currIndex != -1) {
+            if (trackChanged) {
+                notifyItemChanged(currIndex)
+            } else {
+                notifyItemChanged(currIndex, PAYLOAD_PROGRESS)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChronicleViewHolder {
@@ -53,6 +64,14 @@ class ChroniclesAdapter(
         val item = items[position]
         val prevItem = if (position > 0) items[position - 1] else null
         holder.bind(item, prevItem)
+    }
+
+    override fun onBindViewHolder(holder: ChronicleViewHolder, position: Int, payloads: MutableList<Any>) {
+        if (payloads.contains(PAYLOAD_PROGRESS)) {
+            holder.updateProgressOnly(isPlaying, currentProgressPercent, currentTimeMs, durationMs)
+        } else {
+            super.onBindViewHolder(holder, position, payloads)
+        }
     }
 
     override fun getItemCount(): Int = items.size
@@ -129,6 +148,18 @@ class ChroniclesAdapter(
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {}
             })
+        }
+
+        fun updateProgressOnly(playing: Boolean, progressPercent: Float, currentMs: Long, totalMs: Long) {
+            val context = binding.root.context
+            val nord11 = ContextCompat.getColor(context, R.color.nord11)
+            binding.cardParagraph.setStrokeColor(nord11)
+            binding.cardParagraph.setStrokeWidth(4)
+            binding.btnPlayItem.text = if (playing) "⏸" else "▶"
+            binding.btnPlayItem.setStrokeColor(ColorStateList.valueOf(nord11))
+            binding.btnPlayItem.setTextColor(nord11)
+            binding.sbProgressItem.progress = (progressPercent * 100).toInt()
+            binding.tvTimeItem.text = formatTime(currentMs, totalMs)
         }
 
         private fun formatTime(currentMs: Long, totalMs: Long): String {
