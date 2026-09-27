@@ -14,6 +14,8 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
 import net.sn.fetchplayer.R
+import kotlin.math.min
+import kotlin.math.sin
 
 class NordCrateDiggingOverlayView @JvmOverloads constructor(
     context: Context,
@@ -24,6 +26,10 @@ class NordCrateDiggingOverlayView @JvmOverloads constructor(
     private val startTime = System.currentTimeMillis()
 
     private val nord0 = ContextCompat.getColor(context, R.color.nord0) // #2E3440
+    private val nord1 = ContextCompat.getColor(context, R.color.nord1) // #3B4252
+    private val nord2 = ContextCompat.getColor(context, R.color.nord2) // #434C5E
+    private val nord8 = ContextCompat.getColor(context, R.color.nord8) // #88C0D0
+    private val nord9 = ContextCompat.getColor(context, R.color.nord9) // #81A1C1
 
     private val bgPaint = Paint().apply {
         color = nord0 // Solid Nord0 Dark Background (#2E3440)
@@ -48,11 +54,26 @@ class NordCrateDiggingOverlayView @JvmOverloads constructor(
         xfermode = PorterDuffXfermode(PorterDuff.Mode.SCREEN)
     }
 
-    private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.WHITE
-        typeface = Typeface.MONOSPACE
+    private val vinylPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = nord1
         style = Paint.Style.FILL
-        setShadowLayer(6f, 3f, 3f, Color.argb(220, 0, 0, 0))
+    }
+
+    private val groovePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = nord2
+        style = Paint.Style.STROKE
+        strokeWidth = 2.5f
+    }
+
+    private val centerLabelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = nord8
+        style = Paint.Style.FILL
+    }
+
+    private val borderPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = nord8
+        style = Paint.Style.STROKE
+        strokeWidth = 3.5f
     }
 
     private val logoBitmap: Bitmap? by lazy {
@@ -105,32 +126,40 @@ class NordCrateDiggingOverlayView @JvmOverloads constructor(
 
         canvas.restoreToCount(saveLayer)
 
-        // 3. Monospace White Text on the left ("SN MATRIX: CRATE DIGGING.. FLIPPING RECORDS..")
-        val responsiveTextSize = Math.max(20f, Math.min(w, h) * 0.045f)
-        textPaint.textSize = responsiveTextSize
+        // 3. Rotating Vinyl Record Badge in Center
+        val cx = w / 2f
+        val cy = h / 2f
+        val vinylRadius = min(w, h) * 0.22f
+        val rotationAngle = (elapsed * 90f) % 360f
 
-        val dotCount = ((elapsed * 3.0f).toInt() % 3) + 1
-        val dots = ".".repeat(dotCount)
+        canvas.save()
+        canvas.rotate(rotationAngle, cx, cy)
 
-        val textX = w * 0.05f
-        val textY1 = h * 0.48f
-        val textY2 = textY1 + responsiveTextSize * 1.5f
+        // Vinyl disc body
+        canvas.drawCircle(cx, cy, vinylRadius, vinylPaint)
 
-        canvas.drawText("SN MATRIX: CRATE DIGGING$dots FLIPPING", textX, textY1, textPaint)
-        canvas.drawText("RECORDS$dots", textX, textY2, textPaint)
-
-        // 4. Station North Logo in Lower Right Corner
-        logoBitmap?.let { bmp ->
-            val logoW = Math.min(w, h) * 0.24f
-            val logoH = logoW * (bmp.height.toFloat() / bmp.width.toFloat())
-            val margin = w * 0.04f
-            rectF.set(w - margin - logoW, h - margin - logoH, w - margin, h - margin)
-
-            val logoPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-                alpha = 210
-            }
-            canvas.drawBitmap(bmp, null, rectF, logoPaint)
+        // Vinyl concentric grooves
+        for (r in listOf(0.85f, 0.70f, 0.55f)) {
+            canvas.drawCircle(cx, cy, vinylRadius * r, groovePaint)
         }
+
+        // Center vinyl label circle
+        val centerLabelRadius = vinylRadius * 0.40f
+        canvas.drawCircle(cx, cy, centerLabelRadius, centerLabelPaint)
+
+        // Center logo inside vinyl label
+        logoBitmap?.let { bmp ->
+            val imgW = centerLabelRadius * 1.35f
+            val imgH = imgW * (bmp.height.toFloat() / bmp.width.toFloat())
+            rectF.set(cx - imgW / 2f, cy - imgH / 2f, cx + imgW / 2f, cy + imgH / 2f)
+            canvas.drawBitmap(bmp, null, rectF, null)
+        }
+
+        canvas.restore()
+
+        // Outer neon border ring
+        borderPaint.alpha = (180 + 75 * sin(elapsed * 5.0)).toInt().coerceIn(0, 255)
+        canvas.drawCircle(cx, cy, vinylRadius + 4f, borderPaint)
 
         postInvalidateOnAnimation()
     }

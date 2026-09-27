@@ -94,6 +94,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
     private var chroniclesAdapter: ChroniclesAdapter? = null
     private var chroniclesCurrentTrackId: Int = 1
     private var chroniclesIsAutoScroll: Boolean = true
+    private var isChroniclesFullscreen: Boolean = false
     private val chroniclesHandler = Handler(Looper.getMainLooper())
 
     private val chroniclesProgressRunnable = object : Runnable {
@@ -1208,6 +1209,12 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
 
         if (moduleId != 6) {
             pauseChroniclesAudio()
+            if (isChroniclesFullscreen) {
+                isChroniclesFullscreen = false
+                binding.layoutHeader.visibility = View.VISIBLE
+                binding.toggleModeGroup.visibility = View.VISIBLE
+                hub.btnChroniclesFullscreenInline.setIconResource(R.drawable.ic_fullscreen)
+            }
         }
 
         // Dynamic border accent per module
@@ -1279,6 +1286,19 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             layoutManager.scrollToPositionWithOffset(initialIndex, 0)
         }
 
+        hub.btnChroniclesFullscreenInline.setOnClickListener {
+            isChroniclesFullscreen = !isChroniclesFullscreen
+            if (isChroniclesFullscreen) {
+                binding.layoutHeader.visibility = View.GONE
+                binding.toggleModeGroup.visibility = View.GONE
+                hub.btnChroniclesFullscreenInline.setIconResource(R.drawable.ic_fullscreen_exit)
+            } else {
+                binding.layoutHeader.visibility = View.VISIBLE
+                binding.toggleModeGroup.visibility = View.VISIBLE
+                hub.btnChroniclesFullscreenInline.setIconResource(R.drawable.ic_fullscreen)
+            }
+        }
+
         hub.btnTogglePlayAllInline.setOnClickListener {
             if (chroniclesMediaPlayer?.isPlaying == true) {
                 pauseChroniclesAudio()
@@ -1303,7 +1323,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             chroniclesIsAutoScroll = !chroniclesIsAutoScroll
             val nord14 = ContextCompat.getColor(this, R.color.nord14)
             val nord3 = ContextCompat.getColor(this, R.color.nord3)
-            hub.btnAutoScrollToggleInline.setIconTint(ColorStateList.valueOf(if (chroniclesIsAutoScroll) nord14 else nord3))
+            hub.btnAutoScrollToggleInline.backgroundTintList = ColorStateList.valueOf(if (chroniclesIsAutoScroll) nord14 else nord3)
             hub.btnAutoScrollToggleInline.setStrokeColorResource(if (chroniclesIsAutoScroll) R.color.nord14 else R.color.nord3)
         }
     }
@@ -1555,7 +1575,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             hub.btnBackFromAudioVisualizer, hub.btnBackFromChronicles, hub.btnBackFromQueenTutorial, hub.btnBackFromSystemCache,
             hub.btnCreateNewPlaylist, hub.switchFftVisualizer, hub.switchBassPulse, hub.switchQueenQuotes,
             hub.switchSlantedBauchbinden, hub.btnTabImported, hub.btnTabSaved, hub.btnLoadPlaylist,
-            hub.btnPrevTrackInline, hub.btnTogglePlayAllInline, hub.btnNextTrackInline, hub.btnAutoScrollToggleInline, hub.btnOpenQueenTutorial,
+            hub.btnChroniclesFullscreenInline, hub.btnPrevTrackInline, hub.btnTogglePlayAllInline, hub.btnNextTrackInline, hub.btnAutoScrollToggleInline, hub.btnOpenQueenTutorial,
             hub.cbInnerTube, hub.cbStationNorth, hub.cbYtdlpApi, hub.cbInvidious, hub.cbCobalt, hub.cbPiped,
             hub.btnTestInnerTube, hub.btnTestStationNorth, hub.btnTestYtdlpApi, hub.btnTestInvidious, hub.btnTestCobalt, hub.btnTestPiped, hub.btnHelpYtdlpApi
         )
