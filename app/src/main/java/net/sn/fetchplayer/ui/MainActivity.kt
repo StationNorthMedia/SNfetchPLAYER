@@ -89,6 +89,27 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
     private var activeSettingsModuleId = 0
     private var isShowingSavedCatalogTab = false
 
+    private var chroniclesMediaPlayer: android.media.MediaPlayer? = null
+    private var chroniclesItems: List<net.sn.fetchplayer.model.ChronicleCardItem> = emptyList()
+    private var chroniclesAdapter: ChroniclesAdapter? = null
+    private var chroniclesCurrentTrackId: Int = 1
+    private var chroniclesIsAutoScroll: Boolean = true
+    private val chroniclesHandler = Handler(Looper.getMainLooper())
+
+    private val chroniclesProgressRunnable = object : Runnable {
+        override fun run() {
+            chroniclesMediaPlayer?.let { player ->
+                if (player.isPlaying && player.duration > 0) {
+                    val currentMs = player.currentPosition.toLong()
+                    val totalMs = player.duration.toLong()
+                    val progressPercent = currentMs.toFloat() / totalMs.toFloat()
+                    chroniclesAdapter?.setActiveState(chroniclesCurrentTrackId, true, progressPercent, currentMs, totalMs)
+                    chroniclesHandler.postDelayed(this, 200)
+                }
+            }
+        }
+    }
+
     private val importedPlaylistItems = mutableListOf<RawPlaylistItem>()
 
     private val exportJsonLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("application/json")) { uri ->
@@ -1185,6 +1206,10 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         hub.layoutQueenTutorialSettings.visibility = if (moduleId == 7) View.VISIBLE else View.GONE
         hub.layoutSystemCacheUpdateSettings.visibility = if (moduleId == 8) View.VISIBLE else View.GONE
 
+        if (moduleId != 6) {
+            pauseChroniclesAudio()
+        }
+
         // Dynamic border accent per module
         val accentColorRes = when (moduleId) {
             1 -> R.color.nord11 // Broadcast: #BF616A Aurora Red
@@ -1216,6 +1241,138 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                 8 -> hub.btnBackFromSystemCache.requestFocus()
             }
         }
+    }
+
+    private fun setupInlineChroniclesEngine() {
+        val hub = binding.settingsHub
+        chroniclesItems = net.sn.fetchplayer.data.ChroniclesRepository.loadChroniclesData(this)
+        if (chroniclesItems.isEmpty()) return
+
+        val layoutManager = LinearLayoutManager(this)
+        hub.rvChroniclesCardsInline.layoutManager = layoutManager
+
+        chroniclesAdapter = ChroniclesAdapter(
+            items = chroniclesItems,
+            onPlayPauseClick = { item ->
+                if (chroniclesCurrentTrackId == item.id && chroniclesMediaPlayer?.isPlaying == true) {
+                    pauseChroniclesAudio()
+                } else {
+                    playChroniclesTrack(item.id)
+                }
+            },
+            onSeek = { item, positionPercent ->
+                if (chroniclesCurrentTrackId == item.id && chroniclesMediaPlayer != null) {
+                    val targetMs = (positionPercent * (chroniclesMediaPlayer?.duration ?: 0)).toInt()
+                    chroniclesMediaPlayer?.seekTo(targetMs)
+                }
+            }
+        )
+        hub.rvChroniclesCardsInline.adapter = chroniclesAdapter
+
+        hub.btnTogglePlayAllInline.setOnClickListener {
+            if (chroniclesMediaPlayer?.isPlaying == true) {
+                pauseChroniclesAudio()
+            } else {
+                playChroniclesTrack(chroniclesCurrentTrackId)
+            }
+        }
+
+        hub.btnPrevTrackInline.setOnClickListener {
+            if (chroniclesCurrentTrackId > 1) {
+                playChroniclesTrack(chroniclesCurrentTrackId - 1)
+            }
+        }
+
+        hub.btnNextTrackInline.setOnClickListener {
+            if (chroniclesCurrentTrackId < chroniclesItems.size) {
+                playChroniclesTrack(chroniclesCurrentTrackId + 1)
+            }
+        }
+
+        hub.btnAutoScrollToggleInline.setOnClickListener {
+            chroniclesIsAutoScroll = !chroniclesIsAutoScroll
+            hub.btnAutoScrollToggleInline.text = if (chroniclesIsAutoScroll) "📜 Auto: AN" else "📜 Auto: AUS"
+            val nord14 = ContextCompat.getColor(this, R.color.nord14)
+            val nord3 = ContextCompat.getColor(this, R.color.nord3)
+            hub.btnAutoScrollToggleInline.setTextColor(if (chroniclesIsAutoScroll) nord14 else nord3)
+            hub.btnAutoScrollToggleInline.setStrokeColorResource(if (chroniclesIsAutoScroll) R.color.nord14 else R.color.nord3)
+        }
+    }
+
+    private fun playChroniclesTrack(id: Int) {
+        stopChroniclesAudio()
+        chroniclesCurrentTrackId = id
+
+        val item = chroniclesItems.find { it.id == id } ?: return
+        val audioPath = if (item.audio.startsWith("audio/")) item.audio else "audio/${item.audio}"
+        val assetPath = "comic/$audioPath"
+
+        val hub = binding.settingsHub
+        try {
+            val afd: android.content.res.AssetFileDescriptor = assets.openFd(assetPath)
+            chroniclesMediaPlayer = android.media.MediaPlayer().apply {
+                setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
+                afd.close()
+                prepare()
+                start()
+
+                setOnCompletionListener {
+                    if (id < chroniclesItems.size) {
+                        playChroniclesTrack(id + 1)
+                    } else {
+                        hub.tvNowPlayingStatusInline.text = "✅ Vol. 01 Abgeschlossen!"
+                        hub.btnTogglePlayAllInline.text = "▶ Abspielen"
+                        chroniclesAdapter?.setActiveState(id, false, 1.0f, duration.toLong(), duration.toLong())
+                    }
+                }
+            }
+
+            hub.tvNowPlayingStatusInline.text = "🎧 AUDIO #$id wird abgespielt..."
+            hub.btnTogglePlayAllInline.text = "⏸ Pause"
+
+            chroniclesHandler.post(chroniclesProgressRunnable)
+
+            if (chroniclesIsAutoScroll) {
+                val index = chroniclesItems.indexOfFirst { it.id == id }
+                if (index != -1) {
+                    val smoothScroller = object : androidx.recyclerview.widget.LinearSmoothScroller(this) {
+                        override fun getVerticalSnapPreference(): Int = SNAP_TO_START
+                    }
+                    smoothScroller.targetPosition = index
+                    hub.rvChroniclesCardsInline.layoutManager?.startSmoothScroll(smoothScroller)
+                }
+            }
+        } catch (e: Exception) {
+            AppLogger.e("MainActivity", "Error playing asset audio $assetPath: ${e.message}", e)
+            hub.tvNowPlayingStatusInline.text = "🔴 Audio Fehler (#$id)"
+        }
+    }
+
+    private fun pauseChroniclesAudio() {
+        chroniclesHandler.removeCallbacks(chroniclesProgressRunnable)
+        chroniclesMediaPlayer?.let { player ->
+            if (player.isPlaying) {
+                player.pause()
+                val currentMs = player.currentPosition.toLong()
+                val totalMs = player.duration.toLong()
+                val progressPercent = currentMs.toFloat() / totalMs.toFloat()
+                chroniclesAdapter?.setActiveState(chroniclesCurrentTrackId, false, progressPercent, currentMs, totalMs)
+            }
+        }
+        val hub = binding.settingsHub
+        hub.tvNowPlayingStatusInline.text = "⏸ AUDIO #$chroniclesCurrentTrackId pausiert"
+        hub.btnTogglePlayAllInline.text = "▶ Abspielen"
+    }
+
+    private fun stopChroniclesAudio() {
+        chroniclesHandler.removeCallbacks(chroniclesProgressRunnable)
+        try {
+            chroniclesMediaPlayer?.stop()
+            chroniclesMediaPlayer?.release()
+        } catch (e: Exception) {
+            AppLogger.w("MainActivity", "Error stopping Chronicles MediaPlayer: ${e.message}")
+        }
+        chroniclesMediaPlayer = null
     }
 
     private fun setupSettingsHub() {
@@ -1383,17 +1540,14 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             hub.btnBackFromAudioVisualizer, hub.btnBackFromChronicles, hub.btnBackFromQueenTutorial, hub.btnBackFromSystemCache,
             hub.btnCreateNewPlaylist, hub.switchFftVisualizer, hub.switchBassPulse, hub.switchQueenQuotes,
             hub.switchSlantedBauchbinden, hub.btnTabImported, hub.btnTabSaved, hub.btnLoadPlaylist,
+            hub.btnPrevTrackInline, hub.btnTogglePlayAllInline, hub.btnNextTrackInline, hub.btnAutoScrollToggleInline, hub.btnOpenQueenTutorial,
             hub.cbInnerTube, hub.cbStationNorth, hub.cbYtdlpApi, hub.cbInvidious, hub.cbCobalt, hub.cbPiped,
             hub.btnTestInnerTube, hub.btnTestStationNorth, hub.btnTestYtdlpApi, hub.btnTestInvidious, hub.btnTestCobalt, hub.btnTestPiped, hub.btnHelpYtdlpApi
         )
         allFocusableElements.forEach { setupTvFocusHighlight(it) }
 
-        // 6. Module 6: Chronicles E-Book (Inline Content)
-        val rawChroniclesText = net.sn.fetchplayer.manager.QueenQuotesManager.getChroniclesText(this)
-        hub.tvChroniclesContent.text = formatChroniclesSsb(rawChroniclesText)
-        hub.btnOpenEbookChronicles.setOnClickListener {
-            ChroniclesEbookDialog(this).show()
-        }
+        // 6. Module 6: Chronicles E-Book (Inline Native Reader)
+        setupInlineChroniclesEngine()
 
         // 7. Module 7: Queen Tutorial (Inline Content & Tabs)
         fun showTutorialChapter(index: Int) {
@@ -2634,8 +2788,19 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         return ssb
     }
 
+    override fun onPause() {
+        super.onPause()
+        pauseChroniclesAudio()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        pauseChroniclesAudio()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+        stopChroniclesAudio()
         releaseAudioVisualizer()
         bauchbindeRunnable?.let { mainHandler.removeCallbacks(it) }
         hudTimeoutRunnable?.let { mainHandler.removeCallbacks(it) }

@@ -3,12 +3,12 @@
 <img src="docs/logo.png" alt="Station North Logo" width="280" />
 
 # 👑 SNfetchPLAYER • The Queen's Frequency
-**Version 1.0.0.37 • Broadcast & Audio Engine for Android Smartphones, Tablets & Android TV**
+**Version 1.0.0.39 • Broadcast & Audio Engine for Android Smartphones, Tablets & Android TV**
 
 [![Website](https://img.shields.io/badge/Website-station--north.net-88C0D0?style=for-the-badge&logo=google-chrome&logoColor=white)](https://station-north.net)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-5E81AC?style=for-the-badge&logo=github&logoColor=white)](https://github.com/StationNorthMedia/SNfetchPLAYER)
 [![GitLab](https://img.shields.io/badge/GitLab-Repository-D08770?style=for-the-badge&logo=gitlab&logoColor=white)](https://gitlab.com/station-north-net-group/snfetchplayer)
-[![Release](https://img.shields.io/badge/Release-v1.0.0.37-8FBCBB?style=for-the-badge&logo=android&logoColor=white)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v1.0.0.37)
+[![Release](https://img.shields.io/badge/Release-v1.0.0.39-8FBCBB?style=for-the-badge&logo=android&logoColor=white)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v1.0.0.39)
 [![Downloads](https://img.shields.io/github/downloads/StationNorthMedia/SNfetchPLAYER/total?style=for-the-badge&color=A3BE8C&logo=github)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases)
 [![TV Ready](https://img.shields.io/badge/Android_TV-100%25_Compatible-BF616A?style=for-the-badge&logo=androidtv&logoColor=white)](https://developer.android.com/tv)
 [![License](https://img.shields.io/badge/License-MIT-B48EAD?style=for-the-badge)](LICENSE)
@@ -107,61 +107,12 @@
 - **Turn-Key Portainer Stack**: Deploy your own 24/7 private extraction server via Docker/Portainer ([`docker/Portainer-Stack.yml`](docker/Portainer-Stack.yml)) featuring an automatic **12-hour Watchdog background updater** for `yt-dlp` and optional Cloudflare Zero Trust SSL tunnel integration.
 - **Setup Guide**: Read [`docs/PRIVATE_EXTRACTOR_SETUP.md`](docs/PRIVATE_EXTRACTOR_SETUP.md) or open the in-app setup guide directly from Module 8!
 
-### 📖 The Manjaro Lounge Chronicles (In-App E-Book)
-- **Full 6-Chapter Story**: Open the built-in fullscreen E-Book reader to discover how a girl from North Ave and a gray Audi V6 built an empire.
-
----
-
-<details>
-<summary>📖 <b>Click here to preview The Manjaro Lounge Chronicles with Artwork</b></summary>
-
-<br>
-
-### Chapter 1: The Gray V6
-<img src="docs/theQueenAudiB6.png" alt="Chapter 1 Artwork" width="500"/>
-
-Rain was coming down heavy that night, slicking the Baltimore asphalt like grease. I was standing on the corner of North Ave, collar up, minding my own damn business. Just another ghost in the neon fog, trying to survive the street...
-
-Then that gray Audi B6 rolled up, slow and steady, hugging the curbs like it owned the block...
-
-<br>
-
-### Chapter 2: The Birth of the Frequency
-<img src="docs/theQueen1.png" alt="Chapter 2 Artwork" width="500"/>
-
-He didn’t say much after that night, you know. The Boss ain't a man of big words—he lets his fingers do the talking on that mechanical keyboard, lines of blue code lighting up his face like a cold neon sign. But he let me stay at The Bricks...
-
-<br>
-
-### Chapter 3: The Queen's Territory
-<img src="docs/theQueen2.png" alt="Chapter 3 Artwork" width="500"/>
-
-It didn’t take long for the streets to notice. When you change the pulse of a city, the old ghosts start getting restless...
-
-<br>
-
-### Chapter 4: The Sound of the Basement
-<img src="docs/theQueen4.png" alt="Chapter 4 Artwork" width="500"/>
-
-The cellar of The Bricks was my playground. While the Boss spent his hours upstairs in the main hall—messing with those blinking towers and humming racks...
-
-<br>
-
-### Chapter 5: Guerrilla Grid
-<img src="docs/theQueen7.png" alt="Chapter 5 Artwork" width="500"/>
-
-We didn’t advertise. We seduced. We didn’t wait for Baltimore to find us—we burned ourselves into the city's synapses until no one could tell where reality ended and our signal began...
-
-<br>
-
-### Chapter 6: The Overclock
-<img src="docs/theQueen13.png" alt="Chapter 6 Artwork" width="500"/>
-
-I watch him through the glass. He’s sitting there, shoulders rigid, fingers dancing over the keyboard...
-
-*(Read the full 6 Chapters directly inside the app's E-Book Reader)*
-
-</details>
+### 📖 The Manjaro Lounge Chronicles (Vol. 01 - Native Inline E-Book Reader)
+- **Complete Native Story Engine**: The full **13 Chapters & 98 Paragraphs** of *The Manjaro Lounge Chronicles (Vol. 01)* integrated **directly inline** inside **Settings > Chronicles** (Module 6).
+- **44 Comic Artworks (WebP Optimized)**: High-resolution artwork panels compressed with WebP technology (87% size optimization, keeping APK size lightweight at ~116 MB).
+- **98 Audio Narrative Chapters**: Synchronized audio playback for every paragraph with individual Play/Pause buttons, SeekBars, time indicators, and continuous auto-advance (`Track i -> i + 1`).
+- **16:9 Landscape / Widescreen Side-by-Side Layout**: On horizontal/TV screens, comic panels render on the left (40%) and narrative text + player controls render on the right (60%) for optimal reading comfort.
+- **Activity Lifecycle Protection**: Audio automatically pauses on app minimize (`onPause` / `onStop`), module switch, or activity destruction (`onDestroy`).
 
 ---
 
@@ -169,7 +120,7 @@ I watch him through the glass. He’s sitting there, shoulders rigid, fingers da
 
 - 🐙 **GitHub Releases**: [https://github.com/StationNorthMedia/SNfetchPLAYER/releases](https://github.com/StationNorthMedia/SNfetchPLAYER/releases)
 - 🦊 **GitLab Releases / Mirror**: [https://gitlab.com/station-north-net-group/snfetchplayer/-/tree/main/releases](https://gitlab.com/station-north-net-group/snfetchplayer/-/tree/main/releases)
-- ⚡ **Direct APK Download**: [**`SNfetchPLAYER-v1.0.0.37.apk`**](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/download/v1.0.0.37/SNfetchPLAYER-v1.0.0.37.apk) (70.5 MB)
+- ⚡ **Direct APK Download**: [**`SNfetchPLAYER-v1.0.0.39.apk`**](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/download/v1.0.0.39/SNfetchPLAYER-v1.0.0.39.apk) (116 MB)
 
 1. Download the APK file on your Android device or TV box.
 2. Install the APK and launch **SNfetchPLAYER**!
@@ -184,5 +135,4 @@ Built with ❤️ by [**StationNorthMedia**](https://station-north.net). Distrib
 
 ## 🏷️ Indexing & Keyword Classification
 
-`Android TV Player` • `Android Radio Player` • `ExoPlayer Engine` • `SmartTube Integration` • `YouTube Media Streaming` • `Real-Time FFT Audio Visualizer` • `Nord Theme UI` • `Open Source APK Download` • `Station North TV & Radio` • `R&B & Hip-Hop Curator Studio` • `Android Sideload APK` • `21:9 Ultra-Wide Video Player` • `Immersive Media Engine`
-
+`Android TV Player` • `Android Radio Player` • `ExoPlayer Engine` • `SmartTube Integration` • `YouTube Media Streaming` • `Real-Time FFT Audio Visualizer` • `Nord Theme UI` • `Open Source APK Download` • `Station North TV & Radio` • `R&B & Hip-Hop Curator Studio` • `Android Sideload APK` • `21:9 Ultra-Wide Video Player` • `Immersive Media Engine` • `Manjaro Lounge Chronicles E-Book`
