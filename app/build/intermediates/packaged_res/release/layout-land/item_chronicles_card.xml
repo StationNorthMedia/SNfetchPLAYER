@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="12dp"
+    android:paddingVertical="6dp">
+
+    <!-- Optional Chapter Title Header -->
+    <TextView
+        android:id="@+id/tvChapterHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="12dp"
+        android:paddingStart="12dp"
+        android:textColor="@color/nord13"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <!-- Paragraph Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardParagraph"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/nord1"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp"
+        app:strokeColor="@color/nord2"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="14dp">
+
+            <!-- Left Side: Optional Widescreen Image -->
+            <ImageView
+                android:id="@+id/ivParagraphImage"
+                android:layout_width="0dp"
+                android:layout_height="180dp"
+                android:layout_weight="0.4"
+                android:layout_marginEnd="14dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:visibility="gone" />
+
+            <!-- Right Side: Story Text & Nord Audio Player Box -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:orientation="vertical">
+
+                <!-- Story Text -->
+                <TextView
+                    android:id="@+id/tvParagraphText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:lineSpacingExtra="5dp"
+                    android:textColor="@color/nord4"
+                    android:textSize="14sp" />
+
+                <!-- Custom Nord Audio Player Box -->
+                <LinearLayout
+                    android:id="@+id/layoutAudioPlayer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/nord0"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/tvAudioLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🎧 AUDIO"
+                        android:textColor="@color/nord8"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPlayItem"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="8dp"
+                        android:insetLeft="0dp"
+                        android:insetTop="0dp"
+                        android:insetRight="0dp"
+                        android:insetBottom="0dp"
+                        android:padding="0dp"
+                        android:text="▶"
+                        android:textColor="@color/nord8"
+                        android:textSize="12sp"
+                        app:cornerRadius="18dp"
+                        app:strokeColor="@color/nord8"
+                        app:strokeWidth="1dp" />
+
+                    <SeekBar
+                        android:id="@+id/sbProgressItem"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:max="100"
+                        android:progressTint="@color/nord8"
+                        android:thumbTint="@color/nord8" />
+
+                    <TextView
+                        android:id="@+id/tvTimeItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="monospace"
+                        android:text="0:00 / 0:00"
+                        android:textColor="@color/nord4"
+                        android:textSize="10.5sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
