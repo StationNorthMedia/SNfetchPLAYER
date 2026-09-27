@@ -119,7 +119,7 @@
 ## 📥 Download & Installation
 
 - 🐙 **GitHub Releases**: [https://github.com/StationNorthMedia/SNfetchPLAYER/releases](https://github.com/StationNorthMedia/SNfetchPLAYER/releases)
-- 🦊 **GitLab Releases / Mirror**: [https://gitlab.com/station-north-net-group/snfetchplayer/-/tree/main/releases](https://gitlab.com/station-north-net-group/snfetchplayer/-/tree/main/releases)
+- 🦊 **GitLab Releases / Mirror**: [https://gitlab.com/station-north-net-group/snfetchplayer/-/releases](https://gitlab.com/station-north-net-group/snfetchplayer/-/releases)
 - ⚡ **Direct APK Download**: [**`SNfetchPLAYER-v1.0.0.40.apk`**](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/download/v1.0.0.40/SNfetchPLAYER-v1.0.0.40.apk) (116 MB)
 
 1. Download the APK file on your Android device or TV box.
