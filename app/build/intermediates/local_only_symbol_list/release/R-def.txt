@@ -50,6 +50,8 @@ drawable ic_playlist
 drawable ic_previous
 drawable ic_radio
 drawable ic_repeat
+drawable ic_repeat_all
+drawable ic_repeat_one
 drawable ic_save
 drawable ic_storage
 drawable ic_tv
@@ -300,6 +302,7 @@ id tvUpdateVersionSub
 id tvYtId
 id videoFrameConstraintLayout
 id viewDivider
+id viewNordPlayerBackground
 layout activity_main
 layout dialog_app_update
 layout dialog_edit_track

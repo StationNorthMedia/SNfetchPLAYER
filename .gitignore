@@ -29,6 +29,5 @@ __pycache__/
 1en.txt
 tv.css
 
-# Generated APKs & Releases (do NOT push large binary APKs to git)
-*.apk
-/releases/
+# Ignore build output APKs (releases/ is tracked for direct downloads)
+app/build/outputs/apk/

@@ -115,9 +115,9 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <!-- Tile 3: SN-Lexicon (#8FBCBB) -->
+            <!-- Tile 3: Chronicles (#EBCB8B) -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardTileLexicon"
+                android:id="@+id/cardTileChronicles"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="4dp"
@@ -127,8 +127,8 @@
                 app:cardBackgroundColor="@color/nord1"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="3dp"
-                app:rippleColor="@color/nord7"
-                app:strokeColor="@color/nord7"
+                app:rippleColor="@color/nord13"
+                app:strokeColor="@color/nord13"
                 app:strokeWidth="1.5dp">
 
                 <LinearLayout
@@ -142,7 +142,7 @@
                         android:layout_width="38dp"
                         android:layout_height="38dp"
                         android:src="@drawable/ic_book"
-                        app:tint="@color/nord7" />
+                        app:tint="@color/nord13" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -150,8 +150,8 @@
                         android:layout_marginTop="8dp"
                         android:gravity="center"
                         android:letterSpacing="0.04"
-                        android:text="SN-LEXIKON"
-                        android:textColor="@color/nord7"
+                        android:text="CHRONICLES"
+                        android:textColor="@color/nord13"
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -250,9 +250,9 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Tile 6: Chronicles (#EBCB8B) -->
+            <!-- Tile 6: SN-Lexicon (#8FBCBB) -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardTileChronicles"
+                android:id="@+id/cardTileLexicon"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="4dp"
@@ -262,8 +262,8 @@
                 app:cardBackgroundColor="@color/nord1"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="3dp"
-                app:rippleColor="@color/nord13"
-                app:strokeColor="@color/nord13"
+                app:rippleColor="@color/nord7"
+                app:strokeColor="@color/nord7"
                 app:strokeWidth="1.5dp">
 
                 <LinearLayout
@@ -277,7 +277,7 @@
                         android:layout_width="38dp"
                         android:layout_height="38dp"
                         android:src="@drawable/ic_book"
-                        app:tint="@color/nord13" />
+                        app:tint="@color/nord7" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -285,8 +285,8 @@
                         android:layout_marginTop="8dp"
                         android:gravity="center"
                         android:letterSpacing="0.04"
-                        android:text="CHRONICLES"
-                        android:textColor="@color/nord13"
+                        android:text="SN-LEXIKON"
+                        android:textColor="@color/nord7"
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -2060,15 +2060,12 @@
                     android:layout_width="0dp"
                     android:layout_height="36dp"
                     android:layout_marginStart="6dp"
-                    android:layout_weight="1.3"
-                    android:paddingHorizontal="4dp"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="0dp"
                     android:paddingVertical="0dp"
-                    android:text="AUTO: ON"
-                    android:textColor="@color/nord14"
-                    android:textSize="10.5sp"
-                    app:icon="@drawable/ic_book"
-                    app:iconPadding="2dp"
-                    app:iconSize="14dp"
+                    app:icon="@drawable/ic_repeat_all"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
                     app:iconTint="@color/nord14"
                     app:strokeColor="@color/nord14"
                     app:strokeWidth="1dp" />

@@ -1319,10 +1319,15 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
 
         val hub = binding.settingsHub
         try {
-            val afd: android.content.res.AssetFileDescriptor = assets.openFd(assetPath)
+            val localAudioFile = java.io.File(filesDir, "remote_assets/comic/$audioPath")
             chroniclesMediaPlayer = android.media.MediaPlayer().apply {
-                setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
-                afd.close()
+                if (localAudioFile.exists() && localAudioFile.length() > 0) {
+                    setDataSource(localAudioFile.absolutePath)
+                } else {
+                    val afd: android.content.res.AssetFileDescriptor = assets.openFd(assetPath)
+                    setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
+                    afd.close()
+                }
                 prepare()
                 start()
 

@@ -92,14 +92,25 @@ class ChroniclesAdapter(
             // Paragraph Image
             if (item.image.isNotEmpty()) {
                 binding.ivParagraphImage.visibility = View.VISIBLE
-                try {
-                    val stream: InputStream = context.assets.open("comic/" + item.image)
-                    val bitmap = BitmapFactory.decodeStream(stream)
-                    binding.ivParagraphImage.setImageBitmap(bitmap)
-                    stream.close()
-                } catch (e: Exception) {
-                    AppLogger.w("ChroniclesAdapter", "Could not load image asset comic/${item.image}: ${e.message}")
-                    binding.ivParagraphImage.visibility = View.GONE
+                val localFile = java.io.File(context.filesDir, "remote_assets/comic/" + item.image)
+                if (localFile.exists() && localFile.length() > 0) {
+                    try {
+                        val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
+                        binding.ivParagraphImage.setImageBitmap(bitmap)
+                    } catch (e: Exception) {
+                        AppLogger.w("ChroniclesAdapter", "Could not load cached image ${localFile.absolutePath}: ${e.message}")
+                        binding.ivParagraphImage.visibility = View.GONE
+                    }
+                } else {
+                    try {
+                        val stream: InputStream = context.assets.open("comic/" + item.image)
+                        val bitmap = BitmapFactory.decodeStream(stream)
+                        binding.ivParagraphImage.setImageBitmap(bitmap)
+                        stream.close()
+                    } catch (e: Exception) {
+                        AppLogger.w("ChroniclesAdapter", "Could not load image asset comic/${item.image}: ${e.message}")
+                        binding.ivParagraphImage.visibility = View.GONE
+                    }
                 }
             } else {
                 binding.ivParagraphImage.visibility = View.GONE

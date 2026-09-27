@@ -3211,6 +3211,8 @@ drawable ic_playlist
 drawable ic_previous
 drawable ic_radio
 drawable ic_repeat
+drawable ic_repeat_all
+drawable ic_repeat_one
 drawable ic_save
 drawable ic_search_black_24
 drawable ic_storage
@@ -4091,6 +4093,7 @@ id vertical_only
 id videoFrameConstraintLayout
 id video_decoder_gl_surface_view
 id viewDivider
+id viewNordPlayerBackground
 id view_offset_helper
 id view_transition
 id view_tree_lifecycle_owner
