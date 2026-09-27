@@ -29,5 +29,8 @@ __pycache__/
 1en.txt
 tv.css
 
+# Agent local notes (ignored in git)
+.agent_notes.md
+
 # Ignore build output APKs (releases/ is tracked for direct downloads)
 app/build/outputs/apk/
