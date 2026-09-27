@@ -1890,7 +1890,7 @@
         android:padding="6dp"
         android:visibility="gone">
 
-        <!-- Streamlined Top Bar (Compact Arrow + Queen Card) -->
+        <!-- Streamlined Top Bar (Compact Arrow + Title Header) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -1913,63 +1913,161 @@
                 app:iconTint="@color/nord0"
                 app:strokeWidth="0dp" />
 
-            <com.google.android.material.card.MaterialCardView
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:cardElevation="0dp"
-                app:cardCornerRadius="6dp"
-                app:strokeWidth="0dp">
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="👑 &quot;Every legend has a beginning. Read the stories of Station North.&quot; — Her Majesty Queen Directives"
-                    android:textColor="@color/nord13"
-                    android:textSize="17sp"
-                    android:textStyle="bold|italic" />
-            </com.google.android.material.card.MaterialCardView>
+                    android:text="📖 THE MANJARO LOUNGE CHRONICLES"
+                    android:textColor="@color/nord15"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <!-- Hidden Legacy Button ID to preserve ViewBinding -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnOpenEbookChronicles"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:visibility="gone" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Vol. 01 // Native Audio &amp; Comic Engine (98 Absätze • 44 Artworks)"
+                    android:textColor="@color/nord13"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
         </LinearLayout>
 
-        <!-- Direct Inline Full Screen E-Book Content -->
-        <com.google.android.material.card.MaterialCardView
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="4dp"
+            android:background="@color/nord3" />
+
+        <!-- Direct Inline Native RecyclerView for 98 Story Cards -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvChroniclesCardsInline"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="6dp"
             android:layout_weight="1"
-            app:cardBackgroundColor="@color/nord1"
-            app:cardCornerRadius="8dp"
-            app:strokeColor="@color/nord13"
-            app:strokeWidth="1dp">
+            android:clipToPadding="false"
+            android:paddingBottom="12dp" />
 
-            <androidx.core.widget.NestedScrollView
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/nord3" />
+
+        <!-- Persistent Bottom Player Bar -->
+        <LinearLayout
+            android:id="@+id/layoutPlayerBarInline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/nord1"
+            android:elevation="8dp"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="12dp"
-                android:scrollbars="vertical">
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="4dp">
 
                 <TextView
-                    android:id="@+id/tvChroniclesContent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:lineSpacingExtra="3dp"
+                    android:text="▶ STATUS: "
                     android:textColor="@color/nord4"
-                    android:textSize="12sp" />
+                    android:textSize="10.5sp"
+                    android:textStyle="bold" />
 
-            </androidx.core.widget.NestedScrollView>
+                <TextView
+                    android:id="@+id/tvNowPlayingStatusInline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="🎧 AUDIO #1 Bereit"
+                    android:textColor="@color/nord8"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPrevTrackInline"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="34dp"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="0dp"
+                    android:text="⏮ Zurück"
+                    android:textColor="@color/nord6"
+                    android:textSize="10.5sp"
+                    app:strokeColor="@color/nord3"
+                    app:strokeWidth="1dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnTogglePlayAllInline"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="34dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1.2"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="0dp"
+                    android:text="▶ Abspielen"
+                    android:textColor="@color/nord6"
+                    android:textSize="10.5sp"
+                    app:backgroundTint="@color/nord11"
+                    app:strokeColor="@color/nord11"
+                    app:strokeWidth="1dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnNextTrackInline"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="34dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="0dp"
+                    android:text="Weiter ⏭"
+                    android:textColor="@color/nord6"
+                    android:textSize="10.5sp"
+                    app:strokeColor="@color/nord3"
+                    app:strokeWidth="1dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAutoScrollToggleInline"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="34dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1.1"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="0dp"
+                    android:text="📜 Auto: AN"
+                    android:textColor="@color/nord14"
+                    android:textSize="10.5sp"
+                    app:strokeColor="@color/nord14"
+                    app:strokeWidth="1dp" />
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 

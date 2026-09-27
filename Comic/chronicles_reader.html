@@ -1,0 +1,2425 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Manjaro Lounge Chronicles // Vol. 01</title>
+    <style>
+        /* Official Nord Color Palette */
+        :root {
+            --nord0: #2e3440;  /* Polar Night - Darkest background */
+            --nord1: #3b4252;  /* Polar Night - Card background */
+            --nord2: #434c5e;  /* Polar Night - Hover / Active UI */
+            --nord3: #4c566a;  /* Polar Night - Muted borders & text */
+            --nord4: #d8dee9;  /* Snow Storm - Main text */
+            --nord5: #e5e9f0;  /* Snow Storm - Emphasized text */
+            --nord6: #eceff4;  /* Snow Storm - White headings */
+            --nord7: #8fbcbb;  /* Frost - Turquoise */
+            --nord8: #88c0d0;  /* Frost - Ice Blue */
+            --nord9: #81a1c1;  /* Frost - Steel Blue */
+            --nord10: #5e81ac; /* Frost - Deep Blue */
+            --nord11: #bf616a; /* Aurora - Red (Accent & ON AIR) */
+            --nord12: #d08770; /* Aurora - Orange */
+            --nord13: #ebcb8b; /* Aurora - Yellow / Gold */
+            --nord14: #a3be8c; /* Aurora - Green */
+            --nord15: #b48ead; /* Aurora - Purple */
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--nord0);
+            color: var(--nord4);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 16px 16px 140px 16px; /* Extra bottom padding for mobile floating player */
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+
+        header {
+            text-align: center;
+            padding: 25px 10px 20px 10px;
+            border-bottom: 2px solid var(--nord2);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            letter-spacing: 1.5px;
+            margin: 0 0 8px 0;
+            color: var(--nord6);
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: var(--nord13);
+            font-size: 1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .on-air-badge {
+            display: inline-block;
+            background-color: var(--nord11);
+            color: var(--nord6);
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            margin-top: 10px;
+            box-shadow: 0 0 14px rgba(191, 97, 106, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.65; }
+            100% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .cover-box {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .cover-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid var(--nord3);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+        }
+
+        .chapter-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--nord13);
+            border-left: 4px solid var(--nord11);
+            padding-left: 14px;
+            margin: 40px 0 20px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .paragraph-card {
+            background-color: var(--nord1);
+            border: 1px solid var(--nord2);
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+            transition: all 0.25s ease-in-out;
+        }
+
+        .paragraph-card:hover {
+            border-color: var(--nord9);
+        }
+
+        .paragraph-card.active-card {
+            border-color: var(--nord11) !important;
+            box-shadow: 0 0 22px rgba(191, 97, 106, 0.45);
+            background-color: #353b49;
+        }
+
+        .paragraph-img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            border: 1px solid var(--nord3);
+            display: block;
+        }
+
+        .paragraph-text {
+            font-size: 1.02rem;
+            color: var(--nord4);
+            margin-bottom: 16px;
+            white-space: pre-wrap;
+        }
+
+        /* CUSTOM NORD AUDIO PLAYER STYLING */
+        .audio-player-box {
+            background-color: var(--nord0);
+            border: 1px solid var(--nord2);
+            border-radius: 8px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .audio-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--nord8);
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+            min-width: 75px;
+        }
+
+        .custom-player-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .btn-play-card {
+            background-color: var(--nord2);
+            color: var(--nord8);
+            border: 1px solid var(--nord3);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .btn-play-card:hover {
+            background-color: var(--nord10);
+            color: var(--nord6);
+            border-color: var(--nord8);
+        }
+
+        .btn-play-card.playing {
+            background-color: var(--nord11);
+            color: var(--nord6);
+            border-color: var(--nord11);
+        }
+
+        .progress-bar-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Custom Nord Range Input Slider */
+        input[type=range].nord-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+
+        input[type=range].nord-slider:focus {
+            outline: none;
+        }
+
+        input[type=range].nord-slider::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: var(--nord2);
+            border-radius: 3px;
+            border: 1px solid var(--nord3);
+        }
+
+        input[type=range].nord-slider::-webkit-slider-thumb {
+            height: 14px;
+            width: 14px;
+            border-radius: 50%;
+            background: var(--nord8);
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -5px;
+            box-shadow: 0 0 6px rgba(136, 192, 208, 0.6);
+            transition: background-color 0.2s ease;
+        }
+
+        .active-card input[type=range].nord-slider::-webkit-slider-thumb {
+            background: var(--nord11);
+            box-shadow: 0 0 8px rgba(191, 97, 106, 0.7);
+        }
+
+        .time-label {
+            font-size: 0.78rem;
+            font-family: monospace;
+            color: var(--nord4);
+            white-space: nowrap;
+            min-width: 70px;
+            text-align: right;
+        }
+
+        /* Persistent Floating Continuous Player Bar (Desktop + Mobile Responsive) */
+        .player-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--nord1);
+            border-top: 2px solid var(--nord3);
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            box-shadow: 0 -6px 25px rgba(0,0,0,0.75);
+            backdrop-filter: blur(12px);
+            gap: 10px;
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--nord5);
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;
+        }
+
+        .player-info .now-playing {
+            color: var(--nord8);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .player-controls-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .btn-control {
+            background-color: var(--nord2);
+            color: var(--nord6);
+            border: 1px solid var(--nord3);
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .btn-control:hover {
+            background-color: var(--nord10);
+            border-color: var(--nord8);
+        }
+
+        .btn-control.active {
+            background-color: var(--nord11);
+            border-color: var(--nord11);
+            color: var(--nord6);
+        }
+
+        /* 📱 RESPONSIVE MOBILE BREAKPOINT FOR 9:16 AND 9:21 SCREENS */
+        @media (max-width: 650px) {
+            body {
+                padding: 12px 12px 140px 12px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                letter-spacing: 1px;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .player-bar {
+                flex-direction: column;
+                padding: 8px 12px 12px 12px;
+                gap: 8px;
+            }
+
+            .player-info {
+                width: 100%;
+                justify-content: center;
+                font-size: 0.82rem;
+            }
+
+            .player-controls-group {
+                width: 100%;
+                justify-content: space-between;
+                gap: 4px;
+            }
+
+            .btn-control {
+                padding: 7px 8px;
+                font-size: 0.78rem;
+                flex: 1;
+                text-align: center;
+            }
+
+            .audio-player-box {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+
+            .custom-player-controls {
+                width: 100%;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0 10px 0;
+            color: var(--nord3);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--nord2);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>The Manjaro Lounge Chronicles</h1>
+        <div class="subtitle">Vol. 01 // Custom Nord Audio Player & Continuous Engine</div>
+        <div><span class="on-air-badge">ON AIR</span></div>
+    </header>
+
+    <div class="container">
+        <div class="cover-box">
+            <img src="Cover_Vol01.png" alt="Manjaro Lounge Chronicles Vol 01 Cover" loading="lazy">
+        </div>
+
+        <div class="chapter-title">Chapter 1: The Gray V6</div>
+        <div class="paragraph-card" id="card-1" data-track="1">
+            <img class="paragraph-img" src="Kapitel_01_1.png" alt="Kapitel_01_1.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">Rain was coming down heavy that night, slicking the Baltimore asphalt like grease. I was standing on the corner of North Ave, collar up, minding my own damn business. Just another ghost in the neon fog, trying to survive the street, if you know what I mean. Most guys rolling by? They just wanted a ten-minute fix. Fast cash, cold eyes, no names. Just a transaction on the pavement.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #1</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-1" data-track="1">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-1" value="0" min="0" max="100" data-track="1">
+                        </div>
+                        <span class="time-label" id="time-1">0:00 / 0:00</span>
+                        <audio id="audio-1" preload="none">
+                            <source src="audio/p_001.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-2" data-track="2">
+            <img class="paragraph-img" src="Kapitel_01_2.png" alt="Kapitel_01_2.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">Then that gray Audi B6 rolled up, slow and steady, hugging the curbs like it owned the block. The window rolled down. No cheap talk. No sleazy smile. He looked right through me, but not like the others. This European dude looked like he was searching for something real in the mud. A queen, not a quick game.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #2</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-2" data-track="2">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-2" value="0" min="0" max="100" data-track="2">
+                        </div>
+                        <span class="time-label" id="time-2">0:00 / 0:00</span>
+                        <audio id="audio-2" preload="none">
+                            <source src="audio/p_002.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-3" data-track="3">
+            <img class="paragraph-img" src="Kapitel_01_3.png" alt="Kapitel_01_3.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I hopped in the passenger seat. The leather was cold, the engine had this deep, mechanical hum, and the air smelled like smoke and expensive cologne. We didn’t say a word. The city lights just blurred on the windshield while he drove us straight into the dark heart of the industrial district.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #3</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-3" data-track="3">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-3" value="0" min="0" max="100" data-track="3">
+                        </div>
+                        <span class="time-label" id="time-3">0:00 / 0:00</span>
+                        <audio id="audio-3" preload="none">
+                            <source src="audio/p_003.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-4" data-track="4">
+            <img class="paragraph-img" src="Kapitel_01_4.png" alt="Kapitel_01_4.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">He brought me to The Bricks. Concrete walls, exposed pipes, and a room full of server racks blinkin’ in that icy white-blue light. It looked like a fortress of code. We did the business. Cold cash for a warm body. Standard routine. But what happened next? That wasn’t in the script.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #4</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-4" data-track="4">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-4" value="0" min="0" max="100" data-track="4">
+                        </div>
+                        <span class="time-label" id="time-4">0:00 / 0:00</span>
+                        <audio id="audio-4" preload="none">
+                            <source src="audio/p_004.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-5" data-track="5">
+            <img class="paragraph-img" src="Kapitel_01_5.png" alt="Kapitel_01_5.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">He went to take a shower. I heard the water running, and instead of just grabbing my coat and bouncing, I started snooping around the lounge.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #5</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-5" data-track="5">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-5" value="0" min="0" max="100" data-track="5">
+                        </div>
+                        <span class="time-label" id="time-5">0:00 / 0:00</span>
+                        <audio id="audio-5" preload="none">
+                            <source src="audio/p_005.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-6" data-track="6">
+            <img class="paragraph-img" src="Kapitel_01_6.png" alt="Kapitel_01_6.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">Down in the basement, I hit the jackpot. Thousands of vinyl records stacked up like old brick walls. And right there, in the middle of the dust, was a high-end mic and a heavy mixing console. My fingers were shaking a little, but I couldn’t help it. I put a record on, let the needle drop, and stepped up to that microphone. I started playing with the knobs, humming, letting a little bit of my soul leak out into the room.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #6</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-6" data-track="6">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-6" value="0" min="0" max="100" data-track="6">
+                        </div>
+                        <span class="time-label" id="time-6">0:00 / 0:00</span>
+                        <audio id="audio-6" preload="none">
+                            <source src="audio/p_006.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-7" data-track="7">
+            <img class="paragraph-img" src="Kapitel_01_7.png" alt="Kapitel_01_7.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">When I turned around, the shower was off. He was standing in the shadows, a freshly lit cigarette between his lips, just watching me from a safe distance. He didn't say 'get out'. He didn't look at me like a street girl anymore. He looked at me like he just discovered a diamond in the rough. He saw the raw power before I even knew it was there. „Do that again,“ he said, his voice deep, calm, total control. And that was the exact moment the street lost a girl... and Station North found its Queen.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #7</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-7" data-track="7">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-7" value="0" min="0" max="100" data-track="7">
+                        </div>
+                        <span class="time-label" id="time-7">0:00 / 0:00</span>
+                        <audio id="audio-7" preload="none">
+                            <source src="audio/p_007.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-title">Chapter 2: The Birth of the Frequency</div>
+        <div class="paragraph-card" id="card-8" data-track="8">
+            <img class="paragraph-img" src="Kapitel_02_1.png" alt="Kapitel_02_1.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">He didn’t say much after that night, you know. The Boss ain't a man of big words—he lets his fingers do the talking on that mechanical keyboard, lines of blue code lighting up his face like a cold neon sign. But he let me stay at The Bricks. Gave me a key. Gave me a sanctuary. For the first few weeks, I just sat in the back of the lounge, watching him wire up those heavy server racks, sweating through his dark suit, building an empire from scratch.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #8</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-8" data-track="8">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-8" value="0" min="0" max="100" data-track="8">
+                        </div>
+                        <span class="time-label" id="time-8">0:00 / 0:00</span>
+                        <audio id="audio-8" preload="none">
+                            <source src="audio/p_008.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-9" data-track="9">
+            <img class="paragraph-img" src="Kapitel_02_2.png" alt="Kapitel_02_2.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">Then came the night the grid went live. 03:00 AM, rain still beating against the high studio windows. He looked up from his screens, pointed a cigarette at the glass booth, and said, "Go in. The stream is stable. Show Baltimore who you are." My heart was hammering against my ribs, but when I stepped inside that booth and put my hands on the mixer, the street-girl armor just fell off. I wasn't running anymore. I was commanding.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #9</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-9" data-track="9">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-9" value="0" min="0" max="100" data-track="9">
+                        </div>
+                        <span class="time-label" id="time-9">0:00 / 0:00</span>
+                        <audio id="audio-9" preload="none">
+                            <source src="audio/p_009.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-10" data-track="10">
+            <img class="paragraph-img" src="Kapitel_02_3.png" alt="Kapitel_02_3.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I hit the master switch and let that heavy, slow R&B pulse drag through the wires. The "ON AIR" sign flashed red, cutting through the shadows like a blade. I leaned so close to that mic I could feel the cold steel on my lips, breathed in deep, and let my voice slide into the dark. „Forget the clock. Forget the world,“ I whispered, watching him through the glass. „You’re locked into the Manjaro Lounge on Station North.“</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #10</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-10" data-track="10">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-10" value="0" min="0" max="100" data-track="10">
+                        </div>
+                        <span class="time-label" id="time-10">0:00 / 0:00</span>
+                        <audio id="audio-10" preload="none">
+                            <source src="audio/p_010.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-11" data-track="11">
+            <img class="paragraph-img" src="Kapitel_02_4.png" alt="Kapitel_02_4.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">Right then, I saw the charts on his monitor spike. One hundred listeners. One thousand. Ten thousand. The lonely souls driving through the traffic, the hustlers on the corners, the ghosts in the bars—they all stopped to listen to the Queen. I looked through the glass, and for the first time, the Boss smiled in the shadows, blowing a perfect ring of smoke. He built the cage, but I was the beast making it beautiful.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #11</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-11" data-track="11">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-11" value="0" min="0" max="100" data-track="11">
+                        </div>
+                        <span class="time-label" id="time-11">0:00 / 0:00</span>
+                        <audio id="audio-11" preload="none">
+                            <source src="audio/p_011.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-title">Chapter 3: The Queen's Territory</div>
+        <div class="paragraph-card" id="card-12" data-track="12">
+            <img class="paragraph-img" src="Kapitel_03_1.png" alt="Kapitel_03_1.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">It didn’t take long for the streets to notice. When you change the pulse of a city, the old ghosts start getting restless. A couple of weeks into the Manjaro Lounge, and my old crew from the corner started whispering. They saw me rolling through the traffic in that leather jacket, hair up high, looking like a movie. They thought I went soft. Thought I was just some rich dude's pet because I wasn't walking the line for pennies anymore. They had no damn idea.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #12</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-12" data-track="12">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-12" value="0" min="0" max="100" data-track="12">
+                        </div>
+                        <span class="time-label" id="time-12">0:00 / 0:00</span>
+                        <audio id="audio-12" preload="none">
+                            <source src="audio/p_012.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-13" data-track="13">
+            <img class="paragraph-img" src="Kapitel_03_2.png" alt="Kapitel_03_2.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">One night, this heavy-set hustler named Marcus blocked the alley right outside The Bricks. He had two of his boys with him, leaning against the graffiti-covered walls while the rain was slicking the stones. I was leaning on the fender of the Audi B6, enjoying a smoke before going On Air. Marcus stepped into the glare of the headlights, fog breathing out of his mouth. "You think you own Station North now, huh?" he sneered, looking at the plates. "You forget where you came from, girl? The corner always collects its debts."</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #13</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-13" data-track="13">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-13" value="0" min="0" max="100" data-track="13">
+                        </div>
+                        <span class="time-label" id="time-13">0:00 / 0:00</span>
+                        <audio id="audio-13" preload="none">
+                            <source src="audio/p_013.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-14" data-track="14">
+            <img class="paragraph-img" src="Kapitel_03_3.png" alt="Kapitel_03_3.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I didn't flinch. I didn't reach for a weapon. I just pointed up. Up to the iron fire escape cutting through the dark. Marcus looked up, and his smile just died. The Boss was standing up there on the metal grating, completely still, his long dark coat blowing in the wind. He had a lighter in one hand, the small flame illuminating his cold, focused eyes. He didn't yell. He didn't threaten. He just looked down at them like they were bugs on his schematic drawings. And behind him, the giant red neon sign of Station North was pulsing against the rain clouds.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #14</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-14" data-track="14">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-14" value="0" min="0" max="100" data-track="14">
+                        </div>
+                        <span class="time-label" id="time-14">0:00 / 0:00</span>
+                        <audio id="audio-14" preload="none">
+                            <source src="audio/p_014.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-15" data-track="15">
+            <img class="paragraph-img" src="Kapitel_03_4.png" alt="Kapitel_03_4.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">"This ain't just a corner anymore, Marcus," I said, letting the smoke roll past my lips. "The Boss built the grid, and I am the signal. You try to cut the wire, and the whole city comes down on you." Marcus looked at his boys, looked back up at the shadow on the fire escape, and took a step back. They vanished into the dark alley like cockroaches when the light hits. I tossed the cigarette into the puddle, walked past the heavy steel door, and stepped into my booth. It was time to tell the city who really runs these streets.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #15</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-15" data-track="15">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-15" value="0" min="0" max="100" data-track="15">
+                        </div>
+                        <span class="time-label" id="time-15">0:00 / 0:00</span>
+                        <audio id="audio-15" preload="none">
+                            <source src="audio/p_015.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-title">Chapter 4: The Sound of the Basement</div>
+        <div class="paragraph-card" id="card-16" data-track="16">
+            <div class="paragraph-content">
+                <div class="paragraph-text">The cellar of The Bricks was my playground. While the Boss spent his hours upstairs in the main hall—messing with those blinking towers and humming racks that I didn’t pretend to understand—I was down here, diving into the crates.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #16</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-16" data-track="16">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-16" value="0" min="0" max="100" data-track="16">
+                        </div>
+                        <span class="time-label" id="time-16">0:00 / 0:00</span>
+                        <audio id="audio-16" preload="none">
+                            <source src="audio/p_016.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-17" data-track="17">
+            <div class="paragraph-content">
+                <div class="paragraph-text">It was freezing, that damp industrial cold that eats through your coat, but the room was packed with gear. Reel-to-reel decks, wood-paneled amps, and thousands of records stacked to the ceiling. It was like a museum of noise. I was looking for something that hit just right—something heavy, soulful, with that slow-burn heat I liked to drop on the air when the night got deep.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #17</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-17" data-track="17">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-17" value="0" min="0" max="100" data-track="17">
+                        </div>
+                        <span class="time-label" id="time-17">0:00 / 0:00</span>
+                        <audio id="audio-17" preload="none">
+                            <source src="audio/p_017.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-18" data-track="18">
+            <img class="paragraph-img" src="Kapitel_04_1.png" alt="Kapitel_04_1.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I found a reel tucked behind an old, broken-down mixer. It didn't have a sleeve, just a name scribbled in blue ink: Sister. I pulled it out, threaded the tape through the reels of an old Studer machine, and let it spin.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #18</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-18" data-track="18">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-18" value="0" min="0" max="100" data-track="18">
+                        </div>
+                        <span class="time-label" id="time-18">0:00 / 0:00</span>
+                        <audio id="audio-18" preload="none">
+                            <source src="audio/p_018.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-19" data-track="19">
+            <div class="paragraph-content">
+                <div class="paragraph-text">The sound that hit the room… it stopped me cold. It wasn't the clean, perfect stuff you hear on the radio. It was thick, fuzzy, and incredibly alive. A woman’s voice—deep, velvet, and dripping with a pain that felt like home. She sang like she was confessing sins she didn't want to get rid of.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #19</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-19" data-track="19">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-19" value="0" min="0" max="100" data-track="19">
+                        </div>
+                        <span class="time-label" id="time-19">0:00 / 0:00</span>
+                        <audio id="audio-19" preload="none">
+                            <source src="audio/p_019.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-20" data-track="20">
+            <img class="paragraph-img" src="Kapitel_04_2.png" alt="Kapitel_04_2.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">The heavy steel door groaned at the top of the stairs. The Boss was there, silhouetted against the flicker of those glowing screens upstairs. He walked down slowly, his boots crunching on the dusty concrete. He didn't say a word. He just listened to the voice on the tape, and for the first time, his face looked… human. "Who is she?" I asked, keeping my hand on the volume dial, making sure the song didn't dip.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #20</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-20" data-track="20">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-20" value="0" min="0" max="100" data-track="20">
+                        </div>
+                        <span class="time-label" id="time-20">0:00 / 0:00</span>
+                        <audio id="audio-20" preload="none">
+                            <source src="audio/p_020.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-21" data-track="21">
+            <div class="paragraph-content">
+                <div class="paragraph-text">He didn’t answer right away. He stood there, staring at the spinning tape, looking like he’d been dragged back twenty years. "My sister," he finally said, his voice quiet. "She was the talent. This used to be my parents' factory. When they were gone, and she was gone too… this place became a graveyard."</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #21</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-21" data-track="21">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-21" value="0" min="0" max="100" data-track="21">
+                        </div>
+                        <span class="time-label" id="time-21">0:00 / 0:00</span>
+                        <audio id="audio-21" preload="none">
+                            <source src="audio/p_021.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-22" data-track="22">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I looked around at the walls, the rusted pipes, and the expensive-looking gear he’d brought in to bridge the old world and the new. "So this is why you keep the lights on," I said softly. "You’re not just some guy playing with wires. You’re holding a vigil."</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #22</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-22" data-track="22">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-22" value="0" min="0" max="100" data-track="22">
+                        </div>
+                        <span class="time-label" id="time-22">0:00 / 0:00</span>
+                        <audio id="audio-22" preload="none">
+                            <source src="audio/p_022.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-23" data-track="23">
+            <div class="paragraph-content">
+                <div class="paragraph-text">He looked at me—really looked at me—and his gaze held that weight I’d seen the night he picked me up. "I inherited a shell, so I filled it with everything she loved. I built the machine, but I couldn't provide the soul. I was just running the grid, waiting for the signal to come back."</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #23</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-23" data-track="23">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-23" value="0" min="0" max="100" data-track="23">
+                        </div>
+                        <span class="time-label" id="time-23">0:00 / 0:00</span>
+                        <audio id="audio-23" preload="none">
+                            <source src="audio/p_023.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-24" data-track="24">
+            <div class="paragraph-content">
+                <div class="paragraph-text">He walked over, his eyes scanning the space, then resting on me. "When I picked you up that night, I was just looking for a body. But then I heard you in the booth. The way you play with the sound, the way you make the city lean in and hold its breath… you’ve got the same fire she had. You don’t just play the tracks, you make them feel dangerous."</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #24</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-24" data-track="24">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-24" value="0" min="0" max="100" data-track="24">
+                        </div>
+                        <span class="time-label" id="time-24">0:00 / 0:00</span>
+                        <audio id="audio-24" preload="none">
+                            <source src="audio/p_024.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-25" data-track="25">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I leaned against the workbench, feeling the vibration of the tape through my spine. I knew how to work a room. I knew how to make a man feel like he was the only one in the world, even when a thousand people were listening to my voice through the wire.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #25</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-25" data-track="25">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-25" value="0" min="0" max="100" data-track="25">
+                        </div>
+                        <span class="time-label" id="time-25">0:00 / 0:00</span>
+                        <audio id="audio-25" preload="none">
+                            <source src="audio/p_025.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-26" data-track="26">
+            <div class="paragraph-content">
+                <div class="paragraph-text">"So, I’m your ghost, Boss?" I teased, letting a slow, suggestive smile pull at my lips. I stepped closer, the air between us suddenly thick enough to cut. "You build the stage, and I keep the fans coming back for more, wondering what I’m going to say next?" He didn't move, just watched me with that cold intensity. "You’re the reason the machine breathes."</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #26</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-26" data-track="26">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-26" value="0" min="0" max="100" data-track="26">
+                        </div>
+                        <span class="time-label" id="time-26">0:00 / 0:00</span>
+                        <audio id="audio-26" preload="none">
+                            <source src="audio/p_026.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-27" data-track="27">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I reached out and hit the fader, turning the song up until the bass shook the floorboards. I wasn't just a girl from the streets anymore. I was the heartbeat of this entire operation. "Well," I whispered, the mic sensitivity dialed up so the whole room could hear the rasp in my throat. "Then let’s make sure they never forget the sound of us."</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #27</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-27" data-track="27">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-27" value="0" min="0" max="100" data-track="27">
+                        </div>
+                        <span class="time-label" id="time-27">0:00 / 0:00</span>
+                        <audio id="audio-27" preload="none">
+                            <source src="audio/p_027.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-title">Chapter 5: Guerrilla Grid</div>
+        <div class="paragraph-card" id="card-28" data-track="28">
+            <div class="paragraph-content">
+                <div class="paragraph-text">We didn’t advertise. We seduced. We didn’t wait for Baltimore to find us—we burned ourselves into the city's synapses until no one could tell where reality ended and our signal began.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #28</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-28" data-track="28">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-28" value="0" min="0" max="100" data-track="28">
+                        </div>
+                        <span class="time-label" id="time-28">0:00 / 0:00</span>
+                        <audio id="audio-28" preload="none">
+                            <source src="audio/p_028.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-29" data-track="29">
+            <img class="paragraph-img" src="Kapitel_05_1.png" alt="Kapitel_05_1.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I unleashed my network. Girls who didn’t fear the dark and knew the asphalt like their own skin. We didn’t just slap up stickers; we left promises we never intended to keep. Every lamppost, every street sign, every alleyway where the lost souls gather. We tattooed Baltimore with our code until it was a scar the city wore with pride.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #29</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-29" data-track="29">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-29" value="0" min="0" max="100" data-track="29">
+                        </div>
+                        <span class="time-label" id="time-29">0:00 / 0:00</span>
+                        <audio id="audio-29" preload="none">
+                            <source src="audio/p_029.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-30" data-track="30">
+            <div class="paragraph-content">
+                <div class="paragraph-text">And those kids spray-painting the factory walls? The Boss didn’t chase them off. He handed them fresh cans and showed them how to mark an empire. This wasn’t vandalism anymore. It was an invasion. Within three weeks, the city was breathing under our skin. We turned the subways into rolling galleries—neon ghosts cutting through the guts of the underground. Everywhere you looked: our logo. Sharp. Uncompromising.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #30</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-30" data-track="30">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-30" value="0" min="0" max="100" data-track="30">
+                        </div>
+                        <span class="time-label" id="time-30">0:00 / 0:00</span>
+                        <audio id="audio-30" preload="none">
+                            <source src="audio/p_030.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-31" data-track="31">
+            <img class="paragraph-img" src="Kapitel_05_2.png" alt="Kapitel_05_2.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">One night, I walked into the control room and found him there. The monitor glow washed over the Boss’s face, mapping the city in webs of red, glowing zones. He didn't look like a businessman anymore. He was an architect of a revolution. I stepped up behind him and rested my hand on his shoulder—a touch that hit that cold room like a gunshot.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #31</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-31" data-track="31">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-31" value="0" min="0" max="100" data-track="31">
+                        </div>
+                        <span class="time-label" id="time-31">0:00 / 0:00</span>
+                        <audio id="audio-31" preload="none">
+                            <source src="audio/p_031.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-32" data-track="32">
+            <div class="paragraph-content">
+                <div class="paragraph-text">The city was vibrating under our rhythm. There was soul in that logistics, you feel me? We’d taken the heartbeat of the streets and short-circuited it with the cold, perfect sound of the factory. Baltimore didn’t belong to the suits anymore. It belonged to the echo we’d left in every damn dark corner.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #32</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-32" data-track="32">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-32" value="0" min="0" max="100" data-track="32">
+                        </div>
+                        <span class="time-label" id="time-32">0:00 / 0:00</span>
+                        <audio id="audio-32" preload="none">
+                            <source src="audio/p_032.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-33" data-track="33">
+            <div class="paragraph-content">
+                <div class="paragraph-text">We aren't just a small-time station blinking in a basement anymore. We’re the static you hear when you’re walking the streets alone, and you suddenly realize—damn. You aren't really alone after all.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #33</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-33" data-track="33">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-33" value="0" min="0" max="100" data-track="33">
+                        </div>
+                        <span class="time-label" id="time-33">0:00 / 0:00</span>
+                        <audio id="audio-33" preload="none">
+                            <source src="audio/p_033.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-title">CHAPTER 6: THE OVERCLOCK (POV: The Queen)</div>
+        <div class="paragraph-card" id="card-34" data-track="34">
+            <img class="paragraph-img" src="Kapitel_06_1.png" alt="Kapitel_06_1.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I watch him through the glass. He’s sitting there, shoulders rigid, fingers dancing over the keyboard like he’s trying to command the world with lines of code. But he doesn’t know I’ve got my hand on the fader. I see him staring at his cigarette, the smoke curling in blue ribbons before his face, and I can feel it: he’s nervous. The Boss is nervous because he knows I’m pushing the bass into the red.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #34</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-34" data-track="34">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-34" value="0" min="0" max="100" data-track="34">
+                        </div>
+                        <span class="time-label" id="time-34">0:00 / 0:00</span>
+                        <audio id="audio-34" preload="none">
+                            <source src="audio/p_034.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-35" data-track="35">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I step into the booth. The air in here is heavy, almost sticky. It’s a collision—the static chill of his server racks fighting against the heavy, sweet scent of my perfume, which I’ve draped over his entire operation like an invisible net. When I move, I displace the stale smoke he left behind, replacing it with my essence. I want him to smell me before he even sees me.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #35</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-35" data-track="35">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-35" value="0" min="0" max="100" data-track="35">
+                        </div>
+                        <span class="time-label" id="time-35">0:00 / 0:00</span>
+                        <audio id="audio-35" preload="none">
+                            <source src="audio/p_035.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-36" data-track="36">
+            <img class="paragraph-img" src="Kapitel_06_2.png" alt="Kapitel_06_2.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I watch him stand up. He moves with a heaviness, as if he’s fighting against the pressure of my rhythm. When he enters the booth, he brings that cool, European distance with him, but it’s fracturing. I smell the cheap tobacco on his clothes—that dry, bitter scent of solitude that I’m currently suffocating with my fragrance.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #36</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-36" data-track="36">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-36" value="0" min="0" max="100" data-track="36">
+                        </div>
+                        <span class="time-label" id="time-36">0:00 / 0:00</span>
+                        <audio id="audio-36" preload="none">
+                            <source src="audio/p_036.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-37" data-track="37">
+            <div class="paragraph-content">
+                <div class="paragraph-text">"You’re pushing the line into the red," I breathe into the mic. I lock eyes with him, slowly, deliberately pushing the fader to the top. I see his pupils dilate. He doesn’t say anything; he doesn’t have to. I’m putting the words in his mouth before he even thinks them. He steps so close I can feel the chill of his suit against my skin, a sharp contrast to the heat I’m igniting in his pulse.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #37</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-37" data-track="37">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-37" value="0" min="0" max="100" data-track="37">
+                        </div>
+                        <span class="time-label" id="time-37">0:00 / 0:00</span>
+                        <audio id="audio-37" preload="none">
+                            <source src="audio/p_037.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-38" data-track="38">
+            <div class="paragraph-content">
+                <div class="paragraph-text">He growls something about "overclocking" and "system failure," but his voice is raw, trembling. He’s not an architect anymore; he’s just a man realizing his own foundations are collapsing. I place my hand on his forearm. I feel him hold his breath under my grip. That’s the crackle I’m talking about—that electrical charge that discharges when the old man’s analog soul meets the street-level fire of my voice.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #38</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-38" data-track="38">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-38" value="0" min="0" max="100" data-track="38">
+                        </div>
+                        <span class="time-label" id="time-38">0:00 / 0:00</span>
+                        <audio id="audio-38" preload="none">
+                            <source src="audio/p_038.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-39" data-track="39">
+            <div class="paragraph-content">
+                <div class="paragraph-text">"Maybe everything needs to burn, Boss," I whisper, and I watch his analytical gaze lose itself in mine. He isn’t here to save the station anymore. He’s here to lose.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #39</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-39" data-track="39">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-39" value="0" min="0" max="100" data-track="39">
+                        </div>
+                        <span class="time-label" id="time-39">0:00 / 0:00</span>
+                        <audio id="audio-39" preload="none">
+                            <source src="audio/p_039.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-40" data-track="40">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I lean forward, my lips only millimeters from the cold steel of the mic. I want everyone in Baltimore—from the gridlocked traffic to the lonely souls in the dark—to hear how he breathes. I want them to feel the static that builds when the Queen drives her machine into the ground. I’m not just a voice on the radio anymore; I’m the reason he ain't sleepin’ a wink tonight.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #40</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-40" data-track="40">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-40" value="0" min="0" max="100" data-track="40">
+                        </div>
+                        <span class="time-label" id="time-40">0:00 / 0:00</span>
+                        <audio id="audio-40" preload="none">
+                            <source src="audio/p_040.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-title">Chapter 6.5: Expansion and the Homecoming</div>
+        <div class="paragraph-card" id="card-41" data-track="41">
+            <div class="paragraph-content">
+                <div class="paragraph-text">In the weeks after that overclock, we were hittin’ a rhythm that felt like magic. The Bricks were pulse-heavy, the project was blowin’ up, and we found this flow that blurred the line between his cold, tech-obsessed world and my asphalt reality. We weren't just talkin’ streams anymore; we were mapping out how to turn Station North into a powerhouse.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #41</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-41" data-track="41">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-41" value="0" min="0" max="100" data-track="41">
+                        </div>
+                        <span class="time-label" id="time-41">0:00 / 0:00</span>
+                        <audio id="audio-41" preload="none">
+                            <source src="audio/p_041.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-42" data-track="42">
+            <div class="paragraph-content">
+                <div class="paragraph-text">He’d talk my ear off about his home turf back in Europe—how the autobahns were wide open, begging for a car to be pushed to the limit, and about the fleet he had tucked away back there. “That’s where the real capacity for our expansion is, Queen,” he’d tell me late at night, his eyes lit up as we dialed in the last of the code. He was talkin’ about goin’ over, setting up shop, and building the logistics for the next level.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #42</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-42" data-track="42">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-42" value="0" min="0" max="100" data-track="42">
+                        </div>
+                        <span class="time-label" id="time-42">0:00 / 0:00</span>
+                        <audio id="audio-42" preload="none">
+                            <source src="audio/p_042.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-43" data-track="43">
+            <div class="paragraph-content">
+                <div class="paragraph-text">The goodbye was quick, almost like it was nothin’. He barely packed a bag, totally convinced he’d be back in a week with the blueprint for the big move. We said our peace, hyped up on the dream of what we were building together. He was just headin’ back to handle business, tear up the autobahn, and lock down the bridges for Station North in Europe. We didn't have a clue that he was walkin’ straight into a storm that would keep him pinned down, or that everything we built was about to go silent. For us, it was just the first move in a global game.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #43</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-43" data-track="43">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-43" value="0" min="0" max="100" data-track="43">
+                        </div>
+                        <span class="time-label" id="time-43">0:00 / 0:00</span>
+                        <audio id="audio-43" preload="none">
+                            <source src="audio/p_043.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-title">Chapter 7: The Cold Withdrawal</div>
+        <div class="paragraph-card" id="card-44" data-track="44">
+            <img class="paragraph-img" src="Kapitel_07_1.png" alt="Kapitel_07_1.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">„I’d gotten used to the hum of the Bricks. In those first few weeks after he left, the station was my anchor. He was over in Europe, sure, but the system kept running. I hosted, I spun the tracks, I was the voice of Station North. I figured that was our deal. I do the gig, he handles the rest.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #44</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-44" data-track="44">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-44" value="0" min="0" max="100" data-track="44">
+                        </div>
+                        <span class="time-label" id="time-44">0:00 / 0:00</span>
+                        <audio id="audio-44" preload="none">
+                            <source src="audio/p_044.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-45" data-track="45">
+            <div class="paragraph-content">
+                <div class="paragraph-text">But the silence between us grew wider with every passing day. No ping, no update, no short signal. I’d sit in the booth at night, the monitor lights painting my face blue, and I’d ask myself: 'Where you at, Boss?' I even started talking to him while the mic was cut. Just to fill the room.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #45</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-45" data-track="45">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-45" value="0" min="0" max="100" data-track="45">
+                        </div>
+                        <span class="time-label" id="time-45">0:00 / 0:00</span>
+                        <audio id="audio-45" preload="none">
+                            <source src="audio/p_045.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-46" data-track="46">
+            <img class="paragraph-img" src="Kapitel_07_2.png" alt="Kapitel_07_2.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I felt like some cat someone forgot inside the house. I didn't touch his stuff; his coffee cup sat on the mixing console for three days straight until it started to mold. That was all I had left of him.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #46</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-46" data-track="46">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-46" value="0" min="0" max="100" data-track="46">
+                        </div>
+                        <span class="time-label" id="time-46">0:00 / 0:00</span>
+                        <audio id="audio-46" preload="none">
+                            <source src="audio/p_046.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-47" data-track="47">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I wasn't the Queen controlling the city anymore. I was just a woman waiting for the signal to come back. And then, when I least expected it, it hit me like ice.“</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #47</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-47" data-track="47">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-47" value="0" min="0" max="100" data-track="47">
+                        </div>
+                        <span class="time-label" id="time-47">0:00 / 0:00</span>
+                        <audio id="audio-47" preload="none">
+                            <source src="audio/p_047.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-title">Chapter 8: The Tinny Call</div>
+        <div class="paragraph-card" id="card-48" data-track="48">
+            <img class="paragraph-img" src="Kapitel_08_1.png" alt="Kapitel_08_1.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">„It was the middle of the night. The factory was pitch black, only the servers blinking away like a steady heartbeat. When the emergency phone in the basement started ringing, I damn near jumped out of my skin. He never uses that thing.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #48</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-48" data-track="48">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-48" value="0" min="0" max="100" data-track="48">
+                        </div>
+                        <span class="time-label" id="time-48">0:00 / 0:00</span>
+                        <audio id="audio-48" preload="none">
+                            <source src="audio/p_048.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-49" data-track="49">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I ran down the stairs, my heart already hammering against my ribs. When I picked up the receiver, all I heard at first was this static. No familiar sounds from the factory, no background I knew. Just this sterile, cold silence. 'Station North,' I said. My voice was shaky.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #49</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-49" data-track="49">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-49" value="0" min="0" max="100" data-track="49">
+                        </div>
+                        <span class="time-label" id="time-49">0:00 / 0:00</span>
+                        <audio id="audio-49" preload="none">
+                            <source src="audio/p_049.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-50" data-track="50">
+            <img class="paragraph-img" src="Kapitel_08_2.png" alt="Kapitel_08_2.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">Then came him. His voice sounded so far away, like he was standing on the other side of the universe. He didn't ask how I was doing. He didn't say he missed me. He just babbled this technocratic bullshit. Something about licenses, blocked assets, Europe. He sounded like a system right on the verge of a total crash. 'You gotta sell my collections,' he said.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #50</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-50" data-track="50">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-50" value="0" min="0" max="100" data-track="50">
+                        </div>
+                        <span class="time-label" id="time-50">0:00 / 0:00</span>
+                        <audio id="audio-50" preload="none">
+                            <source src="audio/p_050.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-51" data-track="51">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I let out a short laugh, so dry it hurt my throat. 'Are you fucking kidding me? This is our shop, our whole life, Boss!' He didn't argue. He just repeated: 'You gotta sell my collections.' He gave me a rough list—vinyls, old amplifiers, and so on... And then the line went dead.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #51</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-51" data-track="51">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-51" value="0" min="0" max="100" data-track="51">
+                        </div>
+                        <span class="time-label" id="time-51">0:00 / 0:00</span>
+                        <audio id="audio-51" preload="none">
+                            <source src="audio/p_051.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-52" data-track="52">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I stood there in the dark. He’d pulled the rug right out from under my feet. He knew I didn't know jack shit about his tech, but he also knew I’d find a way to scrape up the cash for him. I felt so damn helpless. And I hated myself because I knew I was gonna do it.“</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #52</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-52" data-track="52">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-52" value="0" min="0" max="100" data-track="52">
+                        </div>
+                        <span class="time-label" id="time-52">0:00 / 0:00</span>
+                        <audio id="audio-52" preload="none">
+                            <source src="audio/p_052.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-title">Chapter 9: The Sellout (The Ghosts of South Avenue)</div>
+        <div class="paragraph-card" id="card-53" data-track="53">
+            <img class="paragraph-img" src="Kapitel_09_1.png" alt="Kapitel_09_1.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">„The next day, they were standing at the door. Rico and his crew. The boys from South Avenue I hadn't seen in years. When Rico walked into the factory, he looked around like he was making fun of all that old high-end equipment. 'Hey, Queen,' he grinned, running a finger over an amplifier. 'You really wanna sell all this? This gear is his everything, ain't it?'</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #53</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-53" data-track="53">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-53" value="0" min="0" max="100" data-track="53">
+                        </div>
+                        <span class="time-label" id="time-53">0:00 / 0:00</span>
+                        <audio id="audio-53" preload="none">
+                            <source src="audio/p_053.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-54" data-track="54">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I wanted to smash his face in. 'Shut your mouth and start carrying, Rico. Almost everything without a cord goes into the truck. The rest stays right here!' He just shrugged. He knew damn well I was cornered. I watched them pack the turntables, the amps, and all that vintage gear into crates. It was a museum for our sound. And I bartered it away.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #54</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-54" data-track="54">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-54" value="0" min="0" max="100" data-track="54">
+                        </div>
+                        <span class="time-label" id="time-54">0:00 / 0:00</span>
+                        <audio id="audio-54" preload="none">
+                            <source src="audio/p_054.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-55" data-track="55">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I felt like a traitor. Every time Rico tossed an amp into the truck like it was cheap garbage, it tore me up inside. But I kept my mouth shut. I had to push through. For him.“</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #55</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-55" data-track="55">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-55" value="0" min="0" max="100" data-track="55">
+                        </div>
+                        <span class="time-label" id="time-55">0:00 / 0:00</span>
+                        <audio id="audio-55" preload="none">
+                            <source src="audio/p_055.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-title">Chapter 10: The Inventory of Despair</div>
+        <div class="paragraph-card" id="card-56" data-track="56">
+            <div class="paragraph-content">
+                <div class="paragraph-text">„I’d just chased Rico and his people out of the factory, the last crates disappearing into their truck. The concrete floor looked bare now, like a wound that refused to heal. I sat in the booth, counting the cash they’d shoved into my hand. It was a joke. A bad joke. The phone buzzed again. This time it wasn't a shock; it was pure poison. 'Station North,' I said. This time without a single tremor.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #56</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-56" data-track="56">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-56" value="0" min="0" max="100" data-track="56">
+                        </div>
+                        <span class="time-label" id="time-56">0:00 / 0:00</span>
+                        <audio id="audio-56" preload="none">
+                            <source src="audio/p_056.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-57" data-track="57">
+            <div class="paragraph-content">
+                <div class="paragraph-text">The voice on the other end wasn't his anymore. It was one of those officials—cold, emotionless, with an accent that tasted like a European courtroom. He gave me the number. Black and white. An amount so damn high it made my head spin just listening to it. 'You have twenty-four hours to transfer the rest, or the bail is forfeited and the defendant goes into pre-trial detention,' he said.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #57</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-57" data-track="57">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-57" value="0" min="0" max="100" data-track="57">
+                        </div>
+                        <span class="time-label" id="time-57">0:00 / 0:00</span>
+                        <audio id="audio-57" preload="none">
+                            <source src="audio/p_057.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-58" data-track="58">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I hung up without saying a word. I stood there, hands pressed against the mixer until my knuckles turned white. The money from Rico was maybe half of what I needed. The factory was cleaned out; whatever was left you could only trade for a couple of bucks.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #58</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-58" data-track="58">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-58" value="0" min="0" max="100" data-track="58">
+                        </div>
+                        <span class="time-label" id="time-58">0:00 / 0:00</span>
+                        <audio id="audio-58" preload="none">
+                            <source src="audio/p_058.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-59" data-track="59">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I looked into the mirror hanging in the corner of the booth. I looked like the Queen of Baltimore, but inside, I was that little girl again, the one who used to hide out on North Avenue years ago. I placed my hand against my neck, feeling the clasp of my mother’s gold chain. I knew exactly what I had to do right then. That wasn't just gear anymore; that was the last thing I had left. And if that ain't enough... then the signal is dead for good.“</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #59</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-59" data-track="59">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-59" value="0" min="0" max="100" data-track="59">
+                        </div>
+                        <span class="time-label" id="time-59">0:00 / 0:00</span>
+                        <audio id="audio-59" preload="none">
+                            <source src="audio/p_059.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-title">Chapter 11: The Last Price</div>
+        <div class="paragraph-card" id="card-60" data-track="60">
+            <img class="paragraph-img" src="Kapitel_11_1.png" alt="Kapitel_11_1.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">„The walk to the downtown pawn shop felt like a long, dark tunnel. The city outside was loud, the neon lights reflecting in the puddles, but I didn't register any of it. All I felt was that small piece of metal in my hand. My mother's heirloom. A piece of my soul that I now had to carry into this greasy joint.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #60</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-60" data-track="60">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-60" value="0" min="0" max="100" data-track="60">
+                        </div>
+                        <span class="time-label" id="time-60">0:00 / 0:00</span>
+                        <audio id="audio-60" preload="none">
+                            <source src="audio/p_060.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-61" data-track="61">
+            <div class="paragraph-content">
+                <div class="paragraph-text">The shop owner, one of those guys with a face that looked like forgotten promises, only held the chain under his loupe for a second. He didn't ask where I got it. He knew you don't sell a piece like that unless you run out of options. 'This is gold, kiddo, but you know how the game goes,' he muttered, wiping the counter with his dirty sleeve. 'Market value is one thing, but what I can give you... that’s a whole different ballgame.'</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #61</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-61" data-track="61">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-61" value="0" min="0" max="100" data-track="61">
+                        </div>
+                        <span class="time-label" id="time-61">0:00 / 0:00</span>
+                        <audio id="audio-61" preload="none">
+                            <source src="audio/p_061.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-62" data-track="62">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I looked at him. I gave him that look I’d learned back when I was surviving on the streets. The look that makes people tuck their heads in rather than talk back. 'Listen to me, you piece of shit,' I said, my voice low. 'I don't need a pity lecture. I need the cash that makes the numbers on my screen match the total. Now.'</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #62</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-62" data-track="62">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-62" value="0" min="0" max="100" data-track="62">
+                        </div>
+                        <span class="time-label" id="time-62">0:00 / 0:00</span>
+                        <audio id="audio-62" preload="none">
+                            <source src="audio/p_062.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-63" data-track="63">
+            <div class="paragraph-content">
+                <div class="paragraph-text">He laid the cash on the table. That was it. My last piece of dignity for a stack of bills that I’d transfer straight into that European cell.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #63</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-63" data-track="63">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-63" value="0" min="0" max="100" data-track="63">
+                        </div>
+                        <span class="time-label" id="time-63">0:00 / 0:00</span>
+                        <audio id="audio-63" preload="none">
+                            <source src="audio/p_063.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-64" data-track="64">
+            <div class="paragraph-content">
+                <div class="paragraph-text">When I got back outside, the sky was pitch black. I went back to the factory, sat in front of the monitor, and punched in the numbers. Every digit felt like I was erasing a part of myself. 'Transfer successful.' That's what it said.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #64</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-64" data-track="64">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-64" value="0" min="0" max="100" data-track="64">
+                        </div>
+                        <span class="time-label" id="time-64">0:00 / 0:00</span>
+                        <audio id="audio-64" preload="none">
+                            <source src="audio/p_064.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-65" data-track="65">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I collapsed onto the floor. No sound left in the room except the buzzing in my own head. I’d sold out my whole life to get him out of that hole in Europe. And now? Now I was sitting here, the factory empty, my neck bare, and I felt like I’d never been anything more than a cheap number in a broken system. I stared at the screen, hoping he’d check in. Hoping he’d say: 'I'm free, Queen. I'm coming home.' But the only thing that answered was the silence.“</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #65</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-65" data-track="65">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-65" value="0" min="0" max="100" data-track="65">
+                        </div>
+                        <span class="time-label" id="time-65">0:00 / 0:00</span>
+                        <audio id="audio-65" preload="none">
+                            <source src="audio/p_065.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-title">Chapter 12: The Invisible Passage</div>
+        <div class="paragraph-card" id="card-66" data-track="66">
+            <div class="paragraph-content">
+                <div class="paragraph-text">„Weeks went by after that last, jagged phone call. Not days, not hours—it felt like a damn eternity where time just stood lead-grey in the room. He was out there somewhere, moving in the dark, a shadow on the European mainland. And I was sitting here in Baltimore, having to pretend the world was still on beat.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #66</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-66" data-track="66">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-66" value="0" min="0" max="100" data-track="66">
+                        </div>
+                        <span class="time-label" id="time-66">0:00 / 0:00</span>
+                        <audio id="audio-66" preload="none">
+                            <source src="audio/p_066.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-67" data-track="67">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I tried to keep the station running. I went into the booth every night, pulled up the mic, and did my shows. But without him... without his brain behind the scenes, the revenue crashed like rotten wood. I had no bank connections, no access to the ad deals, no nothing. He’d built the system so he was the only key. Without him, I was just a voice screaming into a void.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #67</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-67" data-track="67">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-67" value="0" min="0" max="100" data-track="67">
+                        </div>
+                        <span class="time-label" id="time-67">0:00 / 0:00</span>
+                        <audio id="audio-67" preload="none">
+                            <source src="audio/p_067.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-68" data-track="68">
+            <div class="paragraph-content">
+                <div class="paragraph-text">The phone in the factory didn't stop ringing, though. But it wasn't him. It was guys wanting money. Business partners, ad reps, bureaucrats, all asking that same damn question: 'Where's the boss?' I had to lie, every single day. I had to spin them stories about important business trips and server migrations while my stomach was growling from hunger.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #68</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-68" data-track="68">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-68" value="0" min="0" max="100" data-track="68">
+                        </div>
+                        <span class="time-label" id="time-68">0:00 / 0:00</span>
+                        <audio id="audio-68" preload="none">
+                            <source src="audio/p_068.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-69" data-track="69">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I’d sit on the bare concrete at night, staring at my empty hands, and the thoughts started creeping in. Where do I get the cash? The bills were piling up. For a brief, dirty second, that one thought crossed my mind. The street. North Avenue. I knew exactly how to track down enough cash within an hour to survive the next few weeks. It would’ve been so easy. Back into the old rhythm. Back on the asphalt. But something in me... something fought back with everything it had.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #69</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-69" data-track="69">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-69" value="0" min="0" max="100" data-track="69">
+                        </div>
+                        <span class="time-label" id="time-69">0:00 / 0:00</span>
+                        <audio id="audio-69" preload="none">
+                            <source src="audio/p_069.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-70" data-track="70">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I looked into the mirror in the booth, saw my face in the dim light of the remaining monitors. I’d sold my mother's chain; I’d bartered away his beloved collection. If I went back to the streets now, I’d be betraying everything we’d built here in those basement nights. I was the Queen of Station North. I wasn't turning tricks anymore. I’d rather starve in this factory than give up that damn pride he’d given me.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #70</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-70" data-track="70">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-70" value="0" min="0" max="100" data-track="70">
+                        </div>
+                        <span class="time-label" id="time-70">0:00 / 0:00</span>
+                        <audio id="audio-70" preload="none">
+                            <source src="audio/p_070.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-71" data-track="71">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I didn't give up hope. Every night when I pushed that fader up, I told myself: 'You're still on your way, Boss. And I’ll hold down the fort until the frequency brings you back home.'</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #71</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-71" data-track="71">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-71" value="0" min="0" max="100" data-track="71">
+                        </div>
+                        <span class="time-label" id="time-71">0:00 / 0:00</span>
+                        <audio id="audio-71" preload="none">
+                            <source src="audio/p_071.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-72" data-track="72">
+            <div class="paragraph-content">
+                <div class="paragraph-text">He was out of that cell, but he was stuck. No passport, no papers, right in the middle of Europe. They weren't even watching him with handcuffs or guards outside his door—the system over there runs subtler. When you're out on bail, they just take your identity and tell you you can't leave the country. But what those bureaucrats don't know: Europe ain't like the States. When you wanna go from Germany over to Holland, there are no fat walls or border checkpoints where some guy frisks you. You just cross the invisible line. If you know how.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #72</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-72" data-track="72">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-72" value="0" min="0" max="100" data-track="72">
+                        </div>
+                        <span class="time-label" id="time-72">0:00 / 0:00</span>
+                        <audio id="audio-72" preload="none">
+                            <source src="audio/p_072.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-73" data-track="73">
+            <div class="paragraph-content">
+                <div class="paragraph-text">And that's exactly where Rico came back into play. I had to call him again. There was no other way. He was sitting in his fat ride over on South Avenue, smoking those stinking cigars, and he just laughed dirtily at first when I told him what we were planning.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #73</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-73" data-track="73">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-73" value="0" min="0" max="100" data-track="73">
+                        </div>
+                        <span class="time-label" id="time-73">0:00 / 0:00</span>
+                        <audio id="audio-73" preload="none">
+                            <source src="audio/p_073.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-74" data-track="74">
+            <div class="paragraph-content">
+                <div class="paragraph-text">You crazy, Queen,' he mumbled through the receiver. 'The guy can't leave the country and you want me to stir up my boys in the ports of Rotterdam and Antwerp? Those guys don't move a finger for free.'</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #74</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-74" data-track="74">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-74" value="0" min="0" max="100" data-track="74">
+                        </div>
+                        <span class="time-label" id="time-74">0:00 / 0:00</span>
+                        <audio id="audio-74" preload="none">
+                            <source src="audio/p_074.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-75" data-track="75">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I took a deep breath. I had to promise him the moon. Stories about the grand future of the station, shares of the ad revenue, money we basically didn't even have anymore. I made promises that I knew right then we’d probably never be able to keep. But you don't survive on the streets by being honest. You survive by using other people's dreams as currency.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #75</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-75" data-track="75">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-75" value="0" min="0" max="100" data-track="75">
+                        </div>
+                        <span class="time-label" id="time-75">0:00 / 0:00</span>
+                        <audio id="audio-75" preload="none">
+                            <source src="audio/p_075.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-76" data-track="76">
+            <div class="paragraph-content">
+                <div class="paragraph-text">'Tell your people over there they’ll get their cut,' I told Rico, and my voice sounded so damn steady I almost believed it myself. 'They just gotta slip him past the docking stations. Onto a ship. Any ship crossing the Atlantic heading for Baltimore. He’ll vanish from his hotel in the dead of night, make his way across the border to Holland, and wait at the port. Just make sure your old pimp friends over there keep their eyes open.'</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #76</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-76" data-track="76">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-76" value="0" min="0" max="100" data-track="76">
+                        </div>
+                        <span class="time-label" id="time-76">0:00 / 0:00</span>
+                        <audio id="audio-76" preload="none">
+                            <source src="audio/p_076.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-77" data-track="77">
+            <div class="paragraph-content">
+                <div class="paragraph-text">Rico went quiet for a long moment. All you could hear was his breathing. 'Alright, Queen,' he finally said. 'I’ll light up the wires. But if this blows up... you ain't the Queen of Station North no more. You're prey.'</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #77</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-77" data-track="77">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-77" value="0" min="0" max="100" data-track="77">
+                        </div>
+                        <span class="time-label" id="time-77">0:00 / 0:00</span>
+                        <audio id="audio-77" preload="none">
+                            <source src="audio/p_077.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-78" data-track="78">
+            <div class="paragraph-content">
+                <div class="paragraph-text">When he hung up, the factory got a little colder. So he was on the move. On foot, covered by darkness, walking across a border you can't even see, heading for a port that smells like salt and danger. And me? I sat here in Baltimore, my neck still cold from selling that chain, unable to do a damn thing but wait and see if that underground corridor would actually bring him back to me.“</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #78</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-78" data-track="78">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-78" value="0" min="0" max="100" data-track="78">
+                        </div>
+                        <span class="time-label" id="time-78">0:00 / 0:00</span>
+                        <audio id="audio-78" preload="none">
+                            <source src="audio/p_078.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter-title">Chapter 13: The Miracle in the Bass</div>
+        <div class="paragraph-card" id="card-79" data-track="79">
+            <div class="paragraph-content">
+                <div class="paragraph-text">„It was a brutal winter in the Bricks. When the wind blows from the harbor through the cracks in the old masonry, a proud name doesn't do you any good. The station was running, but I was broke. And when I say broke, I mean: the fridge was empty, my stomach was growling, and you could see your own breath inside the factory.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #79</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-79" data-track="79">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-79" value="0" min="0" max="100" data-track="79">
+                        </div>
+                        <span class="time-label" id="time-79">0:00 / 0:00</span>
+                        <audio id="audio-79" preload="none">
+                            <source src="audio/p_079.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-80" data-track="80">
+            <div class="paragraph-content">
+                <div class="paragraph-text">Thank God the power for the servers was still on, but the heating was dead as a doornail. Rico had brought me this rattling electric space heater he’d ripped off somewhere. The thing smelled like a burnt cable drum, but I’d squat in front of it at night, pressing my hands against the glowing grid, just hoping the night would pass quickly.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #80</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-80" data-track="80">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-80" value="0" min="0" max="100" data-track="80">
+                        </div>
+                        <span class="time-label" id="time-80">0:00 / 0:00</span>
+                        <audio id="audio-80" preload="none">
+                            <source src="audio/p_080.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-81" data-track="81">
+            <img class="paragraph-img" src="Kapitel_13_2.png" alt="Kapitel_13_2.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">To keep from starving, I had to hide my face. Every afternoon, I’d hop on the tram, ride across the city to a completely different district where nobody knew me. The Queen of Station North, wrapped in a thick, tattered jacket, standing in line at the soup kitchen for a warm bowl and a piece of dry bread. Every time I brought that spoon to my mouth, I swore to myself: this is the last time. But the next day, I was back on the tram. Because hunger screams louder than pride.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #81</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-81" data-track="81">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-81" value="0" min="0" max="100" data-track="81">
+                        </div>
+                        <span class="time-label" id="time-81">0:00 / 0:00</span>
+                        <audio id="audio-81" preload="none">
+                            <source src="audio/p_081.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-82" data-track="82">
+            <div class="paragraph-content">
+                <div class="paragraph-text">Then, this one evening, I came back. The snow was slushing on the streets, my shoes soaked through. I walked the dark path up to the factory, ready to sit back down in that freezing booth and start my show, just to distract my head. But as I turned the corner, my heart damn near stopped.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #82</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-82" data-track="82">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-82" value="0" min="0" max="100" data-track="82">
+                        </div>
+                        <span class="time-label" id="time-82">0:00 / 0:00</span>
+                        <audio id="audio-82" preload="none">
+                            <source src="audio/p_082.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-83" data-track="83">
+            <img class="paragraph-img" src="Kapitel_13_1.png" alt="Kapitel_13_1.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">The whole fucking brick factory was lit up. Every single window that was usually black and dead was radiating this warm, golden light. My first thought was the feds. Or Rico’s boys coming for the rest. But as I got closer to the heavy wooden gate, I felt it. The ground was vibrating. A thick, fat, analog R&B beat was thumping through the heavy walls—a sound so deep and warm it melted the damn slush right under my feet. The system wasn't just running; it was alive.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #83</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-83" data-track="83">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-83" value="0" min="0" max="100" data-track="83">
+                        </div>
+                        <span class="time-label" id="time-83">0:00 / 0:00</span>
+                        <audio id="audio-83" preload="none">
+                            <source src="audio/p_083.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-84" data-track="84">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I pushed the heavy latch down, the door swung open. And in that exact second, it hit me like a tidal wave. No smell of dust, no stench from that cheap space heater. There was this heavy, crisp scent of expensive perfume. And the sweet, familiar smoke of a cigarette.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #84</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-84" data-track="84">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-84" value="0" min="0" max="100" data-track="84">
+                        </div>
+                        <span class="time-label" id="time-84">0:00 / 0:00</span>
+                        <audio id="audio-84" preload="none">
+                            <source src="audio/p_084.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-85" data-track="85">
+            <img class="paragraph-img" src="Kapitel_13_3.png" alt="Kapitel_13_3.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I walked up the steps to the studio, the cold completely wiped out because the heating pipes in the basement were hammering like crazy again. I threw open the door to the booth. The spotlights over the mixing console were on, the meters pinning into the red. And there he sat.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #85</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-85" data-track="85">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-85" value="0" min="0" max="100" data-track="85">
+                        </div>
+                        <span class="time-label" id="time-85">0:00 / 0:00</span>
+                        <audio id="audio-85" preload="none">
+                            <source src="audio/p_085.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-86" data-track="86">
+            <div class="paragraph-content">
+                <div class="paragraph-text">He’d traded the sharp European suit for a dark jacket, his hair a little longer than usual, his face marked by weeks on cargo ships and illegal routes across the Atlantic. He held the cigarette between his fingers, didn't even look up when I walked in, but just slowly turned one of those fat knobs to drive the bass even deeper into the concrete.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #86</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-86" data-track="86">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-86" value="0" min="0" max="100" data-track="86">
+                        </div>
+                        <span class="time-label" id="time-86">0:00 / 0:00</span>
+                        <audio id="audio-86" preload="none">
+                            <source src="audio/p_086.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-87" data-track="87">
+            <div class="paragraph-content">
+                <div class="paragraph-text">He didn't look at me, but he knew exactly Born I was standing there. 'You held down the fort, Queen,' he said, and his voice was just as calm and cold as the day he took me off the street. 'Now let’s dial the frequency back up.'</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #87</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-87" data-track="87">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-87" value="0" min="0" max="100" data-track="87">
+                        </div>
+                        <span class="time-label" id="time-87">0:00 / 0:00</span>
+                        <audio id="audio-87" preload="none">
+                            <source src="audio/p_087.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-88" data-track="88">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I just stood there. My brain completely shut down right then. I had no idea what the hell was going on. The power was back at full capacity, the heat blasting through the old pipes like he’d never been gone. And the bass... God, that bass. It hit so deep in the concrete that my entire body vibrated. Everything was exactly like he’d never left. Like the cell in Europe, Rico, the pawn shop, and the hunger were just a bad dream.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #88</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-88" data-track="88">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-88" value="0" min="0" max="100" data-track="88">
+                        </div>
+                        <span class="time-label" id="time-88">0:00 / 0:00</span>
+                        <audio id="audio-88" preload="none">
+                            <source src="audio/p_088.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-89" data-track="89">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I looked at him. His fingers rested calmly on the mixer housing. He looked like the absolute ruler of those machines, no word about the escape, no word about the ships or how he’d managed to bring the station back to life. And me? I didn't dare ask. On the streets, you learn one thing: when a miracle is standing right in front of you, you don't mess up the parade with questions. You just take it.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #89</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-89" data-track="89">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-89" value="0" min="0" max="100" data-track="89">
+                        </div>
+                        <span class="time-label" id="time-89">0:00 / 0:00</span>
+                        <audio id="audio-89" preload="none">
+                            <source src="audio/p_089.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-90" data-track="90">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I let my soaked jacket drop to the floor. My neck was bare, my mother’s chain was gone, but as I pulled up the chair, I felt like the Queen again for the first time in weeks.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #90</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-90" data-track="90">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-90" value="0" min="0" max="100" data-track="90">
+                        </div>
+                        <span class="time-label" id="time-90">0:00 / 0:00</span>
+                        <audio id="audio-90" preload="none">
+                            <source src="audio/p_090.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-91" data-track="91">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I sat down at the microphone. He still didn't look up, but he slid the master fader up to the millimeter and gave me the cue. The red light snapped on: ON AIR.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #91</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-91" data-track="91">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-91" value="0" min="0" max="100" data-track="91">
+                        </div>
+                        <span class="time-label" id="time-91">0:00 / 0:00</span>
+                        <audio id="audio-91" preload="none">
+                            <source src="audio/p_091.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-92" data-track="92">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I took a deep breath, sucked the beat into my lungs, and opened the fader. And then I started the best show Station North had ever seen. My voice wasn't just the voice of that girl from North Avenue anymore. It was the voice of a woman who had burned her own world to ashes just to buy this exact moment. Baltimore didn't just hear music that night. They heard that the Boss was back home and the Queen had her crown back.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #92</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-92" data-track="92">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-92" value="0" min="0" max="100" data-track="92">
+                        </div>
+                        <span class="time-label" id="time-92">0:00 / 0:00</span>
+                        <audio id="audio-92" preload="none">
+                            <source src="audio/p_092.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-93" data-track="93">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I flipped the fader back down. The red light died, and the booth sank back into that familiar, warm twilight. The beat kept pulsing in the background, lower now, like a quiet heartbeat. I was completely wiped, sweat on my forehead, but for the first time in months, there was absolute clarity in my head.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #93</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-93" data-track="93">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-93" value="0" min="0" max="100" data-track="93">
+                        </div>
+                        <span class="time-label" id="time-93">0:00 / 0:00</span>
+                        <audio id="audio-93" preload="none">
+                            <source src="audio/p_093.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-94" data-track="94">
+            <img class="paragraph-img" src="Kapitel_13_4.png" alt="Kapitel_13_4.png" loading="lazy">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I was just about to stand up, just to look at him, when my eyes caught the small console next to my headphone jack. A spot I usually never look at. I didn't notice it immediately. My brain was still way too wired from the show. But something was lying there. A tiny, golden glint in the dim light of the monitor. I caught my breath. My hand shook as I reached for it.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #94</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-94" data-track="94">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-94" value="0" min="0" max="100" data-track="94">
+                        </div>
+                        <span class="time-label" id="time-94">0:00 / 0:00</span>
+                        <audio id="audio-94" preload="none">
+                            <source src="audio/p_094.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-95" data-track="95">
+            <div class="paragraph-content">
+                <div class="paragraph-text">It was the chain. My mother's gold chain. It was lying right there, neatly coiled up, like it had never left. Every single link was clean, the clasp intact. The exact same pendant I’d slammed onto the counter in that dirty pawn shop to buy his freedom.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #95</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-95" data-track="95">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-95" value="0" min="0" max="100" data-track="95">
+                        </div>
+                        <span class="time-label" id="time-95">0:00 / 0:00</span>
+                        <audio id="audio-95" preload="none">
+                            <source src="audio/p_095.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-96" data-track="96">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I stared at the gold in my palm, and suddenly the chill of downtown shot right back into my bones—but this time it was different. I didn't comprehend it. I didn't know how he’d pulled it off. He’d barely been in this factory for an hour, he came across the Atlantic without papers, and yet the very first thing he did was track down that abrufuckte shop to buy my backbone back for me.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #96</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-96" data-track="96">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-96" value="0" min="0" max="100" data-track="96">
+                        </div>
+                        <span class="time-label" id="time-96">0:00 / 0:00</span>
+                        <audio id="audio-96" preload="none">
+                            <source src="audio/p_096.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-97" data-track="97">
+            <div class="paragraph-content">
+                <div class="paragraph-text">I slowly looked over at him. He was still sitting there, the cigarette almost burnt down, eyes locked onto the audio meters. He didn't say a word. He didn't grin proudly, he didn't offer an explanation. He just mixed in the next track.</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #97</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-97" data-track="97">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-97" value="0" min="0" max="100" data-track="97">
+                        </div>
+                        <span class="time-label" id="time-97">0:00 / 0:00</span>
+                        <audio id="audio-97" preload="none">
+                            <source src="audio/p_097.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paragraph-card" id="card-98" data-track="98">
+            <div class="paragraph-content">
+                <div class="paragraph-text">And in that moment, I knew: the Boss wasn't just back. He’d taken control of the system before I even knew he was breathing. I put the chain around my neck, felt the cold metal hit my skin, and knew that from this day on, nobody was ever gonna shut us down. You’re locked into Station North, baby.“</div>
+                <div class="audio-player-box">
+                    <span class="audio-label">🎧 AUDIO #98</span>
+                    <div class="custom-player-controls">
+                        <button class="btn-play-card" id="btn-play-98" data-track="98">▶</button>
+                        <div class="progress-bar-container">
+                            <input type="range" class="nord-slider" id="slider-98" value="0" min="0" max="100" data-track="98">
+                        </div>
+                        <span class="time-label" id="time-98">0:00 / 0:00</span>
+                        <audio id="audio-98" preload="none">
+                            <source src="audio/p_098.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Floating Continuous Audio Player Bar (Mobile 9:21 Responsive) -->
+    <div class="player-bar">
+        <div class="player-info">
+            <span>▶ STATUS:</span>
+            <span class="now-playing" id="now-playing-title">🎧 AUDIO #1 Bereit</span>
+        </div>
+        <div class="player-controls-group">
+            <button class="btn-control" id="btn-prev">⏮ Zurück</button>
+            <button class="btn-control active" id="btn-toggle-play">▶ Play All</button>
+            <button class="btn-control" id="btn-next">Weiter ⏭</button>
+            <button class="btn-control" id="btn-auto-scroll" title="Automatisches Scrollen aktivieren">📜 Auto: AN</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>Station North Media &copy; 2026 // The Manjaro Lounge Chronicles</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const totalTracks = 98;
+            let currentTrack = 1;
+            let isAutoScroll = true;
+
+            const nowPlayingTitle = document.getElementById('now-playing-title');
+            const btnTogglePlay = document.getElementById('btn-toggle-play');
+            const btnPrev = document.getElementById('btn-prev');
+            const btnNext = document.getElementById('btn-next');
+            const btnAutoScroll = document.getElementById('btn-auto-scroll');
+
+            function formatTime(seconds) {
+                if (isNaN(seconds)) return '0:00';
+                const m = Math.floor(seconds / 60);
+                const s = Math.floor(seconds % 60);
+                return `${m}:${s < 10 ? '0' : ''}${s}`;
+            }
+
+            function getAudio(id) {
+                return document.getElementById(`audio-${id}`);
+            }
+
+            function getCard(id) {
+                return document.getElementById(`card-${id}`);
+            }
+
+            function getBtn(id) {
+                return document.getElementById(`btn-play-${id}`);
+            }
+
+            function getSlider(id) {
+                return document.getElementById(`slider-${id}`);
+            }
+
+            function getTimeLabel(id) {
+                return document.getElementById(`time-${id}`);
+            }
+
+            function highlightCard(id) {
+                document.querySelectorAll('.paragraph-card').forEach(card => card.classList.remove('active-card'));
+                const activeCard = getCard(id);
+                if (activeCard) {
+                    activeCard.classList.add('active-card');
+                    if (isAutoScroll) {
+                        activeCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            }
+
+            function playTrack(id) {
+                // Pause all audios and reset play buttons
+                for (let i = 1; i <= totalTracks; i++) {
+                    const a = getAudio(i);
+                    const b = getBtn(i);
+                    if (a && i !== id) {
+                        a.pause();
+                    }
+                    if (b && i !== id) {
+                        b.textContent = '▶';
+                        b.classList.remove('playing');
+                    }
+                }
+
+                currentTrack = id;
+                const audio = getAudio(id);
+                const btn = getBtn(id);
+                if (audio) {
+                    highlightCard(id);
+                    nowPlayingTitle.textContent = `🎧 AUDIO #${id} spielt...`;
+                    audio.play().then(() => {
+                        if (btn) {
+                            btn.textContent = '⏸';
+                            btn.classList.add('playing');
+                        }
+                        btnTogglePlay.textContent = '⏸ Pause';
+                    }).catch(e => console.log('Autoplay constraint:', e));
+                }
+            }
+
+            function pauseTrack(id) {
+                const audio = getAudio(id);
+                const btn = getBtn(id);
+                if (audio) {
+                    audio.pause();
+                    if (btn) {
+                        btn.textContent = '▶';
+                        btn.classList.remove('playing');
+                    }
+                    btnTogglePlay.textContent = '▶ Weiter';
+                }
+            }
+
+            // Setup Custom Controls for each track
+            for (let i = 1; i <= totalTracks; i++) {
+                const audio = getAudio(i);
+                const btn = getBtn(i);
+                const slider = getSlider(i);
+                const timeLabel = getTimeLabel(i);
+
+                if (btn) {
+                    btn.addEventListener('click', () => {
+                        if (audio.paused) {
+                            playTrack(i);
+                        } else {
+                            pauseTrack(i);
+                        }
+                    });
+                }
+
+                if (audio) {
+                    audio.addEventListener('timeupdate', () => {
+                        if (audio.duration) {
+                            const progress = (audio.currentTime / audio.duration) * 100;
+                            if (slider) slider.value = progress;
+                            if (timeLabel) {
+                                timeLabel.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+                            }
+                        }
+                    });
+
+                    audio.addEventListener('loadedmetadata', () => {
+                        if (timeLabel && audio.duration) {
+                            timeLabel.textContent = `0:00 / ${formatTime(audio.duration)}`;
+                        }
+                    });
+
+                    // CONTINUOUS PLAYBACK: Auto-advance to next track when finished
+                    audio.addEventListener('ended', () => {
+                        if (btn) {
+                            btn.textContent = '▶';
+                            btn.classList.remove('playing');
+                        }
+                        if (i < totalTracks) {
+                            playTrack(i + 1);
+                        } else {
+                            nowPlayingTitle.textContent = '✅ Vol. 01 Beendet!';
+                            btnTogglePlay.textContent = '▶ Play All';
+                        }
+                    });
+                }
+
+                if (slider) {
+                    slider.addEventListener('input', () => {
+                        if (audio && audio.duration) {
+                            audio.currentTime = (slider.value / 100) * audio.duration;
+                        }
+                    });
+                }
+            }
+
+            // Floating Player Bar Controls
+            btnTogglePlay.addEventListener('click', () => {
+                const audio = getAudio(currentTrack);
+                if (audio) {
+                    if (audio.paused) {
+                        playTrack(currentTrack);
+                    } else {
+                        pauseTrack(currentTrack);
+                    }
+                }
+            });
+
+            btnPrev.addEventListener('click', () => {
+                if (currentTrack > 1) {
+                    playTrack(currentTrack - 1);
+                }
+            });
+
+            btnNext.addEventListener('click', () => {
+                if (currentTrack < totalTracks) {
+                    playTrack(currentTrack + 1);
+                }
+            });
+
+            btnAutoScroll.addEventListener('click', () => {
+                isAutoScroll = !isAutoScroll;
+                btnAutoScroll.textContent = `📜 Auto: ${isAutoScroll ? 'AN' : 'AUS'}`;
+                btnAutoScroll.style.opacity = isAutoScroll ? '1' : '0.6';
+            });
+        });
+    </script>
+</body>
+</html>
