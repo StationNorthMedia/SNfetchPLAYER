@@ -302,7 +302,6 @@ id tvUpdateVersionSub
 id tvYtId
 id videoFrameConstraintLayout
 id viewDivider
-id viewNordPlayerBackground
 layout activity_main
 layout dialog_app_update
 layout dialog_edit_track

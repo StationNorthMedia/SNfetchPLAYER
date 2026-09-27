@@ -201,9 +201,6 @@ public final class ActivityMainBinding implements ViewBinding {
   @NonNull
   public final ConstraintLayout videoFrameConstraintLayout;
 
-  @NonNull
-  public final View viewNordPlayerBackground;
-
   private ActivityMainBinding(@NonNull ConstraintLayout rootView,
       @NonNull NordAudioVisualizerView audioVisualizer, @NonNull MaterialButton btnExitFullscreen,
       @NonNull MaterialButton btnFullscreenToggle, @NonNull MaterialButton btnModeRadio,
@@ -233,8 +230,7 @@ public final class ActivityMainBinding implements ViewBinding {
       @NonNull TextView tvBauchbindeBadge, @NonNull TextView tvBauchbindeTitle,
       @NonNull TextView tvRadioArtistName, @NonNull TextView tvRadioWikipediaSummary,
       @NonNull TextView tvTrackArtist, @NonNull TextView tvTrackTitle,
-      @NonNull ConstraintLayout videoFrameConstraintLayout,
-      @NonNull View viewNordPlayerBackground) {
+      @NonNull ConstraintLayout videoFrameConstraintLayout) {
     this.rootView = rootView;
     this.audioVisualizer = audioVisualizer;
     this.btnExitFullscreen = btnExitFullscreen;
@@ -288,7 +284,6 @@ public final class ActivityMainBinding implements ViewBinding {
     this.tvTrackArtist = tvTrackArtist;
     this.tvTrackTitle = tvTrackTitle;
     this.videoFrameConstraintLayout = videoFrameConstraintLayout;
-    this.viewNordPlayerBackground = viewNordPlayerBackground;
   }
 
   @Override
@@ -624,12 +619,6 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.viewNordPlayerBackground;
-      View viewNordPlayerBackground = ViewBindings.findChildViewById(rootView, id);
-      if (viewNordPlayerBackground == null) {
-        break missingId;
-      }
-
       return new ActivityMainBinding((ConstraintLayout) rootView, audioVisualizer,
           btnExitFullscreen, btnFullscreenToggle, btnModeRadio, btnModeSettings, btnModeTv,
           cardArtistInfoContainer, cardHudPanel, cardLowerThirds, cardPlayerContainer,
@@ -641,7 +630,7 @@ public final class ActivityMainBinding implements ViewBinding {
           progressArtistInfo, progressBarBuffering, rootLayout, rvArtistHistory,
           binding_settingsHub, toggleModeGroup, tvAppHeader, tvAppSubHeader, tvBauchbindeArtist,
           tvBauchbindeBadge, tvBauchbindeTitle, tvRadioArtistName, tvRadioWikipediaSummary,
-          tvTrackArtist, tvTrackTitle, videoFrameConstraintLayout, viewNordPlayerBackground);
+          tvTrackArtist, tvTrackTitle, videoFrameConstraintLayout);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
