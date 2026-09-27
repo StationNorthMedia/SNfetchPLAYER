@@ -20,10 +20,14 @@ __pycache__/
 /SNid_720/
 /SNjingle/
 /SNids/
+/Comic/
+/GIT-PICS/
 
-# Loose root screenshots/images (only keep docs/)
+# Loose root screenshots/scratch (only keep docs/)
 /SNfetchPLAYERapp.png
 /SNfetchPLAYERtv.png
+1en.txt
+tv.css
 
 # Generated APKs & Releases (do NOT push large binary APKs to git)
 *.apk
