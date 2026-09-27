@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "net.sn.fetchplayer",
+  "variantName": "debug",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 2026092701,
+      "versionName": "1.0.0.38",
+      "outputFile": "app-debug.apk"
+    }
+  ],
+  "elementType": "File"
+}
