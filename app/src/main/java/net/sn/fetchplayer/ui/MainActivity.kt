@@ -1301,10 +1301,8 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
 
         hub.btnAutoScrollToggleInline.setOnClickListener {
             chroniclesIsAutoScroll = !chroniclesIsAutoScroll
-            hub.btnAutoScrollToggleInline.text = if (chroniclesIsAutoScroll) "AUTO: ON" else "AUTO: OFF"
             val nord14 = ContextCompat.getColor(this, R.color.nord14)
             val nord3 = ContextCompat.getColor(this, R.color.nord3)
-            hub.btnAutoScrollToggleInline.setTextColor(if (chroniclesIsAutoScroll) nord14 else nord3)
             hub.btnAutoScrollToggleInline.setIconTint(ColorStateList.valueOf(if (chroniclesIsAutoScroll) nord14 else nord3))
             hub.btnAutoScrollToggleInline.setStrokeColorResource(if (chroniclesIsAutoScroll) R.color.nord14 else R.color.nord3)
         }

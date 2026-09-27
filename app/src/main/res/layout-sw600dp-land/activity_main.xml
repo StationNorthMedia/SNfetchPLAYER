@@ -148,6 +148,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!-- Nord Theme Solid Background Layer (Behind PlayerView) -->
+            <View
+                android:id="@+id/viewNordPlayerBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/nord1" />
+
             <androidx.media3.ui.PlayerView
                 android:id="@+id/playerView"
                 android:layout_width="0dp"
