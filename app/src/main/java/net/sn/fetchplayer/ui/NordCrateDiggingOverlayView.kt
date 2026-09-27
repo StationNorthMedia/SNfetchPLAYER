@@ -34,7 +34,7 @@ class NordCrateDiggingOverlayView @JvmOverloads constructor(
     private val nord9 = ContextCompat.getColor(context, R.color.nord9)
 
     private val bgPaint = Paint().apply {
-        color = 0xF21D212A.toInt() // 95% opaque Nord0
+        color = nord0 // 100% solid Nord0 background
         style = Paint.Style.FILL
     }
 

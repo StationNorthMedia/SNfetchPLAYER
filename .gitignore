@@ -1,10 +1,10 @@
 *.iml
 .gradle
 /local.properties
-/.idea/workspace.xml
-/.idea/libraries
+/.idea/
 .DS_Store
-/build
+build/
+app/build/
 /captures
 .externalNativeBuild
 .cxx
@@ -25,6 +25,6 @@ __pycache__/
 /SNfetchPLAYERapp.png
 /SNfetchPLAYERtv.png
 
-# Generated APKs
+# Generated APKs & Releases (do NOT push large binary APKs to git)
 *.apk
-/releases/*.apk
+/releases/
