@@ -95,6 +95,81 @@ class CuratorPlaylistAdapter(
             binding.btnSave.setOnClickListener { onSaveClick(item) }
         }
 
+        val density = context.resources.displayMetrics.density
+        val nord0 = ContextCompat.getColor(context, R.color.nord0)
+        val nord1 = ContextCompat.getColor(context, R.color.nord1)
+        val nord2 = ContextCompat.getColor(context, R.color.nord2)
+        val nord6 = ContextCompat.getColor(context, R.color.nord6)
+        val nord8 = ContextCompat.getColor(context, R.color.nord8)
+        val nord11 = ContextCompat.getColor(context, R.color.nord11)
+        val nord14 = ContextCompat.getColor(context, R.color.nord14)
+
+        // Remote TV focus effects (Inward stroke & high-contrast illumination)
+        binding.cardTrackContainer.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.cardTrackContainer.strokeColor = nord8
+                binding.cardTrackContainer.strokeWidth = (2.5f * density).toInt()
+                binding.cardTrackContainer.setCardBackgroundColor(nord2)
+            } else {
+                if (item.youtubeId == currentlyPlayingYtId) {
+                    binding.cardTrackContainer.strokeColor = nord8
+                    binding.cardTrackContainer.strokeWidth = (2 * density).toInt()
+                    binding.cardTrackContainer.setCardBackgroundColor(nord2)
+                } else {
+                    binding.cardTrackContainer.strokeColor = nord2
+                    binding.cardTrackContainer.strokeWidth = (1 * density).toInt()
+                    binding.cardTrackContainer.setCardBackgroundColor(nord1)
+                }
+            }
+        }
+
+        binding.btnPlay.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.btnPlay.backgroundTintList = ColorStateList.valueOf(nord8)
+                binding.btnPlay.strokeColor = ColorStateList.valueOf(nord6)
+                binding.btnPlay.strokeWidth = (2.5f * density).toInt()
+                binding.btnPlay.setTextColor(nord0)
+                binding.btnPlay.iconTint = ColorStateList.valueOf(nord0)
+            } else {
+                binding.btnPlay.backgroundTintList = ColorStateList.valueOf(android.graphics.Color.TRANSPARENT)
+                binding.btnPlay.strokeColor = ColorStateList.valueOf(nord8)
+                binding.btnPlay.strokeWidth = (1 * density).toInt()
+                binding.btnPlay.setTextColor(nord8)
+                binding.btnPlay.iconTint = ColorStateList.valueOf(nord8)
+            }
+        }
+
+        val saveColor = if (isSavedCatalogView) nord8 else nord14
+        binding.btnSave.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.btnSave.backgroundTintList = ColorStateList.valueOf(saveColor)
+                binding.btnSave.strokeColor = ColorStateList.valueOf(nord6)
+                binding.btnSave.strokeWidth = (2.5f * density).toInt()
+                binding.btnSave.setTextColor(nord0)
+                binding.btnSave.iconTint = ColorStateList.valueOf(nord0)
+            } else {
+                binding.btnSave.backgroundTintList = ColorStateList.valueOf(android.graphics.Color.TRANSPARENT)
+                binding.btnSave.strokeColor = ColorStateList.valueOf(saveColor)
+                binding.btnSave.strokeWidth = (1 * density).toInt()
+                binding.btnSave.setTextColor(saveColor)
+                binding.btnSave.iconTint = ColorStateList.valueOf(saveColor)
+            }
+        }
+
+        binding.btnRemove.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.btnRemove.backgroundTintList = ColorStateList.valueOf(nord11)
+                binding.btnRemove.strokeColor = ColorStateList.valueOf(nord6)
+                binding.btnRemove.strokeWidth = (2.5f * density).toInt()
+                binding.btnRemove.iconTint = ColorStateList.valueOf(nord0)
+            } else {
+                binding.btnRemove.backgroundTintList = ColorStateList.valueOf(android.graphics.Color.TRANSPARENT)
+                binding.btnRemove.strokeColor = ColorStateList.valueOf(nord11)
+                binding.btnRemove.strokeWidth = (1 * density).toInt()
+                binding.btnRemove.iconTint = ColorStateList.valueOf(nord11)
+            }
+        }
+
         binding.root.setOnClickListener { onPlayClick(item) }
         binding.btnPlay.setOnClickListener { onPlayClick(item) }
         binding.btnRemove.setOnClickListener {

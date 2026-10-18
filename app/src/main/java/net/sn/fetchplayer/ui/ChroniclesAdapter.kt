@@ -122,15 +122,19 @@ class ChroniclesAdapter(
             // Audio Label
             binding.tvAudioLabel.text = "🎧 AUDIO #${item.id}"
 
+            val nord0 = ContextCompat.getColor(context, R.color.nord0)
+            val nord1 = ContextCompat.getColor(context, R.color.nord1)
             val nord2 = ContextCompat.getColor(context, R.color.nord2)
+            val nord6 = ContextCompat.getColor(context, R.color.nord6)
             val nord8 = ContextCompat.getColor(context, R.color.nord8)
             val nord11 = ContextCompat.getColor(context, R.color.nord11)
+            val density = context.resources.displayMetrics.density
 
             val isActive = (item.id == activeTrackId)
 
             if (isActive) {
                 binding.cardParagraph.setStrokeColor(nord11)
-                binding.cardParagraph.setStrokeWidth(4)
+                binding.cardParagraph.setStrokeWidth((2 * density).toInt())
                 binding.btnPlayItem.text = if (isPlaying) "⏸" else "▶"
                 binding.btnPlayItem.setStrokeColor(ColorStateList.valueOf(nord11))
                 binding.btnPlayItem.setTextColor(nord11)
@@ -138,12 +142,49 @@ class ChroniclesAdapter(
                 binding.tvTimeItem.text = formatTime(currentTimeMs, durationMs)
             } else {
                 binding.cardParagraph.setStrokeColor(nord2)
-                binding.cardParagraph.setStrokeWidth(2)
+                binding.cardParagraph.setStrokeWidth((1 * density).toInt())
                 binding.btnPlayItem.text = "▶"
                 binding.btnPlayItem.setStrokeColor(ColorStateList.valueOf(nord8))
                 binding.btnPlayItem.setTextColor(nord8)
                 binding.sbProgressItem.progress = 0
                 binding.tvTimeItem.text = "0:00 / 0:00"
+            }
+
+            // TV Remote Inward Focus System
+            binding.cardParagraph.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    binding.cardParagraph.setStrokeColor(nord8)
+                    binding.cardParagraph.setStrokeWidth((2.5f * density).toInt())
+                    binding.cardParagraph.setCardBackgroundColor(nord2)
+                } else {
+                    binding.cardParagraph.setCardBackgroundColor(nord1)
+                    if (item.id == activeTrackId) {
+                        binding.cardParagraph.setStrokeColor(nord11)
+                        binding.cardParagraph.setStrokeWidth((2 * density).toInt())
+                    } else {
+                        binding.cardParagraph.setStrokeColor(nord2)
+                        binding.cardParagraph.setStrokeWidth((1 * density).toInt())
+                    }
+                }
+            }
+
+            binding.btnPlayItem.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    binding.btnPlayItem.backgroundTintList = ColorStateList.valueOf(nord8)
+                    binding.btnPlayItem.setStrokeColor(ColorStateList.valueOf(nord6))
+                    binding.btnPlayItem.setStrokeWidth((2.5f * density).toInt())
+                    binding.btnPlayItem.setTextColor(nord0)
+                } else {
+                    binding.btnPlayItem.backgroundTintList = ColorStateList.valueOf(Color.TRANSPARENT)
+                    val activeColor = if (item.id == activeTrackId) nord11 else nord8
+                    binding.btnPlayItem.setStrokeColor(ColorStateList.valueOf(activeColor))
+                    binding.btnPlayItem.setStrokeWidth((1 * density).toInt())
+                    binding.btnPlayItem.setTextColor(activeColor)
+                }
+            }
+
+            binding.cardParagraph.setOnClickListener {
+                onPlayPauseClick(item)
             }
 
             binding.btnPlayItem.setOnClickListener {

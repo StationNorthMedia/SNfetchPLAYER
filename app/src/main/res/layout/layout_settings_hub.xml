@@ -1989,6 +1989,37 @@
 
         </LinearLayout>
 
+        <!-- Real-Time Sync Indicator for Fresh Installs -->
+        <LinearLayout
+            android:id="@+id/layoutChroniclesSyncProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@color/nord1"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvChroniclesSyncStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="⏳ Downloading Chronicles media (0/130)..."
+                android:textColor="@color/nord8"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/pbChroniclesSync"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:layout_marginTop="4dp"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="@color/nord8" />
+        </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -2003,6 +2034,9 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clipToPadding="false"
+            android:focusable="true"
+            android:nextFocusDown="@+id/btnTogglePlayAllInline"
+            android:nextFocusUp="@+id/btnBackFromChronicles"
             android:paddingBottom="12dp" />
 
         <View
@@ -2061,8 +2095,11 @@
                     android:layout_width="0dp"
                     android:layout_height="36dp"
                     android:layout_weight="1"
+                    android:focusable="true"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
+                    android:nextFocusRight="@+id/btnPrevTrackInline"
+                    android:nextFocusUp="@+id/rvChroniclesCardsInline"
                     android:padding="0dp"
                     app:backgroundTint="@color/nord7"
                     app:cornerRadius="6dp"
@@ -2082,8 +2119,12 @@
                     android:layout_height="36dp"
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
+                    android:focusable="true"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
+                    android:nextFocusLeft="@+id/btnChroniclesFullscreenInline"
+                    android:nextFocusRight="@+id/btnTogglePlayAllInline"
+                    android:nextFocusUp="@+id/rvChroniclesCardsInline"
                     android:padding="0dp"
                     app:backgroundTint="@color/nord12"
                     app:cornerRadius="6dp"
@@ -2103,8 +2144,12 @@
                     android:layout_height="36dp"
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
+                    android:focusable="true"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
+                    android:nextFocusLeft="@+id/btnPrevTrackInline"
+                    android:nextFocusRight="@+id/btnNextTrackInline"
+                    android:nextFocusUp="@+id/rvChroniclesCardsInline"
                     android:padding="0dp"
                     app:backgroundTint="@color/nord8"
                     app:cornerRadius="6dp"
@@ -2124,8 +2169,12 @@
                     android:layout_height="36dp"
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
+                    android:focusable="true"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
+                    android:nextFocusLeft="@+id/btnTogglePlayAllInline"
+                    android:nextFocusRight="@+id/btnAutoScrollToggleInline"
+                    android:nextFocusUp="@+id/rvChroniclesCardsInline"
                     android:padding="0dp"
                     app:backgroundTint="@color/nord15"
                     app:cornerRadius="6dp"
@@ -2145,8 +2194,11 @@
                     android:layout_height="36dp"
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
+                    android:focusable="true"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
+                    android:nextFocusLeft="@+id/btnNextTrackInline"
+                    android:nextFocusUp="@+id/rvChroniclesCardsInline"
                     android:padding="0dp"
                     app:backgroundTint="@color/nord14"
                     app:cornerRadius="6dp"

@@ -1846,8 +1846,8 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         val playlists = curatedCatalogManager.getPlaylists()
         val playlistNames = playlists.map { it.name }
 
-        val spinnerAdapter = android.widget.ArrayAdapter(this, android.R.layout.simple_spinner_item, playlistNames).apply {
-            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val spinnerAdapter = android.widget.ArrayAdapter(this, R.layout.item_nord_spinner, playlistNames).apply {
+            setDropDownViewResource(R.layout.item_nord_spinner_dropdown)
         }
 
         hub.spinnerTvPlaylist.adapter = spinnerAdapter
@@ -2172,6 +2172,8 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         dialog.show()
     }
 
+    private var lastReportedDownloadedCount = -1
+
     private fun updateAssetSyncUi(progress: net.sn.fetchplayer.manager.SyncProgress) {
         runOnUiThread {
             binding.settingsHub.pbRemoteAssetSync.progress = progress.progressPercent
@@ -2179,9 +2181,27 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             if (progress.isSyncing) {
                 binding.settingsHub.btnSyncAssetsNow.isEnabled = false
                 binding.settingsHub.btnSyncAssetsNow.text = "⏳ Syncing..."
+
+                // Chronicles inline sync progress banner
+                binding.settingsHub.layoutChroniclesSyncProgress.visibility = View.VISIBLE
+                binding.settingsHub.tvChroniclesSyncStatus.text = "⏳ Syncing Chronicles media: ${progress.downloadedCount}/${progress.totalCount} (${progress.progressPercent}%)"
+                binding.settingsHub.pbChroniclesSync.progress = progress.progressPercent
+
+                // Live update Chronicles cards as new assets land on disk
+                if (progress.downloadedCount != lastReportedDownloadedCount) {
+                    lastReportedDownloadedCount = progress.downloadedCount
+                    chroniclesAdapter?.notifyDataSetChanged()
+                }
             } else {
                 binding.settingsHub.btnSyncAssetsNow.isEnabled = true
                 binding.settingsHub.btnSyncAssetsNow.text = "🔄 Sync Now"
+                binding.settingsHub.layoutChroniclesSyncProgress.visibility = View.GONE
+
+                // Final refresh when sync finishes
+                if (lastReportedDownloadedCount != -1) {
+                    lastReportedDownloadedCount = -1
+                    chroniclesAdapter?.notifyDataSetChanged()
+                }
             }
         }
     }
@@ -2395,7 +2415,23 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             binding.settingsHub.etPlaylistInput,
             binding.settingsHub.btnLoadPlaylist,
             binding.settingsHub.btnExportJson,
-            binding.settingsHub.btnClearCuratorList
+            binding.settingsHub.btnClearCuratorList,
+            binding.settingsHub.btnChroniclesFullscreenInline,
+            binding.settingsHub.btnPrevTrackInline,
+            binding.settingsHub.btnTogglePlayAllInline,
+            binding.settingsHub.btnNextTrackInline,
+            binding.settingsHub.btnAutoScrollToggleInline,
+            binding.settingsHub.btnBackFromBroadcast,
+            binding.settingsHub.btnBackFromCurator,
+            binding.settingsHub.btnBackFromChronicles,
+            binding.settingsHub.btnBackFromLexicon,
+            binding.settingsHub.btnBackFromAudioVisualizer,
+            binding.settingsHub.btnBackFromTvDisplay,
+            binding.settingsHub.btnBackFromQueenTutorial,
+            binding.settingsHub.btnBackFromSystemCache,
+            binding.settingsHub.spinnerCuratorPlaylistSelect,
+            binding.settingsHub.spinnerTvPlaylist,
+            binding.settingsHub.spinnerRadioPlaylist
         )
 
         // 1. Toggle Group Buttons: Field Illumination / Inward Glow (No scaling blowout)
@@ -2426,15 +2462,53 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             }
         }
 
-        // 2. Standalone Action Tiles & HUD Controls: Inward Glow & Elevation
+        val nord1Color = ContextCompat.getColor(this, R.color.nord1)
+        val nord2Color = ContextCompat.getColor(this, R.color.nord2)
+
+        // 2. On Air Dashboard Category Tiles: Inward High-Contrast Stroke & Background Illumination
+        val dashboardCards = listOf(
+            binding.settingsHub.cardTileBroadcast to R.color.nord11,
+            binding.settingsHub.cardTileCurator to R.color.nord15,
+            binding.settingsHub.cardTileChronicles to R.color.nord13,
+            binding.settingsHub.cardTileLexicon to R.color.nord7,
+            binding.settingsHub.cardTileAudioVisualizer to R.color.nord14,
+            binding.settingsHub.cardTileTvDisplay to R.color.nord10,
+            binding.settingsHub.cardTileQueenTutorial to R.color.nord12,
+            binding.settingsHub.cardTileSystemCache to R.color.nord9
+        )
+
+        for ((card, defaultColorRes) in dashboardCards) {
+            val defaultColor = ContextCompat.getColor(this, defaultColorRes)
+            card.isFocusable = true
+            card.isClickable = true
+            card.setOnFocusChangeListener { v, hasFocus ->
+                if (v is com.google.android.material.card.MaterialCardView) {
+                    if (hasFocus) {
+                        v.strokeColor = nord8Color
+                        v.strokeWidth = (3.5f * density).toInt()
+                        v.setCardBackgroundColor(nord2Color)
+                        v.elevation = 10f * density
+                    } else {
+                        v.strokeColor = defaultColor
+                        v.strokeWidth = (1.5f * density).toInt()
+                        v.setCardBackgroundColor(nord1Color)
+                        v.elevation = 3f * density
+                    }
+                }
+            }
+        }
+
+        // 3. Standalone Action Tiles & HUD Controls: Inward Glow & Elevation
         for (view in standaloneButtons) {
             view.isFocusable = true
             view.setOnFocusChangeListener { v, hasFocus ->
                 if (hasFocus) {
                     v.elevation = 8f * density
                     if (v is com.google.android.material.button.MaterialButton) {
-                        v.strokeColor = ColorStateList.valueOf(nord8Color)
+                        v.strokeColor = ColorStateList.valueOf(nord6Color)
                         v.strokeWidth = (2.5f * density).toInt()
+                    } else if (v is android.widget.Spinner) {
+                        v.setBackgroundColor(nord2Color)
                     }
 
                     if (v == binding.btnExitFullscreen || v == binding.hudPrevious ||
@@ -2444,7 +2518,10 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                 } else {
                     v.elevation = 2f * density
                     if (v is com.google.android.material.button.MaterialButton) {
+                        v.strokeColor = ColorStateList.valueOf(nord8Color)
                         v.strokeWidth = (1.5f * density).toInt()
+                    } else if (v is android.widget.Spinner) {
+                        v.setBackgroundColor(nord0Color)
                     }
                 }
             }
