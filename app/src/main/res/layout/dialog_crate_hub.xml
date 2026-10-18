@@ -144,6 +144,69 @@
                 android:indeterminate="true"
                 android:progressTint="@color/nord8" />
 
+            <!-- Prominent Success Banner Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardAirBeamSuccess"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/nord1"
+                app:cardCornerRadius="8dp"
+                app:strokeColor="@color/nord14"
+                app:strokeWidth="1.5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🎉"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:id="@+id/tvAirBeamSuccessTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:text="TRANSFER COMPLETED!"
+                            android:textColor="@color/nord14"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvAirBeamSuccessDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:lineSpacingExtra="2dp"
+                        android:text="Playlist successfully exchanged!"
+                        android:textColor="@color/nord6"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="✨ You can safely close this window now, or select another playlist to beam."
+                        android:textColor="@color/nord4"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
             <!-- Discovered Devices List -->
             <LinearLayout
                 android:id="@+id/layoutDiscoveredDevices"
@@ -185,7 +248,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="4dp"
-                    android:background="@color/nord0"
+                    android:background="@drawable/bg_spinner_nord"
+                    android:focusable="true"
                     android:paddingHorizontal="8dp"
                     android:spinnerMode="dropdown" />
 
@@ -239,15 +303,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
                 android:layout_marginTop="4dp"
-                android:background="@color/nord1"
+                android:background="@drawable/bg_spinner_nord"
+                android:focusable="true"
                 android:paddingHorizontal="8dp"
                 android:spinnerMode="dropdown" />
+
+            <!-- Dynamic Selected Crate Preview Info -->
+            <TextView
+                android:id="@+id/tvMessengerCrateDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_spinner_nord"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="8dp"
+                android:text="📦 Ready to export: Compressed .sncrate container"
+                android:textColor="@color/nord8"
+                android:textSize="11.5sp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnShareViaMessenger"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="10dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="📲 SHARE VIA WHATSAPP / APPS"

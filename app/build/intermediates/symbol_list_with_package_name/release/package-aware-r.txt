@@ -3103,6 +3103,7 @@ drawable avd_hide_password
 drawable avd_show_password
 drawable badge_update_bg
 drawable bg_rounded_edittext
+drawable bg_spinner_nord
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -3534,6 +3535,7 @@ id cache_measures
 id callMeasure
 id cancel_action
 id cancel_button
+id cardAirBeamSuccess
 id cardArtistInfoContainer
 id cardCuratorPreviewPlayer
 id cardDevice
@@ -4094,6 +4096,8 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tvAirBeamStatus
+id tvAirBeamSuccessDetail
+id tvAirBeamSuccessTitle
 id tvAlbumExpandIndicator
 id tvAlbumTitle
 id tvAlbumTrackBadge
@@ -4133,6 +4137,7 @@ id tvDropdownTitle
 id tvEditYtId
 id tvIndex
 id tvLocalDeviceBadge
+id tvMessengerCrateDetails
 id tvNewVersionBadge
 id tvNordLogsTerminal
 id tvNowPlayingStatusInline

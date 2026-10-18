@@ -35,7 +35,7 @@ object CrateArchiveManager {
         val curatorName: String,
         val trackCount: Int,
         val createdAtEpochMs: Long = System.currentTimeMillis(),
-        val appVersion: String = "1.0.0.47"
+        val appVersion: String = "1.0.0.48"
     )
 
     /**

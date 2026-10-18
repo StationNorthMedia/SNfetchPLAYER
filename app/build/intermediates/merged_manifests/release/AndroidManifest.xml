@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.sn.fetchplayer"
-    android:versionCode="2026101901"
-    android:versionName="1.0.0.47" >
+    android:versionCode="2026101902"
+    android:versionName="1.0.0.48" >
 
     <uses-sdk
         android:minSdkVersion="24"

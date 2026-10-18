@@ -50,7 +50,8 @@ class NearbyCrateSyncManager(private val context: Context) {
         data class Receiving(val progressPercent: Int) : SyncState()
         data class CrateReceived(
             val manifest: CrateArchiveManager.CrateManifest,
-            val tracks: List<RawPlaylistItem>
+            val tracks: List<RawPlaylistItem>,
+            val senderDeviceName: String = "Nearby Device"
         ) : SyncState()
         data class Success(val message: String) : SyncState()
         data class Error(val errorMessage: String) : SyncState()
@@ -65,6 +66,7 @@ class NearbyCrateSyncManager(private val context: Context) {
     private val discoveredEndpoints = mutableMapOf<String, DiscoveredDevice>()
     private var activeConnectedEndpointId: String? = null
     private var activeConnectedDeviceName: String? = null
+    private var lastSentPlaylistName: String? = null
 
     val localDeviceName: String
         get() {
@@ -142,6 +144,7 @@ class NearbyCrateSyncManager(private val context: Context) {
             _syncState.value = SyncState.Error("No active connection to send playlist.")
             return
         }
+        lastSentPlaylistName = playlist.name
 
         try {
             val zipBytes = CrateArchiveManager.packCrateToBytes(playlist, curatorName)
@@ -234,11 +237,12 @@ class NearbyCrateSyncManager(private val context: Context) {
     private val payloadCallback = object : PayloadCallback() {
         override fun onPayloadReceived(endpointId: String, payload: Payload) {
             AppLogger.d(TAG, "Incoming payload from $endpointId (type: ${payload.type})")
+            val senderName = discoveredEndpoints[endpointId]?.deviceName ?: activeConnectedDeviceName ?: "Nearby Device"
             when (payload.type) {
                 Payload.Type.BYTES -> {
                     val bytes = payload.asBytes()
                     if (bytes != null) {
-                        processReceivedBytes(bytes)
+                        processReceivedBytes(bytes, senderName)
                     }
                 }
                 Payload.Type.STREAM -> {
@@ -246,7 +250,7 @@ class NearbyCrateSyncManager(private val context: Context) {
                         val stream = payload.asStream()?.asInputStream()
                         if (stream != null) {
                             val bytes = stream.readBytes()
-                            processReceivedBytes(bytes)
+                            processReceivedBytes(bytes, senderName)
                         }
                     }
                 }
@@ -272,6 +276,12 @@ class NearbyCrateSyncManager(private val context: Context) {
                 }
                 PayloadTransferUpdate.Status.SUCCESS -> {
                     AppLogger.d(TAG, "Payload transfer finished successfully with $endpointId")
+                    val currentState = _syncState.value
+                    if (currentState is SyncState.Sending) {
+                        val name = lastSentPlaylistName ?: "Mixtape"
+                        val target = activeConnectedDeviceName ?: "nearby device"
+                        _syncState.value = SyncState.Success("Successfully beamed \"$name\" to $target!")
+                    }
                 }
                 PayloadTransferUpdate.Status.FAILURE -> {
                     AppLogger.e(TAG, "Payload transfer failed with $endpointId")
@@ -284,12 +294,12 @@ class NearbyCrateSyncManager(private val context: Context) {
         }
     }
 
-    private fun processReceivedBytes(bytes: ByteArray) {
+    private fun processReceivedBytes(bytes: ByteArray, senderDeviceName: String = activeConnectedDeviceName ?: "Nearby Device") {
         val result = CrateArchiveManager.unpackCrateFromBytes(bytes)
         if (result != null) {
             val (manifest, tracks) = result
             AppLogger.d(TAG, "Successfully received crate '${manifest.playlistName}' (${tracks.size} tracks)")
-            _syncState.value = SyncState.CrateReceived(manifest, tracks)
+            _syncState.value = SyncState.CrateReceived(manifest, tracks, senderDeviceName)
         } else {
             AppLogger.e(TAG, "Could not unpack received payload into valid crate")
             _syncState.value = SyncState.Error("Received data is not a valid Station North crate.")

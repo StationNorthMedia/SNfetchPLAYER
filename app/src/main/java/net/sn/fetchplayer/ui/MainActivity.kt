@@ -608,6 +608,18 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         dialogBinding.btnTabAirBeam.setOnClickListener { switchMode(true) }
         dialogBinding.btnTabMessenger.setOnClickListener { switchMode(false) }
 
+        fun updateMessengerDetails(playlistIndex: Int) {
+            val playlists = curatedCatalogManager.getPlaylists()
+            if (playlistIndex in playlists.indices) {
+                val p = playlists[playlistIndex]
+                val sampleTracks = p.tracks.take(3).joinToString("\n") { "• ${it.artist} - ${it.title}" }
+                val more = if (p.tracks.size > 3) "\n...and ${p.tracks.size - 3} more tracks" else ""
+                dialogBinding.tvMessengerCrateDetails.text = "📦 Mixtape: \"${p.name}\" (${p.tracks.size} tracks)\n$sampleTracks$more"
+            } else {
+                dialogBinding.tvMessengerCrateDetails.text = "📦 Ready to export: Compressed .sncrate container"
+            }
+        }
+
         fun refreshSpinners() {
             val playlists = curatedCatalogManager.getPlaylists()
             val labels = playlists.map { "${it.name} (${it.tracks.size} tracks)" }
@@ -621,8 +633,16 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             val activeIdx = playlists.indexOfFirst { it.id == activeId }.coerceAtLeast(0)
             dialogBinding.spinnerAirBeamPlaylist.setSelection(activeIdx)
             dialogBinding.spinnerMessengerPlaylist.setSelection(activeIdx)
+            updateMessengerDetails(activeIdx)
         }
         refreshSpinners()
+
+        dialogBinding.spinnerMessengerPlaylist.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
+                updateMessengerDetails(position)
+            }
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
+        }
 
         dialogBinding.tvLocalDeviceBadge.text = "📻 Your Device: ${nearbyCrateSyncManager.localDeviceName}"
 
@@ -671,6 +691,13 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                 val playlistToShare = playlists[selectedIdx]
                 try {
                     val file = CrateArchiveManager.packCrateToFile(this, playlistToShare)
+                    // Copy mixtape description to clipboard as backup for WhatsApp/Messenger
+                    val summaryText = "Station North Mixtape Crate: \"${playlistToShare.name}\" (${playlistToShare.tracks.size} tracks) — Open with SNfetchPLAYER!"
+                    val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                    val clip = ClipData.newPlainText("SNfetch Mixtape Crate", summaryText)
+                    clipboard.setPrimaryClip(clip)
+                    Toast.makeText(this, "Mixtape info copied to clipboard! Opening share...", Toast.LENGTH_SHORT).show()
+
                     val shareIntent = CrateArchiveManager.createShareIntent(this, file, playlistToShare.name)
                     startActivity(shareIntent)
                 } catch (e: Exception) {
@@ -690,7 +717,9 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             dialogBinding.btnTabMessenger,
             dialogBinding.btnBeamPlaylist,
             dialogBinding.btnShareViaMessenger,
-            dialogBinding.btnImportCrateFile
+            dialogBinding.btnImportCrateFile,
+            dialogBinding.spinnerAirBeamPlaylist,
+            dialogBinding.spinnerMessengerPlaylist
         ).forEach { setupTvFocusHighlight(it) }
 
         val syncJob = lifecycleScope.launch {
@@ -698,26 +727,39 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                 if (!dialog.isShowing) return@collect
                 when (state) {
                     is NearbyCrateSyncManager.SyncState.Idle -> {
+                        dialogBinding.cardAirBeamSuccess.visibility = View.GONE
+                        dialogBinding.tvAirBeamStatus.visibility = View.VISIBLE
                         dialogBinding.tvAirBeamStatus.text = "Idle"
                         dialogBinding.pbAirBeamScanning.visibility = View.GONE
                         dialogBinding.layoutConnectedSession.visibility = View.GONE
                     }
                     is NearbyCrateSyncManager.SyncState.Searching -> {
+                        dialogBinding.cardAirBeamSuccess.visibility = View.GONE
+                        dialogBinding.tvAirBeamStatus.visibility = View.VISIBLE
                         dialogBinding.tvAirBeamStatus.text = "📡 Scanning for nearby Station North players..."
+                        dialogBinding.pbAirBeamScanning.isIndeterminate = true
                         dialogBinding.pbAirBeamScanning.visibility = View.VISIBLE
                         dialogBinding.layoutConnectedSession.visibility = View.GONE
                         renderDevices(emptyList())
                     }
                     is NearbyCrateSyncManager.SyncState.DiscoveredDevices -> {
+                        dialogBinding.cardAirBeamSuccess.visibility = View.GONE
+                        dialogBinding.tvAirBeamStatus.visibility = View.VISIBLE
                         dialogBinding.tvAirBeamStatus.text = "Found ${state.devices.size} nearby device(s)"
+                        dialogBinding.pbAirBeamScanning.isIndeterminate = true
                         dialogBinding.pbAirBeamScanning.visibility = View.VISIBLE
                         renderDevices(state.devices)
                     }
                     is NearbyCrateSyncManager.SyncState.Connecting -> {
+                        dialogBinding.cardAirBeamSuccess.visibility = View.GONE
+                        dialogBinding.tvAirBeamStatus.visibility = View.VISIBLE
                         dialogBinding.tvAirBeamStatus.text = "Connecting to ${state.deviceName}..."
+                        dialogBinding.pbAirBeamScanning.isIndeterminate = true
                         dialogBinding.pbAirBeamScanning.visibility = View.VISIBLE
                     }
                     is NearbyCrateSyncManager.SyncState.Connected -> {
+                        dialogBinding.cardAirBeamSuccess.visibility = View.GONE
+                        dialogBinding.tvAirBeamStatus.visibility = View.VISIBLE
                         dialogBinding.tvAirBeamStatus.text = "Connected to ${state.deviceName}!"
                         dialogBinding.pbAirBeamScanning.visibility = View.GONE
                         dialogBinding.layoutDiscoveredDevices.removeAllViews()
@@ -725,16 +767,28 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                         dialogBinding.tvConnectedTargetName.text = "Connected: ${state.deviceName}"
                     }
                     is NearbyCrateSyncManager.SyncState.Sending -> {
+                        dialogBinding.cardAirBeamSuccess.visibility = View.GONE
+                        dialogBinding.tvAirBeamStatus.visibility = View.VISIBLE
                         dialogBinding.tvAirBeamStatus.text = "🚀 Beaming playlist (${state.progressPercent}%)..."
+                        dialogBinding.pbAirBeamScanning.isIndeterminate = false
+                        dialogBinding.pbAirBeamScanning.progress = state.progressPercent
                         dialogBinding.pbAirBeamScanning.visibility = View.VISIBLE
                     }
                     is NearbyCrateSyncManager.SyncState.Receiving -> {
+                        dialogBinding.cardAirBeamSuccess.visibility = View.GONE
+                        dialogBinding.tvAirBeamStatus.visibility = View.VISIBLE
                         dialogBinding.tvAirBeamStatus.text = "📥 Receiving crate (${state.progressPercent}%)..."
+                        dialogBinding.pbAirBeamScanning.isIndeterminate = false
+                        dialogBinding.pbAirBeamScanning.progress = state.progressPercent
                         dialogBinding.pbAirBeamScanning.visibility = View.VISIBLE
                     }
                     is NearbyCrateSyncManager.SyncState.CrateReceived -> {
-                        dialogBinding.tvAirBeamStatus.text = "✅ Received '${state.manifest.playlistName}' (${state.tracks.size} tracks)!"
                         dialogBinding.pbAirBeamScanning.visibility = View.GONE
+                        dialogBinding.tvAirBeamStatus.visibility = View.GONE
+                        dialogBinding.cardAirBeamSuccess.visibility = View.VISIBLE
+                        dialogBinding.tvAirBeamSuccessTitle.text = "MIXTAPE RECEIVED & SAVED!"
+                        dialogBinding.tvAirBeamSuccessDetail.text = "Received \"${state.manifest.playlistName}\" (${state.tracks.size} tracks) from ${state.senderDeviceName}! Added to your library."
+
                         var finalName = state.manifest.playlistName
                         val existingNames = curatedCatalogManager.getPlaylists().map { it.name }
                         if (existingNames.any { it.equals(finalName, ignoreCase = true) }) {
@@ -752,12 +806,19 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                         ).show()
                     }
                     is NearbyCrateSyncManager.SyncState.Success -> {
-                        dialogBinding.tvAirBeamStatus.text = "✅ ${state.message}"
                         dialogBinding.pbAirBeamScanning.visibility = View.GONE
+                        dialogBinding.tvAirBeamStatus.visibility = View.GONE
+                        dialogBinding.cardAirBeamSuccess.visibility = View.VISIBLE
+                        dialogBinding.tvAirBeamSuccessTitle.text = "BEAM TRANSFER COMPLETED!"
+                        dialogBinding.tvAirBeamSuccessDetail.text = state.message
+                        Toast.makeText(this@MainActivity, state.message, Toast.LENGTH_LONG).show()
                     }
                     is NearbyCrateSyncManager.SyncState.Error -> {
+                        dialogBinding.cardAirBeamSuccess.visibility = View.GONE
+                        dialogBinding.tvAirBeamStatus.visibility = View.VISIBLE
                         dialogBinding.tvAirBeamStatus.text = "⚠️ ${state.errorMessage}"
                         dialogBinding.pbAirBeamScanning.visibility = View.GONE
+                        Toast.makeText(this@MainActivity, "AirBeam Error: ${state.errorMessage}", Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -787,9 +848,12 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                 return
             }
 
+            val previewTracks = tracks.take(5).mapIndexed { idx, t -> "${idx + 1}. ${t.artist} - ${t.title}" }.joinToString("\n")
+            val remainingTracks = if (tracks.size > 5) "\n...and ${tracks.size - 5} more tracks" else ""
+
             AlertDialog.Builder(this)
                 .setTitle("📦 Import Mixtape Crate")
-                .setMessage("Mixtape: \"${manifest.playlistName}\"\nCurator: ${manifest.curatorName}\nTracks: ${tracks.size}\n\nDo you want to import this mixtape into your playlist collection?")
+                .setMessage("Mixtape: \"${manifest.playlistName}\"\nCurator: ${manifest.curatorName}\nTracks: ${tracks.size}\n\nTrack Preview:\n$previewTracks$remainingTracks\n\nDo you want to import this mixtape into your playlist collection?")
                 .setPositiveButton("Import") { _, _ ->
                     var finalName = manifest.playlistName
                     val existingNames = curatedCatalogManager.getPlaylists().map { it.name }
@@ -1896,7 +1960,8 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             hub.cardTileAudioVisualizer, hub.cardTileChronicles, hub.cardTileQueenTutorial, hub.cardTileSystemCache,
             hub.btnBackFromBroadcast, hub.btnBackFromCurator, hub.btnBackFromLexicon, hub.btnBackFromTvDisplay,
             hub.btnBackFromAudioVisualizer, hub.btnBackFromChronicles, hub.btnBackFromQueenTutorial, hub.btnBackFromSystemCache,
-            hub.btnOpenCrateHub, hub.btnCreateNewPlaylist, hub.switchFftVisualizer, hub.switchBassPulse, hub.switchQueenQuotes,
+            hub.btnOpenCrateHub, hub.btnCreateNewPlaylist, hub.spinnerTvPlaylist, hub.spinnerRadioPlaylist, hub.spinnerCuratorPlaylistSelect,
+            hub.switchFftVisualizer, hub.switchBassPulse, hub.switchQueenQuotes,
             hub.switchSlantedBauchbinden, hub.btnTabImported, hub.btnTabSaved, hub.btnLoadPlaylist,
             hub.btnChroniclesFullscreenInline, hub.btnPrevTrackInline, hub.btnTogglePlayAllInline, hub.btnNextTrackInline, hub.btnAutoScrollToggleInline, hub.btnOpenQueenTutorial,
             hub.cbInnerTube, hub.cbStationNorth, hub.cbYtdlpApi, hub.cbInvidious, hub.cbCobalt, hub.cbPiped,
