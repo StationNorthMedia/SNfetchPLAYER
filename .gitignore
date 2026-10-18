@@ -34,3 +34,6 @@ tv.css
 
 # Ignore build output APKs (releases/ is tracked for direct downloads)
 app/build/outputs/apk/
+/faith_voice_backup/
+website_reader
+/website_reader/

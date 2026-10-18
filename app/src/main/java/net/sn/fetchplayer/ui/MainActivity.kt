@@ -790,11 +790,11 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
 
         setupButtonTouchEffects()
 
-        // Curator Playlist Load Button
+        // Curator Content Resolve & Add Button
         binding.settingsHub.btnLoadPlaylist.setOnClickListener {
             val input = binding.settingsHub.etPlaylistInput.text.toString().trim()
             if (input.isEmpty()) {
-                Toast.makeText(this, "Bitte YouTube-Playlist URL oder ID eingeben", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter a YouTube link or ID", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -802,24 +802,42 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             binding.settingsHub.btnLoadPlaylist.isEnabled = false
 
             lifecycleScope.launch(Dispatchers.IO) {
-                AppLogger.d("MainActivity", "CURATOR -> Fetching YouTube playlist: $input")
+                AppLogger.d("MainActivity", "CURATOR -> Fetching YouTube content: $input")
                 val tracks = YouTubePlaylistExtractor.fetchPlaylistTracks(input)
                 withContext(Dispatchers.Main) {
                     binding.settingsHub.progressLoadPlaylist.visibility = View.GONE
                     binding.settingsHub.btnLoadPlaylist.isEnabled = true
 
                     if (tracks.isNotEmpty()) {
-                        importedPlaylistItems.clear()
-                        importedPlaylistItems.addAll(tracks)
+                        if (tracks.size == 1) {
+                            val track = tracks.first()
+                            val existingIndex = importedPlaylistItems.indexOfFirst { it.youtubeId == track.youtubeId }
+                            if (existingIndex >= 0) {
+                                importedPlaylistItems[existingIndex] = track
+                            } else {
+                                importedPlaylistItems.add(0, track)
+                            }
+                            binding.settingsHub.toggleCuratorTabGroup.check(R.id.btnTabImported)
+                            curatorAdapter.isSavedCatalogView = false
+                            curatorAdapter.setItems(importedPlaylistItems)
+                            updateCuratorStatusCount()
+                            binding.settingsHub.etPlaylistInput.text?.clear()
+                            Toast.makeText(this@MainActivity, "✓ Added '${track.title}' to queue! Tap 'Save' to add to playlist.", Toast.LENGTH_SHORT).show()
+                            AppLogger.d("MainActivity", "CURATOR -> Successfully added single track '${track.title}' [${track.youtubeId}]")
+                        } else {
+                            importedPlaylistItems.clear()
+                            importedPlaylistItems.addAll(tracks)
 
-                        binding.settingsHub.toggleCuratorTabGroup.check(R.id.btnTabImported)
-                        curatorAdapter.isSavedCatalogView = false
-                        curatorAdapter.setItems(importedPlaylistItems)
-                        updateCuratorStatusCount()
-                        Toast.makeText(this@MainActivity, "${tracks.size} tracks loaded from playlist!", Toast.LENGTH_SHORT).show()
-                        AppLogger.d("MainActivity", "CURATOR -> Successfully loaded ${tracks.size} tracks into Curator UI")
+                            binding.settingsHub.toggleCuratorTabGroup.check(R.id.btnTabImported)
+                            curatorAdapter.isSavedCatalogView = false
+                            curatorAdapter.setItems(importedPlaylistItems)
+                            updateCuratorStatusCount()
+                            binding.settingsHub.etPlaylistInput.text?.clear()
+                            Toast.makeText(this@MainActivity, "${tracks.size} tracks loaded from playlist!", Toast.LENGTH_SHORT).show()
+                            AppLogger.d("MainActivity", "CURATOR -> Successfully loaded ${tracks.size} tracks into Curator UI")
+                        }
                     } else {
-                        Toast.makeText(this@MainActivity, "No tracks found or error loading playlist.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@MainActivity, "Could not resolve video or playlist. Please check link.", Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -1627,7 +1645,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
                 """.trimIndent()
 
                 3 -> """
-                    📖 CHAPTER 3: THE SN-LEXIKON ARCHIVE
+                    📖 CHAPTER 3: THE SN-LEXICON ARCHIVE
                     
                     "Explore 4,438+ Urban, R&B, and Hip-Hop legends indexed straight into the application."
                     

@@ -57,6 +57,18 @@ object YouTubePlaylistExtractor {
         val trimmed = playlistInput.trim()
         AppLogger.d(TAG, "Fetching tracks for input: '$trimmed'")
 
+        val playlistId = extractPlaylistIdFromUrl(trimmed)
+        val videoId = extractVideoId(trimmed)
+
+        // Case A: Pure single video link or ID (no playlist parameter)
+        if (playlistId.isNullOrEmpty() && !videoId.isNullOrEmpty()) {
+            val singleItem = fetchSingleVideoTrack(videoId)
+            if (singleItem != null) {
+                return@withContext listOf(singleItem)
+            }
+        }
+
+        // Case B: Playlist URL or channel
         // Method 1: Check Python Resolver Server (Port 8080) with 1s fast timeout
         val serverItems = fetchViaResolverServer(trimmed)
         if (serverItems.isNotEmpty()) {
@@ -81,8 +93,114 @@ object YouTubePlaylistExtractor {
             return@withContext filtered
         }
 
+        // Case C: Fallback: if playlist extraction failed or returned empty, but input had a videoId
+        if (!videoId.isNullOrEmpty()) {
+            AppLogger.d(TAG, "Playlist extraction empty; falling back to single video resolution for [$videoId]")
+            val singleItem = fetchSingleVideoTrack(videoId)
+            if (singleItem != null) {
+                return@withContext listOf(singleItem)
+            }
+        }
+
         AppLogger.e(TAG, "Failed to extract tracks for input '$trimmed' via all methods.")
         return@withContext emptyList()
+    }
+
+    suspend fun fetchSingleVideoTrack(videoId: String): RawPlaylistItem? = withContext(Dispatchers.IO) {
+        AppLogger.d(TAG, "Resolving single video track for ID: $videoId")
+
+        // Method 1: YouTube oEmbed (Fastest, cleanest official public endpoint)
+        try {
+            val oembedUrl = "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=$videoId&format=json"
+            val request = Request.Builder()
+                .url(oembedUrl)
+                .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
+                .get()
+                .build()
+            val response = httpClient.newCall(request).execute()
+            if (response.isSuccessful) {
+                val jsonStr = response.body?.string()
+                if (!jsonStr.isNullOrEmpty()) {
+                    val root = JsonParser.parseString(jsonStr).asJsonObject
+                    val rawTitle = root.get("title")?.asString?.trim() ?: "Unknown Title"
+                    val rawAuthor = root.get("author_name")?.asString?.trim() ?: "Station North Music"
+                    val (title, artist) = parseTitleAndArtist(rawTitle, rawAuthor)
+                    AppLogger.d(TAG, "SUCCESS oEmbed resolved single video [$videoId]: '$artist' - '$title'")
+                    return@withContext RawPlaylistItem(videoId, title, artist)
+                }
+            }
+        } catch (e: Exception) {
+            AppLogger.d(TAG, "oEmbed resolution failed for [$videoId]: ${e.message}")
+        }
+
+        // Method 2: InnerTube Player API
+        try {
+            val payload = JsonObject().apply {
+                addProperty("videoId", videoId)
+                add("context", JsonObject().apply {
+                    add("client", JsonObject().apply {
+                        addProperty("clientName", "ANDROID")
+                        addProperty("clientVersion", "21.02.35")
+                        addProperty("hl", "en")
+                        addProperty("gl", "US")
+                    })
+                })
+            }
+            val request = Request.Builder()
+                .url("https://www.youtube.com/youtubei/v1/player")
+                .post(payload.toString().toRequestBody(JSON_MEDIA_TYPE))
+                .header("User-Agent", USER_AGENT_ANDROID)
+                .build()
+            val response = httpClient.newCall(request).execute()
+            if (response.isSuccessful) {
+                val jsonStr = response.body?.string()
+                if (!jsonStr.isNullOrEmpty()) {
+                    val root = JsonParser.parseString(jsonStr).asJsonObject
+                    val videoDetails = root.getAsJsonObject("videoDetails")
+                    if (videoDetails != null) {
+                        val rawTitle = videoDetails.get("title")?.asString?.trim() ?: "Unknown Title"
+                        val rawAuthor = videoDetails.get("author")?.asString?.trim() ?: "Station North Music"
+                        val (title, artist) = parseTitleAndArtist(rawTitle, rawAuthor)
+                        AppLogger.d(TAG, "SUCCESS InnerTube resolved single video [$videoId]: '$artist' - '$title'")
+                        return@withContext RawPlaylistItem(videoId, title, artist)
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            AppLogger.d(TAG, "InnerTube single video resolution failed for [$videoId]: ${e.message}")
+        }
+
+        // Method 3: NewPipe Stream Extractor Fallback
+        try {
+            ensureNewPipeInitialized()
+            val streamExtractor = ServiceList.YouTube.getStreamExtractor("https://www.youtube.com/watch?v=$videoId")
+            streamExtractor.fetchPage()
+            val rawTitle = streamExtractor.name
+            val rawAuthor = streamExtractor.uploaderName
+            val (title, artist) = parseTitleAndArtist(rawTitle, rawAuthor)
+            AppLogger.d(TAG, "SUCCESS NewPipe resolved single video [$videoId]: '$artist' - '$title'")
+            return@withContext RawPlaylistItem(videoId, title, artist)
+        } catch (e: Exception) {
+            AppLogger.d(TAG, "NewPipe single video resolution failed for [$videoId]: ${e.message}")
+        }
+
+        AppLogger.e(TAG, "Could not resolve single video [$videoId] via any method")
+        return@withContext null
+    }
+
+    private fun parseTitleAndArtist(rawTitle: String, rawAuthor: String): Pair<String, String> {
+        val delimiters = listOf(" - ", " – ", " — ", " // ", " : ")
+        for (delim in delimiters) {
+            if (rawTitle.contains(delim)) {
+                val parts = rawTitle.split(delim, limit = 2)
+                val possibleArtist = parts[0].trim()
+                val possibleTitle = parts[1].trim()
+                if (possibleArtist.isNotEmpty() && possibleTitle.isNotEmpty()) {
+                    return Pair(possibleTitle, possibleArtist)
+                }
+            }
+        }
+        return Pair(rawTitle, rawAuthor)
     }
 
     private fun filterShorts(items: List<RawPlaylistItem>): List<RawPlaylistItem> {
@@ -405,21 +523,61 @@ object YouTubePlaylistExtractor {
         return url.contains("/@") || url.contains("/channel/") || url.contains("/c/") || url.contains("/user/")
     }
 
-    private fun extractPlaylistIdFromUrl(url: String): String? {
-        if (url.contains("list=")) {
-            return url.substringAfter("list=").substringBefore("&")
+    fun extractPlaylistIdFromUrl(url: String?): String? {
+        if (url.isNullOrBlank()) return null
+        val trimmed = url.trim()
+        if (trimmed.contains("list=")) {
+            return trimmed.substringAfter("list=").substringBefore("&").substringBefore("#")
+        }
+        if (trimmed.startsWith("PL") || trimmed.startsWith("UU") || trimmed.startsWith("FL") || trimmed.startsWith("RD") || trimmed.startsWith("OLAK5uy_")) {
+            return trimmed
         }
         return null
     }
 
-    private fun extractYoutubeIdFromUrl(url: String?): String? {
-        if (url.isNullOrEmpty()) return null
-        if (url.contains("v=")) {
-            return url.substringAfter("v=").substringBefore("&")
+    fun extractVideoId(input: String?): String? {
+        if (input.isNullOrBlank()) return null
+        val trimmed = input.trim()
+
+        // 1. Direct 11-char ID
+        if (trimmed.matches(Regex("^[a-zA-Z0-9_-]{11}$"))) {
+            return trimmed
         }
-        if (url.contains("youtu.be/")) {
-            return url.substringAfter("youtu.be/").substringBefore("?")
+
+        // 2. youtu.be/<id>
+        if (trimmed.contains("youtu.be/")) {
+            val after = trimmed.substringAfter("youtu.be/").substringBefore("?").substringBefore("&").substringBefore("/").substringBefore("#")
+            if (after.length == 11) return after
         }
+
+        // 3. /shorts/<id>
+        if (trimmed.contains("/shorts/")) {
+            val after = trimmed.substringAfter("/shorts/").substringBefore("?").substringBefore("&").substringBefore("/").substringBefore("#")
+            if (after.length == 11) return after
+        }
+
+        // 4. /embed/<id>
+        if (trimmed.contains("/embed/")) {
+            val after = trimmed.substringAfter("/embed/").substringBefore("?").substringBefore("&").substringBefore("/").substringBefore("#")
+            if (after.length == 11) return after
+        }
+
+        // 5. /live/<id>
+        if (trimmed.contains("/live/")) {
+            val after = trimmed.substringAfter("/live/").substringBefore("?").substringBefore("&").substringBefore("/").substringBefore("#")
+            if (after.length == 11) return after
+        }
+
+        // 6. v=<id>
+        if (trimmed.contains("v=")) {
+            val after = trimmed.substringAfter("v=").substringBefore("&").substringBefore("#")
+            if (after.length == 11) return after
+        }
+
         return null
+    }
+
+    private fun extractYoutubeIdFromUrl(url: String?): String? {
+        return extractVideoId(url)
     }
 }

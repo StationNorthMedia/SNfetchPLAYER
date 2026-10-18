@@ -3,12 +3,12 @@
 <img src="docs/logo.png" alt="Station North Logo" width="280" />
 
 # 👑 SNfetchPLAYER • The Queen's Frequency
-**Version 1.0.0.44 • Broadcast & Audio Engine for Android Smartphones, Tablets & Android TV**
+**Version 1.0.0.45 • Broadcast & Audio Engine for Android Smartphones, Tablets & Android TV**
 
 [![Website](https://img.shields.io/badge/Website-station--north.net-88C0D0?style=for-the-badge&logo=google-chrome&logoColor=white)](https://station-north.net)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-5E81AC?style=for-the-badge&logo=github&logoColor=white)](https://github.com/StationNorthMedia/SNfetchPLAYER)
 [![GitLab](https://img.shields.io/badge/GitLab-Repository-D08770?style=for-the-badge&logo=gitlab&logoColor=white)](https://gitlab.com/station-north-net-group/snfetchplayer)
-[![Release](https://img.shields.io/badge/Release-v1.0.0.44-8FBCBB?style=for-the-badge&logo=android&logoColor=white)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v1.0.0.44)
+[![Release](https://img.shields.io/badge/Release-v1.0.0.45-8FBCBB?style=for-the-badge&logo=android&logoColor=white)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v1.0.0.45)
 [![Downloads](https://img.shields.io/github/downloads/StationNorthMedia/SNfetchPLAYER/total?style=for-the-badge&color=A3BE8C&logo=github)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases)
 [![TV Ready](https://img.shields.io/badge/Android_TV-100%25_Compatible-BF616A?style=for-the-badge&logo=androidtv&logoColor=white)](https://developer.android.com/tv)
 [![License](https://img.shields.io/badge/License-MIT-B48EAD?style=for-the-badge)](LICENSE)

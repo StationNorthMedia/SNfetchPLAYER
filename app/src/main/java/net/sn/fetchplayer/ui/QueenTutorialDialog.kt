@@ -85,7 +85,7 @@ class QueenTutorialDialog(context: Context) : Dialog(context) {
             """.trimIndent()
 
             3 -> """
-                📖 CHAPTER 3: THE SN-LEXIKON ARCHIVE
+                📖 CHAPTER 3: THE SN-LEXICON ARCHIVE
                 
                 "Explore 4,438+ Urban, R&B, and Hip-Hop legends indexed straight into the application."
                 
