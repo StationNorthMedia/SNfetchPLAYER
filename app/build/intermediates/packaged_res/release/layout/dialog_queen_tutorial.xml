@@ -114,7 +114,7 @@
                     android:layout_height="34dp"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="0dp"
-                    android:text="📖 3. SN-Lexikon"
+                    android:text="📖 3. SN-Lexicon"
                     android:textColor="@color/nord6"
                     android:textSize="10.5sp"
                     app:strokeColor="@color/nord13"

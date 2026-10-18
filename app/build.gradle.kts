@@ -11,8 +11,8 @@ android {
         applicationId = "net.sn.fetchplayer"
         minSdk = 24
         targetSdk = 34
-        versionCode = 2026101802
-        versionName = "1.0.0.46"
+        versionCode = 2026101901
+        versionName = "1.0.0.47"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -61,4 +61,7 @@ dependencies {
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    // Google Play Services Nearby Connections (P2P Crate Swap)
+    implementation("com.google.android.gms:play-services-nearby:19.3.0")
 }

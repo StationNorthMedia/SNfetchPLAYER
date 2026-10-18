@@ -1091,6 +1091,54 @@ library {
     value: 1
   }
 }
+library {
+  maven_library {
+    groupId: "com.google.android.gms"
+    artifactId: "play-services-nearby"
+    version: "19.3.0"
+  }
+  digests {
+    sha256: "\210\037\242\351d\226B0\201\352i\334\372\235\23031\330J\335\314\027#O\225\246aV\210\226X\355"
+  }
+  repo_index {
+  }
+}
+library {
+  maven_library {
+    groupId: "com.google.android.gms"
+    artifactId: "play-services-base"
+    version: "18.5.0"
+  }
+  digests {
+    sha256: "Y\245\300\302\332\0221\035u\331e\316\037A\224\230Sk\032\026\177\262\217\367\337\302\337\331\316\372AW"
+  }
+  repo_index {
+  }
+}
+library {
+  maven_library {
+    groupId: "com.google.android.gms"
+    artifactId: "play-services-basement"
+    version: "18.4.0"
+  }
+  digests {
+    sha256: "\316\\\223o\326h\024\263`/\\j^\222\231\021\377\227=K\005\366\336\231\226\332Yk\357\227\312\322"
+  }
+  repo_index {
+  }
+}
+library {
+  maven_library {
+    groupId: "com.google.android.gms"
+    artifactId: "play-services-tasks"
+    version: "18.2.0"
+  }
+  digests {
+    sha256: "\177*\252\217P h\352\365CV\312\222\256\300Bq\326\347\304\026\305,E\300\3224@\374\275\026T"
+  }
+  repo_index {
+  }
+}
 library_dependencies {
   library_dep_index: 1
 }
@@ -1662,6 +1710,33 @@ library_dependencies {
   library_dep_index: 5
   library_dep_index: 7
 }
+library_dependencies {
+  library_index: 90
+  library_dep_index: 11
+  library_dep_index: 9
+  library_dep_index: 91
+  library_dep_index: 92
+  library_dep_index: 93
+  library_dep_index: 20
+}
+library_dependencies {
+  library_index: 91
+  library_dep_index: 11
+  library_dep_index: 9
+  library_dep_index: 43
+  library_dep_index: 92
+  library_dep_index: 93
+}
+library_dependencies {
+  library_index: 92
+  library_dep_index: 11
+  library_dep_index: 9
+  library_dep_index: 43
+}
+library_dependencies {
+  library_index: 93
+  library_dep_index: 92
+}
 module_dependencies {
   module_name: "base"
   dependency_index: 0
@@ -1678,6 +1753,7 @@ module_dependencies {
   dependency_index: 86
   dependency_index: 89
   dependency_index: 19
+  dependency_index: 90
 }
 repositories {
   maven_repo {

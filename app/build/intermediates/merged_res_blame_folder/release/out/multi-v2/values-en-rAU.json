@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "net.sn.fetchplayer.app-mergeReleaseResources-34:/values-en-rAU/values-en-rAU.xml",
+            "outputFile": "net.sn.fetchplayer.app-mergeReleaseResources-37:/values-en-rAU/values-en-rAU.xml",
             "map": [
                 {
                     "source": "/home/plex/.gradle/caches/transforms-3/d167100fc9c8e89c37049b40e9a516fc/transformed/media3-session-1.2.1/res/values-en-rAU/values-en-rAU.xml",

@@ -157,7 +157,58 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Tile 4: TV & Display (#D08770) -->
+            <!-- Tile 4: SN-Lexicon (#8FBCBB) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardTileLexicon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/nord1"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="3dp"
+                app:rippleColor="@color/nord7"
+                app:strokeColor="@color/nord7"
+                app:strokeWidth="1.5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:src="@drawable/ic_book"
+                        app:tint="@color/nord7" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:letterSpacing="0.04"
+                        android:text="SN-LEXICON"
+                        android:textColor="@color/nord7"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <!-- Row 3: Tile 5 & Tile 6 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <!-- Tile 5: TV & Display (#D08770) -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardTileTvDisplay"
                 android:layout_width="0dp"
@@ -199,16 +250,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-        </LinearLayout>
-
-        <!-- Row 3: Tile 5 & Tile 6 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <!-- Tile 5: Audio & FFT (#88C0D0) -->
+            <!-- Tile 6: Audio & FFT (#88C0D0) -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardTileAudioVisualizer"
                 android:layout_width="0dp"
@@ -245,48 +287,6 @@
                         android:letterSpacing="0.04"
                         android:text="AUDIO &amp; FFT"
                         android:textColor="@color/nord8"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Tile 6: SN-Lexicon (#8FBCBB) -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardTileLexicon"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:focusable="true"
-                app:cardBackgroundColor="@color/nord1"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="3dp"
-                app:rippleColor="@color/nord7"
-                app:strokeColor="@color/nord7"
-                app:strokeWidth="1.5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:layout_width="38dp"
-                        android:layout_height="38dp"
-                        android:src="@drawable/ic_book"
-                        app:tint="@color/nord7" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:letterSpacing="0.04"
-                        android:text="SN-LEXIKON"
-                        android:textColor="@color/nord7"
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -561,14 +561,30 @@
                                 android:textStyle="bold" />
 
                             <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btnCreateNewPlaylist"
+                                android:id="@+id/btnOpenCrateHub"
                                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="36dp"
                                 android:insetTop="0dp"
                                 android:insetBottom="0dp"
                                 android:paddingHorizontal="10dp"
-                                android:text="➕ New Playlist"
+                                android:text="📦 Sync Crate"
+                                android:textColor="@color/nord8"
+                                android:textSize="11sp"
+                                android:textStyle="bold"
+                                app:strokeColor="@color/nord8"
+                                app:strokeWidth="1dp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnCreateNewPlaylist"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="36dp"
+                                android:layout_marginStart="6dp"
+                                android:insetTop="0dp"
+                                android:insetBottom="0dp"
+                                android:paddingHorizontal="10dp"
+                                android:text="➕ New"
                                 android:textColor="@color/nord14"
                                 android:textSize="11sp"
                                 android:textStyle="bold"
@@ -894,48 +910,97 @@
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
-        <LinearLayout
+        <!-- Highlighted Curator Input Area -->
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/layoutPlaylistInputRow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="4dp"
+            app:cardBackgroundColor="@color/nord1"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="3dp"
+            app:strokeColor="@color/nord8"
+            app:strokeWidth="1.5dp">
 
-            <EditText
-                android:id="@+id/etPlaylistInput"
-                android:layout_width="0dp"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                android:background="@color/nord1"
-                android:hint="YouTube Playlist Link or ID"
-                android:imeOptions="actionDone"
-                android:inputType="textUri"
-                android:paddingHorizontal="8dp"
-                android:textColor="@color/nord6"
-                android:textColorHint="@color/nord4"
-                android:textSize="10.5sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLoadPlaylist"
-                android:layout_width="wrap_content"
-                android:layout_height="32dp"
-                android:layout_marginStart="4dp"
-                android:paddingHorizontal="10dp"
-                android:text="Load"
-                android:textColor="@color/nord0"
-                android:textSize="10.5sp"
-                app:backgroundTint="@color/nord14" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-            <ProgressBar
-                android:id="@+id/progressLoadPlaylist"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="4dp"
-                android:indeterminateTint="@color/nord14"
-                android:visibility="gone" />
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_play"
+                        app:tint="@color/nord8" />
 
-        </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:letterSpacing="0.05"
+                        android:text="ADD YOUTUBE VIDEO OR PLAYLIST"
+                        android:textColor="@color/nord8"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etPlaylistInput"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_rounded_edittext"
+                        android:hint="Paste video, short, or playlist link..."
+                        android:imeOptions="actionDone"
+                        android:inputType="textUri"
+                        android:paddingHorizontal="10dp"
+                        android:textColor="@color/nord6"
+                        android:textColorHint="@color/nord4"
+                        android:textSize="11sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnLoadPlaylist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="6dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:paddingHorizontal="12dp"
+                        android:text="RESOLVE &amp; ADD"
+                        android:textColor="@color/nord0"
+                        android:textSize="10.5sp"
+                        android:textStyle="bold"
+                        app:backgroundTint="@color/nord8"
+                        app:cornerRadius="6dp" />
+
+                    <ProgressBar
+                        android:id="@+id/progressLoadPlaylist"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_marginStart="6dp"
+                        android:indeterminateTint="@color/nord8"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -1940,6 +2005,37 @@
 
         </LinearLayout>
 
+        <!-- Real-Time Sync Indicator for Fresh Installs -->
+        <LinearLayout
+            android:id="@+id/layoutChroniclesSyncProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@color/nord1"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvChroniclesSyncStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="⏳ Downloading Chronicles media (0/130)..."
+                android:textColor="@color/nord8"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/pbChroniclesSync"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:layout_marginTop="4dp"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="@color/nord8" />
+        </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -1954,6 +2050,9 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clipToPadding="false"
+            android:focusable="true"
+            android:nextFocusDown="@+id/btnTogglePlayAllInline"
+            android:nextFocusUp="@+id/btnBackFromChronicles"
             android:paddingBottom="12dp" />
 
         <View
@@ -2007,68 +2106,126 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnPrevTrackInline"
+                    android:id="@+id/btnChroniclesFullscreenInline"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="36dp"
                     android:layout_weight="1"
-                    android:paddingHorizontal="0dp"
-                    android:paddingVertical="0dp"
+                    android:focusable="true"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:nextFocusRight="@+id/btnPrevTrackInline"
+                    android:nextFocusUp="@+id/rvChroniclesCardsInline"
+                    android:padding="0dp"
+                    app:backgroundTint="@color/nord7"
+                    app:cornerRadius="6dp"
+                    app:icon="@drawable/ic_fullscreen"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="18dp"
+                    app:iconTint="@color/nord0"
+                    app:rippleColor="@color/nord6"
+                    app:strokeColor="@color/nord7"
+                    app:strokeWidth="1.5dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPrevTrackInline"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    android:focusable="true"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:nextFocusLeft="@+id/btnChroniclesFullscreenInline"
+                    android:nextFocusRight="@+id/btnTogglePlayAllInline"
+                    android:nextFocusUp="@+id/rvChroniclesCardsInline"
+                    android:padding="0dp"
+                    app:backgroundTint="@color/nord12"
+                    app:cornerRadius="6dp"
                     app:icon="@drawable/ic_previous"
                     app:iconGravity="textStart"
                     app:iconPadding="0dp"
-                    app:iconTint="@color/nord6"
-                    app:strokeColor="@color/nord3"
-                    app:strokeWidth="1dp" />
+                    app:iconSize="18dp"
+                    app:iconTint="@color/nord0"
+                    app:rippleColor="@color/nord6"
+                    app:strokeColor="@color/nord12"
+                    app:strokeWidth="1.5dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnTogglePlayAllInline"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="36dp"
-                    android:layout_marginStart="6dp"
-                    android:layout_weight="1.2"
-                    android:paddingHorizontal="0dp"
-                    android:paddingVertical="0dp"
-                    app:backgroundTint="@color/nord11"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    android:focusable="true"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:nextFocusLeft="@+id/btnPrevTrackInline"
+                    android:nextFocusRight="@+id/btnNextTrackInline"
+                    android:nextFocusUp="@+id/rvChroniclesCardsInline"
+                    android:padding="0dp"
+                    app:backgroundTint="@color/nord8"
+                    app:cornerRadius="6dp"
                     app:icon="@drawable/ic_play"
                     app:iconGravity="textStart"
                     app:iconPadding="0dp"
-                    app:iconTint="@color/nord6"
-                    app:strokeColor="@color/nord11"
-                    app:strokeWidth="1dp" />
+                    app:iconSize="20dp"
+                    app:iconTint="@color/nord0"
+                    app:rippleColor="@color/nord6"
+                    app:strokeColor="@color/nord8"
+                    app:strokeWidth="1.5dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnNextTrackInline"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="36dp"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="4dp"
                     android:layout_weight="1"
-                    android:paddingHorizontal="0dp"
-                    android:paddingVertical="0dp"
+                    android:focusable="true"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:nextFocusLeft="@+id/btnTogglePlayAllInline"
+                    android:nextFocusRight="@+id/btnAutoScrollToggleInline"
+                    android:nextFocusUp="@+id/rvChroniclesCardsInline"
+                    android:padding="0dp"
+                    app:backgroundTint="@color/nord15"
+                    app:cornerRadius="6dp"
                     app:icon="@drawable/ic_next"
                     app:iconGravity="textStart"
                     app:iconPadding="0dp"
-                    app:iconTint="@color/nord6"
-                    app:strokeColor="@color/nord3"
-                    app:strokeWidth="1dp" />
+                    app:iconSize="18dp"
+                    app:iconTint="@color/nord0"
+                    app:rippleColor="@color/nord6"
+                    app:strokeColor="@color/nord15"
+                    app:strokeWidth="1.5dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAutoScrollToggleInline"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="36dp"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="4dp"
                     android:layout_weight="1"
-                    android:paddingHorizontal="0dp"
-                    android:paddingVertical="0dp"
+                    android:focusable="true"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:nextFocusLeft="@+id/btnNextTrackInline"
+                    android:nextFocusUp="@+id/rvChroniclesCardsInline"
+                    android:padding="0dp"
+                    app:backgroundTint="@color/nord14"
+                    app:cornerRadius="6dp"
                     app:icon="@drawable/ic_repeat_all"
                     app:iconGravity="textStart"
                     app:iconPadding="0dp"
-                    app:iconTint="@color/nord14"
+                    app:iconSize="18dp"
+                    app:iconTint="@color/nord0"
+                    app:rippleColor="@color/nord6"
                     app:strokeColor="@color/nord14"
-                    app:strokeWidth="1dp" />
+                    app:strokeWidth="1.5dp" />
             </LinearLayout>
 
         </LinearLayout>

@@ -1,20 +1,20 @@
 -- Merging decision tree log ---
 provider#androidx.core.content.FileProvider
-INJECTED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:35:9-43:20
+INJECTED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:72:9-80:20
 	android:grantUriPermissions
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:39:13-47
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:76:13-47
 	android:authorities
 		INJECTED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:37:13-64
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:74:13-64
 	android:exported
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:38:13-37
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:75:13-37
 	android:name
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:36:13-62
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:73:13-62
 manifest
-ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:2:1-70:12
-INJECTED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:2:1-70:12
-INJECTED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:2:1-70:12
-INJECTED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:2:1-70:12
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:2:1-129:12
+INJECTED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:2:1-129:12
+INJECTED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:2:1-129:12
+INJECTED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:2:1-129:12
 MERGED from [androidx.databinding:viewbinding:8.2.2] /home/plex/.gradle/caches/transforms-3/b93974932ecdca12f6bb7955c79b1b88/transformed/viewbinding-8.2.2/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.material:material:1.11.0] /home/plex/.gradle/caches/transforms-3/3c6da16fc08c5e7b7caed394bbbfefaa/transformed/material-1.11.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /home/plex/.gradle/caches/transforms-3/488aad099d5ebc6b5042a6b3b7d174ef/transformed/constraintlayout-2.1.4/AndroidManifest.xml:2:1-11:12
@@ -30,9 +30,13 @@ MERGED from [androidx.media3:media3-database:1.2.1] /home/plex/.gradle/caches/tr
 MERGED from [androidx.media3:media3-common:1.2.1] /home/plex/.gradle/caches/transforms-3/168d6cfbcc8e27e99e6864179488d726/transformed/media3-common-1.2.1/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.media3:media3-exoplayer:1.2.1] /home/plex/.gradle/caches/transforms-3/6d6945bafdf49ad36f228fa99a4cac3b/transformed/media3-exoplayer-1.2.1/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.media:media:1.7.0] /home/plex/.gradle/caches/transforms-3/7d1628a2b7c58519adba8912dfe08131/transformed/media-1.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-nearby:19.3.0] /home/plex/.gradle/caches/transforms-3/5e1c8b9874d83315fb7462b038d79c9c/transformed/play-services-nearby-19.3.0/AndroidManifest.xml:2:1-12:12
 MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] /home/plex/.gradle/caches/transforms-3/902a8d30ca05a6cdfabd80efce778c31/transformed/emoji2-views-helper-1.2.0/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.emoji2:emoji2:1.2.0] /home/plex/.gradle/caches/transforms-3/40af677edc9e981bf1ec9bb11c8b1d32/transformed/emoji2-1.2.0/AndroidManifest.xml:17:1-35:12
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/plex/.gradle/caches/transforms-3/3318d40775602b177b0b05fde0012af4/transformed/viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/plex/.gradle/caches/transforms-3/249693e3478f09a80ded5a4e55d904c3/transformed/play-services-base-18.5.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/plex/.gradle/caches/transforms-3/7a0ab4f5039c9d909b3fea574e64d101/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:2:1-5:12
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /home/plex/.gradle/caches/transforms-3/eadcf0e70c6cd54ddfd33a9f813830f0/transformed/play-services-basement-18.4.0/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.fragment:fragment:1.3.6] /home/plex/.gradle/caches/transforms-3/392158aea97ce76aae70fa4b7c774883/transformed/fragment-1.3.6/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.activity:activity:1.8.0] /home/plex/.gradle/caches/transforms-3/1c16e8ead83692490cc5a8c6de3616c1/transformed/activity-1.8.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/plex/.gradle/caches/transforms-3/9f7106c8e9c172fe95ea79562a153380/transformed/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
@@ -89,6 +93,8 @@ MERGED from [androidx.media3:media3-common:1.2.1] /home/plex/.gradle/caches/tran
 MERGED from [androidx.media3:media3-common:1.2.1] /home/plex/.gradle/caches/transforms-3/168d6cfbcc8e27e99e6864179488d726/transformed/media3-common-1.2.1/AndroidManifest.xml:22:5-79
 MERGED from [androidx.media3:media3-exoplayer:1.2.1] /home/plex/.gradle/caches/transforms-3/6d6945bafdf49ad36f228fa99a4cac3b/transformed/media3-exoplayer-1.2.1/AndroidManifest.xml:22:5-79
 MERGED from [androidx.media3:media3-exoplayer:1.2.1] /home/plex/.gradle/caches/transforms-3/6d6945bafdf49ad36f228fa99a4cac3b/transformed/media3-exoplayer-1.2.1/AndroidManifest.xml:22:5-79
+MERGED from [com.google.android.gms:play-services-nearby:19.3.0] /home/plex/.gradle/caches/transforms-3/5e1c8b9874d83315fb7462b038d79c9c/transformed/play-services-nearby-19.3.0/AndroidManifest.xml:6:5-79
+MERGED from [com.google.android.gms:play-services-nearby:19.3.0] /home/plex/.gradle/caches/transforms-3/5e1c8b9874d83315fb7462b038d79c9c/transformed/play-services-nearby-19.3.0/AndroidManifest.xml:6:5-79
 	android:name
 		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:6:22-76
 uses-permission#android.permission.FOREGROUND_SERVICE
@@ -115,27 +121,113 @@ uses-permission#android.permission.REQUEST_INSTALL_PACKAGES
 ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:12:5-83
 	android:name
 		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:12:22-80
+uses-permission#android.permission.BLUETOOTH
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:15:5-95
+	android:maxSdkVersion
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:15:66-92
+	android:name
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:15:22-65
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:16:5-101
+	android:maxSdkVersion
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:16:72-98
+	android:name
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:16:22-71
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:17:5-76
+	android:name
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:17:22-73
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:18:5-76
+	android:name
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:18:22-73
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:19:5-108
+	android:maxSdkVersion
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:19:79-105
+	android:name
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:19:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:20:5-106
+	android:maxSdkVersion
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:20:77-103
+	android:name
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:20:22-76
+uses-permission#android.permission.BLUETOOTH_SCAN
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:23:5-26:32
+	android:usesPermissionFlags
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:25:9-55
+	tools:targetApi
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:26:9-29
+	android:name
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:24:9-57
+uses-permission#android.permission.BLUETOOTH_ADVERTISE
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:27:5-29:32
+	tools:targetApi
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:29:9-29
+	android:name
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:28:9-62
+uses-permission#android.permission.BLUETOOTH_CONNECT
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:30:5-32:32
+	tools:targetApi
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:32:9-29
+	android:name
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:31:9-60
+uses-permission#android.permission.NEARBY_WIFI_DEVICES
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:35:5-38:32
+	android:usesPermissionFlags
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:37:9-55
+	tools:targetApi
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:38:9-29
+	android:name
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:36:9-62
+uses-feature#android.hardware.bluetooth
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:41:5-43:36
+	android:required
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:43:9-33
+	android:name
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:42:9-50
+uses-feature#android.hardware.bluetooth_le
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:44:5-46:36
+	android:required
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:46:9-33
+	android:name
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:45:9-53
+uses-feature#android.hardware.wifi
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:47:5-49:36
+	android:required
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:49:9-33
+	android:name
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:48:9-45
 uses-feature#android.software.leanback
-ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:15:5-17:36
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:52:5-54:36
 	android:required
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:17:9-33
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:54:9-33
 	android:name
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:16:9-49
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:53:9-49
 uses-feature#android.hardware.touchscreen
-ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:18:5-20:36
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:55:5-57:36
 	android:required
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:20:9-33
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:57:9-33
 	android:name
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:19:9-52
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:56:9-52
 application
-ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:22:5-68:19
-INJECTED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:22:5-68:19
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:59:5-127:19
+INJECTED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:59:5-127:19
 MERGED from [com.google.android.material:material:1.11.0] /home/plex/.gradle/caches/transforms-3/3c6da16fc08c5e7b7caed394bbbfefaa/transformed/material-1.11.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.11.0] /home/plex/.gradle/caches/transforms-3/3c6da16fc08c5e7b7caed394bbbfefaa/transformed/material-1.11.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /home/plex/.gradle/caches/transforms-3/488aad099d5ebc6b5042a6b3b7d174ef/transformed/constraintlayout-2.1.4/AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /home/plex/.gradle/caches/transforms-3/488aad099d5ebc6b5042a6b3b7d174ef/transformed/constraintlayout-2.1.4/AndroidManifest.xml:9:5-20
+MERGED from [com.google.android.gms:play-services-nearby:19.3.0] /home/plex/.gradle/caches/transforms-3/5e1c8b9874d83315fb7462b038d79c9c/transformed/play-services-nearby-19.3.0/AndroidManifest.xml:8:5-10:19
+MERGED from [com.google.android.gms:play-services-nearby:19.3.0] /home/plex/.gradle/caches/transforms-3/5e1c8b9874d83315fb7462b038d79c9c/transformed/play-services-nearby-19.3.0/AndroidManifest.xml:8:5-10:19
 MERGED from [androidx.emoji2:emoji2:1.2.0] /home/plex/.gradle/caches/transforms-3/40af677edc9e981bf1ec9bb11c8b1d32/transformed/emoji2-1.2.0/AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.emoji2:emoji2:1.2.0] /home/plex/.gradle/caches/transforms-3/40af677edc9e981bf1ec9bb11c8b1d32/transformed/emoji2-1.2.0/AndroidManifest.xml:23:5-33:19
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/plex/.gradle/caches/transforms-3/249693e3478f09a80ded5a4e55d904c3/transformed/play-services-base-18.5.0/AndroidManifest.xml:4:5-6:19
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/plex/.gradle/caches/transforms-3/249693e3478f09a80ded5a4e55d904c3/transformed/play-services-base-18.5.0/AndroidManifest.xml:4:5-6:19
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/plex/.gradle/caches/transforms-3/7a0ab4f5039c9d909b3fea574e64d101/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:4:5-20
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/plex/.gradle/caches/transforms-3/7a0ab4f5039c9d909b3fea574e64d101/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:4:5-20
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /home/plex/.gradle/caches/transforms-3/eadcf0e70c6cd54ddfd33a9f813830f0/transformed/play-services-basement-18.4.0/AndroidManifest.xml:5:5-7:19
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /home/plex/.gradle/caches/transforms-3/eadcf0e70c6cd54ddfd33a9f813830f0/transformed/play-services-basement-18.4.0/AndroidManifest.xml:5:5-7:19
 MERGED from [androidx.core:core:1.12.0] /home/plex/.gradle/caches/transforms-3/440a64c1659b3784956be1ef27019da1/transformed/core-1.12.0/AndroidManifest.xml:28:5-89
 MERGED from [androidx.core:core:1.12.0] /home/plex/.gradle/caches/transforms-3/440a64c1659b3784956be1ef27019da1/transformed/core-1.12.0/AndroidManifest.xml:28:5-89
 MERGED from [androidx.lifecycle:lifecycle-process:2.6.1] /home/plex/.gradle/caches/transforms-3/bdfc36cc96b3b5dbf1de77c609414b49/transformed/lifecycle-process-2.6.1/AndroidManifest.xml:23:5-33:19
@@ -151,75 +243,103 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /home/plex/.gradle/caches/t
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.12.0] /home/plex/.gradle/caches/transforms-3/440a64c1659b3784956be1ef27019da1/transformed/core-1.12.0/AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:30:9-35
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:67:9-35
 	android:label
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:29:9-41
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:66:9-41
 	android:fullBackupContent
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:25:9-54
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:62:9-54
 	android:roundIcon
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:27:9-54
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:64:9-54
 	tools:targetApi
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:33:9-29
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:70:9-29
 	android:icon
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:26:9-43
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:63:9-43
 	android:allowBackup
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:23:9-35
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:60:9-35
 	android:banner
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:28:9-45
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:65:9-45
 	android:theme
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:32:9-51
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:69:9-51
 	android:dataExtractionRules
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:24:9-65
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:61:9-65
 	android:usesCleartextTraffic
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:31:9-44
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:68:9-44
 activity#net.sn.fetchplayer.ui.MainActivity
-ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:45:9-56:20
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:82:9-115:20
 	android:label
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:50:13-45
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:88:13-45
+	android:launchMode
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:85:13-43
 	android:exported
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:47:13-36
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:84:13-36
 	android:icon
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:49:13-47
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:87:13-47
 	android:banner
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:48:13-49
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:86:13-49
 	android:name
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:46:13-44
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:83:13-44
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER+category:name:android.intent.category.LEANBACK_LAUNCHER
-ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:51:13-55:29
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:89:13-93:29
 action#android.intent.action.MAIN
-ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:52:17-69
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:90:17-69
 	android:name
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:52:25-66
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:90:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:53:17-77
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:91:17-77
 	android:name
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:53:27-74
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:91:27-74
 category#android.intent.category.LEANBACK_LAUNCHER
-ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:54:17-86
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:92:17-86
 	android:name
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:54:27-83
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:92:27-83
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:*+data:mimeType:*/*+data:pathPattern:.*\\.sncrate+data:scheme:content+data:scheme:file
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:96:13-105:29
+action#android.intent.action.VIEW
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:97:17-69
+	android:name
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:97:25-66
+category#android.intent.category.DEFAULT
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:98:17-76
+	android:name
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:98:27-73
+category#android.intent.category.BROWSABLE
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:99:17-78
+	android:name
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:99:27-75
+data
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:100:17-50
+	android:host
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:104:23-39
+	android:scheme
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:100:23-47
+	android:pathPattern
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:103:23-57
+	android:mimeType
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:102:23-45
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:mimeType:application/octet-stream+data:mimeType:application/zip+data:scheme:content+data:scheme:file
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:106:13-114:29
 service#net.sn.fetchplayer.service.RadioService
-ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:58:9-66:19
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:117:9-125:19
 	android:enabled
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:60:13-35
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:119:13-35
 	android:exported
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:61:13-37
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:120:13-37
 	android:foregroundServiceType
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:62:13-58
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:121:13-58
 	android:name
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:59:13-49
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:118:13-49
 intent-filter#action:name:androidx.media3.session.MediaSessionService
-ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:63:13-65:29
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:122:13-124:29
 action#androidx.media3.session.MediaSessionService
-ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:64:17-86
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:123:17-86
 	android:name
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:64:25-83
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:123:25-83
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:40:13-42:54
+ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:77:13-79:54
 	android:resource
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:42:17-51
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:79:17-51
 	android:name
-		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:41:17-67
+		ADDED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml:78:17-67
 uses-sdk
 INJECTED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml
@@ -254,12 +374,20 @@ MERGED from [androidx.media3:media3-exoplayer:1.2.1] /home/plex/.gradle/caches/t
 MERGED from [androidx.media3:media3-exoplayer:1.2.1] /home/plex/.gradle/caches/transforms-3/6d6945bafdf49ad36f228fa99a4cac3b/transformed/media3-exoplayer-1.2.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.media:media:1.7.0] /home/plex/.gradle/caches/transforms-3/7d1628a2b7c58519adba8912dfe08131/transformed/media-1.7.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.media:media:1.7.0] /home/plex/.gradle/caches/transforms-3/7d1628a2b7c58519adba8912dfe08131/transformed/media-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-nearby:19.3.0] /home/plex/.gradle/caches/transforms-3/5e1c8b9874d83315fb7462b038d79c9c/transformed/play-services-nearby-19.3.0/AndroidManifest.xml:4:5-44
+MERGED from [com.google.android.gms:play-services-nearby:19.3.0] /home/plex/.gradle/caches/transforms-3/5e1c8b9874d83315fb7462b038d79c9c/transformed/play-services-nearby-19.3.0/AndroidManifest.xml:4:5-44
 MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] /home/plex/.gradle/caches/transforms-3/902a8d30ca05a6cdfabd80efce778c31/transformed/emoji2-views-helper-1.2.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] /home/plex/.gradle/caches/transforms-3/902a8d30ca05a6cdfabd80efce778c31/transformed/emoji2-views-helper-1.2.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.emoji2:emoji2:1.2.0] /home/plex/.gradle/caches/transforms-3/40af677edc9e981bf1ec9bb11c8b1d32/transformed/emoji2-1.2.0/AndroidManifest.xml:21:5-44
 MERGED from [androidx.emoji2:emoji2:1.2.0] /home/plex/.gradle/caches/transforms-3/40af677edc9e981bf1ec9bb11c8b1d32/transformed/emoji2-1.2.0/AndroidManifest.xml:21:5-44
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/plex/.gradle/caches/transforms-3/3318d40775602b177b0b05fde0012af4/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/plex/.gradle/caches/transforms-3/3318d40775602b177b0b05fde0012af4/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/plex/.gradle/caches/transforms-3/249693e3478f09a80ded5a4e55d904c3/transformed/play-services-base-18.5.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /home/plex/.gradle/caches/transforms-3/249693e3478f09a80ded5a4e55d904c3/transformed/play-services-base-18.5.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/plex/.gradle/caches/transforms-3/7a0ab4f5039c9d909b3fea574e64d101/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /home/plex/.gradle/caches/transforms-3/7a0ab4f5039c9d909b3fea574e64d101/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /home/plex/.gradle/caches/transforms-3/eadcf0e70c6cd54ddfd33a9f813830f0/transformed/play-services-basement-18.4.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /home/plex/.gradle/caches/transforms-3/eadcf0e70c6cd54ddfd33a9f813830f0/transformed/play-services-basement-18.4.0/AndroidManifest.xml:3:5-44
 MERGED from [androidx.fragment:fragment:1.3.6] /home/plex/.gradle/caches/transforms-3/392158aea97ce76aae70fa4b7c774883/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.3.6] /home/plex/.gradle/caches/transforms-3/392158aea97ce76aae70fa4b7c774883/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.activity:activity:1.8.0] /home/plex/.gradle/caches/transforms-3/1c16e8ead83692490cc5a8c6de3616c1/transformed/activity-1.8.0/AndroidManifest.xml:20:5-44
@@ -336,6 +464,14 @@ MERGED from [androidx.print:print:1.0.0] /home/plex/.gradle/caches/transforms-3/
 		INJECTED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from /home/plex/Dokumente/SNfetchPLAYER21.25/app/src/main/AndroidManifest.xml
+service#com.google.android.gms.nearby.exposurenotification.WakeUpService
+ADDED from [com.google.android.gms:play-services-nearby:19.3.0] /home/plex/.gradle/caches/transforms-3/5e1c8b9874d83315fb7462b038d79c9c/transformed/play-services-nearby-19.3.0/AndroidManifest.xml:9:9-214
+	android:exported
+		ADDED from [com.google.android.gms:play-services-nearby:19.3.0] /home/plex/.gradle/caches/transforms-3/5e1c8b9874d83315fb7462b038d79c9c/transformed/play-services-nearby-19.3.0/AndroidManifest.xml:9:98-121
+	android:permission
+		ADDED from [com.google.android.gms:play-services-nearby:19.3.0] /home/plex/.gradle/caches/transforms-3/5e1c8b9874d83315fb7462b038d79c9c/transformed/play-services-nearby-19.3.0/AndroidManifest.xml:9:122-211
+	android:name
+		ADDED from [com.google.android.gms:play-services-nearby:19.3.0] /home/plex/.gradle/caches/transforms-3/5e1c8b9874d83315fb7462b038d79c9c/transformed/play-services-nearby-19.3.0/AndroidManifest.xml:9:18-97
 provider#androidx.startup.InitializationProvider
 ADDED from [androidx.emoji2:emoji2:1.2.0] /home/plex/.gradle/caches/transforms-3/40af677edc9e981bf1ec9bb11c8b1d32/transformed/emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
 MERGED from [androidx.lifecycle:lifecycle-process:2.6.1] /home/plex/.gradle/caches/transforms-3/bdfc36cc96b3b5dbf1de77c609414b49/transformed/lifecycle-process-2.6.1/AndroidManifest.xml:24:9-32:20
@@ -358,6 +494,20 @@ ADDED from [androidx.emoji2:emoji2:1.2.0] /home/plex/.gradle/caches/transforms-3
 		ADDED from [androidx.emoji2:emoji2:1.2.0] /home/plex/.gradle/caches/transforms-3/40af677edc9e981bf1ec9bb11c8b1d32/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
 	android:name
 		ADDED from [androidx.emoji2:emoji2:1.2.0] /home/plex/.gradle/caches/transforms-3/40af677edc9e981bf1ec9bb11c8b1d32/transformed/emoji2-1.2.0/AndroidManifest.xml:30:17-75
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:18.5.0] /home/plex/.gradle/caches/transforms-3/249693e3478f09a80ded5a4e55d904c3/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:9-173
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] /home/plex/.gradle/caches/transforms-3/249693e3478f09a80ded5a4e55d904c3/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:146-170
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] /home/plex/.gradle/caches/transforms-3/249693e3478f09a80ded5a4e55d904c3/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:86-145
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] /home/plex/.gradle/caches/transforms-3/249693e3478f09a80ded5a4e55d904c3/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:19-85
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:18.4.0] /home/plex/.gradle/caches/transforms-3/eadcf0e70c6cd54ddfd33a9f813830f0/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:9-122
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:18.4.0] /home/plex/.gradle/caches/transforms-3/eadcf0e70c6cd54ddfd33a9f813830f0/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:66-119
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:18.4.0] /home/plex/.gradle/caches/transforms-3/eadcf0e70c6cd54ddfd33a9f813830f0/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:20-65
 permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.12.0] /home/plex/.gradle/caches/transforms-3/440a64c1659b3784956be1ef27019da1/transformed/core-1.12.0/AndroidManifest.xml:22:5-24:47
 	android:protectionLevel

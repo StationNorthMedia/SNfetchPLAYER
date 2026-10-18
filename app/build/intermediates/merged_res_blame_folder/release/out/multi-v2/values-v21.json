@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "net.sn.fetchplayer.app-mergeReleaseResources-34:/values-v21/values-v21.xml",
+            "outputFile": "net.sn.fetchplayer.app-mergeReleaseResources-37:/values-v21/values-v21.xml",
             "map": [
                 {
                     "source": "/home/plex/.gradle/caches/transforms-3/87d3782a65f8eed07c9114501f2f8cae/transformed/media3-ui-1.2.1/res/values-v21/values-v21.xml",

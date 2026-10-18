@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "net.sn.fetchplayer.app-mergeReleaseResources-34:/values-ldltr-v21/values-ldltr-v21.xml",
+            "outputFile": "net.sn.fetchplayer.app-mergeReleaseResources-37:/values-ldltr-v21/values-ldltr-v21.xml",
             "map": [
                 {
                     "source": "/home/plex/.gradle/caches/transforms-3/9756fab58daf3b55028a539310104216/transformed/appcompat-1.6.1/res/values-ldltr-v21/values-ldltr-v21.xml",

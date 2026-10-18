@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "net.sn.fetchplayer.app-mergeReleaseResources-34:/values-sw600dp-v13/values-sw600dp-v13.xml",
+            "outputFile": "net.sn.fetchplayer.app-mergeReleaseResources-37:/values-sw600dp-v13/values-sw600dp-v13.xml",
             "map": [
                 {
                     "source": "/home/plex/.gradle/caches/transforms-3/3c6da16fc08c5e7b7caed394bbbfefaa/transformed/material-1.11.0/res/values-sw600dp-v13/values-sw600dp-v13.xml",

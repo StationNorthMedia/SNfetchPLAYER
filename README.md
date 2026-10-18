@@ -3,12 +3,12 @@
 <img src="docs/logo.png" alt="Station North Logo" width="280" />
 
 # 👑 SNfetchPLAYER • The Queen's Frequency
-**Version 1.0.0.45 • Broadcast & Audio Engine for Android Smartphones, Tablets & Android TV**
+**Version 1.0.0.47 • Broadcast & Audio Engine for Android Smartphones, Tablets & Android TV**
 
 [![Website](https://img.shields.io/badge/Website-station--north.net-88C0D0?style=for-the-badge&logo=google-chrome&logoColor=white)](https://station-north.net)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-5E81AC?style=for-the-badge&logo=github&logoColor=white)](https://github.com/StationNorthMedia/SNfetchPLAYER)
 [![GitLab](https://img.shields.io/badge/GitLab-Repository-D08770?style=for-the-badge&logo=gitlab&logoColor=white)](https://gitlab.com/station-north-net-group/snfetchplayer)
-[![Release](https://img.shields.io/badge/Release-v1.0.0.46-8FBCBB?style=for-the-badge&logo=android&logoColor=white)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v1.0.0.46)
+[![Release](https://img.shields.io/badge/Release-v1.0.0.47-8FBCBB?style=for-the-badge&logo=android&logoColor=white)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/tag/v1.0.0.47)
 [![Downloads](https://img.shields.io/github/downloads/StationNorthMedia/SNfetchPLAYER/total?style=for-the-badge&color=A3BE8C&logo=github)](https://github.com/StationNorthMedia/SNfetchPLAYER/releases)
 [![TV Ready](https://img.shields.io/badge/Android_TV-100%25_Compatible-BF616A?style=for-the-badge&logo=androidtv&logoColor=white)](https://developer.android.com/tv)
 [![License](https://img.shields.io/badge/License-MIT-B48EAD?style=for-the-badge)](LICENSE)
@@ -98,6 +98,11 @@
 - **Background Sync Engine**: 163 audio jingles and 42 TV IDs lazily downloaded from the cloud in the background to keep the initial APK download lightweight.
 - **Live Progress Bar**: Real-time asset download indicator located inside the Curator Studio **ℹ️ ABOUT** tab.
 
+### 📦 Station North Crate Hub & AirBeam P2P Exchange
+- **AirBeam Offline P2P Crate Swap**: Seamless, zero-cloud peer-to-peer playlist exchange between nearby Android phones, tablets, and Android TVs powered by Google Play Services Nearby Connections.
+- **Custom Mixtape Containers (`.sncrate`)**: Package any playlist into a compressed `.sncrate` container and send it via WhatsApp, Telegram, or Discord. Recipients tap the file to open and import the mix directly with 1 click.
+- **Centralized Hub Access**: Tap `📦 Sync Crate` inside the Playlist Manager to scan nearby devices or share via messenger apps.
+
 ### 🌐 Community & Social Playlist Sharing
 - **1,000 Ways to Share**: Export your custom-curated mixes and share them across forums, social media, Reddit, Discord, or directly with your crew.
 - **Import Community Signals**: Paste playlist links, YouTube mixes, or JSON catalogs to instantly expand your personal Station North broadcast engine.
@@ -120,7 +125,7 @@
 
 - 🐙 **GitHub Releases**: [https://github.com/StationNorthMedia/SNfetchPLAYER/releases](https://github.com/StationNorthMedia/SNfetchPLAYER/releases)
 - 🦊 **GitLab Releases / Mirror**: [https://gitlab.com/station-north-net-group/snfetchplayer/-/tree/main/releases](https://gitlab.com/station-north-net-group/snfetchplayer/-/tree/main/releases)
-- ⚡ **Direct APK Download**: [**`SNfetchPLAYER-v1.0.0.46.apk`**](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/download/v1.0.0.46/SNfetchPLAYER-v1.0.0.46.apk) (71 MB)
+- ⚡ **Direct APK Download**: [**`SNfetchPLAYER-v1.0.0.47.apk`**](https://github.com/StationNorthMedia/SNfetchPLAYER/releases/download/v1.0.0.47/SNfetchPLAYER-v1.0.0.47.apk) (73 MB)
 
 1. Download the APK file on your Android device or TV box.
 2. Install the APK and launch **SNfetchPLAYER**!

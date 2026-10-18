@@ -44,6 +44,10 @@ import net.sn.fetchplayer.R
 import net.sn.fetchplayer.databinding.ActivityMainBinding
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import net.sn.fetchplayer.databinding.DialogCrateHubBinding
+import net.sn.fetchplayer.databinding.ItemNearbyDeviceBinding
+import net.sn.fetchplayer.manager.CrateArchiveManager
+import net.sn.fetchplayer.manager.NearbyCrateSyncManager
 import net.sn.fetchplayer.data.ArtistLexiconRepository
 import net.sn.fetchplayer.data.LexiconArtist
 import net.sn.fetchplayer.data.WikipediaArtistFetcher
@@ -166,6 +170,24 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         }
     }
 
+    private lateinit var nearbyCrateSyncManager: NearbyCrateSyncManager
+    private var activeCrateHubDialog: AlertDialog? = null
+
+    private val importCrateFileLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri != null) {
+            handleCrateImportFromUri(uri)
+        }
+    }
+
+    private val nearbyPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+        val allGranted = permissions.entries.all { it.value }
+        if (allGranted) {
+            nearbyCrateSyncManager.startAirBeamSession()
+        } else {
+            Toast.makeText(this, "Nearby permissions are needed to scan and beam crates.", Toast.LENGTH_LONG).show()
+        }
+    }
+
     private val connection = object : ServiceConnection {
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
             val binder = service as RadioService.RadioBinder
@@ -201,6 +223,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         binding.settingsHub.tvAppVersion.text = "Installierte Version: v${net.sn.fetchplayer.BuildConfig.VERSION_NAME}"
 
         curatedCatalogManager = CuratedCatalogManager(this)
+        nearbyCrateSyncManager = NearbyCrateSyncManager(this)
         net.sn.fetchplayer.data.ArtistLexiconRepository.init(this)
         net.sn.fetchplayer.manager.QueenQuotesManager.init(this)
 
@@ -249,6 +272,18 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         restoreSavedUiState()
         startAndBindService()
         checkAppUpdate(isManualCheck = false)
+
+        if (intent?.action == Intent.ACTION_VIEW && intent?.data != null) {
+            handleCrateImportFromUri(intent.data!!)
+        }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        if (intent.action == Intent.ACTION_VIEW && intent.data != null) {
+            handleCrateImportFromUri(intent.data!!)
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -511,6 +546,272 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             }
             .setNegativeButton("Cancel", null)
             .show()
+    }
+
+    private fun getRequiredNearbyPermissions(): Array<String> {
+        val permissions = mutableListOf<String>()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            permissions.add(Manifest.permission.NEARBY_WIFI_DEVICES)
+            permissions.add(Manifest.permission.BLUETOOTH_SCAN)
+            permissions.add(Manifest.permission.BLUETOOTH_ADVERTISE)
+            permissions.add(Manifest.permission.BLUETOOTH_CONNECT)
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            permissions.add(Manifest.permission.BLUETOOTH_SCAN)
+            permissions.add(Manifest.permission.BLUETOOTH_ADVERTISE)
+            permissions.add(Manifest.permission.BLUETOOTH_CONNECT)
+            permissions.add(Manifest.permission.ACCESS_FINE_LOCATION)
+        } else {
+            permissions.add(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+        return permissions.toTypedArray()
+    }
+
+    private fun hasNearbyPermissions(): Boolean {
+        return getRequiredNearbyPermissions().all { perm ->
+            ContextCompat.checkSelfPermission(this, perm) == PackageManager.PERMISSION_GRANTED
+        }
+    }
+
+    private fun checkAndStartAirBeam() {
+        if (hasNearbyPermissions()) {
+            nearbyCrateSyncManager.startAirBeamSession()
+        } else {
+            nearbyPermissionLauncher.launch(getRequiredNearbyPermissions())
+        }
+    }
+
+    private fun showCrateHubDialog() {
+        val dialogBinding = DialogCrateHubBinding.inflate(layoutInflater)
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogBinding.root)
+            .create()
+
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        activeCrateHubDialog = dialog
+
+        dialogBinding.btnCloseCrateHub.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        fun switchMode(toAirBeam: Boolean) {
+            if (toAirBeam) {
+                dialogBinding.layoutSectionAirBeam.visibility = View.VISIBLE
+                dialogBinding.layoutSectionMessenger.visibility = View.GONE
+                checkAndStartAirBeam()
+            } else {
+                dialogBinding.layoutSectionAirBeam.visibility = View.GONE
+                dialogBinding.layoutSectionMessenger.visibility = View.VISIBLE
+                nearbyCrateSyncManager.stopAll()
+            }
+        }
+
+        dialogBinding.btnTabAirBeam.setOnClickListener { switchMode(true) }
+        dialogBinding.btnTabMessenger.setOnClickListener { switchMode(false) }
+
+        fun refreshSpinners() {
+            val playlists = curatedCatalogManager.getPlaylists()
+            val labels = playlists.map { "${it.name} (${it.tracks.size} tracks)" }
+            val adapter = android.widget.ArrayAdapter(this, R.layout.item_nord_spinner, labels).apply {
+                setDropDownViewResource(R.layout.item_nord_spinner_dropdown)
+            }
+            dialogBinding.spinnerAirBeamPlaylist.adapter = adapter
+            dialogBinding.spinnerMessengerPlaylist.adapter = adapter
+
+            val activeId = curatedCatalogManager.getActivePlaylistId()
+            val activeIdx = playlists.indexOfFirst { it.id == activeId }.coerceAtLeast(0)
+            dialogBinding.spinnerAirBeamPlaylist.setSelection(activeIdx)
+            dialogBinding.spinnerMessengerPlaylist.setSelection(activeIdx)
+        }
+        refreshSpinners()
+
+        dialogBinding.tvLocalDeviceBadge.text = "📻 Your Device: ${nearbyCrateSyncManager.localDeviceName}"
+
+        fun renderDevices(devices: List<NearbyCrateSyncManager.DiscoveredDevice>) {
+            dialogBinding.layoutDiscoveredDevices.removeAllViews()
+            if (devices.isEmpty()) {
+                val emptyTv = TextView(this).apply {
+                    text = "No nearby devices found yet. Make sure the other device is in Crate Hub AirBeam mode."
+                    setTextColor(ContextCompat.getColor(this@MainActivity, R.color.nord3))
+                    textSize = 11.5f
+                    setPadding(8, 12, 8, 12)
+                }
+                dialogBinding.layoutDiscoveredDevices.addView(emptyTv)
+                return
+            }
+
+            for (device in devices) {
+                val itemBinding = ItemNearbyDeviceBinding.inflate(layoutInflater, dialogBinding.layoutDiscoveredDevices, false)
+                itemBinding.tvDeviceName.text = device.deviceName
+                itemBinding.tvDeviceStatus.text = "Nearby Station North Device • Tap to Connect"
+                itemBinding.btnConnectDevice.setOnClickListener {
+                    itemBinding.btnConnectDevice.isEnabled = false
+                    itemBinding.btnConnectDevice.text = "CONNECTING..."
+                    nearbyCrateSyncManager.connectToDevice(device)
+                }
+                setupTvFocusHighlight(itemBinding.cardDevice)
+                setupTvFocusHighlight(itemBinding.btnConnectDevice)
+                dialogBinding.layoutDiscoveredDevices.addView(itemBinding.root)
+            }
+        }
+
+        dialogBinding.btnBeamPlaylist.setOnClickListener {
+            val selectedIdx = dialogBinding.spinnerAirBeamPlaylist.selectedItemPosition
+            val playlists = curatedCatalogManager.getPlaylists()
+            if (selectedIdx in playlists.indices) {
+                val playlistToBeam = playlists[selectedIdx]
+                nearbyCrateSyncManager.sendPlaylist(playlistToBeam)
+                Toast.makeText(this, "Beaming '${playlistToBeam.name}'...", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        dialogBinding.btnShareViaMessenger.setOnClickListener {
+            val selectedIdx = dialogBinding.spinnerMessengerPlaylist.selectedItemPosition
+            val playlists = curatedCatalogManager.getPlaylists()
+            if (selectedIdx in playlists.indices) {
+                val playlistToShare = playlists[selectedIdx]
+                try {
+                    val file = CrateArchiveManager.packCrateToFile(this, playlistToShare)
+                    val shareIntent = CrateArchiveManager.createShareIntent(this, file, playlistToShare.name)
+                    startActivity(shareIntent)
+                } catch (e: Exception) {
+                    AppLogger.e("MainActivity", "Failed to package crate for sharing", e)
+                    Toast.makeText(this, "Error packaging crate: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        dialogBinding.btnImportCrateFile.setOnClickListener {
+            importCrateFileLauncher.launch(arrayOf("*/*", "application/octet-stream", "application/zip"))
+        }
+
+        listOf(
+            dialogBinding.btnCloseCrateHub,
+            dialogBinding.btnTabAirBeam,
+            dialogBinding.btnTabMessenger,
+            dialogBinding.btnBeamPlaylist,
+            dialogBinding.btnShareViaMessenger,
+            dialogBinding.btnImportCrateFile
+        ).forEach { setupTvFocusHighlight(it) }
+
+        val syncJob = lifecycleScope.launch {
+            nearbyCrateSyncManager.syncState.collect { state ->
+                if (!dialog.isShowing) return@collect
+                when (state) {
+                    is NearbyCrateSyncManager.SyncState.Idle -> {
+                        dialogBinding.tvAirBeamStatus.text = "Idle"
+                        dialogBinding.pbAirBeamScanning.visibility = View.GONE
+                        dialogBinding.layoutConnectedSession.visibility = View.GONE
+                    }
+                    is NearbyCrateSyncManager.SyncState.Searching -> {
+                        dialogBinding.tvAirBeamStatus.text = "📡 Scanning for nearby Station North players..."
+                        dialogBinding.pbAirBeamScanning.visibility = View.VISIBLE
+                        dialogBinding.layoutConnectedSession.visibility = View.GONE
+                        renderDevices(emptyList())
+                    }
+                    is NearbyCrateSyncManager.SyncState.DiscoveredDevices -> {
+                        dialogBinding.tvAirBeamStatus.text = "Found ${state.devices.size} nearby device(s)"
+                        dialogBinding.pbAirBeamScanning.visibility = View.VISIBLE
+                        renderDevices(state.devices)
+                    }
+                    is NearbyCrateSyncManager.SyncState.Connecting -> {
+                        dialogBinding.tvAirBeamStatus.text = "Connecting to ${state.deviceName}..."
+                        dialogBinding.pbAirBeamScanning.visibility = View.VISIBLE
+                    }
+                    is NearbyCrateSyncManager.SyncState.Connected -> {
+                        dialogBinding.tvAirBeamStatus.text = "Connected to ${state.deviceName}!"
+                        dialogBinding.pbAirBeamScanning.visibility = View.GONE
+                        dialogBinding.layoutDiscoveredDevices.removeAllViews()
+                        dialogBinding.layoutConnectedSession.visibility = View.VISIBLE
+                        dialogBinding.tvConnectedTargetName.text = "Connected: ${state.deviceName}"
+                    }
+                    is NearbyCrateSyncManager.SyncState.Sending -> {
+                        dialogBinding.tvAirBeamStatus.text = "🚀 Beaming playlist (${state.progressPercent}%)..."
+                        dialogBinding.pbAirBeamScanning.visibility = View.VISIBLE
+                    }
+                    is NearbyCrateSyncManager.SyncState.Receiving -> {
+                        dialogBinding.tvAirBeamStatus.text = "📥 Receiving crate (${state.progressPercent}%)..."
+                        dialogBinding.pbAirBeamScanning.visibility = View.VISIBLE
+                    }
+                    is NearbyCrateSyncManager.SyncState.CrateReceived -> {
+                        dialogBinding.tvAirBeamStatus.text = "✅ Received '${state.manifest.playlistName}' (${state.tracks.size} tracks)!"
+                        dialogBinding.pbAirBeamScanning.visibility = View.GONE
+                        var finalName = state.manifest.playlistName
+                        val existingNames = curatedCatalogManager.getPlaylists().map { it.name }
+                        if (existingNames.any { it.equals(finalName, ignoreCase = true) }) {
+                            finalName = "$finalName (AirBeam)"
+                        }
+                        val imported = curatedCatalogManager.createPlaylist(finalName, state.tracks)
+                        updateCuratorCatalogView()
+                        syncMasterCatalogWithRadioService()
+                        renderPlaylistManagerList()
+                        refreshSpinners()
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Saved AirBeam Crate '${imported.name}' (${state.tracks.size} tracks)!",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                    is NearbyCrateSyncManager.SyncState.Success -> {
+                        dialogBinding.tvAirBeamStatus.text = "✅ ${state.message}"
+                        dialogBinding.pbAirBeamScanning.visibility = View.GONE
+                    }
+                    is NearbyCrateSyncManager.SyncState.Error -> {
+                        dialogBinding.tvAirBeamStatus.text = "⚠️ ${state.errorMessage}"
+                        dialogBinding.pbAirBeamScanning.visibility = View.GONE
+                    }
+                }
+            }
+        }
+
+        dialog.setOnDismissListener {
+            syncJob.cancel()
+            nearbyCrateSyncManager.stopAll()
+            activeCrateHubDialog = null
+        }
+
+        dialog.show()
+
+        checkAndStartAirBeam()
+    }
+
+    private fun handleCrateImportFromUri(uri: Uri) {
+        try {
+            val result = CrateArchiveManager.unpackCrateFromUri(this, uri)
+            if (result == null) {
+                Toast.makeText(this, "Could not read or invalid .sncrate mixtape file.", Toast.LENGTH_LONG).show()
+                return
+            }
+            val (manifest, tracks) = result
+            if (tracks.isEmpty()) {
+                Toast.makeText(this, "Mixtape '${manifest.playlistName}' contains no tracks.", Toast.LENGTH_SHORT).show()
+                return
+            }
+
+            AlertDialog.Builder(this)
+                .setTitle("📦 Import Mixtape Crate")
+                .setMessage("Mixtape: \"${manifest.playlistName}\"\nCurator: ${manifest.curatorName}\nTracks: ${tracks.size}\n\nDo you want to import this mixtape into your playlist collection?")
+                .setPositiveButton("Import") { _, _ ->
+                    var finalName = manifest.playlistName
+                    val existingNames = curatedCatalogManager.getPlaylists().map { it.name }
+                    if (existingNames.any { it.equals(finalName, ignoreCase = true) }) {
+                        finalName = "$finalName (Imported)"
+                    }
+                    val newPlaylist = curatedCatalogManager.createPlaylist(finalName, tracks)
+                    updateCuratorCatalogView()
+                    syncMasterCatalogWithRadioService()
+                    renderPlaylistManagerList()
+                    Toast.makeText(
+                        this,
+                        "Successfully imported '${newPlaylist.name}' (${tracks.size} tracks)!",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                .setNegativeButton("Cancel", null)
+                .show()
+        } catch (e: Exception) {
+            AppLogger.e("MainActivity", "Failed to handle crate import from URI: $uri", e)
+            Toast.makeText(this, "Error importing mixtape: ${e.message}", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun setupBauchbindeDesign() {
@@ -1457,6 +1758,10 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         hub.btnBackFromSystemCache.setOnClickListener { showSettingsModule(0) }
 
         // 3. Module 1: Playlist Manager & Module 2 Curator Dropdown
+        hub.btnOpenCrateHub.setOnClickListener {
+            showCrateHubDialog()
+        }
+
         hub.btnCreateNewPlaylist.setOnClickListener {
             showCreatePlaylistDialog()
         }
@@ -1591,7 +1896,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
             hub.cardTileAudioVisualizer, hub.cardTileChronicles, hub.cardTileQueenTutorial, hub.cardTileSystemCache,
             hub.btnBackFromBroadcast, hub.btnBackFromCurator, hub.btnBackFromLexicon, hub.btnBackFromTvDisplay,
             hub.btnBackFromAudioVisualizer, hub.btnBackFromChronicles, hub.btnBackFromQueenTutorial, hub.btnBackFromSystemCache,
-            hub.btnCreateNewPlaylist, hub.switchFftVisualizer, hub.switchBassPulse, hub.switchQueenQuotes,
+            hub.btnOpenCrateHub, hub.btnCreateNewPlaylist, hub.switchFftVisualizer, hub.switchBassPulse, hub.switchQueenQuotes,
             hub.switchSlantedBauchbinden, hub.btnTabImported, hub.btnTabSaved, hub.btnLoadPlaylist,
             hub.btnChroniclesFullscreenInline, hub.btnPrevTrackInline, hub.btnTogglePlayAllInline, hub.btnNextTrackInline, hub.btnAutoScrollToggleInline, hub.btnOpenQueenTutorial,
             hub.cbInnerTube, hub.cbStationNorth, hub.cbYtdlpApi, hub.cbInvidious, hub.cbCobalt, hub.cbPiped,
@@ -2932,6 +3237,7 @@ class MainActivity : AppCompatActivity(), RadioService.ServiceListener {
         super.onDestroy()
         stopChroniclesAudio()
         releaseAudioVisualizer()
+        nearbyCrateSyncManager.stopAll()
         bauchbindeRunnable?.let { mainHandler.removeCallbacks(it) }
         hudTimeoutRunnable?.let { mainHandler.removeCallbacks(it) }
         AppLogger.setLogListener(null)

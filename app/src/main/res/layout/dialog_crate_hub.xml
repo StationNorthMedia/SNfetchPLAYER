@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    app:cardBackgroundColor="@color/nord0"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="16dp"
+    app:strokeColor="@color/nord8"
+    app:strokeWidth="1.5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📦 CRATE SHARING HUB"
+                    android:textColor="@color/nord8"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Offline AirBeam P2P &amp; WhatsApp Mixtape Sharing"
+                    android:textColor="@color/nord4"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCloseCrateHub"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                android:text="✕"
+                android:textColor="@color/nord4"
+                android:textSize="18sp"
+                app:cornerRadius="19dp" />
+
+        </LinearLayout>
+
+        <!-- Tab Toggle Group -->
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/toggleCrateModeGroup"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            app:checkedButton="@+id/btnTabAirBeam"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTabAirBeam"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="📡 AirBeam (Nearby)"
+                android:textColor="@color/nord8"
+                android:textSize="11.5sp"
+                android:textStyle="bold"
+                app:strokeColor="@color/nord8"
+                app:strokeWidth="1dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTabMessenger"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="💬 Messenger (.sncrate)"
+                android:textColor="@color/nord14"
+                android:textSize="11.5sp"
+                android:textStyle="bold"
+                app:strokeColor="@color/nord14"
+                app:strokeWidth="1dp" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <!-- ============================================================== -->
+        <!-- MODE 1: AIRBEAM (NEARBY P2P SWAP)                             -->
+        <!-- ============================================================== -->
+        <LinearLayout
+            android:id="@+id/layoutSectionAirBeam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/tvLocalDeviceBadge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/nord1"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="📻 Your Device: Galaxy S23"
+                android:textColor="@color/nord14"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvAirBeamStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="📡 Scanning for Station North players nearby..."
+                android:textColor="@color/nord8"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/pbAirBeamScanning"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_marginTop="4dp"
+                android:indeterminate="true"
+                android:progressTint="@color/nord8" />
+
+            <!-- Discovered Devices List -->
+            <LinearLayout
+                android:id="@+id/layoutDiscoveredDevices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical" />
+
+            <!-- Connected Session Box -->
+            <LinearLayout
+                android:id="@+id/layoutConnectedSession"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/nord1"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvConnectedTargetName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Connected to: Living Room Sony TV"
+                    android:textColor="@color/nord14"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Select Playlist to Beam:"
+                    android:textColor="@color/nord4"
+                    android:textSize="11sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerAirBeamPlaylist"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/nord0"
+                    android:paddingHorizontal="8dp"
+                    android:spinnerMode="dropdown" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnBeamPlaylist"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="10dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="🚀 BEAM TO DEVICE"
+                    android:textColor="@color/nord0"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/nord8"
+                    app:cornerRadius="6dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- ============================================================== -->
+        <!-- MODE 2: MESSENGER & FILE EXPORT (.sncrate)                     -->
+        <!-- ============================================================== -->
+        <LinearLayout
+            android:id="@+id/layoutSectionMessenger"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="3dp"
+                android:text="Package any custom mix into a compact .sncrate container and send it via WhatsApp, Telegram, or Discord. The recipient taps the file to open and import it with 1 click."
+                android:textColor="@color/nord4"
+                android:textSize="11.5sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Select Playlist to Export:"
+                android:textColor="@color/nord14"
+                android:textSize="11.5sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinnerMessengerPlaylist"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/nord1"
+                android:paddingHorizontal="8dp"
+                android:spinnerMode="dropdown" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnShareViaMessenger"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginTop="12dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="📲 SHARE VIA WHATSAPP / APPS"
+                android:textColor="@color/nord0"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/nord14"
+                app:cornerRadius="6dp"
+                app:icon="@drawable/ic_share"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconSize="18dp"
+                app:iconTint="@color/nord0" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="12dp"
+                android:background="@color/nord3" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnImportCrateFile"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="📥 IMPORT .SNCRATE FROM STORAGE"
+                android:textColor="@color/nord15"
+                android:textSize="11.5sp"
+                android:textStyle="bold"
+                app:cornerRadius="6dp"
+                app:icon="@drawable/ic_playlist"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconSize="18dp"
+                app:iconTint="@color/nord15"
+                app:strokeColor="@color/nord15"
+                app:strokeWidth="1.5dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

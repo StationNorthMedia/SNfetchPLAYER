@@ -561,14 +561,30 @@
                                 android:textStyle="bold" />
 
                             <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btnCreateNewPlaylist"
+                                android:id="@+id/btnOpenCrateHub"
                                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="36dp"
                                 android:insetTop="0dp"
                                 android:insetBottom="0dp"
                                 android:paddingHorizontal="10dp"
-                                android:text="➕ New Playlist"
+                                android:text="📦 Sync Crate"
+                                android:textColor="@color/nord8"
+                                android:textSize="11sp"
+                                android:textStyle="bold"
+                                app:strokeColor="@color/nord8"
+                                app:strokeWidth="1dp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnCreateNewPlaylist"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="36dp"
+                                android:layout_marginStart="6dp"
+                                android:insetTop="0dp"
+                                android:insetBottom="0dp"
+                                android:paddingHorizontal="10dp"
+                                android:text="➕ New"
                                 android:textColor="@color/nord14"
                                 android:textSize="11sp"
                                 android:textStyle="bold"
